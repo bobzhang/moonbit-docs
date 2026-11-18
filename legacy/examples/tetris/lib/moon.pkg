@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/core/cmp",
+}
+
+options(
+  name: "lib",
+  link: { "wasm-gc": { "exports": [ "draw", "step", "new", "get_score" ] } },
+)

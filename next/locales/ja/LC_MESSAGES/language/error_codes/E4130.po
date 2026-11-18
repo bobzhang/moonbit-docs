@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4130.md:1
+msgid "E4130"
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:3
+msgid "`derive` is not allowed for type alias."
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:5
+msgid ""
+"Aliases of a type can be used interchangeably with the type itself, so it"
+" is not possible to derive traits for an alias without also deriving them"
+" for the type it aliases. Therefore, MoonBit disallows deriving traits "
+"for type aliases. Instead, one should derive the traits for the type "
+"itself."
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:10
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:12
+msgid ""
+"pub struct MyStruct {\n"
+"  field : Int32\n"
+"}\n"
+"\n"
+"#derive(Debug)\n"
+"pub type StructAlias = MyStruct\n"
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:16
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:18
+msgid "Move the `derive` attribute to the type itself:"
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:20
+msgid ""
+"#derive(Debug)\n"
+"pub struct MyStruct {\n"
+"  field : Int32\n"
+"}\n"
+"\n"
+"pub extend MyStruct with Debug::{to_repr}\n"
+"\n"
+"pub type StructAlias = MyStruct\n"
+"\n"
+"pub fn make_alias() -> StructAlias {\n"
+"  { field: 1 }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:24
+msgid ""
+"If you do not have control over the type, you can create a new type that "
+"wraps the original type. However, deriving traits for a new type requires"
+" the wrapped type to also implement the trait, which is likely not the "
+"case if you were using a type alias in the first place. In this case, you"
+" will need to implement the trait manually."
+msgstr ""
+
+#: ../../language/error_codes/E4130.md:30
+msgid ""
+"pub struct StructWrapper(MyStruct)\n"
+"\n"
+"pub fn wrap(value : MyStruct) -> StructWrapper {\n"
+"  StructWrapper(value)\n"
+"}\n"
+msgstr ""

@@ -1,0 +1,5 @@
+import {
+  "moonbit-community/E4069-fixed" @lib,
+}
+
+pkgtype(kind: "executable")

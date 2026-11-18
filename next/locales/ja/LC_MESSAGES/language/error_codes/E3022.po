@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-21 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E3022.md:1
+msgid "E3022"
+msgstr ""
+
+#: ../../language/error_codes/E3022.md:3
+msgid "Ill-formed list of alerts."
+msgstr ""
+
+#: ../../language/error_codes/E3022.md:5
+msgid ""
+"This error happens when the `alert-list` option in `moon.pkg` cannot be "
+"parsed. The option uses the same compact list syntax as `warnings`, with "
+"`+` to enable an alert and `-` to disable an alert. Older configurations "
+"may use an `@` prefix to promote an alert to an error. The prefix remains"
+" accepted only for compatibility and should not be used in new "
+"configuration."
+msgstr ""
+"`moon.pkg` の `alert-list` オプションを解析できないときに、このエラーが発生します。"
+"このオプションは `warnings` と同じ簡潔なリスト構文を使い、`+` でアラートを有効にし、"
+"`-` で無効にします。古い設定では、アラートをエラーに昇格させるために `@` "
+"接頭辞を使っていることがあります。この接頭辞は互換性のためにのみ引き続き受け入れられますが、"
+"新しい設定では使用しないでください。"
+
+#: ../../language/error_codes/E3022.md:11
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E3022.md:13
+msgid ""
+"options(\n"
+"  \"alert-list\": \"1\",\n"
+")\n"
+msgstr ""
+
+#: ../../language/error_codes/E3022.md:17
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E3022.md:19
+msgid "Use a valid alert-list entry:"
+msgstr ""
+
+#: ../../language/error_codes/E3022.md:21
+msgid ""
+"options(\n"
+"  \"alert-list\": \"-unsafe\",\n"
+")\n"
+msgstr ""

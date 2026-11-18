@@ -1,0 +1,80 @@
+name: release website
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to publish (for example v0.10.20)
+        required: true
+        type: string
+      target:
+        description: Chinese deployment destination
+        type: choice
+        options: [aws, both, aliyun]
+        default: aliyun
+
+defaults:
+  run:
+    working-directory: next
+
+jobs:
+  zh-build:
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    concurrency:
+      group: publish-docs-cn
+      cancel-in-progress: false
+    env:
+      DOCS_RELEASE: ${{ inputs.release_tag || github.ref_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate release tag
+        working-directory: ${{ github.workspace }}
+        run: '[[ "$DOCS_RELEASE" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.release_tag || github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install
+        run: pip install -r requirements.txt
+      - name: build
+        id: build
+        run: |
+          LANGUAGE="zh_CN" python3 llm.py
+          LANGUAGE="zh_CN" make html
+      - uses: aliyun/setup-aliyun-cli-action@v1
+        if: inputs.target != 'aws'
+      - name: Install OSS upload tool
+        if: inputs.target != 'aws'
+        run: |
+          curl -fsSL https://gosspublic.alicdn.com/ossutil/install.sh -o /tmp/install-ossutil.sh
+          sudo bash /tmp/install-ossutil.sh
+      - name: Upload Chinese documentation to OSS and refresh ESA
+        if: inputs.target != 'aws'
+        env:
+          ALIBABA_CLOUD_ACCESS_KEY_ID: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_ID }}
+          ALIBABA_CLOUD_ACCESS_KEY_SECRET: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_SECRET }}
+          BUCKET: ${{ secrets.ALIYUN_OSS_BUCKET }}
+          ESA_SITE_ID: ${{ vars.ALIYUN_ESA_SITE_ID }}
+        run: |
+          test -n "$BUCKET" && test -n "$ESA_SITE_ID"
+          aliyun configure set --profile default --mode AK --access-key-id "$ALIBABA_CLOUD_ACCESS_KEY_ID" --access-key-secret "$ALIBABA_CLOUD_ACCESS_KEY_SECRET" --region cn-hangzhou
+          ossutil config --endpoint oss-cn-shenzhen.aliyuncs.com --access-key-id "$ALIBABA_CLOUD_ACCESS_KEY_ID" --access-key-secret "$ALIBABA_CLOUD_ACCESS_KEY_SECRET"
+          ossutil sync ./_build/html/ "$BUCKET" --delete --force --jobs 20 --parallel 5
+          aliyun esa PurgeCaches --region cn-hangzhou --SiteId "$ESA_SITE_ID" --Type directory --Content '{"Directories":["https://docs.moonbitlang.cn/"]}'
+      - name: Upload Chinese documentation to AWS
+        if: ${{ !cancelled() && steps.build.outcome == 'success' && (inputs.target == 'aws' || inputs.target == 'both') }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_MOONBIT_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_MOONBIT_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+          BUCKET: ${{ secrets.AWS_MOONBIT_CN_DOCS_BUCKET }}
+          DISTRIBUTION_ID: ${{ secrets.AWS_MOONBIT_CN_DOCS_DISTRIBUTION_ID }}
+        run: |
+          test -n "$BUCKET" && test -n "$DISTRIBUTION_ID"
+          aws s3 sync ./_build/html/ "s3://$BUCKET" --delete --only-show-errors
+          aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*" --query 'Invalidation.Status' --output text

@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0036.md:1
+msgid "E0036"
+msgstr ""
+
+#: ../../language/error_codes/E0036.md:3
+msgid "Warning name: `block_label_shadowing`"
+msgstr "警告名：`block_label_shadowing`"
+
+#: ../../language/error_codes/E0036.md:5
+msgid "The label on a block or loop shadows a label that is already in scope."
+msgstr "ブロックまたはループのラベルが、すでにスコープ内にあるラベルを隠しています。"
+
+#: ../../language/error_codes/E0036.md:7
+msgid ""
+"Block and loop labels share the same namespace. When a label name is "
+"reused on a nested block or loop, it shadows the outer label, which can "
+"make the target of a labelled `break` or `continue` unclear."
+msgstr ""
+"ブロックとループのラベルは同じ名前空間を共有します。ネストしたブロックまたはループでラベル名を再利用すると、内側のラベルが外側のラベルを隠し、ラベル付き "
+"`break` や `continue` の対象が不明確になります。"
+
+#: ../../language/error_codes/E0036.md:11
+msgid ""
+"Because `break` can target either a block or a loop while `continue` can "
+"target a loop, shadowing can redirect control flow to a different "
+"construct than intended. Use distinct, descriptive names for nested block"
+" and loop labels."
+msgstr ""
+"`break` はブロックとループのどちらも対象にできますが、`continue` "
+"が対象にできるのはループだけです。そのため、ラベルの隠蔽によって意図とは異なる構造へ制御が移る可能性があります。ネストしたブロックとループのラベルには、互いに異なる説明的な名前を使用してください。"
+
+#: ../../language/error_codes/E0036.md:15
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0036.md:17
+msgid ""
+"///|\n"
+"fn has_positive(xs : Array[Int32]) -> Bool {\n"
+"  found~: {\n"
+"    // Warning: The label name `found` shadows a label name that is "
+"already in scope.\n"
+"    found~: for x in xs {\n"
+"      if x > 0 {\n"
+"        break found~\n"
+"      }\n"
+"    }\n"
+"    false\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0036.md:21
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0036.md:23
+msgid ""
+"Use distinct, descriptive label names for nested blocks and loops so each"
+" control-flow target is unambiguous."
+msgstr "ネストしたブロックとループには、互いに異なる説明的なラベル名を使用し、各制御フローの対象を明確にしてください。"
+
+#: ../../language/error_codes/E0036.md:26
+msgid ""
+"///|\n"
+"fn has_positive(xs : Array[Int32]) -> Bool {\n"
+"  found~: {\n"
+"    search~: for x in xs {\n"
+"      if x > 0 {\n"
+"        break found~ true\n"
+"      }\n"
+"      continue search~\n"
+"    }\n"
+"    false\n"
+"  }\n"
+"}\n"
+msgstr ""

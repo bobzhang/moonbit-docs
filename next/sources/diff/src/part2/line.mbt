@@ -1,0 +1,40 @@
+///|
+#derive(ToJson)
+struct Line {
+  number : Int32 // Line number
+  text : String // Does not include newline
+}
+
+///|
+pub extend Line with ToJson::{to_json}
+
+///|
+fn Line::new(number : Int32, text : String) -> Line {
+  Line::{ number, text }
+}
+
+///|
+fn lines(str : String) -> Array[Line] {
+  let lines = Array(capacity=50)
+  let mut line_number = 0
+  for line in str.split("\n") {
+    line_number = line_number + 1
+    lines.push(Line::new(line_number, line.to_owned()))
+  } nobreak {
+    return lines
+  }
+}
+
+///|
+test "lines" {
+  json_inspect(lines(""), content=[{ "number": 1, "text": "" }])
+  json_inspect(lines("\n"), content=[
+    { "number": 1, "text": "" },
+    { "number": 2, "text": "" },
+  ])
+  json_inspect(lines("aaa"), content=[{ "number": 1, "text": "aaa" }])
+  json_inspect(lines("aaa\nbbb"), content=[
+    { "number": 1, "text": "aaa" },
+    { "number": 2, "text": "bbb" },
+  ])
+}

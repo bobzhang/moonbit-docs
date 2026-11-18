@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-08 17:17+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4188.md:1
+msgid "E4188"
+msgstr ""
+
+#: ../../language/error_codes/E4188.md:3
+msgid "Compiler diagnostic name: `async_with_error_poly`."
+msgstr ""
+
+#: ../../language/error_codes/E4188.md:5
+msgid "`async` functions cannot use error polymorphism."
+msgstr "`async` 函数不能使用错误多态。"
+
+#: ../../language/error_codes/E4188.md:7
+msgid ""
+"MoonBit currently does not support combining `async` with `raise?`. An "
+"`async` function is raising by default, so use an ordinary `async fn` "
+"when the function may raise, or remove `async` if the function is not "
+"asynchronous."
+msgstr ""
+"MoonBit 目前不支持将 `async` 与 `raise?` 结合使用。`async` "
+"函数默认可能抛出错误，因此当函数可能抛错时请使用普通的 `async fn`；如果函数并不需要异步行为，则移除 `async`。"
+
+#: ../../language/error_codes/E4188.md:11
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E4188.md:13
+msgid "The following function combines `async` with `raise?`:"
+msgstr "下面的函数同时使用了 `async` 和 `raise?`："
+
+#: ../../language/error_codes/E4188.md:15
+msgid ""
+"///|\n"
+"async fn load() -> Unit raise? {\n"
+"  ()\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  ignore(load)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4188.md:19
+msgid "MoonBit will report an error."
+msgstr "MoonBit 会报告一个错误。"
+
+#: ../../language/error_codes/E4188.md:21
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4188.md:23
+msgid ""
+"Remove `raise?` from the async function, or remove `async` if the "
+"function does not need asynchronous behavior:"
+msgstr "从异步函数中移除 `raise?`；如果函数不需要异步行为，则移除 `async`："
+
+#: ../../language/error_codes/E4188.md:26
+msgid ""
+"///|\n"
+"fn load() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  ignore(load)\n"
+"}\n"
+msgstr ""

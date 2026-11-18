@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4100.md:1
+msgid "E4100"
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:3
+msgid "The type is not a trait."
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:5
+msgid ""
+"This error occurs when you define an alias for a type and use it as a "
+"trait. As it is impossible to use a type as a trait, this error might "
+"hint at a typo in your code."
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:9
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:11
+msgid ""
+"///|\n"
+"pub struct Original(Int32)\n"
+"\n"
+"///|\n"
+"type Alias = Original\n"
+"\n"
+"///|\n"
+"pub trait Trait: Alias {\n"
+"  //         ^~~~~\n"
+"  // Error: The type Alias is not a trait\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:15
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:17
+msgid "If there is a typo, use a correct trait where the error occurs."
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:19
+msgid ""
+"///|\n"
+"pub trait Original {\n"
+"  to_int(Self) -> Int32\n"
+"}\n"
+"\n"
+"///|\n"
+"pub trait Trait: Original {\n"
+"  to_int(Self) -> Int32\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4100.md:23
+msgid "Only traits can appear after `:` in a trait declaration."
+msgstr ""

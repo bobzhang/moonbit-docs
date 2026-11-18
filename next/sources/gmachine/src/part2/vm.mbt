@@ -1,0 +1,369 @@
+// Use the struct tuple to encapsulate an address type.
+
+#derive(Eq, Debug)
+struct Addr(Int32)
+
+pub extend Addr with Eq::{not_equal, equal}
+
+pub extend Addr with @moonbitlang/core/debug.Debug::{to_repr}
+
+// Describe graph nodes with an enumeration type.
+
+#derive(Eq, Debug)
+enum Node {
+  NNum(Int32)
+  // The application node
+  NApp(Addr, Addr)
+  // To store the number of parameters and 
+  // the corresponding sequence of instructions for a super combinator
+  NGlobal(String, Int32, List[Instruction])
+  // The Indirection node，The key component of implementing lazy evaluation
+  NInd(Addr)
+}
+
+pub extend Node with Eq::{not_equal, equal}
+
+pub extend Node with @moonbitlang/core/debug.Debug::{to_repr}
+
+struct GHeap {
+  // The heap uses an array, 
+  // and the space with None content in the array is available as free memory.
+  mut object_count : Int32
+  memory : Array[Node?]
+}
+
+// Allocate heap space for nodes.
+
+fn GHeap::alloc(self : GHeap, node : Node) -> Addr {
+  let heap = self
+  fn next(n : Int32) -> Int32 {
+    (n + 1) % heap.memory.length()
+  }
+
+  fn free(i : Int32) -> Bool {
+    match heap.memory[i] {
+      None => true
+      _ => false
+    }
+  }
+
+  let mut i = heap.object_count
+  while !free(i) {
+    i = next(i)
+  }
+  heap.memory[i] = Some(node)
+  heap.object_count = heap.object_count + 1
+  return Addr(i)
+}
+
+#alias("_[_]")
+fn GHeap::get(self : GHeap, key : Addr) -> Node {
+  let Addr(i) = key
+  match self.memory[i] {
+    Some(node) => node
+    None => abort("GHeap::get(): index \{i} was empty")
+  }
+}
+
+#alias("_[_]=_")
+fn GHeap::set(self : GHeap, key : Addr, val : Node) -> Unit {
+  self.memory[key.0] = Some(val)
+}
+
+struct GState {
+  mut stack : List[Addr]
+  heap : GHeap
+  globals : @hashmap.HashMap[String, Addr]
+  mut dump : List[(List[Instruction], List[Addr])]
+  mut code : List[Instruction]
+  mut stats : GStats
+}
+
+struct GStats(Int32)
+
+fn GState::stat_incr(self : GState) -> Unit {
+  self.stats = self.stats.0 + 1
+}
+
+fn GState::put_stack(self : GState, addr : Addr) -> Unit {
+  self.stack = self.stack.prepend(addr)
+}
+
+fn GState::put_dump(
+  self : GState,
+  codes : List[Instruction],
+  stack : List[Addr],
+) -> Unit {
+  self.dump = self.dump.prepend((codes, stack))
+}
+
+fn GState::put_code(self : GState, instrs : List[Instruction]) -> Unit {
+  self.code = instrs + self.code
+}
+
+fn GState::pop1(self : GState) -> Addr {
+  match self.stack {
+    More(addr, tail=reststack) => {
+      self.stack = reststack
+      addr
+    }
+    Empty => abort("pop1(): stack size smaller than 1")
+  }
+}
+
+// e1 e2 ..... -> (e1, e2) ......
+
+fn GState::pop2(self : GState) -> (Addr, Addr) {
+  match self.stack {
+    More(addr1, tail=More(addr2, tail=reststack)) => {
+      self.stack = reststack
+      (addr1, addr2)
+    }
+    _ => abort("pop2(): stack size smaller than 2")
+  }
+}
+
+fn GState::push_int(self : GState, num : Int32) -> Unit {
+  let addr = self.heap.alloc(NNum(num))
+  self.put_stack(addr)
+}
+
+fn GState::push_global(self : GState, name : String) -> Unit {
+  guard self.globals.get(name) is Some(addr) else {
+    abort("push_global(): can't find supercombinator \{name}")
+  }
+  self.put_stack(addr)
+}
+
+// start push definition
+
+fn GState::push(self : GState, offset : Int32) -> Unit {
+  // Push(n) a0 : . . . : an : s
+  //     =>  an : a0 : . . . : an : s
+  let addr = self.stack.unsafe_nth(offset)
+  self.put_stack(addr)
+}
+// end push definition
+
+// start slide definition
+
+fn GState::slide(self : GState, n : Int32) -> Unit {
+  let addr = self.pop1()
+  self.stack = self.stack.drop(n).prepend(addr)
+}
+// end slide definition
+
+// start rearrange definition
+
+fn GState::rearrange(self : GState, n : Int32) -> Unit {
+  let appnodes = self.stack.take(n)
+  let args = appnodes.map(fn(addr) {
+    guard! self.heap[addr] is NApp(_, arg)
+    arg
+  })
+  self.stack = args + appnodes.drop(n - 1)
+}
+// end rearrange definition
+
+fn GState::mk_apply(self : GState) -> Unit {
+  let (a1, a2) = self.pop2()
+  let appaddr = self.heap.alloc(NApp(a1, a2))
+  self.put_stack(appaddr)
+}
+
+fn GState::update(self : GState, n : Int32) -> Unit {
+  let addr = self.pop1()
+  let dst = self.stack.unsafe_nth(n)
+  self.heap[dst] = NInd(addr)
+}
+
+// start unwind definition
+
+fn GState::unwind(self : GState) -> Unit {
+  let addr = self.pop1()
+  match self.heap[addr] {
+    NNum(_) =>
+      match self.dump {
+        Empty => self.put_stack(addr)
+        More((instrs, stack), tail=rest_dump) => {
+          self.stack = stack
+          self.put_stack(addr)
+          self.dump = rest_dump
+          self.code = instrs
+        }
+      }
+    NApp(a1, _) => {
+      self.put_stack(addr)
+      self.put_stack(a1)
+      self.put_code(@list.List([Unwind]))
+    }
+    NGlobal(_, n, c) =>
+      if self.stack.length() < n {
+        abort("Unwinding with too few arguments")
+      } else {
+        if n != 0 {
+          self.rearrange(n)
+        } else {
+          self.put_stack(addr)
+        }
+        self.put_code(c)
+      }
+    NInd(a) => {
+      self.put_stack(a)
+      self.put_code(@list.List([Unwind]))
+    }
+  }
+}
+// end unwind definition
+
+// start alloc definition
+
+fn GState::alloc_nodes(self : GState, n : Int32) -> Unit {
+  let dummynode : Node = NInd(Addr(-1))
+  for i = 0; i < n; i = i + 1 {
+    let addr = self.heap.alloc(dummynode)
+    self.put_stack(addr)
+  }
+}
+// end alloc definition
+
+// start eval definition
+
+fn GState::eval(self : GState) -> Unit {
+  let addr = self.pop1()
+  self.put_dump(self.code, self.stack)
+  self.stack = @list.List([addr])
+  self.code = @list.List([Unwind])
+}
+// end eval definition
+
+// start cond definition
+
+fn GState::condition(
+  self : GState,
+  i1 : List[Instruction],
+  i2 : List[Instruction],
+) -> Unit {
+  let addr = self.pop1()
+  match self.heap[addr] {
+    NNum(0) =>
+      // false
+      self.code = i2 + self.code
+    NNum(1) =>
+      // true
+      self.code = i1 + self.code
+    otherwise =>
+      abort("cond : \{@debug.to_string(addr)} = \{@debug.to_string(otherwise)}")
+  }
+}
+// end cond definition
+
+// start op definition
+
+fn GState::negate(self : GState) -> Unit {
+  let addr = self.pop1()
+  match self.heap[addr] {
+    NNum(n) => {
+      let addr = self.heap.alloc(NNum(-n))
+      self.put_stack(addr)
+    }
+    otherwise =>
+      abort(
+        "negate: wrong kind of node \{@debug.to_string(otherwise)}, address \{@debug.to_string(addr)}",
+      )
+  }
+}
+
+fn GState::lift_arith2(self : GState, op : (Int32, Int32) -> Int32) -> Unit {
+  let (a1, a2) = self.pop2()
+  match (self.heap[a1], self.heap[a2]) {
+    (NNum(n1), NNum(n2)) => {
+      let newnode = Node::NNum(op(n1, n2))
+      let addr = self.heap.alloc(newnode)
+      self.put_stack(addr)
+    }
+    (node1, node2) =>
+      abort(
+        "liftArith2: \{@debug.to_string(a1)} = \{@debug.to_string(node1)} \{@debug.to_string(a2)} = \{@debug.to_string(node2)}",
+      )
+  }
+}
+
+fn GState::lift_cmp2(self : GState, op : (Int32, Int32) -> Bool) -> Unit {
+  let (a1, a2) = self.pop2()
+  match (self.heap[a1], self.heap[a2]) {
+    (NNum(n1), NNum(n2)) => {
+      let flag = op(n1, n2)
+      let newnode = if flag { Node::NNum(1) } else { Node::NNum(0) }
+      let addr = self.heap.alloc(newnode)
+      self.put_stack(addr)
+    }
+    (node1, node2) =>
+      abort(
+        "liftCmp2: \{@debug.to_string(a1)} = \{@debug.to_string(node1)} \{@debug.to_string(a2)} = \{@debug.to_string(node2)}",
+      )
+  }
+}
+// end op definition
+
+fn build_initial_heap(
+  scdefs : List[(String, Int32, List[Instruction])],
+) -> (GHeap, @hashmap.HashMap[String, Addr]) {
+  let heap = { object_count: 0, memory: Array::make(10000, None) }
+  let globals = @hashmap.HashMap([], capacity=50)
+  for (name, arity, instrs) in scdefs {
+    let addr = heap.alloc(NGlobal(name, arity, instrs))
+    globals[name] = addr
+  }
+  return (heap, globals)
+}
+
+fn GState::step(self : GState) -> Bool {
+  match self.code {
+    Empty => return false
+    More(i, tail=rest) => {
+      self.code = rest
+      self.stat_incr()
+      match i {
+        PushGlobal(f) => self.push_global(f)
+        PushInt(n) => self.push_int(n)
+        Push(n) => self.push(n)
+        MkApp => self.mk_apply()
+        Unwind => self.unwind()
+        Update(n) => self.update(n)
+        Pop(n) => self.stack = self.stack.drop(n)
+        Alloc(n) => self.alloc_nodes(n)
+        Eval => self.eval()
+        Slide(n) => self.slide(n)
+        Add => self.lift_arith2(fn(x, y) { x + y })
+        Sub => self.lift_arith2(fn(x, y) { x - y })
+        Mul => self.lift_arith2(fn(x, y) { x * y })
+        Div => self.lift_arith2(fn(x, y) { x / y })
+        Neg => self.negate()
+        Eq => self.lift_cmp2(fn(x, y) { x == y })
+        Ne => self.lift_cmp2(fn(x, y) { x != y })
+        Lt => self.lift_cmp2(fn(x, y) { x < y })
+        Le => self.lift_cmp2(fn(x, y) { x <= y })
+        Gt => self.lift_cmp2(fn(x, y) { x > y })
+        Ge => self.lift_cmp2(fn(x, y) { x >= y })
+        Cond(i1, i2) => self.condition(i1, i2)
+      }
+      return true
+    }
+  }
+}
+
+fn GState::reify(self : GState) -> Node {
+  if self.step() {
+    self.reify()
+  } else {
+    let stack = self.stack
+    match stack {
+      More(addr, tail=Empty) => {
+        let res = self.heap[addr]
+        return res
+      }
+      _ => abort("wrong stack \{@debug.to_string(stack)}")
+    }
+  }
+}

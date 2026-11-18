@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4119.md:1
+msgid "E4119"
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:3
+msgid "Compiler diagnostic name: `unknown_func_labelled_arg`."
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:5
+msgid ""
+"This function is not a toplevel function, so it cannot have labelled "
+"arguments."
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:7
+msgid ""
+"Only toplevel functions can declare or receive labelled arguments. Local "
+"functions are inferred as ordinary function values, so a call such as "
+"`g(x~)` is rejected when `g` is a local function parameter."
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:11
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:13
+msgid ""
+"fn init {\n"
+"  let x = 42\n"
+"  fn f(g) {\n"
+"    g(x~)\n"
+"  //^\n"
+"  // Error: This function is not a toplevel function, so it cannot have "
+"labelled arguments.\n"
+"  }\n"
+"  f(h)\n"
+"}\n"
+"\n"
+"fn h(x : Int32) -> Unit {\n"
+"  ignore(x)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:17
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:19
+msgid ""
+"Pass the value positionally when calling a local function value, or move "
+"the function to the toplevel if you need labelled arguments."
+msgstr ""
+
+#: ../../language/error_codes/E4119.md:22
+msgid ""
+"fn init {\n"
+"  let x = 42\n"
+"  fn f(g) {\n"
+"    g(x)\n"
+"  }\n"
+"  f(h)\n"
+"}\n"
+"\n"
+"fn h(x : Int32) -> Unit {\n"
+"  ignore(x)\n"
+"}\n"
+msgstr ""

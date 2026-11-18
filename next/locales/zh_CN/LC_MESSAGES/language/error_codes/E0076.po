@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0076.md:1
+msgid "E0076"
+msgstr ""
+
+#: ../../language/error_codes/E0076.md:3
+msgid "Warning name: `lexmatch_first_match`"
+msgstr ""
+
+#: ../../language/error_codes/E0076.md:5
+msgid ""
+"This warning described an earlier experimental form of first-match "
+"`lexmatch` and is not emitted by the current compiler."
+msgstr "此警告描述的是早期实验性的首次匹配 `lexmatch` 形式，当前编译器不会发出该警告。"
+
+#: ../../language/error_codes/E0076.md:8
+msgid ""
+"Current `lexmatch` expressions use `re\"...\"` case patterns and may use "
+"the default first-match strategy. For a single boolean check, a regex "
+"match expression is usually more concise."
+msgstr "当前的 `lexmatch` 表达式使用 `re\"...\"` 分支模式，并且可以采用默认的首次匹配策略。对于单个布尔检查，正则匹配表达式通常更简洁。"
+
+#: ../../language/error_codes/E0076.md:12
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E0076.md:14
+msgid ""
+"///|\n"
+"fn classify(input : String) -> String {\n"
+"  lexmatch input {\n"
+"    \"if\" => \"keyword\"\n"
+"    _ => \"other\"\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  ignore(classify)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0076.md:18
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E0076.md:20
+msgid ""
+"Rewrite the old string-piece pattern syntax with `re\"...\"` cases, or "
+"use a regex match expression when only a boolean result is needed."
+msgstr "请将旧的字符串片段模式语法改写为 `re\"...\"` 分支；如果只需要布尔结果，则使用正则匹配表达式。"
+
+#: ../../language/error_codes/E0076.md:23
+msgid ""
+"///|\n"
+"fn classify(input : String) -> String {\n"
+"  if input =~ re\"^if$\" {\n"
+"    \"keyword\"\n"
+"  } else {\n"
+"    \"other\"\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  ignore(classify)\n"
+"}\n"
+msgstr ""

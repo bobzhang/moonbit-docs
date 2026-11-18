@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4206.md:1
+msgid "E4206"
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:3
+msgid "Compiler diagnostic name: `must_implement_one`."
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:5
+msgid ""
+"The `#must_implement_one` trait attribute requires each implementation to"
+" provide at least one method from the specified set. If the "
+"implementation relies only on defaults for all required methods, the "
+"compiler reports this error."
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:9
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:11
+msgid ""
+"///|\n"
+"type Token\n"
+"\n"
+"///|\n"
+"#must_implement_one(render)\n"
+"pub(open) trait Render {\n"
+"  render(Self) -> String = _\n"
+"  debug(Self) -> String = _\n"
+"}\n"
+"\n"
+"///|\n"
+"impl Render with render(_) {\n"
+"  \"rendered\"\n"
+"}\n"
+"\n"
+"///|\n"
+"impl Render with debug(_) {\n"
+"  \"debug\"\n"
+"}\n"
+"\n"
+"///|\n"
+"pub impl Render for Token with debug(_) {\n"
+"  \"token\"\n"
+"}\n"
+"\n"
+"///|\n"
+"pub extend Token with Render::{render, debug}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:15
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:17
+msgid "Implement at least one of the methods named by `#must_implement_one`."
+msgstr ""
+
+#: ../../language/error_codes/E4206.md:19
+msgid ""
+"///|\n"
+"type Token\n"
+"\n"
+"///|\n"
+"#must_implement_one(render)\n"
+"pub(open) trait Render {\n"
+"  render(Self) -> String = _\n"
+"  debug(Self) -> String = _\n"
+"}\n"
+"\n"
+"///|\n"
+"impl Render with render(_) {\n"
+"  \"rendered\"\n"
+"}\n"
+"\n"
+"///|\n"
+"impl Render with debug(_) {\n"
+"  \"debug\"\n"
+"}\n"
+"\n"
+"///|\n"
+"pub impl Render for Token with render(_) {\n"
+"  \"token\"\n"
+"}\n"
+"\n"
+"///|\n"
+"pub extend Token with Render::{render, debug}\n"
+msgstr ""

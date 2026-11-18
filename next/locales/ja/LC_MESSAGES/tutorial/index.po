@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-11 16:40+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../tutorial/index.md:1
+msgid "Tutorial"
+msgstr "チュートリアル"
+
+#: ../../tutorial/index.md:3
+msgid "Here are some tutorials that may help you learn the programming language:"
+msgstr "このプログラミング言語を学ぶのに役立つチュートリアルを紹介します。"
+
+#: ../../tutorial/index.md:5
+msgid "General"
+msgstr "一般向け"
+
+#: ../../tutorial/index.md:7
+msgid "[An interactive tour with language basics](https://tour.moonbitlang.com)"
+msgstr "[言語の基礎を学べるインタラクティブツアー](https://tour.moonbitlang.com)"
+
+#: ../../tutorial/index.md:8
+msgid "[Tour for Beginners](./tour.md)"
+msgstr "[初心者向けツアー](./tour.md)"
+
+#: ../../tutorial/index.md:9
+msgid "[Native CLI Quickstart](./cli-quickstart.md)"
+msgstr "[ネイティブ CLI クイックスタート](./cli-quickstart.md)"
+
+#: ../../tutorial/index.md:10
+msgid "[Fullstack in One MoonBit Project](./fullstack-one-project.md)"
+msgstr "[1 つの MoonBit プロジェクトで作るフルスタック](./fullstack-one-project.md)"
+
+#: ../../tutorial/index.md:12
+msgid "Language Transition Guides"
+msgstr "言語移行ガイド"
+
+#: ../../tutorial/index.md:14
+msgid "[MoonBit for Go Programmers](./for-go-programmers/index.md)"
+msgstr "[Go プログラマ向け MoonBit](./for-go-programmers/index.md)"
+
+#: ../../tutorial/index.md:17
+msgid "[Download this section in Markdown](path:/download/tutorial/summary.md)"
+msgstr "[このセクションを Markdown でダウンロード](path:/download/tutorial/summary.md)"

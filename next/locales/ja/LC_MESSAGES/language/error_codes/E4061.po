@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-17 10:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4061.md:1
+msgid "E4061"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:3
+msgid ""
+"Cannot implement a trait for a type when both are defined in other "
+"packages."
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:5
+msgid "MoonBit follows the orphan rule, which means that you can only:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "Traits"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "Types"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "Allowed?"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "Current Package"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "Yes"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "Other Package"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md
+msgid "No"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:14
+msgid ""
+"See the [Access control of methods and trait "
+"implementations](../packages.md#trait-implementations) section of the "
+"MoonBit documentation for more information."
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:17
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:19
+msgid ""
+"Suppose you have type `A` and trait `B` defined in package `a` in module "
+"`username/hello`:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:22
+msgid "`a/top.mbt`:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:24
+msgid ""
+"///|\n"
+"pub(all) struct A(Int32)\n"
+"\n"
+"///|\n"
+"pub(open) trait B {\n"
+"  to_int(Self) -> Int32\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:28
+msgid "`a/moon.pkg`:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:30
+msgid "\n"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:34
+msgid "Now, if you want to implement trait `@a.B` for type `@a.A`:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:36
+msgid "`b/moon.pkg`:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:38
+msgid ""
+"import {\n"
+"  \"username/hello/a\",\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:42
+#: ../../language/error_codes/E4061.md:57
+msgid "`b/top.mbt`:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:44
+msgid ""
+"///|\n"
+"impl @a.B for @a.A with to_int(self : @a.A) -> Int32 {\n"
+"  self.0\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:48
+msgid "MoonBit will report an error."
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:50
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:52
+msgid ""
+"You can move either the trait or the type into the package that contains "
+"the implementation. If that is not possible, create a wrapper type around"
+" the type you wish to implement the trait for, and then implement the "
+"trait for the wrapper type:"
+msgstr ""
+
+#: ../../language/error_codes/E4061.md:59
+msgid ""
+"///|\n"
+"priv struct WrapA(@a.A)\n"
+"\n"
+"///|\n"
+"impl @a.B for WrapA with to_int(self : WrapA) -> Int32 {\n"
+"  let _ = self.0\n"
+"  0\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  let value = WrapA(@a.A(1))\n"
+"  inspect(@a.B::to_int(value), content=\"0\")\n"
+"}\n"
+msgstr ""

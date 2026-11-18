@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-02 14:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0097.md:1
+msgid "E0097"
+msgstr ""
+
+#: ../../language/error_codes/E0097.md:3
+msgid "Warning name: `regex_runtime_fallback`"
+msgstr "警告名：`regex_runtime_fallback`"
+
+#: ../../language/error_codes/E0097.md:5
+msgid ""
+"The regex match exceeds a compilation resource limit and uses the runtime"
+" regex engine instead. The match is still accepted; this warning is not a"
+" runtime matching error."
+msgstr "正規表現の照合がコンパイル時のリソース制限を超えたため、代わりに実行時の正規表現エンジンを使用します。照合は引き続き受け入れられ、この警告は実行時の照合エラーではありません。"
+
+#: ../../language/error_codes/E0097.md:9
+msgid ""
+"This warning is disabled by default. Enable `regex_runtime_fallback` in "
+"the package warning configuration to receive it."
+msgstr "この警告はデフォルトでは無効です。パッケージの警告設定で `regex_runtime_fallback` を有効にすると報告されます。"
+
+#: ../../language/error_codes/E0097.md:12
+msgid "Erroneous example"
+msgstr "誤った例"
+
+#: ../../language/error_codes/E0097.md:14
+msgid ""
+"///|\n"
+"pub fn matches(input : String) -> Bool {\n"
+"  input =~ re\"^[01]*1[01]{20}$\"\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0097.md:18
+msgid ""
+"This pattern matches binary strings whose twenty-first character from the "
+"end is `1`. Compiling it exceeds a resource limit; the runtime engine can "
+"still match it. The exact limit may change between compiler versions."
+msgstr ""
+"このパターンは、末尾から 21 番目の文字が `1` "
+"である二進文字列にマッチします。コンパイル時にリソース制限を超えますが、実行時エンジンではマッチングできます。具体的な制限はコンパイラのバージョンによって変わる場合があります。"
+
+#: ../../language/error_codes/E0097.md:22
+msgid "Suggestion"
+msgstr "対処方法"
+
+#: ../../language/error_codes/E0097.md:14
+msgid ""
+"If the fallback is acceptable, no correctness fix is required. If "
+"performance matters, measure the affected operation and consider "
+"simplifying the patterns or splitting the match into smaller operations."
+msgstr "フォールバックを許容できる場合、正しさのための修正は不要です。性能が重要な場合は、影響を受ける処理を計測し、パターンの簡略化や照合の分割を検討してください。"
+
+#: ../../language/error_codes/E0097.md:28
+msgid ""
+"To choose runtime matching explicitly while preserving the pattern, call "
+"`execute` and check whether it returns a match:"
+msgstr "パターンを維持したまま実行時のマッチングを明示的に選ぶには、`execute` を呼び出し、マッチ結果が返されたかを確認します。"
+
+#: ../../language/error_codes/E0097.md:31
+msgid ""
+"///|\n"
+"pub fn matches(input : String) -> Bool {\n"
+"  re\"^[01]*1[01]{20}$\".execute(input) is Some(_)\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(matches(\"100000000000000000000\"), content=\"true\")\n"
+"  inspect(matches(\"000000000000000000000\"), content=\"false\")\n"
+"  inspect(matches(\"1\"), content=\"false\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0097.md:18
+msgid ""
+"If runtime fallback is unavailable, exceeding the compilation limit "
+"produces [E4233](./E4233.md) instead."
+msgstr "実行時へのフォールバックが利用できない場合、コンパイル時の制限を超えると代わりに [E4233](./E4233.md) が発生します。"

@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4029.md:1
+msgid "E4029"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:3
+msgid "This expression has a type which is not a variant."
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:5
+msgid "Erroneous Example"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:7
+msgid ""
+"pub(all) struct T {\n"
+"  value : Int32\n"
+"}\n"
+"\n"
+"pub fn check(value : Int32?) -> Int32 {\n"
+"  match value {\n"
+"    T::None => 0\n"
+"    Some(value) => value\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:11
+msgid ""
+"The example above tries to use `T::None` as a constructor pattern, but "
+"`T` is a struct type, not an enum or enumview type, giving the following "
+"error on line 5:"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:15
+msgid "The type T is a struct type and not an enum or enumview.\n"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:19
+msgid "Suggestions"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:21
+msgid "Make sure to use a value of the correct type instead:"
+msgstr ""
+
+#: ../../language/error_codes/E4029.md:23
+msgid ""
+"pub fn check(value : Int32?) -> Int32 {\n"
+"  match value {\n"
+"    None => 0\n"
+"    Some(value) => value\n"
+"  }\n"
+"}\n"
+msgstr ""

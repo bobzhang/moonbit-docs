@@ -1,4 +1,0 @@
-import {
-}
-
-pkgtype(kind: "executable")

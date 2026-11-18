@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-04 11:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4155.md:1
+msgid "E4155"
+msgstr ""
+
+#: ../../language/error_codes/E4155.md:3
+msgid "Cycle in a `const` or type alias declaration."
+msgstr "`const` または型エイリアスの宣言に循環があります。"
+
+#: ../../language/error_codes/E4155.md:5
+msgid ""
+"Constants and type aliases can refer to other declarations in the same "
+"package, but the references must not form a cycle."
+msgstr "定数と型エイリアスは同じパッケージ内の別の宣言を参照できますが、その参照が循環してはいけません。"
+
+#: ../../language/error_codes/E4155.md:8
+msgid "Erroneous example"
+msgstr "誤った例"
+
+#: ../../language/error_codes/E4155.md:10
+msgid ""
+"///|\n"
+"const A : Int32 = B + 1\n"
+"\n"
+"///|\n"
+"const B : Int32 = A + 1\n"
+"\n"
+"///|\n"
+"type T1 = T2\n"
+"\n"
+"///|\n"
+"type T2 = T1\n"
+msgstr ""
+
+#: ../../language/error_codes/E4155.md:14
+msgid "Suggestion"
+msgstr "修正案"
+
+#: ../../language/error_codes/E4155.md:16
+msgid "Break the cycle so that every constant and type alias eventually resolves to a concrete value or type."
+msgstr "循環を解消し、各定数と型エイリアスが最終的に具体的な値または型へ解決されるようにしてください。"
+
+#: ../../language/error_codes/E4155.md:19
+msgid ""
+"///|\n"
+"const A : Int32 = 1\n"
+"\n"
+"///|\n"
+"const B : Int32 = A + 1\n"
+"\n"
+"///|\n"
+"type T1 = Int32\n"
+"\n"
+"///|\n"
+"type T2 = T1\n"
+"\n"
+"///|\n"
+"fn use_declarations(value : T2) -> Int32 {\n"
+"  value + B\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  assert_eq(use_declarations(A), 3)\n"
+"}\n"
+msgstr ""

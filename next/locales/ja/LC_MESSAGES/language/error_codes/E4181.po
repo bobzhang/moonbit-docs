@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4181.md:1
+msgid "E4181"
+msgstr ""
+
+#: ../../language/error_codes/E4181.md:3
+msgid ""
+"Compiler diagnostic name: "
+"`named_capture_in_regex_literal_used_in_lex_is_not_supported`."
+msgstr ""
+
+#: ../../language/error_codes/E4181.md:5
+msgid ""
+"Named capture groups are not supported in regex literals used by "
+"`lexmatch` or `lexscan`."
+msgstr "`lexmatch` または `lexscan` で使う正規表現リテラルでは、名前付きキャプチャグループはサポートされません。"
+
+#: ../../language/error_codes/E4181.md:8
+msgid ""
+"`lexmatch` and `lexscan` bind matched text with MoonBit's `as` syntax. "
+"Named capture groups inside the regex itself are not part of this binding"
+" model."
+msgstr "`lexmatch` と `lexscan` は、MoonBit の `as` 構文でマッチしたテキストを束縛します。正規表現自体の名前付きキャプチャグループは、この束縛モデルには含まれません。"
+
+#: ../../language/error_codes/E4181.md:11
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4181.md:13
+msgid ""
+"///|\n"
+"pub fn match_text(text : String) -> Unit {\n"
+"  lexmatch text with longest {\n"
+"    re\"^(?<word>abc)$\" => ()\n"
+"    _ => ()\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4181.md:17
+msgid "The regex contains the named capture group `(?<word>...)`."
+msgstr ""
+
+#: ../../language/error_codes/E4181.md:19
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4181.md:21
+msgid "Use a normal regex group and bind the matched text with `as`."
+msgstr "通常の正規表現グループを使い、マッチしたテキストを `as` で束縛してください。"
+
+#: ../../language/error_codes/E4181.md:23
+msgid ""
+"///|\n"
+"pub fn match_text(text : String) -> Unit {\n"
+"  lexmatch text with longest {\n"
+"    (re\"^(abc)$\" as word) => ignore(word)\n"
+"    _ => ()\n"
+"  }\n"
+"}\n"
+msgstr ""

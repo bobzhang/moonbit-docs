@@ -1,0 +1,1972 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 14:48+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../toolchain/moon/package.md:1
+msgid "Package Configuration"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:3
+msgid ""
+"moon uses a package file to identify and describe a package. The legacy "
+"format is `moon.pkg.json`, and the new format is `moon.pkg`. For full "
+"JSON schema, please check [moon's "
+"repository](https://github.com/moonbitlang/moon/blob/main/crates/moonbuild/template/pkg.schema.json)."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:7
+msgid ""
+"`moon.pkg.json` is no longer accepted by ordinary toolchain commands. Use "
+"`moon fmt` to migrate existing JSON manifests before checking or building. "
+"The JSON examples below are migration references, not configurations for new"
+" projects."
+msgstr ""
+"通常のツールチェーンコマンドは `moon.pkg.json` を受け付けなくなりました。チェックやビルドの前に `moon fmt` で既存の "
+"JSON 設定ファイルを移行してください。以下の JSON の例は移行用の参考であり、新しいプロジェクト向けの設定ではありません。"
+
+#: ../../toolchain/moon/package.md:12
+msgid "New format (`moon.pkg`)"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:14
+msgid ""
+"The new format is a concise DSL. You can generate or reformat it from an "
+"existing `moon.pkg.json` with:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:17
+msgid "moon -C <module_dir> fmt\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:21 ../../toolchain/moon/package.md:316
+msgid "Example:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:23
+msgid ""
+"import {\n"
+"  \"moonbit-community/language/packages/virtual\",\n"
+"}\n"
+"\n"
+"pkgtype(kind: \"executable\")\n"
+"\n"
+"options(\n"
+"  overrides: [ \"moonbit-community/language/packages/implement\" ],\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:27
+msgid ""
+"In `moon.pkg`, dependencies are declared in an `import { ... }` block. "
+"Use `@alias` to set a custom alias:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:30 ../../toolchain/moon/package.md:194
+msgid ""
+"import {\n"
+"  \"moonbit-community/language/packages/pkgA\",\n"
+"  \"moonbit-community/language/packages/pkgC\" @c,\n"
+"  \"moonbitlang/core/builtin\",\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:34
+msgid ""
+"Simple package settings can be written directly, using underscore-separated "
+"names, for example `proof_enabled = true` or `regex_backend = \"table\"`. "
+"Declarations such as `formatter`, `pkgtype`, and `virtual` have dedicated "
+"top-level forms. `moon fmt` migrates supported settings from `options(...)` "
+"to these forms. Legacy keys that remain inside `options` and contain `-` "
+"must be quoted."
+msgstr ""
+"単純なパッケージ設定は、`proof_enabled = true` や `regex_backend = \"table\"` "
+"のように、アンダースコア区切りの名前で直接記述できます。`formatter`、`pkgtype`、`virtual` "
+"などには専用のトップレベル宣言があります。`moon fmt` は対応する設定を `options(...)` "
+"からこれらの形式に移行します。`options` に残る従来のキーで `-` を含むものは引用符で囲む必要があります。"
+
+#: ../../toolchain/moon/package.md:41 ../../toolchain/moon/package.md:1252
+msgid "virtual(has_default: true)\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:45
+msgid "The `moon.pkg` format allows comments `//...`."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:47
+msgid "Full syntax of `moon.pkg` is as follows:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:49
+msgid ""
+"moon_pkg ::= statement*\n"
+"statement ::= import | assign | apply\n"
+"\n"
+"import ::= \"import\" \"{\" (import_item \",\")* import_item? \"}\" "
+"import_kind?\n"
+"import_item ::= STRING (\"@\" PKG_NAME)?\n"
+"import_kind ::= \"for\" STRING\n"
+"\n"
+"assign ::= LIDENT \"=\" expr\n"
+"\n"
+"apply ::= LIDENT \"(\" (argument \",\")* argument? \")\"\n"
+"argument ::= LIDENT \":\" expr | STRING \":\" expr  \n"
+"\n"
+"expr ::= array | object | apply | STRING | INT | \"true\" | \"false\"\n"
+"array ::= \"[\" (expr \",\")* expr? \"]\"\n"
+"object ::= \"{\" (field \",\")* field? \"}\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:67
+msgid "Conditional Imports"
+msgstr "条件付きインポート"
+
+#: ../../toolchain/moon/package.md:69
+msgid ""
+"Use `#cfg` on an import block to select dependencies for a backend. "
+"Different dependencies can share an alias when their conditions do not "
+"overlap:"
+msgstr "インポートブロックに `#cfg` を付けてバックエンドごとに依存関係を選択できます。条件が重複しなければ、異なる依存関係で同じ別名を使えます："
+
+#: ../../toolchain/moon/package.md:72
+msgid ""
+"#cfg(target = \"native\")\n"
+"import { \"example/app/native_impl\" @platform }\n"
+"\n"
+"#cfg(target = \"js\")\n"
+"import { \"example/app/js_impl\" @platform }\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:80
+msgid ""
+"The same syntax applies to imports marked `for \"test\"` or `for "
+"\"wbtest\"`."
+msgstr "`for \"test\"` や `for \"wbtest\"` を付けたインポートにも同じ構文を使用できます。"
+
+#: ../../toolchain/moon/package.md:82
+msgid "Experimental Packages"
+msgstr "実験的なパッケージ"
+
+#: ../../toolchain/moon/package.md:84
+msgid ""
+"Set `experimental = true` in a package's `moon.pkg` to warn direct "
+"consumers that its API is experimental. Consumers can opt in with "
+"`options(\"allow-experimental-packages\": true)`."
+msgstr "パッケージの `moon.pkg` で `experimental = true` を設定すると、直接の利用者に API が実験的であることを警告します。利用者は `options(\"allow-experimental-packages\": true)` で利用を許可できます。"
+
+#: ../../toolchain/moon/package.md:67
+msgid "Name"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:69
+msgid ""
+"The package name is not configurable; it is determined by the directory "
+"name of the package."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:71
+msgid "Formatter"
+msgstr "フォーマッタ"
+
+#: ../../toolchain/moon/package.md:73
+msgid ""
+"The `formatter` field configures `moon fmt` for this package. Currently "
+"it supports `ignore`, a list of file names that the formatter should "
+"skip."
+msgstr ""
+"`formatter` フィールドは、このパッケージに対する `moon fmt` "
+"の設定を行います。現在は、フォーマッタがスキップするファイル名の一覧である `ignore` をサポートしています。"
+
+#: ../../toolchain/moon/package.md:76
+msgid ""
+"This is useful for generated files or files that you intentionally keep "
+"in a different format. Files produced by `pre-build` are already skipped "
+"automatically, so `formatter.ignore` is mainly for additional files you "
+"want to exclude."
+msgstr ""
+"これは、生成ファイルや、意図的に別の形式のままにしておきたいファイルに便利です。`pre-build` "
+"で生成されたファイルはすでに自動でスキップされるため、`formatter.ignore` は主に追加で除外したいファイルのために使います。"
+
+#: ../../toolchain/moon/package.md
+msgid "moon.pkg"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:85
+msgid "formatter(ignore: [\"generated.mbt\", \"snapshot.mbt\"])\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md
+msgid "moon.pkg.json"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:92
+msgid ""
+"{\n"
+"  \"formatter\": {\n"
+"    \"ignore\": [\"generated.mbt\", \"snapshot.mbt\"]\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:103
+msgid "Package type"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:105
+msgid ""
+"Use one `pkgtype` declaration to specify what a package builds. For "
+"example, an executable package uses:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:108
+msgid "pkgtype(kind: \"executable\")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:112
+msgid ""
+"The available kinds are `library`, `executable`, and `foreign_library`. "
+"`library` is the default. `executable` replaces the legacy `options(\"is-"
+"main\": true)`, while `foreign_library` replaces the legacy "
+"`options(link: true)`. These kinds are alternatives and must not be "
+"declared together."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:118
+msgid ""
+"In a foreign-library package, `#export_name` assigns a stable symbol name"
+" to a public, non-generic function in generated Wasm, JavaScript, or C "
+"output:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:121
+msgid ""
+"#export_name(\"attr_add\")\n"
+"pub fn add_by_attr(n : Int32) -> Int32 {\n"
+"  n + 42\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:128
+msgid ""
+"Export names must be unique within the package. Name restrictions depend "
+"on the backend: native requires valid C symbol identifiers, while "
+"WebAssembly export names are UTF-8 strings and are not limited to C "
+"identifiers."
+msgstr "エクスポート名はパッケージ内で一意でなければなりません。名前の制約はバックエンドによって異なります。native では有効な C シンボル識別子が必要ですが、WebAssembly のエクスポート名は UTF-8 文字列であり、C 識別子の制約はありません。"
+
+#: ../../toolchain/moon/package.md:132
+msgid ""
+"The attribute cannot be used on generic functions or functions with "
+"optional arguments. Prefer `#export_name` over backend-specific `exports`"
+" link configuration for new exports."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:136
+msgid ""
+"Export declarations are scoped to the package that produces the artifact."
+" An attribute or `exports` configuration in a dependency applies when "
+"that dependency is built as its own artifact, but it does not add symbols"
+" to a downstream package's artifact. Define and export a wrapper in the "
+"exporting package to expose dependency functionality."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:164
+msgid ""
+"The native backend produces a static archive (`.a`, or `.lib` on "
+"Windows), not a shared library such as a `.dll` or `.so`. See [Native "
+"Static Libraries](/language/ffi.md#native-static-libraries) for host "
+"initialization and linking."
+msgstr "native バックエンドは静的アーカイブ（`.a`、Windows では `.lib`）を生成し、`.dll` や `.so` などの共有ライブラリは生成しません。ホストの初期化とリンクは [Native 静的ライブラリ](/language/ffi.md#native-static-libraries) を参照してください。"
+
+#: ../../toolchain/moon/package.md:149
+msgid "is-main (deprecated)"
+msgstr "is-main（非推奨）"
+
+#: ../../toolchain/moon/package.md:151
+msgid ""
+"The `is-main` field is deprecated. It is still accepted for compatibility"
+" with existing package files, but new and migrated `moon.pkg` files "
+"should use `pkgtype(kind: \"executable\")` instead. The following legacy "
+"declarations are equivalent to that `pkgtype` declaration:"
+msgstr ""
+"`is-main` フィールドは非推奨です。既存のパッケージファイルとの互換性のため引き続き使用できますが、新規または移行後の "
+"`moon.pkg` では `pkgtype(kind: \"executable\")` を使用してください。次の旧形式の宣言は、この "
+"`pkgtype` 宣言と同等です。"
+
+#: ../../toolchain/moon/package.md:156
+msgid ""
+"The output of the linking process depends on the backend. When this field"
+" is set to `true`:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:158
+msgid ""
+"For the Wasm and `wasm-gc` backends, a standalone WebAssembly module will"
+" be generated."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:159
+msgid "For the `js` backend, a standalone JavaScript file will be generated."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:165
+msgid ""
+"options(\n"
+"  \"is-main\": true,\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:174
+msgid ""
+"{\n"
+"  \"is-main\": true\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:182
+msgid "Importing dependencies"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:184
+msgid "Import"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:186
+msgid ""
+"The `import` field is used to specify other packages that a package "
+"depends on."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:188
+msgid ""
+"For example, the following imports `pkgA` and `pkgC`, aliasing `pkgC` to "
+"`c`. User can write `@c` to access definitions from `pkgC`."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:200
+msgid ""
+"{\n"
+"    \"import\": [\n"
+"        \"moonbit-community/language/packages/pkgA\",\n"
+"        {\n"
+"            \"path\": \"moonbit-community/language/packages/pkgC\",\n"
+"            \"alias\": \"c\"\n"
+"        },\n"
+"        \"moonbitlang/core/builtin\"\n"
+"    ]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:207
+msgid ""
+"Most core packages are not special here: if you use `@json`, `@test`, or "
+"other ordinary core aliases, add the corresponding `moonbitlang/core/...`"
+" package to `import`; otherwise, the compiler reports E4037 (package not "
+"imported)."
+msgstr "ほとんどのコアパッケージは例外ではありません。`@json`、`@test` などの通常のコアパッケージの別名を使う場合は、対応する `moonbitlang/core/...` パッケージを `import` に追加してください。そうしないと、コンパイラは E4037（パッケージがインポートされていない）を報告します。"
+
+#: ../../toolchain/moon/package.md:211
+msgid ""
+"`prelude` is the exception. It is available by default, so the names it "
+"exposes do not need an explicit package import."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:214
+msgid "Test import"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:216
+msgid ""
+"The test import is used to specify other packages that the black-box test"
+" package of this package depends on, with the same format as `import`."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:221
+msgid ""
+"import {\n"
+"  \"path/to/package1\",\n"
+"  \"path/to/package2\" @pkg2,\n"
+"} for \"test\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:229
+msgid ""
+"{\n"
+"  \"test-import\": {\n"
+"    \"path/to/package1\",\n"
+"    {\n"
+"      \"path\": \"path/to/package2\",\n"
+"      \"alias\": \"pkg2\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:243
+msgid ""
+"The `test-import-all` field is used to specify whether all public "
+"definitions from the package being tested should be imported (`true`) by "
+"default."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:245
+msgid "White-box test import"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:247
+msgid ""
+"The white-box test import is used to specify other packages that the "
+"white-box test package of this package depends on, with the same format "
+"as `import`."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:252
+msgid ""
+"import {\n"
+"  \"path/to/package1\",\n"
+"  \"path/to/package2\" @pkg2,\n"
+"} for \"wbtest\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:260
+msgid ""
+"{\n"
+"  \"wbtest-import\": {\n"
+"    \"path/to/package1\",\n"
+"    {\n"
+"      \"path\": \"path/to/package2\",\n"
+"      \"alias\": \"pkg2\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:274
+msgid "Maximum Concurrent Tests"
+msgstr "最大同時テスト数"
+
+#: ../../toolchain/moon/package.md:276
+msgid ""
+"The `max-concurrent-tests` field limits how many tests from this package "
+"may run at the same time when `moon test` executes the package."
+msgstr ""
+"`max-concurrent-tests` フィールドは、`moon test` "
+"がこのパッケージを実行するときに、このパッケージのテストを同時に実行できる数を制限します。"
+
+#: ../../toolchain/moon/package.md:279
+msgid ""
+"This is useful when tests in the same package share ports, temporary "
+"files, or other external resources that should not all run in parallel."
+msgstr "同じパッケージ内のテストがポート、一時ファイル、または同時実行すべきでないその他の外部リソースを共有する場合に便利です。"
+
+#: ../../toolchain/moon/package.md:284
+msgid ""
+"options(\n"
+"  \"max-concurrent-tests\": 2,\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:291
+msgid ""
+"{\n"
+"  \"max-concurrent-tests\": 2\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:299
+msgid "Conditional Compilation"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:301
+msgid "The smallest unit of conditional compilation is a file."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:303
+msgid ""
+"In a conditional compilation expression, three logical operators are "
+"supported: `and`, `or`, and `not`, where the `or` operator can be "
+"omitted."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:305
+msgid ""
+"For example, `[\"or\", \"wasm\", \"wasm-gc\"]` can be simplified to "
+"`[\"wasm\", \"wasm-gc\"]`."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:307
+msgid ""
+"Conditions in the expression can be categorized into backends and "
+"optimization levels:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:309
+msgid "**Backend conditions**: `\"wasm\"`, `\"wasm-gc\"`, and `\"js\"`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:310
+msgid "**Optimization level conditions**: `\"debug\"` and `\"release\"`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:312
+msgid "Conditional expressions support nesting."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:314
+msgid ""
+"If a file is not listed in `\"targets\"`, it will be compiled under all "
+"conditions by default."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:320
+msgid ""
+"options(\n"
+"  targets: {\n"
+"    \"only_js.mbt\": [\"js\"],\n"
+"    \"only_wasm.mbt\": [\"wasm\"],\n"
+"    \"only_wasm_gc.mbt\": [\"wasm-gc\"],\n"
+"    \"all_wasm.mbt\": [\"wasm\", \"wasm-gc\"],\n"
+"    \"not_js.mbt\": [\"not\", \"js\"],\n"
+"    \"only_debug.mbt\": [\"debug\"],\n"
+"    \"js_and_release.mbt\": [\"and\", [\"js\"], [\"release\"]],\n"
+"    \"js_only_test.mbt\": [\"js\"],\n"
+"    \"js_or_wasm.mbt\": [\"js\", \"wasm\"],\n"
+"    \"wasm_release_or_js_debug.mbt\": [\"or\", [\"and\", \"wasm\", "
+"\"release\"], [\"and\", \"js\", \"debug\"]]\n"
+"  }\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:339
+msgid ""
+"{\n"
+"  \"targets\": {\n"
+"    \"only_js.mbt\": [\"js\"],\n"
+"    \"only_wasm.mbt\": [\"wasm\"],\n"
+"    \"only_wasm_gc.mbt\": [\"wasm-gc\"],\n"
+"    \"all_wasm.mbt\": [\"wasm\", \"wasm-gc\"],\n"
+"    \"not_js.mbt\": [\"not\", \"js\"],\n"
+"    \"only_debug.mbt\": [\"debug\"],\n"
+"    \"js_and_release.mbt\": [\"and\", [\"js\"], [\"release\"]],\n"
+"    \"js_only_test.mbt\": [\"js\"],\n"
+"    \"js_or_wasm.mbt\": [\"js\", \"wasm\"],\n"
+"    \"wasm_release_or_js_debug.mbt\": [\"or\", [\"and\", \"wasm\", "
+"\"release\"], [\"and\", \"js\", \"debug\"]]\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:358
+msgid "Supported Targets"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:360
+msgid ""
+"The `supported_targets` field declares which backends a package is "
+"intended to support. It uses a target-set expression, not an array:"
+msgstr ""
+"`supported_targets` "
+"フィールドは、パッケージが対応する予定のバックエンドを宣言します。値には配列ではなく、ターゲット集合式を使います："
+
+#: ../../toolchain/moon/package.md:365
+msgid "supported_targets = \"js\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:370
+msgid ""
+"{\n"
+"  \"supported-targets\": \"js\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:378
+msgid "Examples:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:380
+msgid "`js` for a single backend"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:381
+msgid "`+js+wasm-gc` for an explicit set of backends"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:382
+msgid "`+all-js` for all backends except `js`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:384
+msgid "Legacy array syntax is still accepted for compatibility:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:388
+msgid "supported_targets = [\"js\", \"native\"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:393
+msgid ""
+"{\n"
+"  \"supported-targets\": [\"js\", \"native\"]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:401
+msgid "This is package metadata, not a conditional compilation rule:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:403
+msgid "use `supported_targets` to declare the package's supported backend set"
+msgstr "`supported_targets` を使って、パッケージが対応するバックエンド集合を宣言する"
+
+#: ../../toolchain/moon/package.md:404
+msgid ""
+"use `targets` to include or exclude individual files for different "
+"backends"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:405
+msgid ""
+"use `preferred_target` in `moon.mod` to choose the default backend for "
+"commands such as `moon check`, `moon run`, and `moon build`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:407
+msgid ""
+"When both the module and the package declare `supported_targets`, the "
+"effective backend set is their intersection."
+msgstr "モジュールとパッケージの両方で `supported_targets` を宣言した場合、有効なバックエンド集合は両方の宣言の積集合になります。"
+
+#: ../../toolchain/moon/package.md:410
+msgid "Command behavior follows the selected backend:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:412
+msgid ""
+"`moon check`, `moon build`, `moon test`, and `moon bench` keep only "
+"packages that support the selected backend"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:413
+msgid "`moon run` requires the selected package to support the selected backend"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:414
+msgid "`moon info` skips unsupported selected packages with a warning"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:415
+msgid ""
+"`moon bundle` skips package targets that do not support the selected "
+"backend"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:417
+msgid ""
+"After root selection, Moon also checks reachable required dependencies. "
+"If a required dependency does not support the selected backend, the "
+"command fails with a normal user-facing error."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:420
+msgid "Notes:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:422
+msgid "omitting `supported_targets` means all backends are supported"
+msgstr "`supported_targets` を省略すると、すべてのバックエンドがサポート対象になる"
+
+#: ../../toolchain/moon/package.md:423
+msgid ""
+"`--target all` expands to `wasm`, `wasm-gc`, `js`, and `native`, but not "
+"`llvm`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:424
+msgid "`llvm` is still a valid `supported_targets` value"
+msgstr "`llvm` も `supported_targets` の有効な値である"
+
+#: ../../toolchain/moon/package.md:425
+msgid "legacy array syntax is deprecated, but still accepted for compatibility"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:427
+msgid "A common setup is:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:429
+msgid "mark a native-only package with `supported_targets = \"native\"`"
+msgstr "native 専用パッケージには `supported_targets = \"native\"` を設定する"
+
+#: ../../toolchain/moon/package.md:430
+msgid "set `preferred_target = \"native\"` in `moon.mod`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:431
+msgid "use `targets` only when some files inside the package differ by backend"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:433
+msgid "Native Stub Files"
+msgstr "ネイティブスタブファイル"
+
+#: ../../toolchain/moon/package.md:435
+msgid ""
+"The `native-stub` field lists C stub source files that should be compiled"
+" with this package for native builds."
+msgstr "`native-stub` フィールドは、native ビルド向けにこのパッケージと一緒にコンパイルすべき C スタブソースファイルを列挙します。"
+
+#: ../../toolchain/moon/package.md:438
+msgid ""
+"This is commonly used together with [`extern \"C\"` declarations in the "
+"FFI documentation](../../language/ffi.md), where the stub file provides "
+"wrapper functions or adapter code that is easier to write in C than "
+"directly in MoonBit."
+msgstr ""
+"これは、[FFI ドキュメントにある `extern \"C\"` 宣言](../../language/ffi.md) "
+"と組み合わせて使われることが多く、その場合スタブファイルは、MoonBit で直接書くより C "
+"で書く方が容易なラッパー関数やアダプタコードを提供します。"
+
+#: ../../toolchain/moon/package.md:443
+msgid "Paths are relative to the package directory."
+msgstr "パスはパッケージディレクトリからの相対パスです。"
+
+#: ../../toolchain/moon/package.md:447
+msgid ""
+"options(\n"
+"  \"native-stub\": [ \"stub.c\", \"helpers.c\" ],\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:454
+msgid ""
+"{\n"
+"  \"native-stub\": [\"stub.c\", \"helpers.c\"]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:462
+msgid "Link Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:464
+msgid ""
+"Packages declared as `executable` or `foreign_library` produce linked "
+"output. The boolean `link: true` form is legacy; use `pkgtype(kind: "
+"\"foreign_library\")` when a package builds a library for foreign code. "
+"An object-valued `link` option configures backend-specific linking."
+msgstr ""
+"`executable` または `foreign_library` として宣言されたパッケージは、リンク済みの出力を生成します。ブール値形式の "
+"`link: true` は旧形式です。外部コード向けのライブラリをビルドする場合は `pkgtype(kind: "
+"\"foreign_library\")` を使用してください。オブジェクト形式の `link` "
+"オプションはバックエンド固有のリンク設定に使用します。"
+
+#: ../../toolchain/moon/package.md:469
+msgid ""
+"The `link` option is used to specify link options, and its value can be "
+"either a boolean or an object."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:471
+msgid ""
+"Currently, `link` does not work for the native backend. The behavior "
+"described in this section applies to the `wasm`, `wasm-gc`, and `js` "
+"backends."
+msgstr ""
+"現在、`link` は native バックエンドでは動作しません。この節で説明する挙動は `wasm`、`wasm-gc`、`js` "
+"バックエンドに適用されます。"
+
+#: ../../toolchain/moon/package.md:474
+msgid ""
+"For new function exports, prefer [`#export_name`](/language/attributes.md"
+"#export-name-attribute). Use the backend-specific `exports` field when "
+"the export set or names must differ by backend, or when the source cannot"
+" be annotated."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:479
+msgid ""
+"When the `link` value is `true`, it indicates that the package should be "
+"linked. The output will vary depending on the backend specified during "
+"the build."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:483
+msgid ""
+"options(\n"
+"  link: true\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:490
+msgid ""
+"{\n"
+"  \"link\": true\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:498
+msgid ""
+"When the `link` value is an object, it indicates that the package should "
+"be linked, and you can specify link options. For detailed configuration, "
+"please refer to the subpage for the corresponding backend."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:500
+msgid "Wasm Backend Link Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:502
+msgid "Common Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:504
+msgid ""
+"The `exports` option is used to specify the function names exported by "
+"the Wasm backend."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:506
+msgid ""
+"For example, in the following configuration, the `hello` function from "
+"the current package is exported as the `hello` function in the Wasm "
+"module, and the `foo` function is exported as the `bar` function in the "
+"Wasm module. In the Wasm host, the `hello` and `bar` functions can be "
+"called to invoke the `hello` and `foo` functions from the current "
+"package."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:510
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm\": {\n"
+"      \"exports\": [ \"hello\", \"foo:bar\" ],\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"exports\": [ \"hello\", \"foo:bar\" ],\n"
+"    }\n"
+"  }\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:524
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm\": {\n"
+"      \"exports\": [\n"
+"        \"hello\",\n"
+"        \"foo:bar\"\n"
+"      ]\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"exports\": [\n"
+"        \"hello\",\n"
+"        \"foo:bar\"\n"
+"      ]\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:545
+msgid ""
+"The `import-memory` option is used to specify the linear memory imported "
+"by the Wasm module."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:547
+msgid ""
+"For example, the following configuration specifies that the linear memory"
+" imported by the Wasm module is the `memory` variable from the `env` "
+"module."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:551
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm\": {\n"
+"      \"import-memory\": {\n"
+"        \"module\": \"env\",\n"
+"        \"name\": \"memory\",\n"
+"      },\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"import-memory\": {\n"
+"        \"module\": \"env\",\n"
+"        \"name\": \"memory\",\n"
+"      },\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:571
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm\": {\n"
+"      \"import-memory\": {\n"
+"        \"module\": \"env\",\n"
+"        \"name\": \"memory\"\n"
+"      }\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"import-memory\": {\n"
+"        \"module\": \"env\",\n"
+"        \"name\": \"memory\"\n"
+"      }\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:592
+msgid ""
+"The `memory-limits` option is used to specify the minimum and maximum "
+"size of the linear memory used by the Wasm module."
+msgstr "`memory-limits` オプションは、Wasm モジュールが使用する線形メモリの最小サイズと最大サイズを指定するために使います。"
+
+#: ../../toolchain/moon/package.md:595
+msgid "The `shared-memory` option is used to enable shared linear memory."
+msgstr "`shared-memory` オプションは、共有線形メモリを有効にするために使います。"
+
+#: ../../toolchain/moon/package.md:597
+msgid ""
+"For example, the following configuration sets memory limits and enables "
+"shared memory for both the `wasm` and `wasm-gc` backends."
+msgstr "たとえば、次の設定では `wasm` と `wasm-gc` の両バックエンドに対してメモリ制限を設定し、共有メモリを有効にしています。"
+
+#: ../../toolchain/moon/package.md:602
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm\": {\n"
+"      \"memory-limits\": {\n"
+"        \"min\": 1,\n"
+"        \"max\": 65536,\n"
+"      },\n"
+"      \"shared-memory\": true,\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"memory-limits\": {\n"
+"        \"min\": 1,\n"
+"        \"max\": 65535,\n"
+"      },\n"
+"      \"shared-memory\": true,\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:624
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm\": {\n"
+"      \"memory-limits\": {\n"
+"        \"min\": 1,\n"
+"        \"max\": 65536\n"
+"      },\n"
+"      \"shared-memory\": true\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"memory-limits\": {\n"
+"        \"min\": 1,\n"
+"        \"max\": 65535\n"
+"      },\n"
+"      \"shared-memory\": true\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:647
+msgid ""
+"The `export-memory-name` option is used to specify the name of the linear"
+" memory exported by the Wasm module."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:651
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm\": {\n"
+"      \"export-memory-name\": \"memory\",\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"export-memory-name\": \"memory\",\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:665
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm\": {\n"
+"      \"export-memory-name\": \"memory\"\n"
+"    },\n"
+"    \"wasm-gc\": {\n"
+"      \"export-memory-name\": \"memory\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:680
+msgid "Wasm Linear Backend Link Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:682
+msgid ""
+"The `heap-start-address` option is used to specify the starting address "
+"of the linear memory that can be used when compiling to the Wasm backend."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:684
+msgid ""
+"For example, the following configuration sets the starting address of the"
+" linear memory to 1024."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:688
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm\": {\n"
+"      \"heap-start-address\": 1024,\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:699
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm\": {\n"
+"      \"heap-start-address\": 1024\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:711
+msgid "Wasm GC Backend Link Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:713
+msgid ""
+"The `use-js-builtin-string` option is used to specify whether the [JS "
+"String Builtin Proposal](https://github.com/WebAssembly/js-string-"
+"builtins/blob/main/proposals/js-string-builtins/Overview.md) should be "
+"enabled when compiling to the Wasm GC backend. It will make the `String` "
+"in MoonBit equivalent to the `String` in JavaScript host runtime."
+msgstr ""
+"`use-js-builtin-string` オプションは、Wasm GC バックエンドへコンパイルする際に [JS String "
+"Builtin Proposal](https://github.com/WebAssembly/js-string-"
+"builtins/blob/main/proposals/js-string-builtins/Overview.md) "
+"を有効にするかどうかを指定します。これにより、MoonBit の `String` は JavaScript ホストランタイムの `String`"
+" と等価になります。"
+
+#: ../../toolchain/moon/package.md:716
+msgid "For example, the following configuration enables the JS String Builtin."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:720
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm-gc\": {\n"
+"      \"use-js-builtin-string\": true,\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:731
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm-gc\": {\n"
+"      \"use-js-builtin-string\": true\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:743
+msgid ""
+"The `imported-string-constants` option is used to specify the imported "
+"string namespace used by the JS String Builtin Proposal, which is \"_\" "
+"by default. It should meet the configuration in the JS host runtime."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:746
+msgid ""
+"For example, the following configuration and JS initialization configures"
+" the imported string namespace."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:750
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"wasm-gc\": {\n"
+"      \"use-js-builtin-string\": true,\n"
+"      \"imported-string-constants\": \"_\",\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:762
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"wasm-gc\": {\n"
+"      \"use-js-builtin-string\": true,\n"
+"      \"imported-string-constants\": \"_\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:775
+msgid ""
+"const { instance } = await WebAssembly.instantiate(bytes, {}, { "
+"importedStringConstants: \"strings\" });\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:779
+msgid "JS Backend Link Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:781
+msgid ""
+"The `exports` option is used to specify the function names to export in "
+"the JavaScript module."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:783
+msgid ""
+"For example, in the following configuration, the `hello` function from "
+"the current package is exported as the `hello` function in the JavaScript"
+" module. In the JavaScript host, the `hello` function can be called to "
+"invoke the `hello` function from the current package."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:787
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"js\": {\n"
+"      \"exports\": [ \"hello\" ],\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:798
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"js\": {\n"
+"      \"exports\": [\n"
+"        \"hello\"\n"
+"      ]\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:812
+msgid ""
+"The `format` option is used to specify the output format of the "
+"JavaScript module."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:814
+msgid "The currently supported formats are:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:815
+msgid "`esm` (default)"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:816
+msgid "`cjs`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:817
+msgid "`iife`"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:819
+msgid ""
+"For example, the following configuration sets the output format of the "
+"current package to ES Module."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:823
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"js\": {\n"
+"      \"format\": \"esm\",\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:834
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"js\": {\n"
+"      \"format\": \"esm\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:846
+msgid "Native Backend Link Options"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:848
+msgid ""
+"The `cc` option is used to specify the compiler for compiling the "
+"`moonc`-generated C source files. It can be either a full path to the "
+"compiler or a simple name that is accessible via the PATH environment "
+"variable."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:853
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"native\": {\n"
+"      \"cc\": \"/usr/bin/gcc13\",\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:864
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"native\": {\n"
+"      \"cc\": \"/usr/bin/gcc13\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:876
+msgid ""
+"The `cc-flags` option is used to override the default flags passed to the"
+" compiler. For example, you can use the following flag to define a macro "
+"called MOONBIT."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:881
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"native\": {\n"
+"      \"cc-flags\": \"-DMOONBIT\",\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:892
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"native\": {\n"
+"      \"cc-flags\": \"-DMOONBIT\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:904
+msgid ""
+"The `cc-link-flags` option is used to override the default flags passed "
+"to the linker. Since the linker is invoked through the compiler driver "
+"(e.g., `cc` instead of `ld`, `cl` instead of `link`), you should prefix "
+"specific options with `-Wl,` or `/link ` when passing them."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:908
+msgid "The following example strips symbol information from produced binary."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:912
+msgid ""
+"options(\n"
+"  link: {\n"
+"    \"native\": {\n"
+"      \"cc-link-flags\": \"-s\",\n"
+"    },\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:923
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"native\": {\n"
+"      \"cc-link-flags\": \"-s\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:935
+msgid ""
+"The `stub-cc` option is similar to `cc` but controls which compiler to "
+"use for compiling stubs. Although it can be different from `cc`, it is "
+"not recommended and should only be used for debugging purposes. "
+"Therefore, we strongly recommend to specify `cc` and `stub-cc` at the "
+"same time and make them consistent to avoid potential conflicts."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:940
+msgid ""
+"The `stub-cc-flags` is similar to `cc-flags`. It only have effects on "
+"stubs compilation."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:942
+msgid ""
+"The `stub-cc-link-flags` are similar but have a subtle difference.  "
+"Normally, stubs are compiled into object files and linked against object "
+"files generated from `moonc`-generated C source files.  This linking is "
+"only controlled by `cc-flags` and `cc-link-flags`, as mentioned earlier."
+"  However, in specific modes, such as when the fast-debugging-test "
+"feature is enabled, there will be a separate linking procedure for stub "
+"objects files, where  `stub-cc-link-flags` will take effect."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:949
+msgid "Default C compiler and compiler flags for the native backend"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:951
+msgid ""
+"Here is a brief summarization to "
+"[compiler_flags.rs](https://github.com/moonbitlang/moon/blob/main/crates/moonutil/src/compiler_flags.rs)"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:953
+msgid "C Compiler"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:955
+msgid ""
+"On Windows, the native backend requires an MSVC-compatible toolchain with"
+" C++ tools and the Windows SDK. Both Microsoft `cl.exe` and LLVM `clang-"
+"cl.exe` are supported. MinGW toolchains are not supported."
+msgstr ""
+"Windows では、native バックエンドに C++ ツールと Windows SDK を含む MSVC 互換ツールチェーンが必要です。"
+"Microsoft の `cl.exe` と LLVM の `clang-cl.exe` の両方をサポートしています。MinGW ツールチェーンはサポートされていません。"
+
+#: ../../toolchain/moon/package.md:959
+msgid ""
+"On other platforms, Moon searches PATH for the following items from top "
+"to bottom."
+msgstr "その他のプラットフォームでは、Moon は PATH から次の項目を上から順に検索します。"
+
+#: ../../toolchain/moon/package.md:962
+msgid "gcc"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:963
+msgid "clang"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:964
+msgid "cc"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:966
+msgid ""
+"For GCC-like compilers, the default compile & link command is as follows."
+" `[]` is used to indicate the flags may not exist in some modes."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:968
+msgid ""
+"cc -o $target -I$MOON_HOME/include -L$MOON_HOME/lib [-g] [-shared -fPIC] "
+"\\\n"
+"   -fwrapv -fno-strict-aliasing (-O2|-Og) "
+"[$MOON_HOME/lib/libmoonbitrun.o] \\\n"
+"   $sources -lm $cc_flags $cc_link_flags\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:974
+msgid ""
+"For MSVC-compatible compiler drivers on Windows, the default compile & "
+"link command is as follows."
+msgstr "Windows 上の MSVC 互換コンパイラドライバでは、デフォルトのコンパイルおよびリンクコマンドは次のとおりです。"
+
+#: ../../toolchain/moon/package.md:976
+msgid ""
+"cl (/Fo|/Fe)$target -I$MOON_HOME/include [/LD] /utf-8 /wd4819 /nologo "
+"(/O2|/Od) \\\n"
+"   /link /LIBPATH:$MOON_HOME/lib\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:981
+msgid "Rule and dev_build"
+msgstr "rule と dev_build"
+
+#: ../../toolchain/moon/package.md:983
+msgid ""
+"`rule` declares a reusable command, and `dev_build` applies a rule to "
+"concrete input and output files. These pre-build steps run before "
+"development commands such as `moon check`, `moon build`, and `moon test`."
+msgstr ""
+"`rule` は再利用可能なコマンドを宣言し、`dev_build` は具体的な入力ファイルと出力ファイルに `rule` "
+"を適用します。これらの事前ビルドステップは、`moon check`、`moon build`、`moon test` "
+"などの開発用コマンドの前に実行されます。"
+
+#: ../../toolchain/moon/package.md:987
+msgid ""
+"This mechanism is intended for package authors during package "
+"development. When the package is used as a dependency by downstream "
+"users, these pre-build steps are not triggered for security reasons, so "
+"dependencies do not execute arbitrary commands during builds. Commit the "
+"generated output files to the repository so downstream users can build "
+"against them directly."
+msgstr "この仕組みは、パッケージ作者がパッケージ開発中に使用することを想定しています。そのパッケージが下流ユーザーの依存関係として使われる場合、セキュリティ上の理由から、これらの事前ビルドステップは実行されません。そのため、依存関係がビルド中に任意のコマンドを実行することはありません。生成された出力ファイルをリポジトリにコミットし、下流ユーザーがそれらを直接使ってビルドできるようにしてください。"
+
+#: ../../toolchain/moon/package.md:993
+msgid ""
+"`rule(name: \"...\", command: \"...\")` declares a reusable command "
+"template. The `name` field identifies the rule, and `command` is a shell "
+"command string. The command can refer to `$input` and `$output`, which "
+"are supplied by the `dev_build` entry that uses the rule. A package can "
+"declare multiple `rule` entries."
+msgstr ""
+"`rule(name: \"...\", command: \"...\")` は再利用可能なコマンドテンプレートを宣言します。`name` "
+"フィールドはその `rule` を識別し、`command` はシェルコマンド文字列です。コマンドは `$input` と `$output` "
+"を参照できます。これらは、その `rule` を使用する `dev_build` エントリから提供されます。パッケージは複数の `rule` "
+"エントリを宣言できます。"
+
+#: ../../toolchain/moon/package.md:999
+msgid ""
+"`dev_build(rule: \"...\", input: \"...\", output: \"...\")` declares a "
+"pre-build step. It selects a rule and supplies the input and output paths"
+" used when expanding that rule's command. A package can declare multiple "
+"`dev_build` entries."
+msgstr ""
+"`dev_build(rule: \"...\", input: \"...\", output: \"...\")` "
+"は事前ビルドステップを宣言します。これは `rule` を選択し、その `rule` "
+"のコマンドを展開するときに使用する入力パスと出力パスを提供します。パッケージは複数の `dev_build` エントリを宣言できます。"
+
+#: ../../toolchain/moon/package.md:1004
+msgid ""
+"Pre-build commands run with the module root as their working directory. "
+"Input, output, and other pre-build paths are resolved relative to that "
+"module root."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1007
+msgid ""
+"Rules can be declared either as package-level rules in the same "
+"`moon.pkg` or as module-level rules in "
+"[`moon.mod`](/toolchain/moon/module.md). A package-level rule is visible "
+"only to `dev_build` entries in that same `moon.pkg`; a module-level rule "
+"is visible to `dev_build` entries in every package in the module. When "
+"resolving a rule name, `moon` first looks for a package-level rule in the"
+" same `moon.pkg`, then for a module-level rule in `moon.mod`."
+msgstr ""
+"`rule` は、同じ `moon.pkg` 内のパッケージレベル `rule` "
+"として宣言することも、[`moon.mod`](/toolchain/moon/module.md) 内のモジュールレベル `rule` "
+"として宣言することもできます。パッケージレベル `rule` は、同じ `moon.pkg` 内の `dev_build` "
+"エントリからのみ参照できます。モジュールレベル `rule` は、モジュール内のすべてのパッケージの `dev_build` "
+"エントリから参照できます。`rule` 名を解決するとき、`moon` はまず同じ `moon.pkg` 内のパッケージレベル `rule` "
+"を探し、次に `moon.mod` 内のモジュールレベル `rule` を探します。"
+
+#: ../../toolchain/moon/package.md:1016
+msgid ""
+"rule(name: \"copy\", command: \"cat $input > $output\")\n"
+"dev_build(rule: \"copy\", input: \"a.txt\", output: \"a.mbt\")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1022
+msgid ""
+"The `rule` and `dev_build` entries are not supported in `moon.pkg.json`. "
+"Use the deprecated `pre-build` configuration instead:"
+msgstr ""
+"`moon.pkg.json` では `rule` エントリと `dev_build` エントリはサポートされていません。代わりに、非推奨の "
+"`pre-build` 設定を使用してください："
+
+#: ../../toolchain/moon/package.md:1024
+msgid ""
+"{\n"
+"  \"pre-build\": [\n"
+"    {\n"
+"      \"input\": \"a.txt\",\n"
+"      \"output\": \"a.mbt\",\n"
+"      \"command\": \"cat $input > $output\"\n"
+"    }\n"
+"  ]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1038
+msgid ""
+"In this example, running a development command such as `moon check` "
+"copies the contents of `a.txt` to `a.mbt` before the package is checked."
+msgstr ""
+"この例では、`moon check` などの開発用コマンドを実行すると、パッケージがチェックされる前に `a.txt` の内容が `a.mbt` "
+"にコピーされます。"
+
+#: ../../toolchain/moon/package.md:1041
+msgid "Warnings List"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1043
+msgid ""
+"Warning lists disable or enable warnings. To make enabled warnings fail a"
+" command, use `--deny-warn`. A warning list is a string composed of one "
+"or more warning names, each prefixed with a sign:"
+msgstr ""
+"警告リストは警告を無効化または有効化します。有効な警告でコマンドを失敗させるには、`--deny-warn` を使います。警告リストは 1 "
+"つ以上の警告名で構成される文字列で、各警告名の先頭に記号を付けます："
+
+#: ../../toolchain/moon/package.md:1047
+msgid "`-` to disable the warning"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1048
+msgid "`+` to enable the warning"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1050
+msgid ""
+"For example, in the following configuration, `-unused_value` disables the"
+" unused functions and variables warning."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1054
+msgid "warnings = \"-unused_value\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1059
+msgid ""
+"{\n"
+"  \"warn-list\": \"-unused_value\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1067
+msgid ""
+"If multiple warnings need to be disabled, they can be directly connected "
+"and combined."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1071
+msgid "warnings = \"-unused_value-unreachable_code\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1076
+msgid ""
+"{\n"
+"  \"warn-list\": \"-unused_value-unreachable_code\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1084
+msgid ""
+"If it is necessary to activate certain warnings that were originally "
+"prohibited, use the plus sign."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1088
+msgid "warnings = \"+unused_optional_argument\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1093
+msgid ""
+"{\n"
+"  \"warn-list\": \"+unused_optional_argument\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1101
+msgid ""
+"Older configurations may use an `@` prefix to promote a warning to an "
+"error. The prefix remains accepted only for compatibility and should not "
+"be used in new configuration. Use `moon check --deny-warn` (and the "
+"equivalent flag on other CI commands) when warnings should fail the "
+"build."
+msgstr ""
+"古い設定では、警告をエラーに昇格させるために `@` "
+"接頭辞を使っていることがあります。この接頭辞は互換性のためにのみ引き続き受け入れられますが、新しい設定では使用しないでください。警告でビルドを失敗させる場合は、`moon"
+" check --deny-warn` （および他の CI コマンドの同等のフラグ）を使います。"
+
+#: ../../toolchain/moon/package.md:1106
+msgid ""
+"You can also use warning numbers in `warnings`. In the output below, "
+"`mnemonic` is the symbolic warning name used in warning lists, while `id`"
+" is the numeric form of the same warning."
+msgstr "`warnings` では警告番号も使用できます。以下の出力で、`mnemonic` は警告リストで使う記号名、`id` は同じ警告の数値形式です。"
+
+#: ../../toolchain/moon/package.md:1110
+msgid "The current list from `moonc check -warn-help` is:"
+msgstr "`moonc check -warn-help` の現在の出力は次のとおりです："
+
+#: ../../toolchain/moon/package.md:1134
+msgid ""
+"Available warnings:\n"
+"mnemonic                   description"
+"                                                     id state\n"
+"unused_value               Unused variable or function."
+"                                     1 warn\n"
+"unused_value               Unused variable."
+"                                                 2 warn\n"
+"unused_type_declaration    Unused type declaration."
+"                                         3 warn\n"
+"missing_priv               Unused abstract type."
+"                                            4 warn\n"
+"unused_type_variable       Unused type variable."
+"                                            5 warn\n"
+"unused_constructor         Unused constructor."
+"                                              6 warn\n"
+"unused_field               Unused field or constructor argument."
+"                            7 warn\n"
+"redundant_modifier         Redundant modifier."
+"                                              8 warn\n"
+"struct_never_constructed   Struct never constructed."
+"                                        9 warn\n"
+"unused_pattern             Unused pattern."
+"                                                 10 warn\n"
+"partial_match              Partial pattern matching."
+"                                       11 error\n"
+"unreachable_code           Unreachable code."
+"                                               12 warn\n"
+"unresolved_type_variable   Unresolved type variable."
+"                                       13 warn\n"
+"alert or alert_<category>  All alerts or alerts with specific category."
+"                    14 warn\n"
+"unused_mut                 Unused mutability."
+"                                              15 error\n"
+"parser_inconsistency       Parser inconsistency check."
+"                                     16 warn\n"
+"ambiguous_loop_argument    Ambiguous usage of loop argument."
+"                               17 warn\n"
+"useless_loop               Useless loop expression."
+"                                        18 warn\n"
+"deprecated                 Deprecated API usage."
+"                                           20 warn\n"
+"missing_pattern_arguments  Some arguments of constructor are omitted in "
+"pattern.           21 warn\n"
+"ambiguous_block            Ambiguous block."
+"                                                22 warn\n"
+"unused_try                 Useless try expression."
+"                                         23 warn\n"
+"unused_error_type          Useless error type."
+"                                             24 warn\n"
+"test_unqualified_package   Using implicitly imported API in test."
+"                          25 warn\n"
+"unused_catch_all           Useless catch all."
+"                                              26 warn\n"
+"deprecated_syntax          Deprecated syntax."
+"                                              27 warn\n"
+"todo                       Todo"
+"                                                            28 warn\n"
+"unused_package             Unused package."
+"                                                 29 warn\n"
+"missing_package_alias      Empty package alias."
+"                                            30 warn\n"
+"unused_optional_argument   Optional argument never supplied."
+"                               31 off\n"
+"unused_default_value       Default value of optional argument never used."
+"                  32 off\n"
+"text_segment_excceed       Text segment exceed the line or column limits."
+"                  33 warn\n"
+"implicit_use_builtin       Implicit use of definitions from "
+"`moonbitlang/core/builtin`.    34 warn\n"
+"reserved_keyword           Reserved keyword."
+"                                               35 warn\n"
+"block_label_shadowing      Block label shadows another label."
+"                              36 warn\n"
+"unused_block_label         Unused block label."
+"                                             37 warn\n"
+"missing_invariant          For-loop is missing an invariant."
+"                               38 off\n"
+"missing_reasoning          For-loop is missing a proof_reasoning."
+"                          39 off\n"
+"multiline_string_escape    Deprecated escape sequence in multiline "
+"string.                 40 error\n"
+"missing_rest_mark          Missing `..` in map pattern."
+"                                    41 warn\n"
+"invalid_attribute          Invalid attribute."
+"                                              42 warn\n"
+"unused_attribute           Unused attribute."
+"                                               43 warn\n"
+"invalid_inline_wasm        Invalid inline-wasm."
+"                                            44 error\n"
+"unused_rest_mark           Useless `..` in pattern"
+"                                         46 warn\n"
+"missing_definition         Unused pub definition because it does not "
+"exist in mbti file.   49 warn\n"
+"method_shadowing           Local method shadows upstream method"
+"                            50 warn\n"
+"ambiguous_precedence       Ambiguous operator precedence"
+"                                   51 warn\n"
+"unused_loop_variable       Loop variable not updated in loop"
+"                               52 warn\n"
+"unused_trait_bound         Unused trait bound"
+"                                              53 warn\n"
+"ambiguous_range_direction  Ambiguous looping direction for range e1..=e2"
+"                   54 off\n"
+"unannotated_ffi            Unannotated FFI param type"
+"                                      55 error\n"
+"missing_pattern_field      Missing field in struct pattern"
+"                                 56 warn\n"
+"missing_pattern_payload    Constructor pattern expect payload"
+"                              57 warn\n"
+"unaligned_byte_access      Unaligned byte access in bits pattern"
+"                           59 warn\n"
+"unused_struct_update       Unused struct update"
+"                                            60 warn\n"
+"duplicate_test             Duplicate test name"
+"                                             61 warn\n"
+"invalid_cascade            Calling method with non-unit return type via "
+"`..`               62 warn\n"
+"syntax_lint                Syntax lint warning"
+"                                             63 warn\n"
+"unannotated_toplevel_array Unannotated toplevel array"
+"                                      64 warn\n"
+"prefer_readonly_array      Suggest ReadOnlyArray for read-only array "
+"literal               65 off\n"
+"prefer_fixed_array         Suggest FixedArray for mutated array literal"
+"                    66 off\n"
+"unused_async               Useless `async` annotation"
+"                                      67 warn\n"
+"declaration_unimplemented  Declaration is unimplemented"
+"                                    68 warn\n"
+"declaration_implemented    Declaration is already implemented"
+"                              69 off\n"
+"deprecated_for_in_method   using `iterator()` method for `for .. in` "
+"loop.                 70 off\n"
+"core_package_not_imported  Packages in `moonbitlang/core` need to be "
+"explicitly imported.  71 warn\n"
+"unqualified_local_using    unqualified local using"
+"                                         72 off\n"
+"unnecessary_annotation     unnecessary type annotation"
+"                                     73 off\n"
+"missing_doc                Missing documentation for public definition"
+"                     74 off\n"
+"unnecessary_view_op        Unnecessary `[:]` view operator"
+"                                 75 off\n"
+"result_error_return        Using `Result[T, E]` where `E` is an error "
+"type.                78 warn\n"
+"implicit_impl_as_method    `impl` implicitly promoted as method"
+"                            79 warn\n"
+"regex_match_missing_before Missing `before` binding in `regex match`."
+"                      80 warn\n"
+"regex_match_missing_after  Missing `after` binding in `regex match`."
+"                       81 warn\n"
+"ambiguous_braces           Ambiguous `{}` braces."
+"                                          82 warn\n"
+"type_param_method          Calling method of type parameter in a "
+"deprecated way.           83 warn\n"
+"unqualified_record         Struct literal in a `let` binding without a "
+"type prefix.        84 off\n"
+"unlabelled_break_in_labelled_loop Unlabelled `break` directly inside a "
+"labelled loop.             85 warn\n"
+"unlabelled_continue_in_labelled_loop Unlabelled `continue` directly "
+"inside a labelled loop.          86 warn\n"
+"guard_inexhaustive         `guard` condition is not exhaustive and may "
+"panic.              87 warn\n"
+"guard_redundant_bang       Redundant `!` on an exhaustive `guard`."
+"                         88 warn\n"
+"guard_redundant_else       Redundant `else` on an exhaustive `guard`."
+"                      89 warn\n"
+"unused_lexcase             `lexmatch`/`lexscan` branch that can never be "
+"selected because other branches takes precedence or its pattern matches "
+"nothing.  90 warn\n"
+"unused_errdefer            unused `errdefer` statement"
+"                                     91 warn\n"
+"fragile_catch_all          fragile `catch` handler that can be converted "
+"to `defer` or `errdefer`  92 warn\n"
+"unknown_constr_pat_on_exhaustive_type using `TypeName::..` pattern on a "
+"type not marked with `#non_exhaustive`  93 warn\n"
+"unknown_intrinsic          `#intrinsic` attribute names an unknown "
+"intrinsic.              94 warn\n"
+"nan_pattern                Pattern on a NaN constant, which never "
+"matches.                 95 warn\n"
+"unfenced_import            Deprecated import declarations outside "
+"frontmatter.             96 warn\n"
+"regex_runtime_fallback     Regex match over the compile limits, which "
+"runs on the runtime engine.  97 off\n"
+"cancellable_defer          Fragile cancellable async code inside "
+"`defer`/`errdefer`        98 warn\n"
+"all                        all warnings\n"
+"state: warn = enabled, error = promoted to error, off = disabled\n"
+"note: default alert exceptions: alert_unsafe=off\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1209
+msgid "Use `moonc check -warn-help` to see the list of preset compiler warnings."
+msgstr "`moonc check -warn-help` を使うと、プリセットされたコンパイラ警告の一覧を確認できます。"
+
+#: ../../toolchain/moon/package.md:1212
+msgid "Alert Warning"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1214
+msgid ""
+"Alerts are special warnings that indicate the usage of API marked with  "
+"[`#internal` attribute](../../language/attributes.md#internal-attribute)."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1217
+msgid ""
+"All alerts have a category associated with them, which is customized by "
+"the author of the API. You can enable or disable specific alert "
+"categories using the `alert_<category>` warning name, or use `alert` to "
+"control all alert warnings at once."
+msgstr ""
+"すべての alert には API 作者が定めたカテゴリがあります。`alert_<category>` "
+"という警告名で特定カテゴリを有効または無効にでき、`alert` を使えばすべての alert 警告をまとめて制御できます。"
+
+#: ../../toolchain/moon/package.md:1221
+msgid ""
+"For example, the following configuration enables all alert warnings "
+"except the `unsafe` category. In CI, add `--deny-warn` to `moon check`, "
+"`moon test`, or the equivalent command to treat enabled warnings as fatal"
+" errors."
+msgstr ""
+"例えば、次の設定は `unsafe` カテゴリ以外のすべての alert 警告を有効にします。CI "
+"で有効な警告を致命的エラーとして扱うには、`moon check`、`moon test`、または同等のコマンドに `--deny-warn` "
+"を追加してください。"
+
+#: ../../toolchain/moon/package.md:1227
+msgid "warnings = \"+alert-alert_unsafe\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1232
+msgid ""
+"{\n"
+"  \"warn-list\": \"+alert-alert_unsafe\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1240
+msgid "Virtual Package"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1242
+msgid ""
+"A virtual package serves as an interface of a package that can be "
+"replaced by actual implementations."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1244
+msgid "Declarations"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1246
+msgid ""
+"The `virtual` field is used to declare the current package as a virtual "
+"package."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1248
+msgid ""
+"For example, the following declares a virtual package with default "
+"implementation:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1257
+msgid ""
+"{\n"
+"  \"virtual\": {\n"
+"    \"has-default\": true\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1267
+msgid "Implementations"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1269
+msgid ""
+"Use `virtual(implement: \"package/path\")` to declare the virtual package "
+"implemented by the current package."
+msgstr "`virtual(implement: \"package/path\")` で、現在のパッケージが実装する仮想パッケージを宣言します。"
+
+#: ../../toolchain/moon/package.md:1272
+msgid "For example, the following implements a virtual package:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1276
+msgid "virtual(implement: \"moonbitlang/core/abort\")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1281
+msgid ""
+"{\n"
+"  \"implement\": \"moonbitlang/core/abort\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1289
+msgid "Overriding implementations"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1291
+msgid ""
+"The `overrides` field is used to provide the implementations that "
+"fulfills an imported virtual package."
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1293
+msgid ""
+"For example, the following overrides the default implementation of the "
+"builtin abort package with another package:"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1297
+msgid ""
+"options(\n"
+"  overrides: [ \"moonbitlang/dummy_abort/abort_show_msg\" ],\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/package.md:1304
+msgid ""
+"{\n"
+"  \"overrides\": [\"moonbitlang/dummy_abort/abort_show_msg\"]\n"
+"}\n"
+msgstr ""

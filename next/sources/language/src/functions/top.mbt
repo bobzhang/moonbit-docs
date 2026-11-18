@@ -1,0 +1,258 @@
+// start expression
+fn foo() -> Int32 {
+  let x = 1
+  x + 1
+}
+
+fn bar() -> Int32 {
+  let x = 1
+  //! x + 1
+  x + 2
+}
+// end expression
+
+// start top-level functions
+fn add3(x : Int32, y : Int32, z : Int32) -> Int32 {
+  x + y + z
+}
+// end top-level functions
+
+// start declared functions
+declare fn declared_add(x : Int32, y : Int32) -> Int32
+
+fn declared_add(x : Int32, y : Int32) -> Int32 {
+  x + y
+}
+
+struct DeclaredCounter(Int32)
+
+declare fn DeclaredCounter::value(self : Self) -> Int32
+
+fn DeclaredCounter::value(self : Self) -> Int32 {
+  self.0
+}
+
+test "declared functions" {
+  @test.assert_eq(declared_add(1, 2), 3)
+  @test.assert_eq(DeclaredCounter(4).value(), 4)
+}
+// end declared functions
+
+// start function application 1
+test {
+  let add3 = fn(x, y, z) { x + y + z }
+  assert_eq(add3(1, 2, 7), 10)
+}
+// end function application 1
+
+// start function application 2
+test {
+  let f = fn(x) { x + 1 }
+  let g = fn(x) { x + 2 }
+  let w = (if true { f } else { g })(3)
+  assert_eq(w, 4)
+}
+// end function application 2
+
+// start partial application 1
+fn add(x : Int32, y : Int32) -> Int32 {
+  x + y
+}
+
+test {
+  let add10 : (Int32) -> Int32 = x => add(10, x)
+  println(add10(5)) // prints 15
+  println(add10(10)) // prints 20
+}
+// end partial application 1
+
+// start local functions 1
+fn local_1() -> Int32 {
+  fn inc(x) { // named as `inc`
+    x + 1
+  }
+  // anonymous, instantly applied to integer literal 6
+  (fn(x) { x + inc(2) })(6)
+}
+
+test {
+  assert_eq(local_1(), 9)
+}
+// end local functions 1
+
+// start local functions 2
+let global_y = 3
+
+fn local_2(x : Int32) -> (Int32, Int32) {
+  fn inc() {
+    x + 1
+  }
+
+  fn four() {
+    global_y + 1
+  }
+
+  (inc(), four())
+}
+
+test {
+  @test.assert_eq(local_2(3), (4, 4))
+}
+// end local functions 2
+
+test {
+// start local functions 3
+  [1, 2, 3].eachi((i, x) => println("\{i} => \{x}"))
+  // parenthesis can be omitted when there is only one parameter
+  [1, 2, 3].each(x => println(x * x))
+// end local functions 3
+}
+
+// start labelled arguments 1
+fn labelled_1(arg1~ : Int32, arg2~ : Int32) -> Int32 {
+  arg1 + arg2
+}
+// end labelled arguments 1
+
+// start labelled arguments 2
+test {
+  let arg1 = 1
+  assert_eq(labelled_1(arg2=2, arg1~), 3)
+}
+// end labelled arguments 2
+
+// start optional arguments 1
+fn optional(opt~ : Int32 = 42) -> Int32 {
+  opt
+}
+
+test {
+  assert_eq(optional(), 42)
+  assert_eq(optional(opt=0), 0)
+}
+// end optional arguments 1
+
+// start optional arguments 2
+fn incr(counter~ : Ref[Int32] = { val: 0 }) -> Ref[Int32] {
+  counter.val = counter.val + 1
+  counter
+}
+
+test {
+  @test.assert_eq(incr().val, 1)
+  @test.assert_eq(incr().val, 1)
+  let counter = Ref::{ val: 0 }
+  @test.assert_eq(incr(counter~).val, 1)
+  @test.assert_eq(incr(counter~).val, 2)
+}
+// end optional arguments 2
+
+// start optional arguments 3
+let default_counter : Ref[Int32] = { val: 0 }
+
+fn incr_2(counter~ : Ref[Int32] = default_counter) -> Int32 {
+  counter.val = counter.val + 1
+  counter.val
+}
+
+test {
+  assert_eq(incr_2(), 1)
+  assert_eq(incr_2(), 2)
+}
+// end optional arguments 3
+
+// start optional arguments 4
+fn create_rectangle(a : Int32, b~ : Int32 = a) -> (Int32, Int32) {
+  (a, b)
+}
+
+test {
+  debug_inspect(create_rectangle(10), content="(10, 10)")
+}
+// end optional arguments 4
+
+// start optional arguments 5
+fn may_fail(x : Int32) -> Int32 raise Failure {
+  if x < 0 {
+    fail("negative")
+  }
+  x
+}
+
+fn add_with_optional(base : Int32, extra~ : Int32 = 1) -> Int32 {
+  base + extra
+}
+
+test {
+  inspect(add_with_optional(1, extra=may_fail(2)), content="3")
+}
+// end optional arguments 5
+
+struct Image {
+  width : Int32
+  height : Int32
+}
+
+// start optional arguments 6
+fn new_image(width? : Int32, height? : Int32) -> Image {
+  if width is Some(w) {
+    ...
+  }
+  ...
+}
+
+let img2 : Image = new_image(width=1920, height=1080)
+// end optional arguments 6
+
+// start optional arguments 7
+fn image(width? : Int32, height? : Int32) -> Image {
+  ...
+}
+
+fn fixed_width_image(height? : Int32) -> Image {
+  image(width=1920, height?)
+}
+// end optional arguments 7
+
+// start autofill arguments
+#callsite(autofill(loc, args_loc))
+fn f(_x : Int32, loc~ : SourceLoc, args_loc~ : ArgsLoc) -> String {
+  (
+    $|loc of whole function call: \{loc}
+    $|loc of arguments: \{args_loc}
+  )
+  // loc of whole function call: <filename>:7:3-7:10
+  // loc of arguments: [Some(<filename>:7:5-7:6), Some(<filename>:7:8-7:9), None, None]
+}
+// end autofill arguments
+
+// start function alias
+#alias(g)
+#alias(h, visibility="pub")
+fn k() -> Bool {
+  true
+}
+// end function alias
+
+test {
+// start local functions 4
+  fn f(x) {
+    // `f` can refer to itself here, but cannot use `g`
+    if x > 0 {
+      f(x - 1)
+    }
+  }
+
+  fn g(x) {
+    // `g` can refer to `f` and `g` itself
+    if x < 0 {
+      f(-x)
+    } else {
+      f(x)
+    }
+  }
+  // mutually recursive local functions
+  letrec even = x => x == 0 || odd(x - 1)
+  and odd = x => x != 0 && even(x - 1)
+// end local functions 4
+}

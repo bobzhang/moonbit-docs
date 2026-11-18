@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 15:03+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0047.md:1
+msgid "E0047"
+msgstr ""
+
+#: ../../language/error_codes/E0047.md:3
+msgid "Warning name: `invalid_mbti`"
+msgstr "警告名称：`invalid_mbti`"
+
+#: ../../language/error_codes/E0047.md:5
+msgid "Invalid mbti file."
+msgstr "无效的 mbti 文件。"
+
+#: ../../language/error_codes/E0047.md:7
+msgid ""
+"This warning name is kept in the warning table for invalid `.mbti` files,"
+" but the current interface parser reports syntax errors in `.mbti` files "
+"as [`E3100`](E3100.md)."
+msgstr ""
+"此警告名称保留在 warning table 中，用于无效的 `.mbti` 文件；但当前接口解析器会将 `.mbti` 文件中的语法错误报告为 "
+"[`E3100`](E3100.md)。"
+
+#: ../../language/error_codes/E0047.md:11
+msgid ""
+"If you see an invalid interface warning from a tool that still uses this "
+"warning entry, regenerate the `.mbti` file (or fix the tool that produced"
+" it) so that the interface matches the current compiler version."
+msgstr ""
+"如果某个工具仍使用此 warning entry 并报告了无效接口警告，请重新生成 `.mbti` "
+"文件（或修复生成它的工具），使接口匹配当前编译器版本。"
+
+#: ../../language/error_codes/E0047.md:15
+msgid ""
+"This page has no checked source example because current invalid `.mbti` "
+"diagnostics are documented and monitored under E3100."
+msgstr "此页面没有受检查的源码示例，因为当前无效 `.mbti` 诊断已在 E3100 下记录并监控。"

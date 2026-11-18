@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-20 11:55+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0032.md:1
+msgid "E0032"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:3
+msgid "Warning name: `unused_default_value`"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:5
+msgid ""
+"The default value of an optional argument is unused: every call site "
+"explicitly supplies a value. Remove the default value to make it a required "
+"labelled argument, keeping the `~` in its declaration."
+msgstr ""
+"省略可能な引数のデフォルト値が使われていません。すべての呼び出し箇所で明示的に値が渡されています。宣言の `~` "
+"を残したままデフォルト値を削除すると、必須のラベル付き引数になります。"
+
+#: ../../language/error_codes/E0032.md:7
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:9
+msgid ""
+"This warning is turned off by default. Enable it with the `warnings` "
+"field in `moon.pkg`:"
+msgstr ""
+"この警告はデフォルトでは無効です。`moon.pkg` の `warnings` "
+"フィールドで有効にできます："
+
+#: ../../language/error_codes/E0032.md:12
+msgid "moon.pkg"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:12
+msgid ""
+"warnings = \"+unused_default_value\"\n"
+"\n"
+"pkgtype(kind: \"executable\")\n"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:17
+msgid "main.mbt"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:17
+msgid ""
+"///|\n"
+"fn f(opt~ : Int32 = 4) -> Int32 {\n"
+"  ignore(opt)\n"
+"  0\n"
+"}\n"
+"\n"
+"///|\n"
+"fn main {\n"
+"  println(f(opt=3))\n"
+"  println(f(opt=3))\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:22
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0032.md:24
+msgid "Remove the default value to make the labelled argument required:"
+msgstr "デフォルト値を削除して、ラベル付き引数を必須にしてください："
+
+#: ../../language/error_codes/E0032.md:26
+msgid ""
+"///|\n"
+"fn f(opt~ : Int32) -> Int32 {\n"
+"  ignore(opt)\n"
+"  0\n"
+"}\n"
+"\n"
+"///|\n"
+"fn main {\n"
+"  println(f(opt=3))\n"
+"  println(f(opt=3))\n"
+"}\n"
+msgstr ""

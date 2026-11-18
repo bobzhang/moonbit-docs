@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-18 15:32+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4220.md:1
+msgid "E4220"
+msgstr ""
+
+#: ../../language/error_codes/E4220.md:3
+msgid "Compiler diagnostic name: `regex_match_binding_not_supported`."
+msgstr ""
+
+#: ../../language/error_codes/E4220.md:5
+msgid "A lexical case uses a binding that is not available in its matching mode."
+msgstr "字句ケースで、そのマッチモードでは利用できない束縛が使われています。"
+
+#: ../../language/error_codes/E4220.md:7
+msgid ""
+"For text and byte inputs, first-match `lexmatch` supports both `before=` "
+"and `after=`. Longest-match mode starts at the beginning of the input, so"
+" it supports `after=` but not `before=`. `lexscan` does not support "
+"either binding: streaming targets consume their input buffers, while an "
+"in-memory `@lexbuf.StringScanner` stores the next scan position in its "
+"`cursor` field."
+msgstr "テキストとバイト入力では、first-match の `lexmatch` は `before=` と `after=` の両方をサポートします。longest-match は入力の先頭から開始するため、`after=` のみをサポートします。`lexscan` はどちらもサポートしません。ストリーミング対象は入力バッファを消費し、メモリ内の `@lexbuf.StringScanner` は次の走査位置を `cursor` フィールドに保持します。"
+
+#: ../../language/error_codes/E4220.md:13
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4220.md:15
+msgid ""
+"///|\n"
+"pub fn first_word(input : String) -> StringView {\n"
+"  lexmatch input with longest {\n"
+"    (re\"^[a-z]+\" as word, before=_) => word\n"
+"    _ => \"\"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4220.md:19
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4220.md:21
+msgid ""
+"For `lexscan`, remove `before=` or `after=` and anchor the regex at `^`. "
+"For `lexmatch`, remove `before=`, anchor the regex at `^`, and use "
+"`after=` when the unmatched suffix is needed."
+msgstr "`lexscan` では `before=` または `after=` を削除し、正規表現を `^` でアンカーしてください。`lexmatch` では `before=` を削除して正規表現を `^` でアンカーし、マッチしなかった接尾部が必要な場合は `after=` を使用してください。"
+
+#: ../../language/error_codes/E4220.md:25
+msgid ""
+"///|\n"
+"pub fn first_word(input : String) -> StringView {\n"
+"  lexmatch input with longest {\n"
+"    (re\"^[a-z]+\" as word, after=_) => word\n"
+"    _ => \"\"\n"
+"  }\n"
+"}\n"
+msgstr ""

@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4172.md:1
+msgid "E4172"
+msgstr "E4172"
+
+#: ../../language/error_codes/E4172.md:3
+msgid "Compiler diagnostic name: `invalid_regex_pattern`."
+msgstr "编译器诊断名称：`invalid_regex_pattern`。"
+
+#: ../../language/error_codes/E4172.md:5
+msgid "Invalid regex pattern."
+msgstr "无效的正则表达式模式。"
+
+#: ../../language/error_codes/E4172.md:7
+msgid ""
+"This error happens when a `re\"...\"` literal does not follow MoonBit's "
+"regex syntax. Regex literals are checked at compile time, so syntax "
+"errors, unsupported assertions, invalid ranges, and duplicate capture "
+"names are reported before the program runs."
+msgstr "`re\"...\"` 字面量不符合 MoonBit 的正则语法时会出现此错误。正则字面量会在编译时检查，因此语法错误、不支持的断言、无效范围和重复捕获名称都会在程序运行前报告。"
+
+#: ../../language/error_codes/E4172.md:12
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E4172.md:14
+msgid ""
+"fn invalid_regex() -> Regex {\n"
+"  re\"[a-z\"\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4172.md:18
+msgid "The character class starts with `[`, but never closes with `]`."
+msgstr "字符类以 `[` 开始，但没有用 `]` 闭合。"
+
+#: ../../language/error_codes/E4172.md:20
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4172.md:22
+msgid "Fix the regex syntax, or rewrite the pattern using a supported regex form."
+msgstr "修正正则表达式语法，或使用受支持的正则表达式形式重写该模式。"
+
+#: ../../language/error_codes/E4172.md:24
+msgid ""
+"fn valid_regex() -> Regex {\n"
+"  re\"[a-z]\"\n"
+"}\n"
+msgstr ""

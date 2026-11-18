@@ -1,0 +1,9 @@
+import {
+  "moonbit-community/language/packages/virtual",
+}
+
+pkgtype(kind: "executable")
+
+options(
+  overrides: [ "moonbit-community/language/packages/implement" ],
+)

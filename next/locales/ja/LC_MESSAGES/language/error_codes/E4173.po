@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4173.md:1
+msgid "E4173"
+msgstr ""
+
+#: ../../language/error_codes/E4173.md:3
+msgid "Compiler diagnostic name: `invalid_value_type_attr`."
+msgstr ""
+
+#: ../../language/error_codes/E4173.md:5
+msgid "Invalid `#valtype` declaration."
+msgstr ""
+
+#: ../../language/error_codes/E4173.md:7
+msgid ""
+"`#valtype` asks the compiler to represent a type as a value type. Value-"
+"type fields must be immutable, so a declaration with a mutable field is "
+"rejected."
+msgstr "`#valtype` は、型を値型として表現するようコンパイラに要求します。値型のフィールドは不変でなければならないため、可変フィールドを含む宣言は拒否されます。"
+
+#: ../../language/error_codes/E4173.md:10
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4173.md:12
+msgid ""
+"#valtype\n"
+"struct Counter {\n"
+"  mut value : Int32\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4173.md:16
+msgid "The field `value` is mutable."
+msgstr "フィールド `value` は可変です。"
+
+#: ../../language/error_codes/E4173.md:18
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4173.md:20
+msgid ""
+"Make the field immutable, or remove `#valtype` if the type needs in-place"
+" mutation."
+msgstr "フィールドを不変にしてください。その型でインプレース変更が必要な場合は、`#valtype` を削除します。"
+
+#: ../../language/error_codes/E4173.md:23
+msgid ""
+"#valtype\n"
+"struct Point {\n"
+"  x : Int32\n"
+"  y : Int32\n"
+"}\n"
+msgstr ""

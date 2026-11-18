@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4174.md:1
+msgid "E4174"
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:3
+msgid "Compiler diagnostic name: `control_in_defer`."
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:5
+msgid "Invalid control flow inside `defer`."
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:7
+msgid ""
+"The right-hand side of `defer` is cleanup code that runs when the "
+"surrounding scope exits. It cannot change how that surrounding scope "
+"exits. MoonBit rejects `return`, `break`, `continue`, `raise`, calls to "
+"functions that may raise, and async calls inside `defer`."
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:12
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:14
+msgid ""
+"fn answer() -> Int32 {\n"
+"  defer { return 42 }\n"
+"  0\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:18
+msgid ""
+"The `return` would try to exit the surrounding function from cleanup "
+"code, so it is rejected."
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:21
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:23
+msgid ""
+"Keep `defer` for cleanup with `Unit`-returning, non-raising, synchronous "
+"code. Perform control flow after the deferred cleanup has been "
+"registered."
+msgstr ""
+
+#: ../../language/error_codes/E4174.md:26
+msgid ""
+"fn answer() -> Int32 {\n"
+"  defer println(\"leaving answer\")\n"
+"  42\n"
+"}\n"
+msgstr ""

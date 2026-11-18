@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-17 12:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0079.md:1
+msgid "E0079"
+msgstr ""
+
+#: ../../language/error_codes/E0079.md:3
+msgid "Warning name: `implicit_impl_as_method`"
+msgstr "警告名：`implicit_impl_as_method`"
+
+#: ../../language/error_codes/E0079.md:5
+msgid ""
+"Methods from an `impl Trait for Type` declaration are being attached to "
+"`Type` implicitly. This compatibility behavior is deprecated because it "
+"is not explicit or refactoring-safe."
+msgstr "`impl Trait for Type` 宣言のメソッドが暗黙的に `Type` に追加されています。この互換動作は明示的ではなく、安全なリファクタリングを妨げるため、非推奨です。"
+
+#: ../../language/error_codes/E0079.md:9
+msgid ""
+"This diagnostic describes the former implicit-attachment compatibility "
+"behavior. Without an explicitly attached method, current toolchains "
+"report [E4015](E4015.md) instead."
+msgstr "この診断は、以前の暗黙的なメソッド追加という互換動作を説明しています。メソッドが明示的に追加されていない場合、現在のツールチェーンは代わりに [E4015](E4015.md) を報告します。"
+
+#: ../../language/error_codes/E0079.md:13
+msgid "Suggestion"
+msgstr "修正案"
+
+#: ../../language/error_codes/E0079.md:15
+msgid ""
+"Use `extend Type with Trait::{method}` for methods that should support "
+"dot syntax. If the compatibility method should remain available only for "
+"migration, mark that `extend` declaration with `#deprecated`. Otherwise, "
+"call the implementation as `Trait::method(value)`."
+msgstr "ドット構文をサポートすべきメソッドには `extend Type with Trait::{method}` を使用します。互換メソッドを移行期間だけ残す場合は、その `extend` 宣言を `#deprecated` でマークしてください。それ以外の場合は `Trait::method(value)` として実装を呼び出します。"

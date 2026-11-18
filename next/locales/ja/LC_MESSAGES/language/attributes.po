@@ -1,0 +1,1387 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 15:01+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/attributes.md:1
+msgid "Attribute"
+msgstr "アトリビュート"
+
+#: ../../language/attributes.md:3
+msgid ""
+"Attributes are annotations placed before structures in source code. They "
+"take the form `#attribute(...)`. An attribute occupies the entire line, "
+"and newlines are not allowed within it. Attributes do not normally affect"
+" the meaning of programs. Unused attributes will be reported as warnings."
+msgstr ""
+
+#: ../../language/attributes.md:7
+msgid "The syntax of attributes is defined as follows:"
+msgstr "アトリビュートの構文は次のとおりです："
+
+#: ../../language/attributes.md:9
+msgid ""
+"attribute ::= '#' attribute-name\n"
+"            | '#' attribute-name '(' attribute-arguments ')'\n"
+"\n"
+"attribute-name ::= LIDENT | LIDENT '.' LIDENT\n"
+"\n"
+"attribute-arguments ::= attribute-argument (',' attribute-argument )*\n"
+"\n"
+"attribute-argument ::= expr | LIDENT '=' expr\n"
+"\n"
+"expr ::= LIDENT | UIDENT | STRING | 'true' | 'false'\n"
+"       | '@' LIDENT '.' LIDENT | '@' LIDENT '.' UIDENT\n"
+"       | '[' (expr (',' expr)* ','?)? ']'\n"
+"       | LIDENT '(' attribute-arguments ')'\n"
+"       | UIDENT '(' attribute-arguments ')'\n"
+msgstr ""
+
+#: ../../language/attributes.md:25
+msgid ""
+"Attributes have two categories: the built-in attributes and user-defined "
+"attributes. For example:"
+msgstr "アトリビュートには 2 種類あります。組み込みアトリビュートとユーザー定義アトリビュートです。例えば："
+
+#: ../../language/attributes.md:27
+msgid ""
+"#deprecated(\"message\")\n"
+"#custom.attribute(key=\"value\", flag=true)\n"
+msgstr ""
+
+#: ../../language/attributes.md:32
+msgid ""
+"The first attribute is a built-in attribute; it does not have a namespace"
+" prefix in the attribute name. Built-in attributes are recognized by the "
+"MoonBit compiler and have specific meanings."
+msgstr ""
+"最初のアトリビュートは組み込みアトリビュートです。アトリビュート名に名前空間プレフィックスはありません。組み込みアトリビュートは MoonBit "
+"コンパイラに認識され、特定の意味を持ちます。"
+
+#: ../../language/attributes.md:34
+msgid ""
+"The second attribute is a user-defined attribute; it has a namespace "
+"prefix `custom.` in the attribute name. User-defined attributes are "
+"ignored by the compiler, but can be used by external tools via parsing "
+"the source code."
+msgstr ""
+"2 つ目のアトリビュートはユーザー定義アトリビュートです。アトリビュート名に `custom.` "
+"という名前空間プレフィックスがあります。ユーザー定義アトリビュートはコンパイラには無視されますが、外部ツールはソースコードを解析して利用できます。"
+
+#: ../../language/attributes.md:37
+msgid ""
+"MoonBit is designed not to support runtime reflection. It's easy to "
+"abuse, making it impossible for toolchains (e.g., the compiler) to catch "
+"errors at compile time, which makes code harder to maintain. It also "
+"negatively impacts performance optimization."
+msgstr ""
+"MoonBit "
+"はランタイムリフレクションをサポートしない設計です。これは悪用されやすく、ツールチェーン（たとえばコンパイラ）がコンパイル時にエラーを検出できなくなり、コードの保守性が下がります。また、性能最適化にも悪影響があります。"
+
+#: ../../language/attributes.md:39
+msgid ""
+"We prefer to use compile-time code generation, keeping the benefits of "
+"static typing and performance (should also be used judiciously to avoid "
+"unnecessary complexity)."
+msgstr "私たちはコンパイル時コード生成を使うことを好みます。これにより静的型付けと性能の利点を保てます（ただし、不要な複雑さを避けるため慎重に使うべきです）。"
+
+#: ../../language/attributes/derive.md:2
+msgid "Derive Attribute"
+msgstr "Derive 属性"
+
+#: ../../language/attributes/derive.md:4
+msgid ""
+"Use `#derive(...)` before a type definition to generate implementations "
+"of supported traits. Each field must satisfy the requirements of the "
+"derived trait."
+msgstr "型定義の前に `#derive(...)` を付けると、対応するトレイトの実装を生成できます。各フィールドは派生するトレイトの要件を満たす必要があります。"
+
+#: ../../language/attributes/derive.md:8
+msgid ""
+"#derive(Debug)\n"
+"struct DebugPoint {\n"
+"  x : Int32\n"
+"  y : Int32\n"
+"}\n"
+"\n"
+"pub extend DebugPoint with Debug::{to_repr}\n"
+"\n"
+"test \"derive debug struct\" {\n"
+"  let point = DebugPoint::{ x: 1, y: 2 }\n"
+"  debug_inspect(point, content=\"{ x: 1, y: 2 }\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/derive.md:14
+msgid ""
+"See [Deriving traits](/language/derive.md) for supported traits and their"
+" options. `moon fmt` migrates the older trailing `derive(...)` syntax."
+msgstr "対応するトレイトとオプションは[トレイトの派生](/language/derive.md)を参照してください。`moon fmt` で旧来の末尾に置く `derive(...)` 構文を移行できます。"
+
+#: ../../language/attributes/deprecated.md:2
+msgid "Deprecated Attribute"
+msgstr "非推奨アトリビュート"
+
+#: ../../language/attributes/deprecated.md:4
+msgid ""
+"The `#deprecated` attribute is used to mark an API as deprecated. MoonBit"
+" emits a warning when the deprecated API is used, and if the API is "
+"listed in completion, it will be shown with a strikethrough style. For "
+"example:"
+msgstr ""
+
+#: ../../language/attributes/deprecated.md:8
+msgid ""
+"#deprecated\n"
+"pub fn foo() -> Unit {\n"
+"  ...\n"
+"}\n"
+"\n"
+"#deprecated(\"Use Bar2 instead\")\n"
+"pub(all) enum Bar {\n"
+"  Ctor1\n"
+"  Ctor2\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/deprecated.md:14
+msgid "The `#deprecated` attribute can be used in the following contexts:"
+msgstr "`#deprecated` アトリビュートは次の文脈で使えます："
+
+#: ../../language/attributes/deprecated.md:16
+msgid "Top-level value declarations (including `fn`, `let`, and `const`)"
+msgstr "トップレベルの値宣言（`fn`、`let`、`const` を含む）"
+
+#: ../../language/attributes/deprecated.md:17
+msgid "Top-level type declarations (including `type`, `struct`, and `enum`)"
+msgstr "トップレベルの型宣言（`type`、`struct`、`enum` を含む）"
+
+#: ../../language/attributes/deprecated.md:18
+msgid "Trait method declarations"
+msgstr "trait メソッド宣言"
+
+#: ../../language/attributes/deprecated.md:19
+msgid "Trait default implementations"
+msgstr "trait のデフォルト実装"
+
+#: ../../language/attributes/deprecated.md:20
+msgid "`extend` declarations"
+msgstr "`extend` 宣言"
+
+#: ../../language/attributes/deprecated.md:22
+msgid "Common forms include:"
+msgstr "一般的な形式は次のとおりです："
+
+#: ../../language/attributes/deprecated.md:24
+msgid "`#deprecated`"
+msgstr "`#deprecated`"
+
+#: ../../language/attributes/deprecated.md:26
+msgid "Marks the item as deprecated with a default warning message."
+msgstr "項目を非推奨にし、デフォルトの警告メッセージを使います。"
+
+#: ../../language/attributes/deprecated.md:28
+msgid "`#deprecated(\"Use new_function instead\")`"
+msgstr "`#deprecated(\"Use new_function instead\")`"
+
+#: ../../language/attributes/deprecated.md:30
+msgid ""
+"Marks the item as deprecated with a custom warning message. Every time "
+"the deprecated API is used, the provided message will be displayed as a "
+"warning."
+msgstr "項目を非推奨にし、カスタム警告メッセージを使います。非推奨 API が使われるたびに、指定したメッセージが警告として表示されます。"
+
+#: ../../language/attributes/deprecated.md:32
+msgid "`#deprecated(\"Use new_function instead\", skip_current_package=true)`"
+msgstr "`#deprecated(\"Use new_function instead\", skip_current_package=true)`"
+
+#: ../../language/attributes/deprecated.md:34
+msgid ""
+"Marks the item as deprecated with a custom warning message, but skips "
+"emitting warnings when the deprecated API is used within the same "
+"package."
+msgstr "項目を非推奨にし、カスタム警告メッセージを使いますが、同じパッケージ内で非推奨 API が使われた場合は警告を出しません。"
+
+#: ../../language/attributes/deprecated.md:36
+msgid "`#deprecated(skip_current_package=true)`"
+msgstr ""
+
+#: ../../language/attributes/deprecated.md:38
+msgid ""
+"Marks the item as deprecated with a default warning message, but skips "
+"emitting warnings within the same package. When both a message and "
+"`skip_current_package` are present, either argument order is accepted."
+msgstr ""
+
+#: ../../language/attributes/alert.md:2
+msgid "Alert Attribute"
+msgstr ""
+
+#: ../../language/attributes/alert.md:4
+msgid ""
+"The `#alert` attribute attaches a category and message to an API. When "
+"code uses the API, MoonBit emits an alert warning."
+msgstr ""
+"`#alert` アトリビュートは API にカテゴリとメッセージを付与します。その API が使われると、MoonBit は alert "
+"警告を出します。"
+
+#: ../../language/attributes/alert.md:7
+msgid ""
+"#alert(unsafe, \"This function is unsafe.\")\n"
+"fn[A] alert_unsafe_get(arr : Array[A], index : Int32) -> A {\n"
+"  arr[index]\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/alert.md:13
+msgid ""
+"The first argument is the alert category, and the second argument is the "
+"message shown to users. The warning can be configured through warning "
+"names such as `alert` and `alert_unsafe`."
+msgstr ""
+"第 1 引数は alert のカテゴリで、第 2 引数はユーザーに表示されるメッセージです。この警告は `alert` や "
+"`alert_unsafe` などの警告名で設定できます。"
+
+#: ../../language/attributes/alert.md:17
+msgid ""
+"For more detail, see [alert warning](/toolchain/moon/package.md#alert-"
+"warning)."
+msgstr ""
+
+#: ../../language/attributes/alias.md:2
+msgid "Alias Attribute"
+msgstr "エイリアスアトリビュート"
+
+#: ../../language/attributes/alias.md:4
+msgid ""
+"The `alias` attribute is used to overload operators related to indexing, "
+"or to create an alias name for a top-level function or variable. It has "
+"two forms:"
+msgstr ""
+"`alias` アトリビュートは、添字に関係する演算子をオーバーロードしたり、トップレベル関数や変数に別名を付けたりするために使います。形式は 2"
+" 種類あります："
+
+#: ../../language/attributes/alias.md:6
+msgid ""
+"`#alias(\"op\")`: where `op` is one of the following strings representing"
+" the indexing operators:"
+msgstr "`#alias(\"op\")`。ここで `op` は次の添字演算子を表す文字列のいずれかです："
+
+#: ../../language/attributes/alias.md:8
+msgid "`_[_]`: for the indexing operator"
+msgstr "`_[_]`: 添字演算子"
+
+#: ../../language/attributes/alias.md:9
+msgid "`_[_]=_`: for the indexing assignment operator"
+msgstr "`_[_]=_`: 添字代入演算子"
+
+#: ../../language/attributes/alias.md:10
+msgid "`_[_:_]`: for the as view operator"
+msgstr "`_[_:_]`: as view 演算子"
+
+#: ../../language/attributes/alias.md:12
+msgid "`#alias(id)`: where `id` is a identifier representing the alias name."
+msgstr "`#alias(id)`。ここで `id` は別名を表す識別子です。"
+
+#: ../../language/attributes/alias.md:14
+msgid "Both forms allowed additional arguments:"
+msgstr "どちらの形式でも追加引数を指定できます："
+
+#: ../../language/attributes/alias.md:16
+msgid "`visibility=\"modifier\"`"
+msgstr "`visibility=\"modifier\"`"
+
+#: ../../language/attributes/alias.md:18
+msgid ""
+"A labeled argument, changes the visibility of the alias. The `modifier` "
+"can be `pub` or `priv`. If not specified, the alias will have the same "
+"visibility as the original function or variable."
+msgstr ""
+"ラベル付き引数で、別名の可視性を変更します。`modifier` は `pub` または `priv` "
+"です。指定しない場合、別名の可視性は元の関数または変数と同じになります。"
+
+#: ../../language/attributes/alias.md:20
+msgid "`deprecated` or `deprecated=\"message\"`"
+msgstr "`deprecated` または `deprecated=\"message\"`"
+
+#: ../../language/attributes/alias.md:22
+msgid ""
+"Marks the alias as deprecated. If a message is provided, it will be "
+"displayed as a warning when the alias is used."
+msgstr "別名を非推奨としてマークします。メッセージを指定した場合、別名が使われると警告として表示されます。"
+
+#: ../../language/attributes/alias.md:24
+msgid ""
+"`#alias` cannot be applied to `declare fn` or `declare let`. Put the "
+"attribute on the corresponding definition instead."
+msgstr "`#alias` は `declare fn` や `declare let` には指定できません。対応する定義に属性を付けてください。"
+
+#: ../../language/attributes/alias.md:27
+msgid ""
+"To expose an alias through a declaration-based interface, declare the alias "
+"name separately with `declare fn` or `declare let`. The declarations specify"
+" the names and their types, but do not require an alias relationship between"
+" them. Whether the implementation uses `#alias` or separate definitions is "
+"an implementation detail."
+msgstr ""
+"宣言ベースのインターフェースで別名を公開するには、`declare fn` または `declare let` "
+"でその名前を個別に宣言します。宣言は名前と型を指定しますが、名前同士が別名であることは要求しません。`#alias` "
+"を使うか、それぞれを別々に定義するかは実装の詳細です。"
+
+#: ../../language/attributes/alias.md:33
+msgid ""
+"///|\n"
+"declare pub fn new_name() -> Int32\n"
+"\n"
+"///|\n"
+"declare pub fn old_name() -> Int32\n"
+"\n"
+"///|\n"
+"#alias(old_name)\n"
+"pub fn new_name() -> Int32 {\n"
+"  42\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/alias.md:37
+msgid ""
+"To graceful migration from old API to new API, you can rename the old API"
+" directly, and create an alias with the old name, mark it as deprecated. "
+"For example:"
+msgstr ""
+
+#: ../../language/attributes/alias.md:40
+msgid ""
+"#alias(old_name, deprecated)\n"
+"fn new_name() -> Unit {\n"
+"  ()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:2
+msgid "`label_migration` Attribute"
+msgstr "`label_migration` アトリビュート"
+
+#: ../../language/attributes/label_migration.md:4
+msgid ""
+"The `#label_migration` attribute is used to help you safely evolve your "
+"API by warning users during the transition period."
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:7
+msgid "It has three following forms:"
+msgstr "形式は次の 3 種類です："
+
+#: ../../language/attributes/label_migration.md:9
+msgid "`#label_migration(id, fill=true, msg=\"message\")`"
+msgstr "`#label_migration(id, fill=true, msg=\"message\")`"
+
+#: ../../language/attributes/label_migration.md:11
+msgid ""
+"The `fill` argument is used when you want to refactor an optional "
+"parameter. You can use `fill=true` when you want to eventually make an "
+"optional parameter required. You can use `fill=false` when you want to "
+"eventually remove an optional parameter."
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:16
+#: ../../language/attributes/label_migration.md:31
+#: ../../language/attributes/label_migration.md:46
+msgid ""
+"The `msg` argument is an string that provides additional information "
+"about the migration."
+msgstr "`msg` 引数は、移行に関する追加情報を提供する文字列です。"
+
+#: ../../language/attributes/label_migration.md:18
+msgid ""
+"#label_migration(x, fill=true)\n"
+"#label_migration(y, fill=false)\n"
+"fn label_migration_fill(x~ : Int32 = 0, y~ : Int32 = 1) -> Int32 {\n"
+"  x + y\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:24
+msgid "`#label_migration(id, allow_positional=true, msg=\"message\")`"
+msgstr "`#label_migration(id, allow_positional=true, msg=\"message\")`"
+
+#: ../../language/attributes/label_migration.md:26
+msgid ""
+"The `allow_positional` argument is used when you want a labelled "
+"parameter to be used without its label being provided. When the parameter"
+" is used positionally (without a label), the compiler reports a warning. "
+"This is useful when you want to change a positional parameter to a "
+"labelled parameter without breaking the downstream code."
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:33
+msgid ""
+"#label_migration(x, allow_positional=true)\n"
+"fn label_migration_allow_positional(x~ : Int32) -> Int32 {\n"
+"  x\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:39
+msgid "`#label_migration(id, alias=new_id, msg=\"message\")`"
+msgstr "`#label_migration(id, alias=new_id, msg=\"message\")`"
+
+#: ../../language/attributes/label_migration.md:41
+msgid ""
+"The alias argument allows you to provide an alternative name to a "
+"labelled parameter. This is useful when renaming a parameter to maintain "
+"backward compatibility. If a warning message is provided, the compiler "
+"warns when using the alias; otherwise, the alias can be used without "
+"warnings."
+msgstr ""
+
+#: ../../language/attributes/label_migration.md:48
+msgid ""
+"#label_migration(x, alias=xx)\n"
+"#label_migration(x, alias=y, msg=\"warning\")\n"
+"fn label_migration_alias(x~ : Int32) -> Int32 {\n"
+"  x\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/visibility.md:2
+msgid "Visibility Attribute"
+msgstr "可視性アトリビュート"
+
+#: ../../language/attributes/visibility.md:5
+msgid ""
+"This topic does not cover access control. To learn more about `pub`, "
+"`pub(all)` and `priv`, see [Access Control](/language/packages.md#access-"
+"control)."
+msgstr ""
+"このトピックではアクセス制御は扱いません。`pub`、`pub(all)`、`priv` について詳しくは [Access "
+"Control](/language/packages.md#access-control) を参照してください。"
+
+#: ../../language/attributes/visibility.md:8
+msgid ""
+"The `#visibility` attribute is similar to the `#deprecated` attribute, "
+"but it is used to hint that a type will change its visibility in the "
+"future. For outside usages, if the usage will be invalidated by the "
+"visibility change in future, a warning will be emitted."
+msgstr ""
+
+#: ../../language/attributes/visibility.md:11
+msgid ""
+"// in @util package\n"
+"#visibility(change_to=\"readonly\", \"Point will be readonly in the "
+"future.\")\n"
+"pub(all) struct Point {\n"
+"  x : Int32\n"
+"  y : Int32\n"
+"}\n"
+"\n"
+"#visibility(change_to=\"abstract\", \"Use new_text and new_binary "
+"instead.\")\n"
+"pub(all) enum Resource {\n"
+"  Text(String)\n"
+"  Binary(Bytes)\n"
+"}\n"
+"\n"
+"pub fn new_text(str : String) -> Resource {\n"
+"  ...\n"
+"}\n"
+"\n"
+"pub fn new_binary(bytes : Bytes) -> Resource {\n"
+"  ...\n"
+"}\n"
+"\n"
+"// in another package\n"
+"fn main {\n"
+"  let p = Point::{ x: 1, y: 2 } // warning\n"
+"  let { x, y } = p // ok\n"
+"  println(p.x) // ok\n"
+"  match Resource::Text(\"\") { // warning\n"
+"    Text(s) => ... // waning\n"
+"    Binary(b) => ... // warning\n"
+"  }\n"
+"}\n"
+"\n"
+msgstr ""
+
+#: ../../language/attributes/visibility.md:17
+msgid ""
+"The `#visibility` attribute takes a required `change_to` argument and an "
+"optional `message` argument."
+msgstr ""
+
+#: ../../language/attributes/visibility.md:20
+msgid ""
+"The `change_to` argument is a string that indicates the new visibility of"
+" the type. It can be either `\"abstract\"` or `\"readonly\"`."
+msgstr ""
+"`change_to` 引数は、型の新しい可視性を表す文字列です。値は `\"abstract\"` または `\"readonly\"` "
+"のどちらかです。"
+
+#: ../../language/attributes.md:11
+msgid "`change_to`"
+msgstr "`change_to`"
+
+#: ../../language/attributes.md:11
+msgid "Invalidated Usages"
+msgstr "無効になる使い方"
+
+#: ../../language/attributes.md:11
+msgid "`\"readonly\"`"
+msgstr "`\"readonly\"`"
+
+#: ../../language/attributes.md:11
+msgid "Creating an instance of the type or mutating the fields of the instance."
+msgstr "型のインスタンスを生成すること、またはそのフィールドを変更すること。"
+
+#: ../../language/attributes.md:11
+msgid "`\"abstract\"`"
+msgstr "`\"abstract\"`"
+
+#: ../../language/attributes.md:11
+msgid ""
+"Creating an instance of the type, mutating the fields of the instance, "
+"pattern matching, or accessing fields by label."
+msgstr "型のインスタンスを生成すること、インスタンスのフィールドを変更すること、パターンマッチ、またはラベルによるフィールドアクセス。"
+
+#: ../../language/attributes/visibility.md:27
+msgid ""
+"The optional `message` argument is a string that provides additional "
+"information about the visibility change."
+msgstr ""
+
+#: ../../language/attributes/non_exhaustive.md:2
+msgid "Non-exhaustive Enum Attribute"
+msgstr "非網羅 enum アトリビュート"
+
+#: ../../language/attributes/non_exhaustive.md:4
+msgid ""
+"The `#non_exhaustive` attribute marks an `enum` whose defining package "
+"may add constructors in a future release. It is valid only on enum "
+"declarations."
+msgstr ""
+"`#non_exhaustive` アトリビュートは、定義元パッケージが将来のリリースで"
+"コンストラクタを追加する可能性のある `enum` を示します。このアトリビュートは "
+"enum 宣言にのみ使用できます。"
+
+#: ../../language/attributes/non_exhaustive.md:7
+msgid ""
+"///|\n"
+"#non_exhaustive\n"
+"pub(all) enum Response {\n"
+"  Ok(String)\n"
+"  NotFound\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/non_exhaustive.md:13
+msgid ""
+"Code outside the defining package must handle potential future "
+"constructors with a `Type::..` pattern:"
+msgstr ""
+"定義元パッケージの外部では、将来追加される可能性のあるコンストラクタを "
+"`Type::..` パターンで処理する必要があります："
+
+#: ../../language/attributes/non_exhaustive.md:16
+msgid ""
+"///|\n"
+"pub fn render(response : @base.Response) -> String {\n"
+"  match response {\n"
+"    @base.Ok(body) => body\n"
+"    @base.NotFound => \"not found\"\n"
+"    @base.Response::.. => \"unsupported response\"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/non_exhaustive.md:22
+msgid ""
+"The `Type::..` pattern is specifically for forward compatibility. It does"
+" not replace the enum's currently known constructors: match those "
+"constructors explicitly before this pattern. A wildcard pattern (`_`) is "
+"not a substitute for `Type::..` when handling constructors added by a "
+"future version of the defining package."
+msgstr ""
+"`Type::..` パターンは前方互換性のためのものです。現在既知のコンストラクタを"
+"置き換えるものではありません。これらを明示的にマッチした後に、このパターンを"
+"置いてください。定義元パッケージの将来のバージョンで追加されるコンストラクタを"
+"処理する場合、ワイルドカードパターン（`_`）は `Type::..` の代わりにはなりません。"
+
+#: ../../language/attributes/non_exhaustive.md:28
+msgid ""
+"Adding a constructor to a `#non_exhaustive` enum is therefore compatible "
+"with downstream matches that use `Type::..`."
+msgstr ""
+"したがって、下流の match が `Type::..` を使用していれば、`#non_exhaustive` "
+"enum へのコンストラクタ追加は互換性のある変更です。"
+
+#: ../../language/attributes/internal.md:2
+msgid "Internal Attribute"
+msgstr "内部アトリビュート"
+
+#: ../../language/attributes/internal.md:4
+msgid ""
+"The `#internal` attribute is used to mark a function, type, or trait as "
+"internal. Any usage of the internal function or type in other modules "
+"will emit an alert warning."
+msgstr ""
+
+#: ../../language/attributes/internal.md:7
+msgid ""
+"#internal(unsafe, \"This is an unsafe function\")\n"
+"fn[A] internal_unsafe_get(arr : Array[A], index : Int32) -> A {\n"
+"  arr[index]\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/internal.md:13
+msgid ""
+"The internal attribute takes a required `category` argument and an "
+"optional `message` argument. `category` is a identifier that indicates "
+"the category of the alert, and `message` is a string that provides "
+"additional message for the alert."
+msgstr ""
+
+#: ../../language/attributes/internal.md:18
+msgid ""
+"Alert warnings can be turned off with the `warnings` field in `moon.pkg`."
+" For more detail, see [alert warning](/toolchain/moon/package.md#alert-"
+"warning)."
+msgstr ""
+"alert 警告は `moon.pkg` の `warnings` フィールドを設定することで無効化できます。詳しくは [alert "
+"warning](/toolchain/moon/package.md#alert-warning) を参照してください。"
+
+#: ../../language/attributes/doc_hidden.md:2
+msgid "Doc Hidden Attribute"
+msgstr ""
+
+#: ../../language/attributes/doc_hidden.md:4
+msgid "The `#doc(hidden)` attribute hides an API from generated documentation."
+msgstr "`#doc(hidden)` アトリビュートは生成されるドキュメントから API を隠します。"
+
+#: ../../language/attributes/doc_hidden.md:6
+msgid ""
+"#doc(hidden)\n"
+"pub fn hidden_helper() -> Unit {\n"
+"  ()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/doc_hidden.md:12
+msgid ""
+"Use it for public declarations that must remain available to code but "
+"should not be shown as part of the documented API surface."
+msgstr "コードからは利用可能なままにする必要がある一方で、ドキュメント化された API としては表示したくない公開宣言に使います。"
+
+#: ../../language/attributes/warnings.md:2
+msgid "Warnings Attribute"
+msgstr "警告アトリビュート"
+
+#: ../../language/attributes/warnings.md:4
+msgid ""
+"The `#warnings` attribute is used to configure warning settings for a "
+"specific top-level declaration. It can enable, disable or treat an "
+"enabled warning as error for specific warnings in that declaration."
+msgstr ""
+
+#: ../../language/attributes/warnings.md:8
+msgid ""
+"The argument is a string that specifies the warning list. It can contain "
+"multiple warning names, each prefixed with a sign:"
+msgstr ""
+
+#: ../../language/attributes/warnings.md:11
+msgid ""
+"#warnings(\"-unused_value\")\n"
+"fn warnings_example() -> Unit {\n"
+"  let x = 42\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/warnings.md:17
+msgid "The prefixes have the following meanings:"
+msgstr "プレフィックスの意味は次のとおりです："
+
+#: ../../language/attributes/warnings.md:19
+msgid "`+warning_name`: enable the warning"
+msgstr "`+warning_name`: 警告を有効化"
+
+#: ../../language/attributes/warnings.md:20
+msgid "`-warning_name`: disable the warning"
+msgstr "`-warning_name`: 警告を無効化"
+
+#: ../../language/attributes/warnings.md:21
+msgid "`@warning_name`: treat an enabled warning as an error (deprecated)"
+msgstr "`@warning_name`: 有効な警告をエラーとして扱う（非推奨）"
+
+#: ../../language/attributes/warnings.md:23
+msgid ""
+"The `@` switch is deprecated in v0.10.4. Use `+` or `-` to configure "
+"individual warnings, and use `moon check --deny-warn` or the equivalent "
+"command flag when warnings should fail a CI build."
+msgstr ""
+"`@` スイッチは v0.10.4 で非推奨になりました。個別の警告は `+` または `-` で設定し、警告によって CI "
+"ビルドを失敗させる場合は `moon check --deny-warn` または各コマンドの同等オプションを使用してください。"
+
+#: ../../language/attributes/warnings.md:27
+msgid "Currently this attribute only works with some specific warnings."
+msgstr "現在、このアトリビュートは一部の特定の警告にのみ対応しています。"
+
+#: ../../language/attributes/warnings.md:29
+msgid ""
+"To learn more about warning names, see [warning "
+"list](/toolchain/moon/package.md#warnings-list)."
+msgstr ""
+
+#: ../../language/attributes/must_implement_one.md:2
+msgid "Must Implement One Attribute"
+msgstr "Must Implement One アトリビュート"
+
+#: ../../language/attributes/must_implement_one.md:4
+msgid ""
+"The `#must_implement_one` attribute is used on traits to require that "
+"each implementation explicitly defines at least one method, instead of "
+"relying only on default method implementations."
+msgstr ""
+"`#must_implement_one` アトリビュートは trait に付けて、各実装がデフォルトメソッド実装だけに依存せず、少なくとも 1 "
+"つのメソッドを明示的に定義することを要求します。"
+
+#: ../../language/attributes/must_implement_one.md:8
+msgid ""
+"Without arguments, at least one method of the trait must be explicitly "
+"implemented:"
+msgstr "引数を指定しない場合、その trait の少なくとも 1 つのメソッドを明示的に実装する必要があります："
+
+#: ../../language/attributes/must_implement_one.md:11
+msgid ""
+"#must_implement_one\n"
+"pub(open) trait RequireAnyMethod {\n"
+"  f(Self) -> Unit = _\n"
+"  g(Self) -> Unit = _\n"
+"}\n"
+"\n"
+"impl RequireAnyMethod with f(_) { () }\n"
+"\n"
+"impl RequireAnyMethod with g(_) { () }\n"
+"\n"
+"type AnyImpl\n"
+"\n"
+"impl RequireAnyMethod for AnyImpl with f(_) { () }\n"
+msgstr ""
+
+#: ../../language/attributes/must_implement_one.md:17
+msgid ""
+"With method names, at least one of the listed methods must be explicitly "
+"implemented:"
+msgstr "メソッド名を指定した場合、列挙されたメソッドのうち少なくとも 1 つを明示的に実装する必要があります："
+
+#: ../../language/attributes/must_implement_one.md:20
+msgid ""
+"#must_implement_one(f, g)\n"
+"pub(open) trait RequireSelectedMethod {\n"
+"  f(Self) -> Unit = _\n"
+"  g(Self) -> Unit = _\n"
+"  h(Self) -> Unit = _\n"
+"}\n"
+"\n"
+"impl RequireSelectedMethod with f(_) { () }\n"
+"\n"
+"impl RequireSelectedMethod with g(_) { () }\n"
+"\n"
+"impl RequireSelectedMethod with h(_) { () }\n"
+"\n"
+"type SelectedImpl\n"
+"\n"
+"impl RequireSelectedMethod for SelectedImpl with g(_) { () }\n"
+msgstr ""
+
+#: ../../language/attributes/must_implement_one.md:26
+msgid ""
+"Multiple `#must_implement_one` attributes can be used on the same trait "
+"to require explicit implementations from multiple method groups."
+msgstr ""
+"同じ trait に複数の `#must_implement_one` "
+"アトリビュートを付けることで、複数のメソッドグループから明示的な実装を要求できます。"
+
+#: ../../language/attributes/inline.md:2
+msgid "Inline Attribute"
+msgstr ""
+
+#: ../../language/attributes/inline.md:4
+msgid ""
+"The `#inline` attribute is an optimization hint for a function. It asks "
+"the compiler to inline the function when possible:"
+msgstr "`#inline` アトリビュートは関数に対する最適化ヒントです。可能であればその関数をインライン化するようコンパイラに依頼します："
+
+#: ../../language/attributes/inline.md:7
+msgid ""
+"#inline\n"
+"fn add_one(x : Int32) -> Int32 {\n"
+"  x + 1\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/inline.md:13
+msgid "Use `#inline(never)` to ask the compiler not to inline a function:"
+msgstr "`#inline(never)` を使うと、関数をインライン化しないようコンパイラに依頼できます："
+
+#: ../../language/attributes/inline.md:15
+msgid ""
+"#inline(never)\n"
+"fn keep_stack_frame(x : Int32) -> Int32 {\n"
+"  x + 1\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/inline.md:21
+msgid ""
+"These attributes are hints. They do not change the source-level behavior "
+"of the function."
+msgstr "これらのアトリビュートはヒントです。関数のソースレベルの振る舞いは変わりません。"
+
+#: ../../language/attributes/intrinsic.md:2
+msgid "Intrinsic Attribute"
+msgstr "組み込み命令属性"
+
+#: ../../language/attributes/intrinsic.md:4
+msgid ""
+"`#intrinsic(\"name\")` associates a function with a compiler intrinsic "
+"while retaining an ordinary function body."
+msgstr "`#intrinsic(\"name\")` は、通常の関数本体を残したまま、関数をコンパイラの組み込み命令に関連付けます。"
+
+#: ../../language/attributes/intrinsic.md:8
+msgid ""
+"Intrinsics are not a stable API. They may change without notice and are "
+"not recommended for application code. Prefer ordinary functions and "
+"public standard-library APIs."
+msgstr "組み込み命令は安定した API ではありません。予告なく変更される可能性があり、アプリケーションコードでの使用は推奨されません。通常の関数や標準ライブラリの公開 API を優先してください。"
+
+#: ../../language/attributes/intrinsic.md:13
+msgid ""
+"If the compiler does not recognize the name, it reports "
+"[E0094](/language/error_codes/E0094.md), ignores the attribute, and uses "
+"the ordinary function body. This is different from a direct intrinsic "
+"declaration (`fn f(x : Int32) -> Int32 = \"name\"`), which has no "
+"ordinary body and reports [E4070](/language/error_codes/E4070.md) for an "
+"unknown name."
+msgstr "コンパイラが名前を認識できない場合は [E0094](/language/error_codes/E0094.md) を報告し、属性を無視して通常の関数本体を使用します。直接の組み込み命令宣言（`fn f(x : Int32) -> Int32 = \"name\"`）とは異なります。後者には通常の関数本体がなく、未知の名前に対して [E4070](/language/error_codes/E4070.md) を報告します。"
+
+#: ../../language/attributes/intrinsic.md:19
+msgid ""
+"Specifying multiple intrinsics for one function is not supported; see "
+"[E4071](/language/error_codes/E4071.md)."
+msgstr "1 つの関数に複数の組み込み命令を指定することはできません。[E4071](/language/error_codes/E4071.md) を参照してください。"
+
+#: ../../language/attributes/external.md:2
+msgid "External Attribute"
+msgstr "外部アトリビュート"
+
+#: ../../language/attributes/external.md:4
+msgid ""
+"The `#external` attribute is used to mark an abstract type as external "
+"type."
+msgstr "`#external` アトリビュートは、抽象型を外部型としてマークするために使います。"
+
+#: ../../language/attributes/external.md:6
+msgid "For Wasm and Wasm GC backends, it would be interpreted as `externref`."
+msgstr "Wasm および Wasm GC バックエンドでは、これは `externref` と解釈されます。"
+
+#: ../../language/attributes/external.md:7
+msgid "For JavaScript backend, it would be interpreted as `any`."
+msgstr "JavaScript バックエンドでは、これは `any` と解釈されます。"
+
+#: ../../language/attributes/external.md:8
+msgid "For native backends, it would be interpreted as `void*`."
+msgstr "ネイティブバックエンドでは、これは `void*` と解釈されます。"
+
+#: ../../language/attributes/external.md:10
+msgid ""
+"#external\n"
+"type AttrPtr\n"
+msgstr ""
+
+#: ../../language/attributes/borrow_and_owned.md:2
+msgid "Borrow and Owned Attribute"
+msgstr "Borrow/Owned アトリビュート"
+
+#: ../../language/attributes/borrow_and_owned.md:4
+msgid ""
+"The `#borrow` and `#owned` attributes are used on FFI declarations to "
+"describe how reference-counted MoonBit arguments are passed to foreign "
+"code. This matters for boxed MoonBit values such as `Bytes`, `String`, "
+"`FixedArray[T]`, and abstract types, whose lifetimes are managed by "
+"reference counting on the C and Wasm backends."
+msgstr ""
+"`#borrow` と `#owned` アトリビュートは FFI 宣言で使い、参照カウントされる MoonBit "
+"引数を外部コードへどのように渡すかを記述します。これは "
+"`Bytes`、`String`、`FixedArray[T]`、抽象型などのボックス化された MoonBit "
+"値で重要です。これらの値のライフタイムは C および Wasm バックエンドで参照カウントにより管理されます。"
+
+#: ../../language/attributes/borrow_and_owned.md:10
+msgid ""
+"Use `#borrow(param)` when the foreign function only reads `param` during "
+"the call and does not store or return it. A borrowed parameter remains "
+"owned by MoonBit, so the foreign function does not need to call "
+"`moonbit_decref` or `$moonbit.decref` for it."
+msgstr ""
+"外部関数が呼び出し中に `param` を読むだけで、それを保存したり返したりしない場合は `#borrow(param)` "
+"を使います。borrow された引数の所有権は MoonBit に残るため、外部関数はその引数に対して `moonbit_decref` や "
+"`$moonbit.decref` を呼ぶ必要がありません。"
+
+#: ../../language/attributes/borrow_and_owned.md:15
+msgid ""
+"Use `#owned(param)` when the foreign function takes ownership of `param`,"
+" for example by storing it and releasing it later. An owned parameter "
+"must eventually be released by the foreign side when it is no longer "
+"needed."
+msgstr ""
+"外部関数が `param` の所有権を受け取る場合、たとえば保存して後で解放する場合は `#owned(param)` を使います。owned "
+"引数は不要になった時点で、最終的に外部側が解放する必要があります。"
+
+#: ../../language/attributes/borrow_and_owned.md:19
+msgid ""
+"#borrow(filename)\n"
+"extern \"C\" fn open(filename : Bytes, flags : Int32) -> Int32 = \"open\""
+msgstr ""
+
+#: ../../language/attributes/borrow_and_owned.md:25
+msgid ""
+"For the full calling-convention rules, see [FFI lifetime "
+"management](/language/ffi.md#the-borrow-and-owned-attribute)."
+msgstr ""
+"完全な呼び出し規約のルールについては [FFI ライフタイム管理](/language/ffi.md#the-borrow-and-owned-"
+"attribute) を参照してください。"
+
+#: ../../language/attributes/unsafe_cycle_free.md:2
+msgid "Unsafe Cycle-Free Attribute"
+msgstr "Unsafe Cycle-Free アトリビュート"
+
+#: ../../language/attributes/unsafe_cycle_free.md:4
+msgid ""
+"The `#unsafe_cycle_free` attribute is an advanced optimization assertion "
+"for a struct, enum, or newtype declaration. It tells the compiler that no"
+" value of the annotated type will ever participate in a reference cycle. "
+"The compiler trusts this assertion during cycle-capability analysis and "
+"does not verify it."
+msgstr ""
+"`#unsafe_cycle_free` アトリビュートは、struct、enum、newtype "
+"の宣言に対する高度な最適化アサーションです。注釈を付けた型の値が参照サイクルに決して加わらないことをコンパイラに伝えます。コンパイラはサイクル可能性の解析でこのアサーションを信頼し、検証しません。"
+
+#: ../../language/attributes/unsafe_cycle_free.md:9
+msgid ""
+"#unsafe_cycle_free\n"
+"pub(all) struct CycleFreeNode {\n"
+"  mut next : CycleFreeNode?\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/unsafe_cycle_free.md:16
+msgid ""
+"Use this attribute only when the cycle-free invariant is guaranteed by "
+"the program. An incorrect assertion can cause reference cycles involving "
+"the type to be treated as impossible and therefore not reclaimed."
+msgstr "プログラムがサイクルフリー不変条件を保証できる場合にのみ、このアトリビュートを使ってください。誤ったアサーションにより、この型を含む参照サイクルが存在しないものとして扱われ、回収されなくなる可能性があります。"
+
+#: ../../language/attributes/as_free_fn.md:2
+msgid "`as_free_fn` Attribute"
+msgstr "`as_free_fn` アトリビュート"
+
+#: ../../language/attributes/as_free_fn.md:4
+msgid ""
+"The `#as_free_fn` attribute is used to mark a method that it is declared "
+"as a free function as well. It can also change the visibility of the free"
+" function, the name of the free function, and provide separate "
+"deprecation warning."
+msgstr ""
+"`#as_free_fn` アトリビュートは、メソッドを free 関数としても宣言することを示すために使います。free "
+"関数の可視性や名前を変更したり、別個の非推奨警告を与えたりすることもできます。"
+
+#: ../../language/attributes/as_free_fn.md:7
+msgid ""
+"#as_free_fn(dec, visibility=\"pub\", deprecated=\"use `Int32::decrement` "
+"instead\")\n"
+"#as_free_fn(visibility=\"pub\")\n"
+"fn Int32::decrement(i : Self) -> Self {\n"
+"  i - 1\n"
+"}\n"
+"\n"
+"test {\n"
+"  let _ = decrement(10)\n"
+"  let _ = (10).decrement()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/callsite.md:2
+msgid "Callsite Attribute"
+msgstr "Callsite アトリビュート"
+
+#: ../../language/attributes/callsite.md:4
+msgid ""
+"The `#callsite` attribute is used to mark properties that happen at "
+"callsite."
+msgstr "`#callsite` アトリビュートは、呼び出し元で起こる属性を示すために使います。"
+
+#: ../../language/attributes/callsite.md:6
+msgid ""
+"It could be `autofill`, which is to autofill the arguments [SourceLoc and"
+" ArgLoc](/language/fundamentals.md#autofill-arguments) at callsite."
+msgstr ""
+"`autofill` を指定でき、呼び出し元で引数 [SourceLoc と ArgLoc](/language/fundamentals.md"
+"#autofill-arguments) を自動補完します。"
+
+#: ../../language/attributes/skip.md:2
+msgid "Skip Attribute"
+msgstr "Skip アトリビュート"
+
+#: ../../language/attributes/skip.md:4
+msgid ""
+"The `#skip` attribute is used to skip a single test block. It can be "
+"written as `#skip` or with a reason, such as `#skip(\"blocked by external"
+" service\")`. The type checking will still be performed."
+msgstr ""
+
+#: ../../language/attributes/coverage_skip.md:2
+msgid "Coverage Skip Attribute"
+msgstr ""
+
+#: ../../language/attributes/coverage_skip.md:4
+msgid ""
+"The `#coverage.skip` attribute skips coverage operations within a "
+"function."
+msgstr "`#coverage.skip` アトリビュートは関数内のカバレッジ操作をスキップします。"
+
+#: ../../language/attributes/coverage_skip.md:6
+msgid ""
+"#coverage.skip\n"
+"fn platform_specific_helper() -> Unit {\n"
+"  ()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/coverage_skip.md:12
+msgid ""
+"Use it for functions that should not affect coverage reports, such as "
+"platform-specific fallback code or code paths that are intentionally "
+"excluded from coverage measurement. For more detail, see [Skipping "
+"coverage](/toolchain/moon/coverage.md#skipping-coverage)."
+msgstr ""
+"プラットフォーム固有のフォールバックコードや、意図的にカバレッジ測定から除外するコードパスなど、カバレッジレポートに影響させたくない関数に使います。詳しくは"
+" [Skipping coverage](/toolchain/moon/coverage.md#skipping-coverage) "
+"を参照してください。"
+
+#: ../../language/attributes/cfg.md:2
+msgid "Configuration attribute"
+msgstr "設定アトリビュート"
+
+#: ../../language/attributes/cfg.md:4
+msgid ""
+"The `#cfg` attribute controls whether a declaration is included in "
+"compilation. Conditions are evaluated at compile time and can use:"
+msgstr "`#cfg` アトリビュートは、宣言をコンパイルに含めるかどうかを制御します。条件はコンパイル時に評価され、次のものを使用できます："
+
+#: ../../language/attributes/cfg.md:7
+msgid "`true` or `false` to always include or exclude a declaration."
+msgstr "`true` または `false`：宣言を常に含めるか除外します。"
+
+#: ../../language/attributes/cfg.md:8
+msgid "`target` to select a compilation backend, such as `target=\"wasm\"`."
+msgstr "`target`：`target=\"wasm\"` のようにコンパイルバックエンドを選択します。"
+
+#: ../../language/attributes/cfg.md:9
+msgid ""
+"`platform` to select an operating system for the native backend, such as "
+"`platform=\"windows\"`."
+msgstr "`platform`：`platform=\"windows\"` のように native バックエンドのオペレーティングシステムを選択します。"
+
+#: ../../language/attributes/cfg.md:11
+msgid ""
+"`not(...)`, `all(...)`, or `any(...)` to negate a condition, require all "
+"conditions, or require at least one condition."
+msgstr "`not(...)`、`all(...)`、`any(...)`：それぞれ条件の否定、すべての条件の成立、少なくとも一つの条件の成立を表します。"
+
+#: ../../language/attributes/cfg.md:15
+msgid ""
+"A `platform` condition currently also restricts the target to `native`. "
+"For example, `platform=\"windows\"` is equivalent to "
+"`all(target=\"native\", platform=\"windows\")`."
+msgstr "`platform` 条件を指定すると、現時点では target も `native` に制限されます。たとえば、`platform=\"windows\"` は `all(target=\"native\", platform=\"windows\")` と同じ意味です。"
+
+#: ../../language/attributes/cfg.md:19
+msgid ""
+"This matters under negation: `not(platform=\"windows\")` also matches "
+"every non-native target. To select native builds other than Windows, use "
+"`all(target=\"native\", not(platform=\"windows\"))`."
+msgstr "否定する場合はこの点に注意してください。`not(platform=\"windows\")` は、`native` 以外のすべての target にも一致します。Windows 以外の native ビルドだけを選択するには、`all(target=\"native\", not(platform=\"windows\"))` を使用してください。"
+
+#: ../../language/attributes/cfg.md:26
+msgid ""
+"#cfg(true)\n"
+"fn cfg_true() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"#cfg(false)\n"
+"fn cfg_false() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"#cfg(target=\"wasm\")\n"
+"fn cfg_wasm() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"#cfg(platform=\"windows\")\n"
+"fn cfg_native_windows() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"#cfg(not(platform=\"windows\"))\n"
+"fn cfg_except_native_windows() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"#cfg(all(target=\"native\", not(platform=\"windows\")))\n"
+"fn cfg_native_non_windows() -> Unit {\n"
+"  ()\n"
+"}\n"
+"\n"
+"#cfg(any(target=\"wasm\", target=\"native\"))\n"
+"fn cfg_any() -> Unit {\n"
+"  ()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/module.md:2
+msgid "Module attribute"
+msgstr "モジュールアトリビュート"
+
+#: ../../language/attributes/module.md:4
+msgid ""
+"The `module` attribute is used to declare the module dependency for "
+"JavaScript backend."
+msgstr "`module` アトリビュートは、JavaScript バックエンド向けのモジュール依存を宣言するために使います。"
+
+#: ../../language/attributes/module.md:6
+msgid ""
+"In `cjs` format, it is interpreted as `require`, and in `esm` format, it "
+"is interpreted as `import`."
+msgstr "`cjs` 形式では `require` として解釈され、`esm` 形式では `import` として解釈されます。"
+
+#: ../../language/attributes/module.md:10
+msgid ""
+"#module(\"math-utils\")\n"
+"pub extern \"js\" fn add_from_module(x : Int32, y : Int32) -> Int32 = \"add\"\n"
+msgstr ""
+
+#: ../../language/attributes/export_name.md:2
+msgid "Export Name Attribute"
+msgstr ""
+
+#: ../../language/attributes/export_name.md:4
+msgid ""
+"The `#export_name` attribute assigns a stable exported symbol name to a "
+"public function in a package declared with `pkgtype(kind: "
+"\"foreign_library\")`. The name is used in generated Wasm, JavaScript, or"
+" C output:"
+msgstr ""
+
+#: ../../language/attributes/export_name.md:8
+msgid ""
+"#export_name(\"add\")\n"
+"pub fn add_one(value : Int32) -> Int32 {\n"
+"  value + 1\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/export_name.md:15
+msgid ""
+"Export names must be unique within the package. Name restrictions depend "
+"on the backend: native requires valid C symbol identifiers, while "
+"WebAssembly export names are UTF-8 strings and are not limited to C "
+"identifiers."
+msgstr "エクスポート名はパッケージ内で一意である必要があります。名前の制約はバックエンドによって異なり、native では有効な C シンボル識別子が必要ですが、WebAssembly のエクスポート名は UTF-8 文字列であり C 識別子に限定されません。"
+
+#: ../../language/attributes/export_name.md:24
+msgid ""
+"The attribute cannot be used on generic functions, functions with "
+"optional arguments, methods, or declarations without a body."
+msgstr ""
+
+#: ../../language/attributes/export_name.md:27
+msgid ""
+"Prefer `#export_name` over backend-specific `exports` link configuration "
+"for new exports. It keeps the exported name next to the function and "
+"applies to every backend that supports foreign-library output. Use "
+"`exports` when the export set or names must differ by backend, or when "
+"the source cannot be annotated."
+msgstr ""
+
+#: ../../language/attributes/export_name.md:33
+msgid ""
+"Export declarations are scoped to the package that produces the artifact."
+" An attribute in a dependency applies when that dependency is built as "
+"its own artifact, but it does not add a symbol to a downstream package's "
+"artifact. To expose dependency functionality, define and export a wrapper"
+" in the exporting package."
+msgstr ""
+
+#: ../../language/attributes/export_name.md:35
+msgid ""
+"The native backend produces a static archive (`.a`, or `.lib` on "
+"Windows), not a shared library such as a `.dll` or `.so`. The host must "
+"call `moonbit_init()` before calling exported functions."
+msgstr "native バックエンドは静的アーカイブ（`.a`、Windows では `.lib`）を生成し、`.dll` や `.so` などの共有ライブラリは生成しません。ホストはエクスポート関数を呼ぶ前に `moonbit_init()` を呼ぶ必要があります。"
+
+#: ../../language/attributes/export_name.md:45
+msgid ""
+"See [Export Functions](/language/ffi.md#export-functions) for backend-"
+"specific alternatives."
+msgstr ""
+
+#: ../../language/attributes/proof_pure.md:2
+msgid "Proof Pure Attribute"
+msgstr "Proof Pure アトリビュート"
+
+#: ../../language/attributes/proof_pure.md:4
+msgid ""
+"The `#proof_pure` attribute makes a side-effect-free function available "
+"to both executable code and proof-oriented logic."
+msgstr "`#proof_pure` アトリビュートは、副作用のない関数を実行可能コードと証明向けロジックの両方で利用できるようにします。"
+
+#: ../../language/attributes/proof_pure.md:7
+msgid ""
+"#proof_pure\n"
+"fn height(t : Tree) -> Int32 {\n"
+"  match t {\n"
+"    Empty => 0\n"
+"    Node(_, _, _, h) => h\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/attributes/proof_pure.md:13
+msgid ""
+"It currently supports regular top-level functions and ordinary methods. "
+"Verification contracts, direct recursion, and mutual recursion are not "
+"yet supported on `#proof_pure` definitions."
+msgstr ""
+"現在、通常のトップレベル関数と通常のメソッドをサポートしています。`#proof_pure` "
+"定義では、検証契約、直接再帰、相互再帰はまだサポートされていません。"
+
+#: ../../language/attributes/proof_pure.md:17
+msgid ""
+"For its role in specifications and a complete example, see [Formal "
+"Verification](/language/verification.md#proof-specific-annotations)."
+msgstr ""
+"仕様における役割と完全な例については、[形式検証](/language/verification.md#proof-specific-"
+"annotations)を参照してください。"
+
+#: ../../language/attributes/proof_external.md:2
+msgid "Proof External Attribute"
+msgstr "Proof External アトリビュート"
+
+#: ../../language/attributes/proof_external.md:4
+msgid ""
+"The `#proof_external(module, symbol)` attribute tells verification "
+"lowering to represent an abstract MoonBit type with a type from a Why3 "
+"module."
+msgstr ""
+"`#proof_external(module, symbol)` アトリビュートは、検証時の変換で抽象 MoonBit 型を Why3 "
+"モジュール内の型として表現するよう指定します。"
+
+#: ../../language/attributes/proof_external.md:7
+msgid ""
+"///|\n"
+"#proof_external(\"set.Fset\", \"fset\")\n"
+"pub type ProofSet[T]\n"
+msgstr ""
+
+#: ../../language/attributes/proof_external.md:13
+msgid ""
+"In this example, occurrences of `ProofSet[T]` in proof-oriented logic are"
+" lowered to the Why3 type `set.Fset.fset T`. The attribute does not "
+"implement the MoonBit type, provide runtime values, or connect the type "
+"to an FFI ABI."
+msgstr ""
+"この例では、証明向けロジック内の `ProofSet[T]` は Why3 型 `set.Fset.fset T` "
+"に変換されます。このアトリビュートは MoonBit 型を実装せず、実行時の値も提供せず、その型を FFI ABI に接続することもありません。"
+
+#: ../../language/attributes/proof_external.md:17
+msgid ""
+"The module and symbol mapping is part of the trusted verification "
+"boundary. For the corresponding operation imports and proof example, see "
+"[Formal Verification](/language/verification.md#proof-specific-"
+"annotations)."
+msgstr ""
+"モジュールとシンボルの対応付けは、信頼される検証境界の一部です。対応する演算のインポートと証明例については、[形式検証](/language/verification.md"
+"#proof-specific-annotations)を参照してください。"
+
+#: ../../language/attributes/proof_import.md:2
+msgid "Proof Import Attribute"
+msgstr "Proof Import アトリビュート"
+
+#: ../../language/attributes/proof_import.md:4
+msgid ""
+"The `#proof_import(module)` attribute maps a proof-only logic declaration"
+" in a `.mbtp` file to a symbol from a Why3 module. The declaration's "
+"string body names the Why3 symbol; it is not an executable MoonBit "
+"expression."
+msgstr ""
+"`#proof_import(module)` アトリビュートは、`.mbtp` ファイル内の証明専用ロジック宣言を Why3 "
+"モジュールのシンボルに対応付けます。宣言の文字列本体は Why3 シンボルを指定するもので、実行可能な MoonBit 式ではありません。"
+
+#: ../../language/attributes/proof_import.md:8
+msgid ""
+"#proof_import(\"set.Fset\")\n"
+"fn proof_set_mem(x : Int32, set : ProofSet[Int32]) -> Bool = \"mem\"\n"
+"\n"
+"#proof_import(\"set.Fset\")\n"
+"fn proof_set_empty() -> ProofSet[Int32] = \"empty\"\n"
+"\n"
+"#proof_import(\"set.Fset\")\n"
+"fn proof_set_add(x : Int32, set : ProofSet[Int32]) -> ProofSet[Int32] = \"add\""
+"\n"
+"\n"
+"lemma proof_set_add_contains(x : Int32) where {\n"
+"  proof_ensure: proof_set_mem(\n"
+"    x,\n"
+"    proof_set_add(x, proof_set_empty()),\n"
+"  ),\n"
+"} {}\n"
+msgstr ""
+
+#: ../../language/attributes/proof_import.md:14
+msgid ""
+"Here, `set.Fset` is the Why3 module path, while `\"mem\"`, `\"empty\"`, "
+"and `\"add\"` name symbols in that module. These declarations affect "
+"verification lowering only and do not provide runtime implementations or "
+"FFI bindings. The final lemma creates a proof obligation; the imported "
+"declarations themselves do not."
+msgstr ""
+"ここで、`set.Fset` は Why3 のモジュールパスであり、`\"mem\"`、`\"empty\"`、`\"add\"` "
+"はそのモジュール内のシンボルを指定します。これらの宣言は検証時の変換だけに影響し、実行時の実装や FFI "
+"バインディングは提供しません。最後の補題は証明義務を生成しますが、インポート宣言自体は生成しません。"
+
+#: ../../language/attributes/proof_import.md:19
+msgid ""
+"The declared signatures and symbol mappings are part of the trusted "
+"verification boundary. For a complete example and usage guidance, see "
+"[Formal Verification](/language/verification.md#proof-specific-"
+"annotations)."
+msgstr ""
+"宣言したシグネチャとシンボルの対応付けは、信頼される検証境界の一部です。完全な例と利用方法については、[形式検証](/language/verification.md"
+"#proof-specific-annotations)を参照してください。"
