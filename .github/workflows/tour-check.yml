@@ -1,6 +1,8 @@
 name: check language tour
 
 on:
+  push:
+    branches: [main, "upgrade/**"]
   pull_request:
     branches: ['main']
 
