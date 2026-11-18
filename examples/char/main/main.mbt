@@ -10,4 +10,3 @@ test {
   @assertion.assert_eq(@lib.next('Z'), Some('['))?
   @assertion.assert_eq(@lib.prev('A'), Some('@'))?
 }
-

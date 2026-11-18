@@ -1,5 +1,6 @@
+///|
 fn init {
-  let mut v : @lib.T[Int] = Empty // Create an empty AVL tree with Int type
+  let mut v : @lib.T[Int32] = Empty // Create an empty AVL tree with Int type
   let iter = 30
 
   // Add values from 0 to iter-1 to the AVL tree
@@ -9,7 +10,7 @@ fn init {
     i = i + 1
   }
 
-  let height = v.height()
+  let _height = v.height()
   println("height of the tree: \(height)")
 
   v.print_tree()
@@ -36,4 +37,3 @@ fn init {
     Node(_) => print("impossible")
   }
 }
-

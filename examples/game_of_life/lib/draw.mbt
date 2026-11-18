@@ -1,21 +1,37 @@
+///|
 type Canvas_ctx
 
-fn set_stroke_color(self : Canvas_ctx, color : Int) = "canvas" "set_stroke_color"
+///|
+fn Canvas_ctx::set_stroke_color(self : Canvas_ctx, color : Int32) = "canvas" "set_stroke_color"
 
-fn move_to(self : Canvas_ctx, x : Int, y : Int) = "canvas" "move_to"
+///|
+fn Canvas_ctx::move_to(self : Canvas_ctx, x : Int32, y : Int32) = "canvas" "move_to"
 
-fn line_to(self : Canvas_ctx, x : Int, y : Int) = "canvas" "line_to"
+///|
+fn Canvas_ctx::line_to(self : Canvas_ctx, x : Int32, y : Int32) = "canvas" "line_to"
 
-fn begin_path(self : Canvas_ctx) = "canvas" "begin_path"
+///|
+fn Canvas_ctx::begin_path(self : Canvas_ctx) = "canvas" "begin_path"
 
-fn stroke(self : Canvas_ctx) = "canvas" "stroke"
+///|
+fn Canvas_ctx::stroke(self : Canvas_ctx) = "canvas" "stroke"
 
-fn fill_rect(self : Canvas_ctx, x : Int, y : Int, width : Int, height : Int) = "canvas" "fill_rect"
+///|
+fn Canvas_ctx::fill_rect(
+  self : Canvas_ctx,
+  x : Int32,
+  y : Int32,
+  width : Int32,
+  height : Int32,
+) = "canvas" "fill_rect"
 
-fn set_fill_style(self : Canvas_ctx, color : Int) = "canvas" "set_fill_style"
+///|
+fn Canvas_ctx::set_fill_style(self : Canvas_ctx, color : Int32) = "canvas" "set_fill_style"
 
+///|
 let cell_size = 5
 
+///|
 pub fn draw_grid(canvas : Canvas_ctx) -> Unit {
   canvas.begin_path()
   canvas.set_stroke_color(0xcccccc)
@@ -34,11 +50,12 @@ pub fn draw_grid(canvas : Canvas_ctx) -> Unit {
   canvas.stroke()
 }
 
+///|
 pub fn draw_cell(
   canvas : Canvas_ctx,
   universe : Universe,
-  dead : Int,
-  alive : Int
+  dead : Int32,
+  alive : Int32,
 ) -> Unit {
   canvas.begin_path()
   let mut row = 0

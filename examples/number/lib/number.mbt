@@ -99,4 +99,3 @@ pub fn parse_int(s : String) -> Option[Int] {
 fn init {
   ()
 }
-

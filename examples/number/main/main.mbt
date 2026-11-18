@@ -1,3 +1,4 @@
+///|
 fn init {
   print_float(@lib.pi)
   println(@lib.max(4, 2)) // 4
@@ -46,4 +47,3 @@ fn init {
     None => println("overflowed")
   }
 }
-

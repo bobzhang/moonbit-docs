@@ -1,6 +1,0 @@
-{
-  "name": "main",
-  "import": {
-    "avl_tree/lib": ""
-  }
-}

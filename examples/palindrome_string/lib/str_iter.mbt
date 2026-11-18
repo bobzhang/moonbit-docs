@@ -1,3 +1,4 @@
+///|
 pub fn is_palindrome(chars : String) -> Bool {
   let n = chars.length()
   let mut i = 0
@@ -9,4 +10,3 @@ pub fn is_palindrome(chars : String) -> Bool {
   }
   return true
 }
-

@@ -1,5 +1,6 @@
+///|
 fn init {
-  let buf : @lib.Buffer[Int] = @lib.Buffer::new(5)
+  let buf : @lib.Buffer[Int32] = @lib.Buffer::new(5)
   println(buf.capacity()) // 5
   let mut index = 0
   while index < 8 {
@@ -17,4 +18,3 @@ fn init {
   println(buf.capacity()) // 10
   println(buf.length()) // 0
 }
-

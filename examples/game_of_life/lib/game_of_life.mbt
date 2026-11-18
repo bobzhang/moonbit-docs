@@ -111,7 +111,7 @@ pub fn to_string(self : Universe) -> String {
     let mut c = 0
     while c < self.width {
       let idx = self.get_index(r, c)
-      let cell = self.cells[idx]
+      let _cell = self.cells[idx]
       // No buffer implementation?
       cells = cells + match cell {
         Alive => "▅"
@@ -124,4 +124,3 @@ pub fn to_string(self : Universe) -> String {
   }
   cells
 }
-

@@ -6,4 +6,3 @@ test {
   (test2 |> @lib.is_palindrome |> @assertion.assert_true)?
   (test3 |> @lib.is_palindrome |> @assertion.assert_true)?
 }
-

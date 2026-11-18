@@ -1,7 +1,10 @@
+///|
 let grid_row_count = 20
 
+///|
 let grid_col_count = 10
 
+///|
 enum PIECE {
   I
   L
@@ -12,7 +15,8 @@ enum PIECE {
   O
 }
 
-pub fn pice_shap(self : PIECE) -> Array[Array[Int]] {
+///|
+pub fn PIECE::pice_shap(self : PIECE) -> Array[Array[Int32]] {
   match self {
     I => [[1, 1, 1, 1]]
     L => [[0, 0, 2], [2, 2, 2]]
@@ -23,4 +27,3 @@ pub fn pice_shap(self : PIECE) -> Array[Array[Int]] {
     O => [[7, 7], [7, 7]]
   }
 }
-
