@@ -1,6 +1,7 @@
 name: check legacy examples
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

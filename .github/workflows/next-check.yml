@@ -1,6 +1,7 @@
 name: check document examples
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

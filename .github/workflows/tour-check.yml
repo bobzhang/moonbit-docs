@@ -1,6 +1,7 @@
 name: check language tour
 
 on:
+  workflow_dispatch:
   push:
     branches: [main, "upgrade/**"]
   pull_request:
