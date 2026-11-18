@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-18 15:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0029.md:1
+msgid "E0029"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:3
+msgid "Warning name: `unused_package`"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:5
+msgid ""
+"This warning is emitted when a package is listed as an import but the "
+"current package does not use that import directly. Explicit imports from "
+"`moonbitlang/core` are checked as well."
+msgstr "パッケージが import に記載されていても、現在のパッケージがその import を直接使用していない場合に、この警告が発生します。`moonbitlang/core` からの明示的な import も検査対象です。"
+
+#: ../../language/error_codes/E0029.md:9
+msgid ""
+"Finding a method or trait implementation through a value's type does not "
+"by itself make an explicit import necessary. An import used only for such"
+" indirect lookup may therefore still be reported as unused."
+msgstr "値の型を通じてメソッドやトレイト実装が見つかること自体は、明示的な import を必要としません。このような間接検索だけに使われる import は、未使用と報告されることがあります。"
+
+#: ../../language/error_codes/E0029.md:13
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:15
+msgid "moon.mod"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:15
+msgid "name = \"moonbit-community/E0029\""
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:20
+msgid "lib/moon.pkg"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:20
+msgid "// This package has no package-specific configuration.\n"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:24
+#: ../../language/error_codes/E0029.md:38
+msgid "moon.pkg"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:24
+msgid ""
+"import {\n"
+"  \"moonbit-community/E0029/lib\", // Warning: Unused package\n"
+"}\n"
+"\n"
+"pkgtype(kind: \"executable\")\n"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:28
+msgid "top.mbt"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:28
+msgid ""
+"///|\n"
+"fn main {\n"
+"\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:33
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0029.md:35
+msgid ""
+"Remove the unused package. If the code needs an API from that package "
+"directly, refer to it through the package alias instead:"
+msgstr "未使用のパッケージを削除してください。そのパッケージの API を直接使用する必要がある場合は、パッケージ別名を通じて参照します："
+
+#: ../../language/error_codes/E0029.md:38
+msgid "pkgtype(kind: \"executable\")\n"
+msgstr ""

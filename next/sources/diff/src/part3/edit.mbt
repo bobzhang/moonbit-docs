@@ -1,0 +1,55 @@
+///|
+enum Edit {
+  Insert(new~ : Line)
+  Delete(old~ : Line)
+  Equal(old~ : Line, new~ : Line) // old, new
+}
+
+///|
+/// start pprint definition
+///
+let line_width = 4
+
+///|
+fn pad_right(s : String, width : Int32) -> String {
+  String::make(width - s.length(), ' ') + s
+}
+
+///|
+fn pprint_edit(edit : Edit) -> String {
+  match edit {
+    Insert(_) as edit => {
+      let tag = "+"
+      let old_line = pad_right("", line_width)
+      let new_line = pad_right(edit.new.number.to_string(), line_width)
+      let text = edit.new.text
+      "\{tag} \{old_line} \{new_line}    \{text}"
+    }
+    Delete(_) as edit => {
+      let tag = "-"
+      let old_line = pad_right(edit.old.number.to_string(), line_width)
+      let new_line = pad_right("", line_width)
+      let text = edit.old.text
+      "\{tag} \{old_line} \{new_line}    \{text}"
+    }
+    Equal(_) as edit => {
+      let tag = " "
+      let old_line = pad_right(edit.old.number.to_string(), line_width)
+      let new_line = pad_right(edit.new.number.to_string(), line_width)
+      let text = edit.old.text
+      "\{tag} \{old_line} \{new_line}    \{text}"
+    }
+  }
+}
+
+///|
+fn pprint_diff(diff : Array[Edit]) -> String {
+  let buf = StringBuilder(capacity=100)
+  for i = 0; i < diff.length(); i = i + 1 {
+    buf.write_string(pprint_edit(diff[i]))
+    buf.write_char('\n')
+  } nobreak {
+    buf.to_string()
+  }
+}
+// end pprint definition

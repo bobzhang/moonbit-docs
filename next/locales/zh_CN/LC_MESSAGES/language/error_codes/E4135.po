@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-17 10:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4135.md:1
+msgid "E4135"
+msgstr ""
+
+#: ../../language/error_codes/E4135.md:3
+msgid ""
+"Inconsistent `impl` of trait: implementations have different self types "
+"or constraints."
+msgstr "`impl` 实现不一致：多个实现具有不同的 self 类型或约束。"
+
+#: ../../language/error_codes/E4135.md:6
+msgid ""
+"When implementing different methods of a trait for the same type, all "
+"implementations must agree on the receiver type and type-parameter "
+"constraints. If two implementations use different constraints, it is "
+"unclear whether a type that satisfies both constraints has a complete and"
+" coherent implementation."
+msgstr ""
+"为同一类型实现 trait "
+"的不同方法时，所有实现必须在接收者类型和类型参数约束上保持一致。如果两个实现使用不同的约束，那么对于同时满足这两个约束的类型，是否具有完整且一致的实现就不明确。"
+
+#: ../../language/error_codes/E4135.md:12
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E4135.md:14
+msgid ""
+"pub(open) trait I {\n"
+"  f(Self) -> Unit\n"
+"  g(Self) -> Unit\n"
+"}\n"
+"\n"
+"pub(all) struct P[X](X)\n"
+"\n"
+"impl[X : Show] I for P[X] with f(_self) { () }\n"
+"impl[X] I for P[X] with g(_self) { () }\n"
+msgstr ""
+
+#: ../../language/error_codes/E4135.md:18
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4135.md:20
+msgid ""
+"One way to resolve this issue is to make the implementations use the same"
+" constraints:"
+msgstr "解决这个问题的一种方法是让这些实现使用相同的约束："
+
+#: ../../language/error_codes/E4135.md:23
+msgid ""
+"pub(open) trait I {\n"
+"  f(Self) -> Unit\n"
+"  g(Self) -> Unit\n"
+"}\n"
+"\n"
+"pub(all) struct P[X](X)\n"
+"\n"
+"impl[X] I for P[X] with f(_self) { () }\n"
+"impl[X] I for P[X] with g(_self) { () }\n"
+"\n"
+"pub fn use_i(p : P[Int32]) -> Unit {\n"
+"  I::f(p)\n"
+"  I::g(p)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4135.md:27
+msgid ""
+"If you want implementations for both constraints, create a new trait that"
+" combines the constraints, and manually implement that trait for each "
+"type that should satisfy it."
+msgstr "如果希望同时支持两种约束，可以创建一个组合这些约束的新 trait，并为每个应满足该约束的类型手动实现这个 trait。"

@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-16 15:37+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4213.md:1
+msgid "E4213"
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:3
+msgid "Compiler diagnostic name: `invalid_constr_self_type`."
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:5
+msgid ""
+"Custom constructors cannot be defined for trait object types such as "
+"`&Trait`."
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:7
+msgid ""
+"MoonBit supports custom constructors for user-defined concrete types, "
+"including structs, enums, and newtypes. A trait object is an erased "
+"runtime view rather than a concrete type that can own a constructor, so "
+"`fn &Trait::Trait(...)` is rejected."
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:12
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:14
+msgid ""
+"///|\n"
+"pub(open) trait Renderable {\n"
+"  fn render(Self) -> String\n"
+"}\n"
+"\n"
+"///|\n"
+"pub fn[X : Renderable] &Renderable::Renderable(value : X) -> &Renderable "
+"{\n"
+"  value as &Renderable\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:18
+msgid ""
+"The erroneous example tries to make `&Renderable::Renderable` a "
+"constructor for the trait object type."
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:21
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:23
+msgid ""
+"Use a normal function to convert a value to the trait object, or define a"
+" custom constructor on a concrete wrapper type."
+msgstr ""
+
+#: ../../language/error_codes/E4213.md:26
+msgid ""
+"///|\n"
+"pub(open) trait Renderable {\n"
+"  fn render(Self) -> String\n"
+"}\n"
+"\n"
+"///|\n"
+"pub fn[X : Renderable] as_renderable(value : X) -> &Renderable {\n"
+"  value as &Renderable\n"
+"}\n"
+msgstr ""

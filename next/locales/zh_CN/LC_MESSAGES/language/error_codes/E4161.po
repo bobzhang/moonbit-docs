@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-06 12:09+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4161.md:1
+msgid "E4161"
+msgstr "E4161"
+
+#: ../../language/error_codes/E4161.md:3
+msgid "Compiler diagnostic name: `mismatch_with_declare`."
+msgstr "编译器诊断名称：`mismatch_with_declare`。"
+
+#: ../../language/error_codes/E4161.md:5
+msgid "Declaration does not match its implementation."
+msgstr "声明与其实现不匹配。"
+
+#: ../../language/error_codes/E4161.md:7
+msgid ""
+"This error happens when a `declare` item and the item that implements it "
+"describe different APIs. MoonBit checks declarations against "
+"implementations so that a forward declaration, abstract type declaration,"
+" or declared implementation relation cannot silently drift from the "
+"actual definition."
+msgstr ""
+"当 `declare` 条目与实现它的条目描述了不同的 API 时，会出现此错误。MoonBit 会将"
+"声明与实现进行检查，避免前向声明、抽象类型声明或已声明的实现关系悄悄偏离实际"
+"定义。"
+
+#: ../../language/error_codes/E4161.md:12
+msgid ""
+"For functions and methods, the implementation must match the declared "
+"name, visibility, type parameters, parameter types, return type, "
+"constraints, and effects. For declared types, the implementation must "
+"match the declared visibility and type parameter list. For declared "
+"implementation relations, the implemented trait, target type, visibility,"
+" and type parameters must match."
+msgstr ""
+"对于函数和方法，实现必须与声明的名称、可见性、类型参数、参数类型、返回类型、"
+"约束和 effect 匹配。对于已声明的类型，实现必须与声明的可见性和类型参数列表匹"
+"配。对于已声明的实现关系，被实现的 trait、目标类型、可见性和类型参数都必须匹"
+"配。"
+
+#: ../../language/error_codes/E4161.md:18
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E4161.md:20
+msgid ""
+"declare pub fn declared_increment(x : Int32) -> Int32\n"
+"\n"
+"pub fn declared_increment(x : Int32) -> Double {\n"
+"  x.to_double()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4161.md:24
+msgid ""
+"The declaration says `declared_increment` returns `Int32`, but the "
+"implementation returns `Double`."
+msgstr "声明中 `declared_increment` 返回 `Int32`，但实现返回 `Double`。"
+
+#: ../../language/error_codes/E4161.md:27
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4161.md:29
+msgid ""
+"Change either the declaration or the implementation so that the public "
+"contract is written only one way."
+msgstr "修改声明或实现，使公开契约只有一种写法。"
+
+#: ../../language/error_codes/E4161.md:32
+msgid ""
+"declare pub fn declared_increment(x : Int32) -> Int32\n"
+"\n"
+"pub fn declared_increment(x : Int32) -> Int32 {\n"
+"  x + 1\n"
+"}\n"
+msgstr ""

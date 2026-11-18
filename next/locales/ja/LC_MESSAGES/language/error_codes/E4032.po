@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4032.md:1
+msgid "E4032"
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:3
+msgid "Compiler diagnostic name: `type_not_found`."
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:5
+msgid "The type is undefined."
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:7
+msgid ""
+"This error happens when a type annotation, constructor path, trait bound,"
+" or other type position refers to a type that is not in scope."
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:10
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:12
+msgid ""
+"pub fn make(x : Missing) -> Unit {\n"
+"  //          ^~~~~~~\n"
+"  // Error: The type Missing is undefined.\n"
+"  ignore(x)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:16
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:18
+msgid ""
+"Use a type that is defined and visible from the current package, or "
+"import the package that defines the type."
+msgstr ""
+
+#: ../../language/error_codes/E4032.md:21
+msgid ""
+"pub fn make(x : Int32) -> Unit {\n"
+"  ignore(x)\n"
+"}\n"
+msgstr ""

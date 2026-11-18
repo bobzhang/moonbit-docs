@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0068.md:1
+msgid "E0068"
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:3
+msgid "Warning name: `declaration_unimplemented`"
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:5
+msgid "Declaration is unimplemented."
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:7
+msgid ""
+"This warning is emitted when a `declare` item is left without a matching "
+"implementation in the same package. It can apply to declared functions, "
+"methods, values, abstract types, and implementation relations."
+msgstr ""
+"`declare` 宣言に対応する実装が同じパッケージ内にない場合に、この警告が出ます。関数、メソッド、値、抽象型、実装関係の宣言が対象です。"
+
+#: ../../language/error_codes/E0068.md:11
+msgid ""
+"Leaving a declaration unimplemented is useful while designing an API, but"
+" it can also mean that callers can see a contract that the package never "
+"actually provides. Enable this warning when you want declaration stubs to"
+" be temporary."
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:15
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:17
+msgid "declare fn f() -> Unit\n"
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:21
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:23
+msgid ""
+"Provide an implementation, or remove the declaration if the API is no "
+"longer needed:"
+msgstr ""
+
+#: ../../language/error_codes/E0068.md:26
+msgid ""
+"fn f() -> Unit {\n"
+"  println(\"Hello\")\n"
+"}\n"
+msgstr ""

@@ -1,0 +1,194 @@
+# Writing Tests
+
+Tests are important for improving quality and maintainability of a program. They verify the behavior of a program and also serves as a specification to avoid regressions over time.
+
+MoonBit comes with test support to make the writing easier and simpler.
+
+## Test Blocks
+
+MoonBit provides the test code block for writing inline test cases. For example:
+
+```{literalinclude} /sources/language/src/testing/top.mbt
+:language: moonbit
+:start-after: start test 1
+:end-before: end test 1
+```
+
+A test code block is essentially a function with type
+`() -> Unit raise Error`: it returns `Unit` and may raise an
+[`Error`](/language/error-handling.md#error-types). It is called during the
+execution of `moon test` and outputs a test report through the build system.
+The `assert_eq` function is from the standard library; if the assertion fails,
+it prints an error message and terminates the test. The string `"test_name"`
+is used to identify the test case and is optional.
+
+Tests started by `moon test` use the module root as their current working
+directory. Resolve relative paths used by tests from the module root, rather
+than from the package directory or the directory containing the test file.
+
+If a test name starts with `"panic"`, it indicates that the expected behavior of the test is to trigger a panic, and the test will only pass if the panic is triggered. For example:
+
+```{literalinclude} /sources/language/src/testing/top.mbt
+:language: moonbit
+:start-after: start test 2
+:end-before: end test 2
+```
+
+## Documentation Tests
+
+Code blocks marked `mbt check` in `///` documentation comments can contain
+tests run by `moon test`. A documentation test does not inherit the documented
+function's `#cfg` attribute. If the test only supports certain backends,
+put the appropriate `#cfg` attribute on the test block itself.
+
+## Snapshot Tests
+
+Writing tests can be tedious when specifying the expected values. Thus, MoonBit provides three kinds of snapshot tests.
+All of which can be inserted or updated automatically using `moon test --update`.
+
+### Snapshotting `Debug`
+
+Use `debug_inspect(x, content="...")` for values implementing `Debug`.
+Add `#derive(Debug)` before a type definition to generate a structural
+representation. Use `inspect` for values with a custom `Show` implementation.
+The labelled argument `content` can be omitted as `moon test --update` will insert it for you:
+
+```{literalinclude} /sources/language/src/testing/top.mbt
+:language: moonbit
+:start-after: start snapshot test 1
+:end-before: end snapshot test 1
+```
+
+### Snapshotting `JSON`
+
+Structural debugging output can become long for deeply nested values.
+
+Use `json_inspect(x, content=x)` to record a JSON structure, which can be more
+readable after formatting.
+
+```{literalinclude} /sources/language/src/testing/top.mbt
+:language: moonbit
+:start-after: start snapshot test 2
+:end-before: end snapshot test 2
+```
+
+One can also implement a custom `ToJson` to keep only the essential information.
+
+### Snapshotting Anything
+
+Still, sometimes we want to not only record one data structure but the output of a whole process.
+
+A full snapshot test can be used to record anything using `@test.T::write` and `@test.T::writeln`:
+
+```{literalinclude} /sources/language/src/testing/top.mbt
+:language: moonbit
+:start-after: start snapshot test 3
+:end-before: end snapshot test 3
+```
+
+This will create a file under `__snapshot__` of that package with the given filename:
+
+```{literalinclude} /sources/language/src/testing/__snapshot__/record_anything.txt
+```
+
+This can also be used for applications to test the generated output, whether it were creating an image, a video or some custom data.
+
+Please note that `@test.T::snapshot` should be used at the end of a test block, as it always raises exception.
+
+## Property-Based Tests
+
+Example-based tests check particular inputs. Property-based tests describe a
+relationship that should hold for many generated inputs. Use the standard
+library's `quickcheck` package inside an ordinary `test` block; no additional
+module dependency is needed. For examples in a `_test.mbt` file, add this import
+to `moon.pkg`:
+
+```{literalinclude} /sources/language/src/testing/moon.pkg
+:language: moonbit
+:start-after: start property imports
+:end-before: end property imports
+```
+
+### Checking a Property
+
+Adding zero should leave an integer unchanged:
+
+```{literalinclude} /sources/language/src/testing/property_test.mbt
+:language: moonbit
+:start-after: start property check
+:end-before: end property check
+```
+
+Run this test with `moon test`. `check` generates inputs and calls the property
+for each one. Returning `true` accepts a case; returning `false` or raising an
+error causes `check` to report a failure. Here, `count` requests 100 cases and
+`seed` makes the run repeatable. Generated `Int32` values are not limited to
+small numbers: they can include values near the limits of the type.
+
+The input type must implement `Arbitrary` to generate values, `Shrink` to
+simplify failing inputs, and `Debug` to display them. These implementations are
+provided for common types, including `Int32`. Keep properties deterministic
+and avoid mutating their inputs.
+
+### Understanding a Counterexample
+
+What about adding one? `x + 1 > x` holds for mathematical integers, but does it
+hold for `Int32`? Small examples such as 0, 1, and 100 would all pass. The
+following example uses `report` to look for a counterexample. It returns a
+result instead of raising a test failure, so we can record the failure report
+in a snapshot while keeping the demonstration itself a passing test:
+
+```{literalinclude} /sources/language/src/testing/property_test.mbt
+:language: moonbit
+:start-after: start property report
+:end-before: end property report
+```
+
+`Falsified` means the property returned `false`. The counterexample is
+`2147483647`, the largest `Int32`. Adding one overflows and wraps to
+`-2147483648`, so the result is smaller, not larger. This is a mistaken
+assumption about fixed-width arithmetic, not a bug in addition.
+
+QuickCheck also tries simpler inputs that still fail, a process called
+shrinking. Here, `shrinks=0`: no smaller input preserves the failure, since
+only the largest `Int32` fails this property. The optional `max_shrinks`
+argument limits the number of candidates examined; shrinking does not in
+general guarantee the smallest counterexample. Use `check`, rather than
+`report`, when a false property should fail your test suite.
+
+### Keeping a Regression Test
+
+To reproduce a run, keep the seed, settings, property, and toolchain/library
+version the same. Generated cases and shrink results can change between
+versions. Once a counterexample reveals a bug or a mistaken expectation, keep
+that concrete input in an example-based test with the correct expected behavior:
+
+```{literalinclude} /sources/language/src/testing/property_test.mbt
+:language: moonbit
+:start-after: start property regression
+:end-before: end property regression
+```
+
+The second assertion converts to `Int64` **before** adding one, which is wide
+enough for this calculation. Converting the result after `Int32` addition
+would be too late: the overflow would already have happened.
+
+Keep both kinds of tests: the regression test always checks the discovered
+case, while the property test can explore more inputs with other seeds and
+settings. Passing generated cases is not a proof that a property holds for all
+inputs.
+
+For custom generators and more ways to choose useful properties, see
+[Property-Based Testing in MoonBit](https://www.moonbitlang.com/blog/property-based-testing-moonbit).
+
+## BlackBox Tests and WhiteBox Tests
+
+When developing libraries, it is important to verify if the user can use it correctly. For example, one may forget to make a type or a function public. That's why MoonBit provides BlackBox tests, allowing developers to have a grasp of how others are feeling.
+
+- A test that has access to all the members in a package is called a WhiteBox tests as we can see everything. Such tests can be defined inline or defined in a file whose name ends with `_wbtest.mbt`.
+
+- A test that has access only to the public members in a package is called a BlackBox tests. Such tests need to be defined in a file whose name ends with `_test.mbt`.
+
+The WhiteBox test files (`_wbtest.mbt`) imports the packages defined in the `import` and `wbtest-import` sections of the package configuration (`moon.pkg`, or legacy `moon.pkg.json`).
+
+The BlackBox test files (`_test.mbt`) imports the current package and the packages defined in the `import` and `test-import` sections of the package configuration (`moon.pkg`, or legacy `moon.pkg.json`).

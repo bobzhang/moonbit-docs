@@ -1,0 +1,75 @@
+// start derive eq_compare struct
+#derive(Eq, Compare)
+struct DeriveEqCompare {
+  x : Int32
+  y : Int32
+}
+
+pub extend DeriveEqCompare with Eq::{not_equal, equal}
+
+pub extend DeriveEqCompare with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+test "derive eq_compare struct" {
+  let p1 = DeriveEqCompare::{ x: 1, y: 2 }
+  let p2 = DeriveEqCompare::{ x: 2, y: 1 }
+  let p3 = DeriveEqCompare::{ x: 1, y: 2 }
+  let p4 = DeriveEqCompare::{ x: 1, y: 3 }
+
+  // Eq
+  assert_eq(p1 == p2, false)
+  assert_eq(p1 == p3, true)
+  assert_eq(p1 == p4, false)
+  assert_eq(p1 != p2, true)
+  assert_eq(p1 != p3, false)
+  assert_eq(p1 != p4, true)
+
+  // Compare
+  assert_eq(p1 < p2, true)
+  assert_eq(p1 < p3, false)
+  assert_eq(p1 < p4, true)
+  assert_eq(p1 > p2, false)
+  assert_eq(p1 > p3, false)
+  assert_eq(p1 > p4, false)
+  assert_eq(p1 <= p2, true)
+  assert_eq(p1 >= p2, false)
+}
+// end derive eq_compare struct
+
+// start derive eq_compare enum
+#derive(Eq, Compare)
+enum DeriveEqCompareEnum {
+  Case1(Int32)
+  Case2(label~ : String)
+  Case3
+}
+
+pub extend DeriveEqCompareEnum with Eq::{not_equal, equal}
+
+pub extend DeriveEqCompareEnum with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+test "derive eq_compare enum" {
+  let p1 = DeriveEqCompareEnum::Case1(42)
+  let p2 = DeriveEqCompareEnum::Case1(43)
+  let p3 = DeriveEqCompareEnum::Case1(42)
+  let p4 = DeriveEqCompareEnum::Case2(label="hello")
+  let p5 = DeriveEqCompareEnum::Case2(label="world")
+  let p6 = DeriveEqCompareEnum::Case2(label="hello")
+  let p7 = DeriveEqCompareEnum::Case3
+
+  // Eq
+  assert_eq(p1 == p2, false)
+  assert_eq(p1 == p3, true)
+  assert_eq(p1 == p4, false)
+  assert_eq(p1 != p2, true)
+  assert_eq(p1 != p3, false)
+  assert_eq(p1 != p4, true)
+
+  // Compare
+  assert_eq(p1 < p2, true) // 42 < 43
+  assert_eq(p1 < p3, false)
+  assert_eq(p1 < p4, true) // Case1 < Case2
+  assert_eq(p4 < p5, true)
+  assert_eq(p4 < p6, false)
+  assert_eq(p4 < p7, true) // Case2 < Case3
+}
+// end derive eq_compare enum

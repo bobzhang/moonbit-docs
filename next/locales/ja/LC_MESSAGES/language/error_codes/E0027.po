@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-07 11:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0027.md:1
+msgid "E0027"
+msgstr ""
+
+#: ../../language/error_codes/E0027.md:3
+msgid "Warning name: `deprecated_syntax`"
+msgstr ""
+
+#: ../../language/error_codes/E0027.md:5
+msgid ""
+"The compiler may emit this warning when it still accepts outdated syntax "
+"for compatibility. Follow the diagnostic's suggested replacement and "
+"migrate the code promptly."
+msgstr ""
+"コンパイラが互換性のために古い構文を引き続き受け入れている場合、この警告が"
+"出ることがあります。診断で提案される置き換えに従い、速やかにコードを移行し"
+"てください。"
+
+#: ../../language/error_codes/E0027.md:9
+msgid ""
+"Deprecated syntax is temporary and may be removed in a later compiler "
+"release. After removal, the same source may produce a syntax error "
+"instead of this warning. Therefore, this page does not use a checked "
+"source example tied to one particular deprecated form; refer to the "
+"diagnostic for its exact replacement."
+msgstr ""
+"非推奨構文は一時的な互換形式であり、将来のコンパイラリリースで削除される可能"
+"性があります。削除後、同じソースはこの警告ではなく構文エラーになる場合があり"
+"ます。そのため、このページでは特定の非推奨形式に依存するチェック済みソース例"
+"を用意していません。正確な置き換えについては、診断メッセージを参照してくださ"
+"い。"

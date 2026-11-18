@@ -1,0 +1,393 @@
+///|
+fn ScDef::compileSC(self : ScDef[String]) -> (String, Int32, List[Instruction]) {
+  let name = self.name
+  let body = self.body
+  let mut arity = 0
+  fn gen_env(i : Int32, args : List[String]) -> List[(String, Int32)] {
+    match args {
+      Empty => {
+        arity = i
+        return @list.List([])
+      }
+      More(s, tail=ss) => gen_env(i + 1, ss).prepend((s, i))
+    }
+  }
+
+  let env = gen_env(0, self.args)
+  (name, arity, body.compileR(env, arity))
+}
+
+///|
+fn RawExpr::compileR(
+  self : RawExpr[String],
+  env : List[(String, Int32)],
+  arity : Int32,
+) -> List[Instruction] {
+  if arity == 0 {
+    self.compileE(env) + @list.List([Update(arity), Unwind])
+  } else {
+    self.compileE(env) + @list.List([Update(arity), Pop(arity), Unwind])
+  }
+}
+
+///|
+fn RawExpr::compileC(
+  self : RawExpr[String],
+  env : List[(String, Int32)],
+) -> List[Instruction] {
+  match self {
+    Var(s) =>
+      match env.lookup(s) {
+        None => @list.List([PushGlobal(s)])
+        Some(n) => @list.List([Push(n)])
+      }
+    Num(n) => @list.List([PushInt(n)])
+    // start c_constr definition
+    App(App(Constructor(tag=1, arity=2), x), xs) =>
+      // Cons(x, xs)
+      xs.compileC(env) +
+      x.compileC(argOffset(1, env)) +
+      @list.List([Pack(1, 2)])
+    // Empty
+    Constructor(tag=0, arity=0) => @list.List([Pack(0, 0)])
+    // end c_constr definition
+    App(e1, e2) =>
+      e2.compileC(env) +
+      e1.compileC(argOffset(1, env)) +
+      @list.List([MkApp])
+    Let(rec, defs, e) =>
+      if rec {
+        compileLetrec(RawExpr::compileC, defs, e, env)
+      } else {
+        compileLet(RawExpr::compileC, defs, e, env)
+      }
+    _ => abort("not support yet")
+  }
+}
+
+///|
+fn RawExpr::compileE(
+  self : RawExpr[String],
+  env : List[(String, Int32)],
+) -> List[Instruction] {
+  match self {
+    // start num definition
+    Num(n) => @list.List([PushInt(n)])
+    // end num definition
+    // start let definition
+    Let(rec, defs, e) =>
+      if rec {
+        compileLetrec(RawExpr::compileE, defs, e, env)
+      } else {
+        compileLet(RawExpr::compileE, defs, e, env)
+      }
+    // end let definition
+    // start if_and_neg definition
+    App(App(App(Var("if"), b), e1), e2) => {
+      let condition = b.compileE(env)
+      let branch1 = e1.compileE(env)
+      let branch2 = e2.compileE(env)
+      condition + @list.List([Cond(branch1, branch2)])
+    }
+    App(Var("negate"), e) => e.compileE(env) + @list.List([Neg])
+    // end if_and_neg definition
+    // start binop definition
+    App(App(Var(op), e0), e1) =>
+      match builtinOpS.get(op) {
+        None => self.compileC(env) + @list.List([Eval])
+        Some(instr) => {
+          let code1 = e1.compileE(env)
+          let code0 = e0.compileE(argOffset(1, env))
+          code1 + code0 + @list.List([instr])
+        }
+      }
+    // end binop definition
+    // start e_constr_case definition
+    Case(e, alts) =>
+      e.compileE(env) + @list.List([CaseJump(compileAlts(alts, env))])
+    Constructor(tag=0, arity=0) =>
+      // Empty
+      @list.List([Pack(0, 0)])
+    App(App(Constructor(tag=1, arity=2), x), xs) =>
+      // Cons(x, xs)
+      xs.compileC(env) +
+      x.compileC(argOffset(1, env)) +
+      @list.List([Pack(1, 2)])
+    // end e_constr_case definition
+    // start default definition
+    _ => self.compileC(env) + @list.List([Eval])
+    // end default definition
+  }
+}
+
+///|
+fn compileAlts(
+  alts : List[(Int32, List[String], RawExpr[String])],
+  env : List[(String, Int32)],
+) -> List[(Int32, List[Instruction])] {
+  fn buildenv(variables : List[String], off : Int32) -> List[(String, Int32)] {
+    match variables {
+      Empty => @list.List([])
+      More(v, tail=vs) => buildenv(vs, off + 1).prepend((v, off))
+    }
+  }
+
+  fn go(
+    alts : List[(Int32, List[String], RawExpr[String])],
+  ) -> List[(Int32, List[Instruction])] {
+    match alts {
+      Empty => @list.List([])
+      More(alt, tail=rest) => {
+        let (tag, variables, body) = alt
+        let offset = variables.length()
+        let env = buildenv(variables, 0) + argOffset(offset, env)
+        let code = @list.List([Split]) +
+          body.compileE(env) +
+          @list.List([Slide(offset)])
+        go(rest).prepend((tag, code))
+      }
+    }
+  }
+
+  go(alts)
+}
+
+///|
+fn argOffset(n : Int32, env : List[(String, Int32)]) -> List[(String, Int32)] {
+  env.map(fn(entry) {
+    let (name, offset) = entry
+    (name, offset + n)
+  })
+}
+
+///|
+fn compileLet(
+  comp : (RawExpr[String], List[(String, Int32)]) -> List[Instruction],
+  defs : List[(String, RawExpr[String])],
+  expr : RawExpr[String],
+  env : List[(String, Int32)],
+) -> List[Instruction] {
+  let (env, codes) = defs.fold(init=(env, @list.List([])), fn(acc, def) {
+    let (env, codes) = acc
+    let (name, expr) = def
+    let code = expr.compileC(env)
+    let env = argOffset(1, env).prepend((name, 0))
+    (env, codes + code)
+  })
+  codes + comp(expr, env) + @list.List([Slide(defs.length())])
+}
+
+///|
+fn compileLetrec(
+  comp : (RawExpr[String], List[(String, Int32)]) -> List[Instruction],
+  defs : List[(String, RawExpr[String])],
+  expr : RawExpr[String],
+  env : List[(String, Int32)],
+) -> List[Instruction] {
+  let mut env = env
+  for remaining = defs {
+    match remaining {
+      Empty => break
+      More((name, _), tail=rest) => {
+        env = argOffset(1, env).prepend((name, 0))
+        continue rest
+      }
+    }
+  }
+  let n = defs.length()
+  fn compileDefs(
+    defs : List[(String, RawExpr[String])],
+    offset : Int32,
+  ) -> List[Instruction] {
+    match defs {
+      Empty => comp(expr, env) + @list.List([Slide(n)])
+      More((_, expr), tail=rest) =>
+        expr.compileC(env) +
+        compileDefs(rest, offset - 1).prepend(Update(offset))
+    }
+  }
+
+  compileDefs(defs, n - 1).prepend(Alloc(n))
+}
+
+///|
+let compiled_primitives : List[(String, Int32, List[Instruction])] = @list.List([
+    // Arith
+    (
+      "add",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Add,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "sub",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Sub,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "mul",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Mul,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "div",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Div,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    // Compare
+    (
+      "eq",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Eq,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "neq",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Ne,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "ge",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Ge,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "gt",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Gt,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "le",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Le,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    (
+      "lt",
+      2,
+      @list.List([
+        Push(1),
+        Eval,
+        Push(1),
+        Eval,
+        Lt,
+        Update(2),
+        Pop(2),
+        Unwind,
+      ]),
+    ),
+    // MISC
+    (
+      "negate",
+      1,
+      @list.List([Push(0), Eval, Neg, Update(1), Pop(1), Unwind]),
+    ),
+    (
+      "if",
+      3,
+      @list.List([
+        Push(0),
+        Eval,
+        Cond(@list.List([Push(1)]), @list.List([Push(2)])),
+        Update(3),
+        Pop(3),
+        Unwind,
+      ]),
+    ),
+  ],
+)
+
+///| start builtin definition
+let builtinOpS : @hashmap.HashMap[String, Instruction] = {
+  let table = @hashmap.HashMap([], capacity=50)
+  table["add"] = Add
+  table["mul"] = Mul
+  table["sub"] = Sub
+  table["div"] = Div
+  table["eq"] = Eq
+  table["neq"] = Ne
+  table["ge"] = Ge
+  table["gt"] = Gt
+  table["le"] = Le
+  table["lt"] = Lt
+  table
+}
+// end builtin definition

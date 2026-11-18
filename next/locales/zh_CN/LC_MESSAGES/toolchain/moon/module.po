@@ -1,0 +1,1285 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 11:22+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../toolchain/moon/module.md:1
+msgid "Module Configuration"
+msgstr "模块配置"
+
+#: ../../toolchain/moon/module.md:3
+msgid ""
+"moon uses a module file to identify and describe a module. The legacy "
+"format is `moon.mod.json`,  and the new format is `moon.mod`. For full "
+"JSON schema, please check [moon's "
+"repository](https://github.com/moonbitlang/moon/blob/main/crates/moonbuild/template/mod.schema.json)."
+msgstr ""
+"moon 使用模块文件来标识和描述一个模块。旧格式为 `moon.mod.json`，新格式为 `moon.mod`。完整的 JSON 模式请查看"
+" [moon "
+"的仓库](https://github.com/moonbitlang/moon/blob/main/crates/moonbuild/template/mod.schema.json)。"
+
+#: ../../toolchain/moon/module.md:6
+msgid ""
+"`moon.mod.json` is no longer accepted by ordinary toolchain commands. Run "
+"`moon fmt` to migrate existing JSON manifests to `moon.mod` and `moon.pkg` "
+"before checking or building the project. The JSON examples below are "
+"migration references, not configurations for new projects."
+msgstr ""
+"常规工具链命令不再接受 `moon.mod.json`。请先运行 `moon fmt`，将现有 JSON 配置文件迁移为 `moon.mod` 和 "
+"`moon.pkg`，再检查或构建项目。下方的 JSON 示例仅供迁移参考，不应作为新项目的配置。"
+
+#: ../../toolchain/moon/module.md:12
+msgid "Full syntax of moon.mod is as follows:"
+msgstr "`moon.mod` 的完整语法如下："
+
+#: ../../toolchain/moon/module.md:14
+msgid ""
+"moon_mod ::= statement*\n"
+"statement ::= import | assign | apply\n"
+"\n"
+"import ::= \"import\" \"{\" (import_item \",\")* import_item? \"}\" "
+"import_kind?\n"
+"import_item ::= STRING\n"
+"\n"
+"assign ::= LIDENT \"=\" expr\n"
+"\n"
+"apply ::= LIDENT \"(\" (argument \",\")* argument? \")\"\n"
+"argument ::= LIDENT \":\" expr | STRING \":\" expr  \n"
+"\n"
+"expr ::= array | object | apply | STRING | INT | \"true\" | \"false\"\n"
+"array ::= \"[\" (expr \",\")* expr? \"]\"\n"
+"object ::= \"{\" (field \",\")* field? \"}\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:32
+msgid "Name"
+msgstr "名称"
+
+#: ../../toolchain/moon/module.md:34
+msgid ""
+"The `name` field is used to specify the name of the module, and it is "
+"required."
+msgstr "`name` 字段用于指定模块的名称，它是必需的。"
+
+#: ../../toolchain/moon/module.md
+msgid "moon.mod"
+msgstr "moon.mod"
+
+#: ../../toolchain/moon/module.md:38
+msgid "name = \"user/example\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md
+msgid "moon.mod.json"
+msgstr "moon.mod.json"
+
+#: ../../toolchain/moon/module.md:44
+msgid ""
+"{\n"
+"  \"name\": \"user/example\"\n"
+"  // ...\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:53
+msgid "The module name can contain letters, numbers, `_`, `-`, and `/`."
+msgstr "模块名称可以包含字母、数字、`_`、`-` 和 `/`。"
+
+#: ../../toolchain/moon/module.md:55
+msgid ""
+"For modules published to [mooncakes.io](https://mooncakes.io), the module"
+" name must begin with the username."
+msgstr "对于发布到 [mooncakes.io](https://mooncakes.io) 的模块，模块名称必须以用户名开头。"
+
+#: ../../toolchain/moon/module.md:57
+msgid ""
+"A major-version module path can end in `/vN`, as in `owner/library/v2`. "
+"The root package's default alias is still `@library`; use explicit "
+"aliases when importing multiple major versions. Publishing version "
+"`1.0.0` or later is not supported before MoonBit 1.0."
+msgstr "主版本模块路径可以以 `/vN` 结尾，例如 `owner/library/v2`。根包默认别名仍为 `@library`；同时导入多个主版本时请使用显式别名。MoonBit 1.0 之前不支持发布 1.0.0 或更高版本。"
+
+#: ../../toolchain/moon/module.md:57
+msgid "Version"
+msgstr "版本"
+
+#: ../../toolchain/moon/module.md:59
+msgid "The `version` field is used to specify the version of the module."
+msgstr " `version` 字段用于指定模块的版本。"
+
+#: ../../toolchain/moon/module.md:61
+msgid ""
+"This field is optional. For modules published to "
+"[mooncakes.io](https://mooncakes.io), the version number must follow the "
+"[Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) "
+"specification."
+msgstr ""
+"此字段是可选的。对于发布到 [mooncakes.io](https://mooncakes.io) 的模块，版本号必须遵循 [语义化版本 "
+"2.0.0](https://semver.org/spec/v2.0.0.html) 规范。"
+
+#: ../../toolchain/moon/module.md:65
+msgid "version = \"0.1.0\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:70
+msgid ""
+"{\n"
+"  \"version\": \"0.1.0\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:78
+msgid "Dependency Management"
+msgstr "依赖管理"
+
+#: ../../toolchain/moon/module.md:85
+msgid "A dependency's declared version must exist in the registry."
+msgstr "依赖声明的版本必须在注册表中存在。"
+
+#: ../../toolchain/moon/module.md:80
+msgid ""
+"Module dependencies are declared with `import` in `moon.mod`. The legacy "
+"`moon.mod.json` format represents the same information in its `deps` "
+"field."
+msgstr ""
+"模块依赖通过 `moon.mod` 中的 `import` 声明。遗留的 `moon.mod.json` 格式则使用 `deps` "
+"字段表示相同信息。"
+
+#: ../../toolchain/moon/module.md:83
+msgid "It is automatically managed by commands like `moon add` and `moon remove`."
+msgstr "它由 `moon add` 和 `moon remove` 等命令自动管理。"
+
+#: ../../toolchain/moon/module.md:87
+msgid ""
+"name = \"username/hello\"\n"
+"import {\n"
+"  \"moonbitlang/x@0.4.6\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:95
+msgid ""
+"{\n"
+"  \"name\": \"username/hello\",\n"
+"  \"deps\": {\n"
+"    \"moonbitlang/x\": \"0.4.6\"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:106
+msgid "You may also use a local dependency for module."
+msgstr "你也可以为模块使用本地依赖。"
+
+#: ../../toolchain/moon/module.md:110
+msgid ""
+"For new `moon.mod` format, the local dependency configuration is "
+"deprecated.  The recommended way to use a local dependency is to "
+"configure it in `moon.work`."
+msgstr "对于新的 `moon.mod` 格式，本地依赖配置已被弃用。推荐的本地依赖使用方式是在 `moon.work` 中配置。"
+
+#: ../../toolchain/moon/module.md:113
+msgid ""
+"For example, if you use `moon.work` to manage `user/module1` and "
+"`user/module2`:"
+msgstr "例如，如果你使用 `moon.work` 管理 `user/module1` 和 `user/module2`："
+
+#: ../../toolchain/moon/module.md:115
+msgid ""
+"// in moon.work\n"
+"members = [\n"
+"  \"source/to/module1\",\n"
+"  \"source/to/module2\",\n"
+"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:123
+msgid "And `user/module1` uses `user/module2` as a dependency:"
+msgstr "并且 `user/module1` 使用 `user/module2` 作为依赖："
+
+#: ../../toolchain/moon/module.md:125
+msgid ""
+"// in source/to/module1/moon.mod\n"
+"import {\n"
+"  \"user/module2@0.1.0\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:132
+msgid ""
+"The `@version` part is ignored, `user/module2` is resolved from the local"
+" source instead of mooncakes.io."
+msgstr "`@version` 部分会被忽略，`user/module2` 会从本地源码解析，而不是从 mooncakes.io 解析。"
+
+#: ../../toolchain/moon/module.md:136
+msgid ""
+"{\n"
+"  \"name\": \"username/hello\",\n"
+"  \"deps\": {\n"
+"    \"username/other\": {\n"
+"      \"path\": \"../other\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:149
+msgid "Meta Information"
+msgstr "元信息"
+
+#: ../../toolchain/moon/module.md:151
+msgid "README"
+msgstr "README"
+
+#: ../../toolchain/moon/module.md:153
+msgid ""
+"The `readme` field is used to specify the path to the module's README "
+"file."
+msgstr "`readme` 字段用于指定模块的 README 文件的路径。"
+
+#: ../../toolchain/moon/module.md:157
+msgid "readme = \"README.md\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:162
+msgid ""
+"{\n"
+"  \"readme\": \"README.md\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:171
+msgid "Repository"
+msgstr "仓库"
+
+#: ../../toolchain/moon/module.md:173
+msgid ""
+"The `repository` field is used to specify the URL of the module's "
+"repository."
+msgstr "`repository` 字段用于指定模块的仓库的 URL。"
+
+#: ../../toolchain/moon/module.md:177
+msgid "repository = \"link/to/your/repo\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:182
+msgid ""
+"{\n"
+"  \"repository\": \"link/to/your/repo\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:191
+msgid "License"
+msgstr "许可证"
+
+#: ../../toolchain/moon/module.md:193
+msgid ""
+"The `license` field is used to specify the license of the module. The "
+"license type must comply with the [SPDX License "
+"List](https://spdx.org/licenses/)."
+msgstr "`license` 字段用于指定模块的许可证。许可证类型必须符合 [SPDX 许可证列表](https://spdx.org/licenses/)。"
+
+#: ../../toolchain/moon/module.md:198
+msgid "license = \"MIT\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:203
+msgid ""
+"{\n"
+"  \"license\": \"MIT\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:211
+msgid "Keywords"
+msgstr "关键字"
+
+#: ../../toolchain/moon/module.md:213
+msgid "The `keywords` field is used to specify the keywords for the module."
+msgstr "`keywords` 字段用于指定模块的关键字。"
+
+#: ../../toolchain/moon/module.md:217
+msgid "keywords = [\"example\", \"test\"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:222
+msgid ""
+"{\n"
+"  \"keywords\": [\"example\", \"test\"]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:230
+msgid "Description"
+msgstr "描述"
+
+#: ../../toolchain/moon/module.md:232
+msgid "The `description` field is used to specify the description of the module."
+msgstr "`description` 字段用于指定模块的描述。"
+
+#: ../../toolchain/moon/module.md:237
+msgid "description = \"This is a description of the module.\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:242
+msgid ""
+"{\n"
+"  \"description\": \"This is a description of the module.\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:250
+msgid "Publishing Files with `.moonignore`"
+msgstr "使用 `.moonignore` 控制发布文件"
+
+#: ../../toolchain/moon/module.md:252
+msgid ""
+"Use `.moonignore` files to exclude files and directories from archives "
+"created by `moon package` and `moon publish`. Each file uses gitignore-"
+"style patterns:"
+msgstr ""
+"使用 `.moonignore` 文件从 `moon package` 和 `moon publish` 创建的归档中排除文件和目录。每个文件使用"
+" gitignore 风格的模式："
+
+#: ../../toolchain/moon/module.md:255
+msgid ""
+"# Generated output\n"
+"build/\n"
+"*.log\n"
+"\n"
+"# Keep this fixture even though other log files are excluded\n"
+"!fixtures/expected.log\n"
+"\n"
+"# Keep selected root dotfiles that are excluded by default\n"
+"!/.gitignore\n"
+"!/.moonignore\n"
+"\n"
+"# Keep a hidden directory and everything below it\n"
+"!/.well-known/\n"
+"!/.well-known/**\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:272
+msgid ""
+"Publishing honors `.gitignore` rules by default. If a directory contains "
+"a `.moonignore`, its rules are used instead of that directory's "
+"`.gitignore` when creating the archive; the two files in the same "
+"directory are not combined. This filtering is based on the patterns, "
+"regardless of whether a file is tracked by Git."
+msgstr ""
+"发布时默认遵循 `.gitignore` 规则。如果某个目录包含 `.moonignore`，创建归档时将使用其规则代替同一目录中的 "
+"`.gitignore`；同一目录中的这两个文件不会合并。无论文件是否由 Git 跟踪，筛选都只依据这些模式。"
+
+#: ../../toolchain/moon/module.md:278
+msgid ""
+"Git's repository-local `.git/info/exclude` and global ignore "
+"configuration are not consulted. Only the ignore files that belong to the"
+" project affect the archive, so publishing the same contents does not "
+"depend on a user's Git configuration."
+msgstr ""
+"不会读取 Git 仓库本地的 `.git/info/exclude` "
+"和全局忽略配置。只有项目自身包含的忽略文件会影响归档，因此发布相同内容的结果不会依赖用户的 Git 配置。"
+
+#: ../../toolchain/moon/module.md:283
+msgid ""
+"By default, files and directories whose names begin with `.` are excluded"
+" at every depth. The root-anchored examples above keep the two ignore "
+"files and `.well-known/` in the archive. Re-including a directory does "
+"not automatically re-include its contents, so the second `.well-known` "
+"rule is also needed."
+msgstr ""
+"默认情况下，各层级中名称以 `.` 开头的文件和目录都会被排除。上面锚定到根目录的示例会将两个忽略文件和 `.well-known/` "
+"保留在归档中。重新包含一个目录并不会自动重新包含其内容，因此还需要第二条 `.well-known` 规则。"
+
+#: ../../toolchain/moon/module.md:288
+msgid ""
+"The package-root `_build/` directory is always excluded and cannot be re-"
+"included by an ignore rule or the deprecated `include` field. This fixed "
+"exclusion does not apply to nested directories with the same name. For "
+"example, `!/_build/` and `!/_build/**` cannot restore the package-root "
+"directory, while `examples/_build/data.bin` is not excluded merely "
+"because a nested directory is named `_build`."
+msgstr ""
+"包根目录下的 `_build/` 始终会被排除，无法通过忽略规则或已弃用的 `include` "
+"字段重新包含。此固定排除不适用于同名的嵌套目录。例如，`!/_build/` 和 `!/_build/**` 无法恢复包根目录下的 "
+"`_build/`，而 `examples/_build/data.bin` 不会仅仅因为所在的嵌套目录名为 `_build` 就被排除。"
+
+#: ../../toolchain/moon/module.md:295
+msgid ""
+"Rules apply to the directory containing the ignore file and all of its "
+"descendants. Rules inherited from parent directories remain in effect, "
+"while later matching rules in nested directories take precedence. This "
+"includes `!` rules that restore a previously excluded path whose parent "
+"directory is still visible. A leading `/` anchors a pattern to the "
+"directory containing the ignore file, while a trailing `/` matches "
+"directories."
+msgstr ""
+"规则作用于包含忽略文件的目录及其所有后代。父目录继承来的规则仍然有效，而嵌套目录中后出现的匹配规则优先。这也包括用 `!` "
+"恢复先前排除的路径、且该路径的父目录仍然可见的规则。开头的 `/` 将模式锚定到包含忽略文件的目录，末尾的 `/` 则匹配目录。"
+
+#: ../../toolchain/moon/module.md:302
+msgid ""
+"Use [`moon package --list`](commands.md#moon-package) to inspect the "
+"files that will be packaged."
+msgstr "使用 [`moon package --list`](commands.md#moon-package) 检查将要打包的文件。"
+
+#: ../../toolchain/moon/module.md:305
+msgid "Deprecated `include` and `exclude` fields"
+msgstr "已弃用的 `include` 和 `exclude` 字段"
+
+#: ../../toolchain/moon/module.md:308
+msgid ""
+"The `include` and `exclude` fields in `moon.mod` and `moon.mod.json` are "
+"deprecated. Use `.moonignore` for new and migrated modules."
+msgstr ""
+"`moon.mod` 和 `moon.mod.json` 中的 `include` 与 `exclude` 字段已弃用。新模块和迁移后的模块请使用"
+" `.moonignore`。"
+
+#: ../../toolchain/moon/module.md:312
+msgid ""
+"Existing manifests may still use either field. When `include` is present,"
+" it is an exhaustive allowlist: `exclude`, `.gitignore`, `.moonignore`, "
+"and the default dot-prefixed-path exclusion are not applied. Use `!` "
+"patterns within `include` for exceptions to the allowlist. The fixed "
+"exclusion of the package-root `_build/` directory still applies."
+msgstr ""
+"现有清单仍可使用其中任一字段。当存在 `include` 时，它是完整的允许列表：不会应用 "
+"`exclude`、`.gitignore`、`.moonignore` 以及默认的点前缀路径排除规则。可在 `include` 中使用 `!` "
+"模式为允许列表添加例外。对包根目录 `_build/` 的固定排除仍然有效。"
+
+#: ../../toolchain/moon/module.md:318
+msgid ""
+"Avoid combining these legacy fields with ignore files; migrate the "
+"complete publishing policy to `.moonignore` instead."
+msgstr "请勿将这些旧字段与忽略文件混用；应将完整的发布策略迁移到 `.moonignore`。"
+
+#: ../../toolchain/moon/module.md:321
+msgid "Preferred Target"
+msgstr "首选目标"
+
+#: ../../toolchain/moon/module.md:323
+msgid ""
+"The `preferred_target` field allows `moon` and the language server to "
+"know which target should be used as the default target, avoiding the "
+"necessity to write `--target` when developing a project targeting other "
+"backends than Wasm GC."
+msgstr ""
+"`preferred_target` 字段允许 `moon` 和语言服务器知道应该使用哪个目标作为默认目标，从而避免在开发针对 Wasm GC "
+"以外的其他后端的项目时需要传递 `--target`。"
+
+#: ../../toolchain/moon/module.md:327
+msgid ""
+"Set `preferred_target` on each module. Workspace-level `preferred-target`"
+" is deprecated; `moon run` uses the selected module's own preferred "
+"target."
+msgstr ""
+"请在各模块中设置 `preferred_target`。工作区级别的 `preferred-target` 已弃用；`moon run` "
+"使用所选模块自身的首选目标。"
+
+#: ../../toolchain/moon/module.md:333
+msgid "preferred_target = \"js\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:338
+msgid ""
+"{\n"
+"  \"preferred-target\": \"js\"\n"
+"}\n"
+msgstr ""
+"{\n"
+"  \"preferred-target\": \"js\"\n"
+"}\n"
+
+#: ../../toolchain/moon/module.md:348
+msgid "Supported Targets"
+msgstr "支持的目标"
+
+#: ../../toolchain/moon/module.md:350
+msgid ""
+"The `supported_targets` field declares which backends this module is "
+"intended to support. Unlike `preferred_target`, it does not choose a "
+"default target for commands. Use it to record the module's compatibility "
+"surface in metadata."
+msgstr ""
+"`supported_targets` 字段用于声明该模块打算支持哪些后端。与 `preferred_target` "
+"不同，它不会为命令选择默认目标。它的作用是把模块的兼容后端范围记录在元数据中。"
+
+#: ../../toolchain/moon/module.md:354
+msgid "`supported_targets` uses a compact target-set syntax:"
+msgstr "`supported_targets` 使用紧凑的目标集合语法："
+
+#: ../../toolchain/moon/module.md:356
+msgid "`js` for a single backend"
+msgstr "`js` 表示单个后端"
+
+#: ../../toolchain/moon/module.md:357
+msgid "`+js+wasm-gc` for an explicit set of backends"
+msgstr "`+js+wasm-gc` 表示显式指定一组后端"
+
+#: ../../toolchain/moon/module.md:358
+msgid "`+all-js` for all backends except `js`"
+msgstr "`+all-js` 表示除 `js` 之外的所有后端"
+
+#: ../../toolchain/moon/module.md:360
+msgid "For example:"
+msgstr "例如："
+
+#: ../../toolchain/moon/module.md:364
+msgid "supported_targets = \"+js+wasm-gc\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:369
+msgid ""
+"{\n"
+"  \"supported-targets\": \"+js+wasm-gc\"\n"
+"}\n"
+msgstr ""
+"{\n"
+"  \"supported-targets\": \"+js+wasm-gc\"\n"
+"}\n"
+
+#: ../../toolchain/moon/module.md:377
+msgid "Legacy array syntax is still accepted for compatibility:"
+msgstr "为了兼容，旧的数组语法仍然可以使用："
+
+#: ../../toolchain/moon/module.md:381
+msgid "supported_targets = [\"js\", \"wasm-gc\"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:386
+msgid ""
+"{\n"
+"  \"supported-targets\": [\"js\", \"wasm-gc\"]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:394
+msgid "`preferred_target` and `supported_targets` are often used together:"
+msgstr "`preferred_target` 和 `supported_targets` 经常一起使用："
+
+#: ../../toolchain/moon/module.md:396
+msgid "`preferred_target` says which backend `moon` should use by default"
+msgstr "`preferred_target` 表示 `moon` 默认应使用哪个后端"
+
+#: ../../toolchain/moon/module.md:397
+msgid "`supported_targets` says which backends the module claims to support"
+msgstr "`supported_targets` 表示模块声明自己支持哪些后端"
+
+#: ../../toolchain/moon/module.md:399
+msgid ""
+"When a package also defines `supported_targets`, the effective backend "
+"set is the intersection of the module-level and package-level "
+"declarations."
+msgstr "当某个包也定义了 `supported_targets` 时，实际生效的后端集合就是模块级声明与包级声明的交集。"
+
+#: ../../toolchain/moon/module.md:402
+msgid ""
+"For per-file conditional compilation inside a package, use "
+"[`targets`](package.md#conditional-compilation) in `moon.pkg` / "
+"`moon.pkg.json` instead."
+msgstr ""
+"如果你想在包内部按文件做条件编译，应改用 `moon.pkg` / `moon.pkg.json` 中的 "
+"[`targets`](package.md#conditional-compilation)。"
+
+#: ../../toolchain/moon/module.md:405
+msgid "Source directory"
+msgstr "源目录"
+
+#: ../../toolchain/moon/module.md:407
+msgid "The `source` field is used to specify the source directory of the module."
+msgstr "`source` 字段用于指定模块的源目录。"
+
+#: ../../toolchain/moon/module.md:409
+msgid ""
+"It must be a relative path to a subdirectory of the directory containing "
+"the module file."
+msgstr "它必须是相对于模块文件所在目录的子目录路径。"
+
+#: ../../toolchain/moon/module.md:412
+msgid ""
+"When creating a module using the `moon new` command, a `src` directory "
+"will be automatically generated, and the default value of the `source` "
+"field will be `src`."
+msgstr "当使用 `moon new` 命令创建一个模块时，将自动生成一个 `src` 目录，并且 `source` 字段的默认值将为 `src`。"
+
+#: ../../toolchain/moon/module.md:416
+msgid "source = \"src\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:421
+msgid ""
+"{\n"
+"  \"source\": \"src\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:429
+msgid ""
+"When the `source` field does not exist, or its value is an empty string "
+"`\"\"`, it is equivalent to setting `source = \".\"`. This means that the"
+" source directory is the same as the directory containing the module "
+"file."
+msgstr ""
+"如果 `source` 字段不存在，或其值为空字符串 `\"\"`，则等同于设置 `source = "
+"\".\"`。这意味着源目录与模块文件所在目录相同。"
+
+#: ../../toolchain/moon/module.md:435
+msgid "source = \"\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:438
+msgid "source = \".\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:443
+msgid ""
+"{\n"
+"  \"source\": \"\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:448
+msgid ""
+"{\n"
+"  \"source\": \".\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:454
+msgid "`null` is equivalent to the cases above:"
+msgstr "`null` 等同于上述情况："
+
+#: ../../toolchain/moon/module.md:456
+msgid ""
+"{\n"
+"  \"source\": null\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:463
+msgid "Warning List"
+msgstr "警告列表"
+
+#: ../../toolchain/moon/module.md:465
+msgid "This is used to disable specific preset compiler warning numbers."
+msgstr "这用于禁用特定的预设编译器警告编号。"
+
+#: ../../toolchain/moon/module.md:467
+msgid ""
+"For example, in the following configuration, `-2` disables the warning "
+"number 2 (Unused variable)."
+msgstr "例如，在以下配置中，`-2` 禁用警告编号 2（未使用的变量）。"
+
+#: ../../toolchain/moon/module.md:471
+msgid "warnings = \"-2\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:476
+msgid ""
+"{\n"
+"  \"warn-list\": \"-2\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:484
+msgid ""
+"If multiple warnings need to be disabled, they can be directly connected "
+"and combined."
+msgstr "如果需要禁用多种警告，可以直接连接起来进行组合。"
+
+#: ../../toolchain/moon/module.md:489
+msgid "warnings = \"-2-4\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:494
+msgid ""
+"{\n"
+"  \"warn-list\": \"-2-4\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:502
+msgid ""
+"If it is necessary to activate certain warnings that were originally "
+"prohibited, use the plus sign."
+msgstr "如果需要激活某种原来未启用的警告，则使用加号。"
+
+#: ../../toolchain/moon/module.md:506
+msgid "warnings = \"+31\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:511
+msgid ""
+"{\n"
+"  \"warn-list\": \"+31\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:519
+msgid ""
+"You can use `moonc check -warn-help` to see the list of preset compiler "
+"warning numbers. In the output below, `mnemonic` is the symbolic warning "
+"name used in warning lists, while `id` is the numeric form of the same "
+"warning."
+msgstr ""
+"你可以使用 `moonc check -warn-help` 查看预设编译器警告编号列表。在下面的输出中，`mnemonic` "
+"是警告列表中使用的符号名称，`id` 是同一警告的数字形式。"
+
+#: ../../toolchain/moon/module.md:530
+msgid ""
+"$ moonc check -warn-help\n"
+"Available warnings:\n"
+"mnemonic                   description"
+"                                                     id state\n"
+"unused_value               Unused variable or function."
+"                                     1 warn\n"
+"unused_value               Unused variable."
+"                                                 2 warn\n"
+"unused_type_declaration    Unused type declaration."
+"                                         3 warn\n"
+"missing_priv               Unused abstract type."
+"                                            4 warn\n"
+"unused_type_variable       Unused type variable."
+"                                            5 warn\n"
+"unused_constructor         Unused constructor."
+"                                              6 warn\n"
+"unused_field               Unused field or constructor argument."
+"                            7 warn\n"
+"redundant_modifier         Redundant modifier."
+"                                              8 warn\n"
+"struct_never_constructed   Struct never constructed."
+"                                        9 warn\n"
+"unused_pattern             Unused pattern."
+"                                                 10 warn\n"
+"partial_match              Partial pattern matching."
+"                                       11 error\n"
+"unreachable_code           Unreachable code."
+"                                               12 warn\n"
+"unresolved_type_variable   Unresolved type variable."
+"                                       13 warn\n"
+"alert or alert_<category>  All alerts or alerts with specific category."
+"                    14 warn\n"
+"unused_mut                 Unused mutability."
+"                                              15 error\n"
+"parser_inconsistency       Parser inconsistency check."
+"                                     16 warn\n"
+"ambiguous_loop_argument    Ambiguous usage of loop argument."
+"                               17 warn\n"
+"useless_loop               Useless loop expression."
+"                                        18 warn\n"
+"deprecated                 Deprecated API usage."
+"                                           20 warn\n"
+"missing_pattern_arguments  Some arguments of constructor are omitted in "
+"pattern.           21 warn\n"
+"ambiguous_block            Ambiguous block."
+"                                                22 warn\n"
+"unused_try                 Useless try expression."
+"                                         23 warn\n"
+"unused_error_type          Useless error type."
+"                                             24 warn\n"
+"test_unqualified_package   Using implicitly imported API in test."
+"                          25 warn\n"
+"unused_catch_all           Useless catch all."
+"                                              26 warn\n"
+"deprecated_syntax          Deprecated syntax."
+"                                              27 warn\n"
+"todo                       Todo"
+"                                                            28 warn\n"
+"unused_package             Unused package."
+"                                                 29 warn\n"
+"missing_package_alias      Empty package alias."
+"                                            30 warn\n"
+"unused_optional_argument   Optional argument never supplied."
+"                               31 off\n"
+"unused_default_value       Default value of optional argument never used."
+"                  32 off\n"
+"text_segment_excceed       Text segment exceed the line or column limits."
+"                  33 warn\n"
+"implicit_use_builtin       Implicit use of definitions from "
+"`moonbitlang/core/builtin`.    34 warn\n"
+"reserved_keyword           Reserved keyword."
+"                                               35 warn\n"
+"block_label_shadowing      Block label shadows another label."
+"                              36 warn\n"
+"unused_block_label         Unused block label."
+"                                             37 warn\n"
+"missing_invariant          For-loop is missing an invariant."
+"                               38 off\n"
+"missing_reasoning          For-loop is missing a proof_reasoning."
+"                          39 off\n"
+"multiline_string_escape    Deprecated escape sequence in multiline "
+"string.                 40 error\n"
+"missing_rest_mark          Missing `..` in map pattern."
+"                                    41 warn\n"
+"invalid_attribute          Invalid attribute."
+"                                              42 warn\n"
+"unused_attribute           Unused attribute."
+"                                               43 warn\n"
+"invalid_inline_wasm        Invalid inline-wasm."
+"                                            44 error\n"
+"unused_rest_mark           Useless `..` in pattern"
+"                                         46 warn\n"
+"missing_definition         Unused pub definition because it does not "
+"exist in mbti file.   49 warn\n"
+"method_shadowing           Local method shadows upstream method"
+"                            50 warn\n"
+"ambiguous_precedence       Ambiguous operator precedence"
+"                                   51 warn\n"
+"unused_loop_variable       Loop variable not updated in loop"
+"                               52 warn\n"
+"unused_trait_bound         Unused trait bound"
+"                                              53 warn\n"
+"ambiguous_range_direction  Ambiguous looping direction for range e1..=e2"
+"                   54 off\n"
+"unannotated_ffi            Unannotated FFI param type"
+"                                      55 error\n"
+"missing_pattern_field      Missing field in struct pattern"
+"                                 56 warn\n"
+"missing_pattern_payload    Constructor pattern expect payload"
+"                              57 warn\n"
+"unaligned_byte_access      Unaligned byte access in bits pattern"
+"                           59 warn\n"
+"unused_struct_update       Unused struct update"
+"                                            60 warn\n"
+"duplicate_test             Duplicate test name"
+"                                             61 warn\n"
+"invalid_cascade            Calling method with non-unit return type via "
+"`..`               62 warn\n"
+"syntax_lint                Syntax lint warning"
+"                                             63 warn\n"
+"unannotated_toplevel_array Unannotated toplevel array"
+"                                      64 warn\n"
+"prefer_readonly_array      Suggest ReadOnlyArray for read-only array "
+"literal               65 off\n"
+"prefer_fixed_array         Suggest FixedArray for mutated array literal"
+"                    66 off\n"
+"unused_async               Useless `async` annotation"
+"                                      67 warn\n"
+"declaration_unimplemented  Declaration is unimplemented"
+"                                    68 warn\n"
+"declaration_implemented    Declaration is already implemented"
+"                              69 off\n"
+"deprecated_for_in_method   using `iterator()` method for `for .. in` "
+"loop.                 70 off\n"
+"core_package_not_imported  Packages in `moonbitlang/core` need to be "
+"explicitly imported.  71 warn\n"
+"unqualified_local_using    unqualified local using"
+"                                         72 off\n"
+"unnecessary_annotation     unnecessary type annotation"
+"                                     73 off\n"
+"missing_doc                Missing documentation for public definition"
+"                     74 off\n"
+"unnecessary_view_op        Unnecessary `[:]` view operator"
+"                                 75 off\n"
+"result_error_return        Using `Result[T, E]` where `E` is an error "
+"type.                78 warn\n"
+"implicit_impl_as_method    `impl` implicitly promoted as method"
+"                            79 warn\n"
+"regex_match_missing_before Missing `before` binding in `regex match`."
+"                      80 warn\n"
+"regex_match_missing_after  Missing `after` binding in `regex match`."
+"                       81 warn\n"
+"ambiguous_braces           Ambiguous `{}` braces."
+"                                          82 warn\n"
+"type_param_method          Calling method of type parameter in a "
+"deprecated way.           83 warn\n"
+"unqualified_record         Struct literal in a `let` binding without a "
+"type prefix.        84 off\n"
+"unlabelled_break_in_labelled_loop Unlabelled `break` directly inside a "
+"labelled loop.             85 warn\n"
+"unlabelled_continue_in_labelled_loop Unlabelled `continue` directly "
+"inside a labelled loop.          86 warn\n"
+"guard_inexhaustive         `guard` condition is not exhaustive and may "
+"panic.              87 warn\n"
+"guard_redundant_bang       Redundant `!` on an exhaustive `guard`."
+"                         88 warn\n"
+"guard_redundant_else       Redundant `else` on an exhaustive `guard`."
+"                      89 warn\n"
+"unused_lexcase             `lexmatch`/`lexscan` branch that can never be "
+"selected because other branches takes precedence or its pattern matches "
+"nothing.  90 warn\n"
+"unused_errdefer            unused `errdefer` statement"
+"                                     91 warn\n"
+"fragile_catch_all          fragile `catch` handler that can be converted "
+"to `defer` or `errdefer`  92 warn\n"
+"unknown_constr_pat_on_exhaustive_type using `TypeName::..` pattern on a "
+"type not marked with `#non_exhaustive`  93 warn\n"
+"unknown_intrinsic          `#intrinsic` attribute names an unknown "
+"intrinsic.              94 warn\n"
+"nan_pattern                Pattern on a NaN constant, which never "
+"matches.                 95 warn\n"
+"unfenced_import            Deprecated import declarations outside "
+"frontmatter.             96 warn\n"
+"regex_runtime_fallback     Regex match over the compile limits, which "
+"runs on the runtime engine.  97 off\n"
+"cancellable_defer          Fragile cancellable async code inside "
+"`defer`/`errdefer`        98 warn\n"
+"all                        all warnings\n"
+"state: warn = enabled, error = promoted to error, off = disabled\n"
+"note: default alert exceptions: alert_unsafe=off\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:620
+msgid "Rule"
+msgstr "Rule"
+
+#: ../../toolchain/moon/module.md:622
+msgid ""
+"The module-level `rule` entry declares a reusable pre-build command that "
+"is visible to every `moon.pkg` in the module. A module-level rule does "
+"not run by itself; to use it before building a package, add a package-"
+"level `dev_build` entry in `moon.pkg`. See the \"Rule and dev_build\" "
+"section in [Package Configuration](/toolchain/moon/package.md#rule-and-"
+"dev_build) for the package-level configuration."
+msgstr ""
+"模块级 `rule` 条目声明一个可复用的预构建命令，模块内的每个 `moon.pkg` 都可以使用它。模块级 rule "
+"不会自行运行；如果要在构建包之前使用它，需要在 `moon.pkg` 中添加包级 `dev_build` 条目。关于包级配置，请参阅 "
+"[Package Configuration](package.md#rule-and-dev_build) 中的 \"Rule and "
+"dev_build\" 一节。"
+
+#: ../../toolchain/moon/module.md:629
+msgid ""
+"Use `rule(name: \"...\", command: \"...\")`, where `name` identifies the "
+"rule and `command` is a shell command string. The command can refer to "
+"`$input` and `$output`, which are supplied by the package-level "
+"`dev_build` entry that uses the rule. A module can declare multiple "
+"module-level `rule` entries."
+msgstr ""
+"使用 `rule(name: \"...\", command: \"...\")`，其中 `name` 标识规则，`command` 是一个 "
+"shell 命令字符串。该命令可以引用 `$input` 和 `$output`，它们由使用该 rule 的包级 `dev_build` "
+"条目提供。一个模块可以声明多个模块级 `rule` 条目。"
+
+#: ../../toolchain/moon/module.md:636
+msgid "rule(name: \"tool\", command: \"tool $input -o $output\")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:641
+msgid "This feature is not supported in `moon.mod.json`."
+msgstr "`moon.mod.json` 不支持此功能。"
+
+#: ../../toolchain/moon/module.md:645
+msgid "Scripts"
+msgstr "脚本"
+
+#: ../../toolchain/moon/module.md:647
+msgid ""
+"The `scripts` field is used to define custom scripts associated with the "
+"module."
+msgstr "`scripts` 字段用于定义与模块关联的自定义脚本。"
+
+#: ../../toolchain/moon/module.md:649
+msgid "postadd script"
+msgstr "postadd 脚本"
+
+#: ../../toolchain/moon/module.md:651
+msgid ""
+"The `postadd` script runs automatically after the module has been added. "
+"When executed, the script's current working directory (cwd) is set to the"
+" directory containing the module configuration file."
+msgstr "`postadd` 脚本在模块添加后自动运行。执行时，脚本的当前工作目录（cwd）设置为模块配置文件所在的目录。"
+
+#: ../../toolchain/moon/module.md:657
+msgid ""
+"options(\n"
+"  scripts: {\n"
+"    \"postadd\": \"python3 build.py\",\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:666
+msgid ""
+"{\n"
+"  \"scripts\": {\n"
+"    \"postadd\": \"python3 build.py\"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:677
+msgid "\\[Experimental\\] Pre-build config script"
+msgstr "\\[实验性\\] 预构建配置脚本"
+
+#: ../../toolchain/moon/module.md:690
+msgid ""
+"This feature is extremely experimental, and its API may change at any "
+"time."
+msgstr "此功能仍处于高度实验阶段，其 API 可能随时变化。"
+
+#: ../../toolchain/moon/module.md:685
+msgid ""
+"Using this feature may execute arbitrary code in your computer. Please "
+"use with caution and only with trusted dependencies."
+msgstr "使用此功能可能会在您的计算机上执行任意代码。请谨慎使用，仅与受信任的依赖项一起使用。"
+
+#: ../../toolchain/moon/module.md:689
+msgid ""
+"The pre-build config script is added in order to aid native target "
+"programming. To use such a script, add it to your module configuration:"
+msgstr "预构建配置脚本用于辅助 native 目标编程。要使用此类脚本，请将其添加到模块配置中："
+
+#: ../../toolchain/moon/module.md:695
+msgid ""
+"options(\n"
+"  \"--moonbit-unstable-prebuild\": \"<path/to/build-script>\",\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:702
+msgid ""
+"{\n"
+"  \"--moonbit-unstable-prebuild\": \"<path/to/build-script>\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:719
+msgid ""
+"The path is a relative path from the root of the project. The script may "
+"either be a JavaScript script (with extension `.js`, `.cjs`, `.mjs`) "
+"executed with `node`, a Python script (with extension `.py`) executed "
+"with `python3` or `python`, or a MoonBit script (`.mbtx`) compiled to "
+"Wasm and executed with `moonrun`. Its working directory is the module "
+"root."
+msgstr "路径相对于项目根目录。支持通过 `node` 执行的 JavaScript（`.js`、`.cjs`、`.mjs`）、通过 `python3` 或 `python` 执行的 Python（`.py`），以及编译为 Wasm 并通过 `moonrun` 执行的 MoonBit（`.mbtx`）。工作目录为模块根目录。"
+
+#: ../../toolchain/moon/module.md:715
+msgid "Input"
+msgstr "输入"
+
+#: ../../toolchain/moon/module.md:727
+msgid ""
+"Read build information from environment variables, not standard input. "
+"The legacy JSON input on stdin is retained only for compatibility with "
+"older scripts."
+msgstr "请从环境变量读取构建信息，而不是标准输入。stdin 上的旧 JSON 输入仅为兼容旧脚本而保留。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "Variable"
+msgstr "变量"
+
+#: ../../toolchain/moon/module.md:710
+msgid "Meaning"
+msgstr "含义"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_MOD`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Path to the module's configuration file (`moon.mod` or `moon.mod.json`)."
+msgstr "模块配置文件（`moon.mod` 或 `moon.mod.json`）的路径。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_BUILD_DIR`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Writable output directory for this module's build script."
+msgstr "此模块构建脚本可写入的输出目录。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_HOST_OS`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Host operating system, such as `linux`, `macos`, or `windows`."
+msgstr "宿主操作系统，例如 `linux`、`macos` 或 `windows`。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_HOST_ARCH`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Host architecture, such as `x86_64` or `aarch64`."
+msgstr "宿主架构，例如 `x86_64` 或 `aarch64`。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_BACKEND`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Selected backend, such as `native`, `llvm`, `wasm`, `wasm-gc`, or `js`."
+msgstr "所选后端，例如 `native`、`llvm`、`wasm`、`wasm-gc` 或 `js`。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_PROFILE`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Build profile: `debug` or `release`."
+msgstr "构建配置：`debug` 或 `release`。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_JOBS`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Number of parallel jobs available to the build, as a decimal string."
+msgstr "构建可用的并行任务数，以十进制字符串表示。"
+
+#: ../../toolchain/moon/module.md:740
+msgid ""
+"`MOON_HOST_OS` and `MOON_HOST_ARCH` describe the machine running the "
+"script, not a cross-compilation target. Write generated files under "
+"`MOON_BUILD_DIR` instead of modifying dependency source directories. Use "
+"the supplied path rather than relying on a particular build-directory "
+"layout."
+msgstr "`MOON_HOST_OS` 和 `MOON_HOST_ARCH` 描述运行脚本的机器，而非交叉编译的目标。请将生成文件写入 `MOON_BUILD_DIR`，不要修改依赖的源码目录。应使用提供的路径，不要依赖特定的构建目录布局。"
+
+#: ../../toolchain/moon/module.md:745
+msgid ""
+"For example, a Python build script can expose its output directory as a "
+"build variable without reading stdin:"
+msgstr "例如，Python 构建脚本无需读取 stdin，即可将输出目录作为构建变量提供："
+
+#: ../../toolchain/moon/module.md:748
+msgid ""
+"import json\n"
+"import os\n"
+"\n"
+"print(json.dumps({\"vars\": {\"OUT_DIR\": "
+"os.environ[\"MOON_BUILD_DIR\"]}}))\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:740
+msgid "Output"
+msgstr "输出"
+
+#: ../../toolchain/moon/module.md:757
+msgid ""
+"The script is expected to print a JSON string in its standard output "
+"stream (stdout) with the structure of `BuildScriptOutput`. Reserve stdout"
+" for this JSON object and write diagnostic messages to stderr. Exit with "
+"a nonzero status if the script fails."
+msgstr "脚本应向标准输出（stdout）打印符合 `BuildScriptOutput` 结构的 JSON 字符串。stdout 仅用于此 JSON 对象，诊断信息应写入 stderr。脚本失败时应以非零状态退出。"
+
+#: ../../toolchain/moon/module.md:763
+msgid ""
+"Unlike `dev_build`, pre-build configuration scripts can also run for "
+"dependencies. Only build dependencies whose scripts you trust."
+msgstr "与 `dev_build` 不同，预构建配置脚本也可能为依赖执行。请只构建您信任其脚本的依赖。"
+
+#: ../../toolchain/moon/module.md:767
+msgid "The output has the following fields:"
+msgstr "输出包含以下字段："
+
+#: ../../toolchain/moon/module.md:745
+msgid ""
+"interface BuildScriptOutput {\n"
+"  /** Build variables */\n"
+"  vars?: Record<string, string>\n"
+"  /** Configurations to linking */\n"
+"  link_configs?: LinkConfig[]\n"
+"}\n"
+"\n"
+"interface LinkConfig {\n"
+"  /** The name of the package to configure */\n"
+"  package: string\n"
+"\n"
+"  /** Link flags that needs to be propagated to dependents\n"
+"   *\n"
+"   * Reference: `cargo::rustc-link-arg=FLAG` */\n"
+"  link_flags?: string\n"
+"\n"
+"  /** Libraries that need linking, propagated to dependents\n"
+"   *\n"
+"   * Reference: `cargo::rustc-link-lib=LIB` */\n"
+"  link_libs?: string[]\n"
+"\n"
+"  /** Paths that needs to be searched during linking, propagated to "
+"dependents\n"
+"   *\n"
+"   * Reference: `cargo::rustc-link-search=[KIND=]PATH` */\n"
+"  link_search_paths?: string[]\n"
+"}\n"
+msgstr ""
+"interface BuildScriptOutput {\n"
+"  /** 构建变量 */\n"
+"  vars?: Record<string, string>\n"
+"  /** 链接配置 */\n"
+"  link_configs?: LinkConfig[]\n"
+"}\n"
+"\n"
+"interface LinkConfig {\n"
+"  /** 要配置的包的名称 */\n"
+"  package: string\n"
+"\n"
+"  /** 需要传播到依赖项的链接标志\n"
+"   *\n"
+"   * 参考：`cargo::rustc-link-arg=FLAG` */\n"
+"  link_flags?: string\n"
+"\n"
+"  /** 需要链接的库，传播到依赖项\n"
+"   *\n"
+"   * 参考：`cargo::rustc-link-lib=LIB` */\n"
+"  link_libs?: string[]\n"
+"\n"
+"  /** 需要在链接期间搜索的路径，传播到依赖项\n"
+"   *\n"
+"   * 参考：`cargo::rustc-link-search=[KIND=]PATH` */\n"
+"  link_search_paths?: string[]\n"
+"}\n"
+
+#: ../../toolchain/moon/module.md:774
+msgid "Build variables"
+msgstr "构建变量"
+
+#: ../../toolchain/moon/module.md:776
+msgid ""
+"You may use the variables emitted in the `vars` fields in the native "
+"linking arguments in `moon.pkg` as `${build.<var_name>}`."
+msgstr "您可以在 `moon.pkg` 的本地链接参数中使用 `vars` 字段中发出的变量，格式为 `${build.<var_name>}`。"
+
+#: ../../toolchain/moon/module.md:779
+msgid "For example, if your build script outputs:"
+msgstr "例如，如果您的构建脚本输出："
+
+#: ../../toolchain/moon/module.md:781
+msgid "{ \"vars\": { \"CC\": \"gcc\" } }\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:785
+msgid "and your `moon.pkg` is structured like:"
+msgstr "并且您的 `moon.pkg` 结构如下："
+
+#: ../../toolchain/moon/module.md:787
+msgid "moon.pkg"
+msgstr "moon.pkg"
+
+#: ../../toolchain/moon/module.md:787
+msgid ""
+"options(\n"
+"  link: { \"native\": { \"cc\": \"${build.CC}\" } },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:792
+msgid "It will be transformed into"
+msgstr "它会被转换为"
+
+#: ../../toolchain/moon/module.md:794
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"native\": {\n"
+"      \"cc\": \"gcc\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""

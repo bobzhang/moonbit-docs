@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-10 10:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E3024.md:1
+msgid "E3024"
+msgstr ""
+
+#: ../../language/error_codes/E3024.md:3
+msgid ""
+"Legacy constructor functions declared inside a `struct` must have name "
+"`new`."
+msgstr "`struct` 内で宣言する旧形式のコンストラクタ関数は、`new` という名前でなければなりません。"
+
+#: ../../language/error_codes/E3024.md:5
+msgid ""
+"This error happens when a constructor function declared inside a `struct` is"
+" not named `new`. This is a legacy syntax diagnostic: renaming the nested "
+"function to `new` is not a migration to current syntax. The compiler also "
+"rejects nested constructor declarations with E3002; use a top-level "
+"constructor instead."
+msgstr ""
+"`struct` 内で宣言されたコンストラクタ関数の名前が `new` "
+"でない場合に、このエラーが発生します。これは旧構文に対する診断であり、入れ子の関数を `new` "
+"に改名しても現行構文への移行にはなりません。コンパイラは入れ子のコンストラクタ宣言を E3002 "
+"でも拒否するため、トップレベルのコンストラクタを使用してください。"
+
+#: ../../language/error_codes/E3024.md:11
+msgid "Erroneous example"
+msgstr "誤った例"
+
+#: ../../language/error_codes/E3024.md:11
+msgid ""
+"pub struct S {\n"
+"  x : Int32\n"
+"  fn constr(x : Int32) -> S\n"
+"}\n"
+"\n"
+"fn S::constr(x : Int32) -> S {\n"
+"  { x, }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E3024.md:17
+msgid "Suggestion"
+msgstr "対処方法"
+
+#: ../../language/error_codes/E3024.md:19
+msgid "Define the constructor with the current top-level `Type::Type` form:"
+msgstr "現行のトップレベルの `Type::Type` 形式でコンストラクタを定義してください。"
+
+#: ../../language/error_codes/E3024.md:19
+msgid ""
+"pub struct S {\n"
+"  x : Int32\n"
+"}\n"
+"\n"
+"fn S::S(x : Int32) -> S {\n"
+"  { x, }\n"
+"}\n"
+"\n"
+"pub fn make(x : Int32) -> S {\n"
+"  S(x)\n"
+"}\n"
+msgstr ""

@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4194.md:1
+msgid "E4194"
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:3
+msgid "Compiler diagnostic name: `unsupported_declaration`."
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:5
+msgid "Unsupported declaration target."
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:7
+msgid ""
+"The declaration-only attribute is supported only on declaration items "
+"that the compiler can later match with an implementation. It cannot be "
+"applied to ordinary value bindings or other unsupported top-level items."
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:11
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:13
+msgid ""
+"#declaration_only\n"
+"let answer = 42\n"
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:17
+msgid ""
+"`answer` is a `let` binding, not a function, type, or implementation "
+"relation that can be tracked as a declaration."
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:20
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:22
+msgid ""
+"Use an ordinary definition for values. If you need a declaration, declare"
+" a function signature, abstract type, or implementation relation."
+msgstr ""
+
+#: ../../language/error_codes/E4194.md:25
+msgid "let answer = 42\n"
+msgstr ""

@@ -1,0 +1,112 @@
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# -- Project information -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+
+import os
+
+project = 'MoonBit'
+author = 'International Digital Economy Academy'
+copyright = '%Y, {author}'.format(author=author)
+rtd_version = os.getenv('READTHEDOCS_VERSION') or ''
+release = os.getenv('DOCS_RELEASE') or (
+    rtd_version if rtd_version and rtd_version != 'latest' else 'nightly'
+)
+
+# I18N based on Readthedocs Environment
+# https://docs.readthedocs.io/en/stable/reference/environment-variables.html
+rtd_language = (os.getenv('READTHEDOCS_LANGUAGE') or '').lower()
+local_language = (os.getenv('LANGUAGE') or '').split('.')[0]
+if rtd_language == 'zh-cn' or local_language == 'zh_CN':  # For local build
+    project = 'MoonBit 月兔'
+    author = '粤港澳大湾区数字经济院'
+    copyright = '%Y, {author}'.format(author=author)
+    language = 'zh_CN'
+    import jieba
+    # For Chinese searching
+    html_search_options = {
+        "dict": jieba.DEFAULT_DICT
+    }
+elif rtd_language == 'ja' or local_language in ('ja', 'ja_JP'):
+    language = 'ja'
+
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+source_suffix = {
+    '.mbt.md': 'markdown'
+}
+
+import sys
+from pathlib import Path
+sys.path.append(str(Path("_ext").resolve()))
+
+extensions = ['myst_parser', 'lexer', 'grammar', 'check', 'indent', 'sphinx_copybutton', 'sphinx_design']
+
+templates_path = ['_templates']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', ".env", '.venv', "README*.md", 'sources', 'download']
+
+smartquotes_excludes = {
+  'builders': ['man', 'text', 'markdown', 'latex'],
+}
+
+# Keep generated Markdown links usable when pages are consumed out of tree.
+markdown_http_base = {
+    'zh_CN': 'https://docs.moonbitlang.cn',
+    'ja': 'https://docs.moonbitlang.com/ja/latest',
+}.get(globals().get('language'), 'https://docs.moonbitlang.com/en/latest')
+markdown_uri_doc_suffix = '.html'
+
+# Avoid guess-highlighting output blocks and other snippets without a language.
+highlight_language = 'none'
+
+# -- Options for HTML output -------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_theme = 'sphinx_book_theme'
+html_static_path = ['_static']
+html_theme_options = {
+    "repository_url": "https://github.com/moonbitlang/moonbit-docs/",
+    "path_to_docs": "next",
+    "use_source_button": True,
+    "use_edit_page_button": True,
+    "use_issues_button": True,
+    "logo": {
+        "text":"MoonBit 月兔",
+    }
+}
+html_logo = "_static/logo.png"
+html_favicon = "_static/favicon.ico"
+
+# -- Options for LaTeX output ------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
+effective_language = globals().get('language') or ''
+latex_elements = {
+    # keep code blocks stable across engines; CJK glue hook is only used when available
+    'fvset': r"\fvset{formatcom={\ifdefined\CJKsetecglue\CJKsetecglue{}\fi}}",
+}
+if str(effective_language).startswith('zh'):
+    # keep Chinese PDF pipeline on XeLaTeX + xeCJK
+    latex_engine = 'xelatex'
+    latex_elements['preamble'] = r"\usepackage{xeCJK}"
+# For Japanese and other locales, respect Sphinx defaults for latex_engine/docclass.
+
+# -- Options for myst_parser -------------------------------------------------
+myst_heading_anchors = 4
+myst_enable_extensions = [
+    "attrs_inline"
+]
+
+# -- Options for gettext -----------------------------------------------------
+gettext_additional_targets = ["literal-block"]
+gettext_compact = False
+
+# -- Options for sphinx_copybutton -------------------------------------------------
+copybutton_prompt_text = "$ "
+
+# -- Options for link check -------------------------------------------------
+linkcheck_anchors_ignore_for_url = [ 'https://mooncakes.io/docs' ]
+linkcheck_ignore = ["https://platform.deepseek.com"]

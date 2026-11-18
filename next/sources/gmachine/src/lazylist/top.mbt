@@ -1,0 +1,44 @@
+///|
+using @list {type List}
+
+///|
+/// start stream definition
+enum Stream[T] {
+  Empty
+  Cons(T, () -> Stream[T])
+}
+// end stream definition
+
+///|
+/// start list conversion
+fn[T] Stream::from_list(l : List[T]) -> Self[T] {
+  match l {
+    Empty => Empty
+    More(x, tail=xs) => Cons(x, fn() { Stream::from_list(xs) })
+  }
+}
+// end list conversion
+
+///|
+/// start map definition
+fn[X, Y] Stream::map(self : Stream[X], f : (X) -> Y) -> Stream[Y] {
+  match self {
+    Empty => Empty
+    Cons(x, xs) => Cons(f(x), fn() { xs().map(f) })
+  }
+}
+// end map definition
+
+///|
+/// start take definition
+fn[T] Stream::take(self : Stream[T], n : Int32) -> List[T] {
+  if n == 0 {
+    @list.List([])
+  } else {
+    match self {
+      Empty => @list.List([])
+      Cons(x, xs) => xs().take(n - 1).prepend(x)
+    }
+  }
+}
+// end take definition

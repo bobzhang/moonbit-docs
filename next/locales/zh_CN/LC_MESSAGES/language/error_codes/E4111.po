@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-29 14:51+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4111.md:1
+msgid "E4111"
+msgstr ""
+
+#: ../../language/error_codes/E4111.md:3
+msgid "The usage of a `break` statement is invalid."
+msgstr "`break` 语句的使用无效。"
+
+#: ../../language/error_codes/E4111.md:5
+msgid ""
+"This error happens when you use a `break` statement in the "
+"initialization, condition, or update statement of a loop."
+msgstr "当您在循环的初始化、条件或更新语句中使用 `break` 语句时，就会发生此错误。"
+
+#: ../../language/error_codes/E4111.md:8
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E4111.md:10
+msgid ""
+"///|\n"
+"pub fn f(x : Int32, y : Int32) -> Unit {\n"
+"  for i = 0; i < x; i = i + 1 {\n"
+"    for j = ({\n"
+"            break\n"
+"          })\n"
+"        j < y\n"
+"        j = j + 1 {\n"
+"      //            ^^^^^ Error: The usage of break statement is invalid."
+"\n"
+"      println(i + j)\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4111.md:14
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4111.md:16
+msgid ""
+"Do not write a `break` statement in the initialization, condition, or "
+"update statement of a loop. Put it in the loop body instead."
+msgstr "不要在循环的初始化、条件或更新语句中编写 `break` 语句。请将它放在循环体中。"
+
+#: ../../language/error_codes/E4111.md:19
+msgid ""
+"///|\n"
+"pub fn f(x : Int32, y : Int32) -> Unit {\n"
+"  for i = 0; i < x; i = i + 1 {\n"
+"    for j = 0; j < y; j = j + 1 {\n"
+"      if i + j > 10 {\n"
+"        break\n"
+"      }\n"
+"      println(i + j)\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4111.md:23
+msgid ""
+"The error also occurs when an unlabelled `break` is directly inside a "
+"labelled block. Specify the block's label when exiting it:"
+msgstr "当未带标签的 `break` 直接位于带标签的代码块内时，也会出现此错误。退出代码块时请指定其标签："
+
+#: ../../language/error_codes/E4111.md:26
+msgid ""
+"///|\n"
+"pub fn value_or_zero(value : Int32?) -> Int32 {\n"
+"  result~: {\n"
+"    guard value is Some(result) else { break }\n"
+"    result\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4111.md:30
+msgid ""
+"///|\n"
+"pub fn value_or_zero(value : Int32?) -> Int32 {\n"
+"  result~: {\n"
+"    guard value is Some(result) else { break result~ 0 }\n"
+"    result\n"
+"  }\n"
+"}\n"
+msgstr ""

@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 15:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4108.md:1
+msgid "E4108"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:3
+msgid ""
+"The loop is expected to yield a value; in current syntax, add a `nobreak`"
+" branch."
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:6
+msgid ""
+"This error occurs when the compiler infers that a for-loop is expected to"
+" yield a non-Unit value based on its context (such as the function's "
+"return type), but the loop lacks a branch to provide that value. In "
+"current MoonBit syntax, that branch is written as `nobreak`."
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:11
+msgid ""
+"In MoonBit, when a for-loop is used in a context where a value is "
+"expected (for example, when the function returns a non-Unit type), the "
+"loop must have an `nobreak` branch that specifies what value to return "
+"when the loop completes normally. This is because:"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:16
+msgid "The loop body itself cannot yield a value"
+msgstr "ループ本体そのものは値を返せません"
+
+#: ../../language/error_codes/E4108.md:17
+msgid ""
+"Without a `nobreak` branch, there's no way to determine what value should"
+" be returned when the loop finishes without breaking"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:20
+msgid "This commonly occurs in two situations:"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:22
+msgid ""
+"When the for-loop is the last expression in a function that returns a "
+"non-Unit type"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:24
+msgid ""
+"When the for-loop's result is assigned to a variable or used in an "
+"expression that expects a non-Unit value"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:27
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:29
+msgid ""
+"///|\n"
+"pub fn f(x : Int32) -> Int32 {\n"
+"  for i = 0, acc = 0; i < x; i = i + 1, acc = acc + i {\n"
+"    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Error: The "
+"for loop is\n"
+"    //                                                      not expected "
+"to yield a\n"
+"    //                                                      value, please"
+" add an\n"
+"    //                                                      `else` "
+"branch.\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"pub fn g(x : Int32) -> Int32 {\n"
+"  for i in 0..<=x {\n"
+"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:33
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:35
+msgid "To fix this error, you can:"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:37
+msgid "add a `nobreak` branch to the for-loop:"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:39
+msgid ""
+"///|\n"
+"pub fn f(x : Int32) -> Int32 {\n"
+"  for i = 0, acc = 0; i < x; i = i + 1, acc = acc + i {\n"
+"\n"
+"  } nobreak {\n"
+"    acc\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:43
+msgid ""
+"change the function's return type to `Unit` if you don't need to return a"
+" value from the loop:"
+msgstr ""
+
+#: ../../language/error_codes/E4108.md:46
+msgid ""
+"///|\n"
+"pub fn g(x : Int32) -> Unit {\n"
+"  for i in 0..<=x {\n"
+"    ignore(i)\n"
+"  }\n"
+"}\n"
+msgstr ""

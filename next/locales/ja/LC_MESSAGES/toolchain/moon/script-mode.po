@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-18 15:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../toolchain/moon/script-mode.md:1
+msgid "Running `.mbtx` Scripts"
+msgstr "`.mbtx` スクリプトの実行"
+
+#: ../../toolchain/moon/script-mode.md:3
+msgid ""
+"The Moon build system lets you write script files in MoonBit without any "
+"module or package configuration files. Script files use the special "
+"`.mbtx` extension."
+msgstr ""
+"Moon ビルドシステムでは、モジュールやパッケージの設定ファイルがなくても MoonBit "
+"でスクリプトファイルを書けます。スクリプトファイルには特別な拡張子 `.mbtx` を使います。"
+
+#: ../../toolchain/moon/script-mode.md:6
+msgid "Run a `.mbtx` file"
+msgstr "`.mbtx` ファイルを実行する"
+
+#: ../../toolchain/moon/script-mode.md:8
+msgid "Write a script `script.mbtx`:"
+msgstr "スクリプト `script.mbtx` を作成します："
+
+#: ../../toolchain/moon/script-mode.md:10
+msgid ""
+"---\n"
+"import {\n"
+"  \"moonbitlang/core/list\" @ls\n"
+"}\n"
+"---\n"
+"\n"
+"///|\n"
+"async fn main {\n"
+"  let xs = @ls.List([\"1\", \"2\", \"3\"])\n"
+"  debug(xs)\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/script-mode.md:24
+msgid "Then run this script directly:"
+msgstr "次に、このスクリプトを直接実行します："
+
+#: ../../toolchain/moon/script-mode.md:26
+msgid "$ moon run script.mbtx\n"
+msgstr "$ moon run script.mbtx\n"
+
+#: ../../toolchain/moon/script-mode.md:30
+msgid ""
+"You can also use `moonx script.mbtx`; see [Running Scripts and Tools with"
+" `moonx`](moonx.md)."
+msgstr "`moonx script.mbtx` も使用できます。[`moonx` でスクリプトとツールを実行する](moonx.md)を参照してください。"
+
+#: ../../toolchain/moon/script-mode.md:33
+msgid ""
+"In `.mbtx`, declare imports in frontmatter enclosed by `---` lines at the"
+" beginning of the file, using the same syntax as package configuration. "
+"Imports outside frontmatter are deprecated (`unfenced_import`, warning "
+"96). For example, an async script can import the standard library's "
+"`moonbitlang/core/async` package in frontmatter:"
+msgstr "`.mbtx` では、ファイル先頭の `---` で囲まれたフロントマターに、パッケージ設定と同じ構文でインポートを宣言します。フロントマターの外でのインポートは非推奨です（`unfenced_import`、警告 96）。例えば、非同期スクリプトはフロントマターで標準ライブラリの `moonbitlang/core/async` パッケージをインポートできます。"
+
+#: ../../toolchain/moon/script-mode.md:39
+msgid ""
+"---\n"
+"import {\n"
+"  \"moonbitlang/core/async\",\n"
+"}\n"
+"---\n"
+"\n"
+"///|\n"
+"async fn main {\n"
+"  @async.sleep(0)\n"
+"  println(\"done\")\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/script-mode.md:43
+msgid "Run this example with `moon run --target native async.mbtx`."
+msgstr "この例は `moon run --target native async.mbtx` で実行します。"
+
+#: ../../toolchain/moon/script-mode.md:46
+msgid ""
+"Running this script currently reports an experimental-package warning. "
+"Unlike `moon.pkg`, script frontmatter does not support the `options"
+"(\"allow-experimental-packages\": true)` opt-in. The warning does not "
+"prevent the script from running."
+msgstr "このスクリプトを実行すると、現在は実験的なパッケージに関する警告が表示されます。`moon.pkg` と異なり、スクリプトのフロントマターでは `options(\"allow-experimental-packages\": true)` によるオプトインを設定できません。この警告が表示されてもスクリプトは実行されます。"
+
+#: ../../toolchain/moon/script-mode.md:52
+msgid ""
+"For third-party dependencies, import paths can optionally include a "
+"version `@version` after the module name, in the form "
+"`author/module@version/package`. All imported packages from the same "
+"module must use the same version."
+msgstr "サードパーティの依存関係では、モジュール名の後に `@version` を付けて、`author/module@version/package` の形式でバージョンを指定できます。同じモジュールからインポートするすべてのパッケージは同じバージョンを使用する必要があります。"
+
+#: ../../toolchain/moon/script-mode.md:52
+msgid ""
+"If the import path is not explicitly versioned, it uses the latest "
+"version in the local registry index."
+msgstr "import パスで明示的にバージョンを指定しない場合は、ローカルのレジストリインデックスにある最新バージョンが使われます。"
+
+#: ../../toolchain/moon/script-mode.md:59
+msgid ""
+"Standard library imports such as `moonbitlang/core/async` use the version"
+" bundled with the toolchain and do not need a version in the import path."
+msgstr "`moonbitlang/core/async` などの標準ライブラリのインポートでは、ツールチェーンに同梱されたバージョンが使用されるため、インポートパスでのバージョン指定は不要です。"
+
+#: ../../toolchain/moon/script-mode.md:55
+msgid ""
+"A script may add `*` after an import to bring all definitions from that "
+"package into its scope. The import may also set a custom package alias with "
+"`@alias`:"
+msgstr ""
+"スクリプトでは import の後に `*` を付けると、そのパッケージのすべての定義を"
+"現在のスコープへ取り込めます。`@alias` で独自のパッケージ別名も設定できます："
+
+#: ../../toolchain/moon/script-mode.md:58
+msgid ""
+"---\n"
+"import {\n"
+"  \"moonbitlang/core/queue\" @q *\n"
+"}\n"
+"---\n"
+"\n"
+"///|\n"
+"fn main {\n"
+"  let queue = Queue([1, 2, 3])\n"
+"  println(queue.length())\n"
+"  let qualified = @q.Queue([4, 5])\n"
+"  println(qualified.length())\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/script-mode.md:62
+msgid ""
+"The package alias remains available, so the example can use both `Queue` and "
+"`@q.Queue`. Without an explicit `@alias`, the package's default alias is "
+"used. Import-all syntax is limited to `.mbtx` scripts; regular packages "
+"should use package aliases or `using` declarations. Prefer explicit imports "
+"when name conflicts would make a script difficult to read."
+msgstr ""
+"パッケージ別名も引き続き利用できるため、この例では `Queue` と `@q.Queue` の両方を"
+"使用できます。明示的な `@alias` がない場合は、パッケージのデフォルト別名が使われます。"
+"全インポート構文は `.mbtx` スクリプト専用です。通常のパッケージではパッケージ別名"
+"または `using` 宣言を使用してください。名前の衝突でスクリプトが読みにくくなる場合は、"
+"明示的な import を優先してください。"
+
+#: ../../toolchain/moon/script-mode.md:68
+msgid "Test a `.mbtx` script"
+msgstr "`.mbtx` スクリプトをテストする"
+
+#: ../../toolchain/moon/script-mode.md:70
+msgid "Pass a script path to `moon test` to test that script by itself:"
+msgstr "スクリプトのパスを `moon test` に渡すと、そのスクリプトだけをテストできます："
+
+#: ../../toolchain/moon/script-mode.md:72
+msgid "moon test script.mbtx\n"
+msgstr ""
+
+#: ../../toolchain/moon/script-mode.md:76
+msgid ""
+"The script must define `fn main`, but the generated test entrypoint does "
+"not run it. An explicit `.mbtx` path selects only that script, even when "
+"it is inside a project; conversely, package-wide test runs do not include"
+" `.mbtx` scripts."
+msgstr ""
+"スクリプトには `fn main` が必要ですが、生成されたテスト用エントリポイントはそれを実行しません。"
+"明示的な `.mbtx` パスは、プロジェクト内にある場合でもそのスクリプトだけを選択します。逆に、"
+"パッケージ全体のテストには `.mbtx` スクリプトは含まれません。"
+
+#: ../../toolchain/moon/script-mode.md:81
+msgid "Run a `.mbtx` script from stdin"
+msgstr "stdin から `.mbtx` スクリプトを実行する"
+
+#: ../../toolchain/moon/script-mode.md:83
+msgid "Moon supports running a `.mbtx` script from stdin:"
+msgstr "Moon は stdin から `.mbtx` スクリプトを実行することをサポートしています："
+
+#: ../../toolchain/moon/script-mode.md:85
+msgid "$ cat script.mbtx | moon run -\n"
+msgstr "$ cat script.mbtx | moon run -\n"
+
+#: ../../toolchain/moon/script-mode.md:89
+msgid "For short scripts, pass the `.mbtx` source directly with `-c`:"
+msgstr "短いスクリプトでは、`-c` で `.mbtx` ソースを直接渡せます："
+
+#: ../../toolchain/moon/script-mode.md:91
+msgid ""
+"$ moon run -c \"<script>\"\n"
+"$ moon run -c 'fn main { println(\"hello\") }'\n"
+msgstr ""
+
+#: ../../toolchain/moon/script-mode.md:96
+msgid "You can also use a heredoc, a feature provided by the shell:"
+msgstr "シェルが提供する機能である heredoc も使えます："
+
+#: ../../toolchain/moon/script-mode.md:98
+msgid ""
+"$ moon run - <<EOF\n"
+"fn main {\n"
+"  println(\"hello\")\n"
+"}\n"
+"EOF\n"
+msgstr ""
+"$ moon run - <<EOF\n"
+"fn main {\n"
+"  println(\"hello\")\n"
+"}\n"
+"EOF\n"

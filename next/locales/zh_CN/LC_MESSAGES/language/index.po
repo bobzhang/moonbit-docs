@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-04 10:54+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/index.md:1
+msgid "MoonBit Language"
+msgstr "MoonBit（月兔）编程语言"
+
+#: ../../language/index.md:3
+msgid ""
+"MoonBit is an AI native programming language toolchain for cloud and edge "
+"computing. It targets `wasm`, `wasm-gc`, `js`, and `native`, and works well "
+"for mixed-backend projects in one module."
+msgstr "MoonBit 是一个面向云与边缘计算的 AI 原生编程语言工具链。它支持 `wasm`、`wasm-gc`、`js` 与 `native` 目标，并且很适合在一个模块中开发混合后端项目。"
+
+#: ../../language/index.md:5
+msgid "**Status**"
+msgstr "**状态**"
+
+#: ../../language/index.md:9
+msgid "MoonBit is currently in beta-preview."
+msgstr "MoonBit 目前处于 beta-preview 阶段。"
+
+#: ../../language/index.md:11
+msgid ""
+"MoonBit can already be used in production, with backwards-incompatible "
+"changes evaluated seriously and compiler bugs expected to be rare. MoonBit "
+"is developed by a full-time team with deep language-toolchain experience, "
+"so the ecosystem is moving quickly."
+msgstr ""
+"MoonBit 已经可以用于生产环境；任何不兼容的更改都会被严格评估，编译器错误也应当是罕见的。MoonBit 由一支在语言工具链方面经验深厚的全职团队开发，因此整个生态发展得很快。"
+
+#: ../../language/index.md:13
+msgid "**Main advantages**"
+msgstr "**主要优势**"
+
+#: ../../language/index.md:15
+msgid "Generate significantly smaller WASM output than any existing solutions."
+msgstr "生成比现有解决方案明显更小的 Wasm 文件。"
+
+#: ../../language/index.md:16
+msgid "Much faster runtime performance."
+msgstr "更高的运行时性能。"
+
+#: ../../language/index.md:17
+msgid "State of the art compile-time performance."
+msgstr "先进的编译时性能。"
+
+#: ../../language/index.md:18
+msgid "Simple but practical, data-oriented language design."
+msgstr "简单且实用的数据导向语言设计。"
+
+#: ../../language/index.md:21
+msgid "[Download this section in Markdown](path:/download/language/summary.md)"
+msgstr "[下载本章节的 Markdown 版本](path:/download/language/summary.md)"

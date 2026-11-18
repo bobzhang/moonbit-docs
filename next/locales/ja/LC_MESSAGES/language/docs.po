@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-18 15:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/docs.md:1
+msgid "Comments and Documentation"
+msgstr "コメントとドキュメント"
+
+#: ../../language/docs.md:3
+msgid "Comments"
+msgstr "コメント"
+
+#: ../../language/docs.md:5
+msgid "Use `//` for ordinary comments inside code:"
+msgstr "コード内の通常のコメントには `//` を使います："
+
+#: ../../language/docs.md:7
+msgid ""
+"// Explain why this branch exists.\n"
+"let retries = 3\n"
+msgstr ""
+"// Explain why this branch exists.\n"
+"let retries = 3\n"
+
+#: ../../language/docs.md:12
+msgid ""
+"You will also often see `///|` at the start of top-level blocks. It is an"
+" empty doc-comment line used to split top-level items explicitly. This "
+"matters for documentation tooling today, and it also preserves clear top-"
+"level block boundaries for future caching and other tooling purposes. In "
+"practice, `///|` is useful in ordinary MoonBit code as well as in "
+"documentation sources."
+msgstr ""
+"トップレベルブロックの先頭で `///|` をよく見かけることもあります。これは "
+"トップレベル項目を明示的に区切るための空のドキュメントコメント行です。これは現時点のドキュメントツールにとって重要であり、将来のキャッシュやその他のツール用途に向けても、トップレベルブロックの境界を明確に保ちます。実際には、`///|`"
+" は通常の MoonBit コードでもドキュメントソースでも役立ちます。"
+
+#: ../../language/docs.md:18
+msgid "Doc Comments"
+msgstr "ドキュメントコメント"
+
+#: ../../language/docs.md:20
+msgid ""
+"Doc comments use `///` on each line immediately before a top-level item "
+"such as `fn`, `let`, `enum`, `struct`, or `type`. Doc comments are "
+"written in Markdown."
+msgstr ""
+"ドキュメントコメントは、`fn`、`let`、`enum`、`struct`、`type` などのトップレベル項目の直前の各行に `///` "
+"を使って書きます。ドキュメントコメントは Markdown で記述します。"
+
+#: ../../language/docs.md:24
+msgid ""
+"/// Return a new array with reversed elements.\n"
+"fn[T] reverse(xs : Array[T]) -> Array[T] {\n"
+"  ...\n"
+"}\n"
+msgstr ""
+"/// Return a new array with reversed elements.\n"
+"fn[T] reverse(xs : Array[T]) -> Array[T] {\n"
+"  ...\n"
+"}\n"
+
+#: ../../language/docs.md:31
+msgid ""
+"Markdown code blocks inside doc comments marked with `mbt check` are "
+"treated as document tests. `moon check` and `moon test` will "
+"automatically check and run these tests, so that examples in doc comments"
+" are always up-to-date. Wrap the snippet in `test { .. }` when you want a"
+" test block:"
+msgstr ""
+"`mbt check` とマークされたドキュメントコメント内の Markdown コードブロックは、ドキュメントテストとして扱われます。`moon"
+" check` と `moon test` "
+"はこれらのテストを自動的に検査・実行するため、ドキュメントコメント内の例を常に最新に保てます。テストブロックにしたい場合は、スニペットを "
+"`test { .. }` で囲んでください："
+
+#: ../../language/docs.md:36
+msgid ""
+"/// Increment an integer by one,\n"
+"///\n"
+"/// Example:\n"
+"/// ```mbt check\n"
+"/// test {\n"
+"///   inspect(@misc.incr(41), content=\"42\")\n"
+"/// }\n"
+"/// ```\n"
+"pub fn incr(x : Int32) -> Int32 {\n"
+"  x + 1\n"
+"}\n"
+msgstr ""
+
+#: ../../language/docs.md:42
+msgid ""
+"If you want to prevent a code snippet from being treated as a document "
+"test, mark it with a language id other than `mbt check` on the markdown "
+"code block:"
+msgstr ""
+"コードスニペットをドキュメントテストとして扱わせたくない場合は、Markdown コードブロックに `mbt check` 以外の言語 ID "
+"を付けてください："
+
+#: ../../language/docs.md:45
+msgid ""
+"/// `c_incr(x)` is the same as the following C code:\n"
+"/// ```c\n"
+"/// x++\n"
+"/// ```\n"
+"pub fn c_incr(x : Ref[Int32]) -> Int32 {\n"
+"  let old = x.val\n"
+"  x.val += 1\n"
+"  old\n"
+"}\n"
+msgstr ""
+"/// `c_incr(x)` is the same as the following C code:\n"
+"/// ```c\n"
+"/// x++\n"
+"/// ```\n"
+"pub fn c_incr(x : Ref[Int32]) -> Int32 {\n"
+"  let old = x.val\n"
+"  x.val += 1\n"
+"  old\n"
+"}\n"
+
+#: ../../language/docs.md:51
+msgid ""
+"Currently, document tests are always [blackbox tests](/language/tests.md"
+"#blackbox-tests-and-whitebox-tests). So private definitions cannot have "
+"document test."
+msgstr ""
+"現在、ドキュメントテストは常に [ブラックボックステスト](/language/tests.md#blackbox-tests-and-"
+"whitebox-tests) として扱われます。そのため、private な定義にはドキュメントテストを付けられません。"
+
+#: ../../language/docs.md:54
+msgid "Literate `.mbt.md` Files"
+msgstr "リテラテ `.mbt.md` ファイル"
+
+#: ../../language/docs.md:56
+msgid ""
+"MoonBit also supports literate Markdown files ending in `.mbt.md`. These "
+"files can live inside a package as checked documentation, or they can be "
+"used as standalone single-file inputs to `moon check` and `moon test`."
+msgstr ""
+"MoonBit は `.mbt.md` で終わるリテラテ Markdown "
+"ファイルもサポートします。これらのファイルは、パッケージ内で検査済みドキュメントとして置くことも、`moon check` と `moon "
+"test` の単独ファイル入力として使うこともできます。"
+
+#: ../../language/docs.md:60
+msgid "For a standalone file, run:"
+msgstr "単独ファイルの場合は、次を実行します："
+
+#: ../../language/docs.md:62
+msgid ""
+"moon check README.mbt.md\n"
+"moon test README.mbt.md\n"
+msgstr ""
+"moon check README.mbt.md\n"
+"moon test README.mbt.md\n"
+
+#: ../../language/docs.md:67
+msgid ""
+"Inside a project, keep using the package-level `moon check` and `moon "
+"test` commands instead."
+msgstr "プロジェクト内では、引き続きパッケージ単位の `moon check` と `moon test` コマンドを使ってください。"
+
+#: ../../language/docs.md:70
+msgid "The code fence language controls how each block is handled:"
+msgstr "コードフェンスの言語によって、各ブロックの扱いが決まります："
+
+#: ../../language/docs.md:72
+msgid "`mbt`: MoonBit code that is compiled, but does not create a test entry."
+msgstr "`mbt`: コンパイルされるが、テストエントリは作成しない MoonBit コード"
+
+#: ../../language/docs.md:73
+msgid ""
+"`mbt check`: MoonBit document-test code. Use `test { .. }` or `async "
+"test` inside the block when you want assertions."
+msgstr ""
+"`mbt check`: MoonBit のドキュメントテストコード。アサーションを使いたいときは、ブロック内で `test { .. }` "
+"または `async test` を使います。"
+
+#: ../../language/docs.md:75
+msgid "`mbt nocheck`: Show MoonBit code without compiling or testing it."
+msgstr "`mbt nocheck`: コンパイルもテストもしない MoonBit コードを表示する"
+
+#: ../../language/docs.md:76
+msgid ""
+"`moonbit`: Ordinary displayed code block for documentation; it is not "
+"compiled or tested."
+msgstr "`moonbit`: ドキュメント用の通常の表示コードブロック。コンパイルもテストもされません。"
+
+#: ../../language/docs.md:79
+msgid "For example:"
+msgstr "例えば："
+
+#: ../../language/docs.md:81
+msgid ""
+"```mbt nocheck\n"
+"///|\n"
+"fn helper() -> Int32 {\n"
+"  42\n"
+"}\n"
+"```\n"
+"\n"
+"```mbt check\n"
+"///|\n"
+"test \"forty two\" {\n"
+"  inspect(40 + 2, content=\"42\")\n"
+"}\n"
+"```\n"
+"\n"
+"```mbt nocheck\n"
+"///|\n"
+"fn native_only() -> Unit {\n"
+"  ...\n"
+"}\n"
+"```\n"
+msgstr ""
+"```mbt nocheck\n"
+"///|\n"
+"fn helper() -> Int32 {\n"
+"  42\n"
+"}\n"
+"```\n"
+"\n"
+"```mbt check\n"
+"///|\n"
+"test \"forty two\" {\n"
+"  inspect(40 + 2, content=\"42\")\n"
+"}\n"
+"```\n"
+"\n"
+"```mbt nocheck\n"
+"///|\n"
+"fn native_only() -> Unit {\n"
+"  ...\n"
+"}\n"
+"```\n"
+
+#: ../../language/docs.md:87
+msgid ""
+"Standalone `.mbt.md` files can also declare front matter to specify "
+"imports or the target backend:"
+msgstr "単独の `.mbt.md` ファイルでは、front matter を使って import や対象バックエンドを指定することもできます："
+
+#: ../../language/docs.md:90
+msgid ""
+"---\n"
+"moonbit:\n"
+"  import:\n"
+"    - path: moonbitlang/core/ref\n"
+"      alias: ref\n"
+"  backend:\n"
+"    native\n"
+"---\n"
+"\n"
+"```mbt check\n"
+"fn answer() -> Int32 {\n"
+"  let cell = @ref.Ref::{ val: 41 }\n"
+"  cell.val + 1\n"
+"}\n"
+"\n"
+"///|\n"
+"test \"answer\" {\n"
+"  inspect(answer(), content=\"42\")\n"
+"}\n"
+"```\n"
+msgstr ""
+
+#: ../../language/docs.md:94
+msgid ""
+"Use `moonbit.import` when you want to name the packages the file can "
+"import directly. Use `moonbit.deps` when you only want to declare module "
+"dependencies and let Moon synthesize the imports automatically."
+msgstr ""
+"ファイルが直接 import できるパッケージを明示したい場合は `moonbit.import` "
+"を使います。モジュール依存関係だけを宣言して、Moon に import を自動生成させたい場合は `moonbit.deps` を使います。"

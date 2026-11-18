@@ -1,0 +1,44 @@
+///|
+fn run(codes : List[String]) -> String {
+  fn parse_then_compile(code : String) -> (String, Int32, List[Instruction]) {
+    let tokens = tokenize(code)
+    let code = try tokens.parse_sc() catch {
+      ParseError(s) => abort(s)
+    } else {
+      expr => expr
+    }
+    let code = code.compileSC()
+    return code
+  }
+
+  let codes = codes.map(parse_then_compile) + prelude_defs.map(ScDef::compileSC)
+  let codes = compiled_primitives + codes
+  let (heap, globals) = build_initial_heap(codes)
+  // start init definition
+  let initialState : GState = {
+    output: StringBuilder(capacity=60),
+    heap,
+    stack: @list.List([]),
+    code: @list.List([PushGlobal("main"), Eval, Print]),
+    globals,
+    stats: 0,
+    dump: @list.List([]),
+  }
+  // end init definition
+  GState::reify(initialState)
+}
+
+///|
+test "basic eval" {
+  let basic = []
+  for kv in programs.iter() {
+    let (_, v) = kv
+    basic.push(v)
+  }
+  let basic = @list.List(basic)
+  let main = "(defn main[] (take 20 fibs))"
+  inspect(
+    run(@list.List([main]).concat(basic)),
+    content="0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 Nil",
+  )
+}

@@ -1,0 +1,1281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 11:22+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../toolchain/moon/module.md:1
+msgid "Module Configuration"
+msgstr "モジュール設定"
+
+#: ../../toolchain/moon/module.md:3
+msgid ""
+"moon uses a module file to identify and describe a module. The legacy "
+"format is `moon.mod.json`,  and the new format is `moon.mod`. For full "
+"JSON schema, please check [moon's "
+"repository](https://github.com/moonbitlang/moon/blob/main/crates/moonbuild/template/mod.schema.json)."
+msgstr ""
+"moon は、モジュールファイルを使ってモジュールを識別し、説明します。従来の形式は `moon.mod.json` で、新しい形式は "
+"`moon.mod` です。完全な JSON スキーマは [moon "
+"のリポジトリ](https://github.com/moonbitlang/moon/blob/main/crates/moonbuild/template/mod.schema.json)を参照してください。"
+
+#: ../../toolchain/moon/module.md:6
+msgid ""
+"`moon.mod.json` is no longer accepted by ordinary toolchain commands. Run "
+"`moon fmt` to migrate existing JSON manifests to `moon.mod` and `moon.pkg` "
+"before checking or building the project. The JSON examples below are "
+"migration references, not configurations for new projects."
+msgstr ""
+"通常のツールチェーンコマンドは `moon.mod.json` を受け付けなくなりました。プロジェクトのチェックやビルドの前に `moon fmt` "
+"を実行し、既存の JSON 設定ファイルを `moon.mod` と `moon.pkg` に移行してください。以下の JSON "
+"の例は移行用の参考であり、新しいプロジェクト向けの設定ではありません。"
+
+#: ../../toolchain/moon/module.md:12
+msgid "Full syntax of moon.mod is as follows:"
+msgstr "`moon.mod` の完全な構文は次のとおりです："
+
+#: ../../toolchain/moon/module.md:14
+msgid ""
+"moon_mod ::= statement*\n"
+"statement ::= import | assign | apply\n"
+"\n"
+"import ::= \"import\" \"{\" (import_item \",\")* import_item? \"}\" "
+"import_kind?\n"
+"import_item ::= STRING\n"
+"\n"
+"assign ::= LIDENT \"=\" expr\n"
+"\n"
+"apply ::= LIDENT \"(\" (argument \",\")* argument? \")\"\n"
+"argument ::= LIDENT \":\" expr | STRING \":\" expr  \n"
+"\n"
+"expr ::= array | object | apply | STRING | INT | \"true\" | \"false\"\n"
+"array ::= \"[\" (expr \",\")* expr? \"]\"\n"
+"object ::= \"{\" (field \",\")* field? \"}\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:32
+msgid "Name"
+msgstr "名前"
+
+#: ../../toolchain/moon/module.md:34
+msgid ""
+"The `name` field is used to specify the name of the module, and it is "
+"required."
+msgstr "`name` フィールドはモジュール名を指定するために使います。このフィールドは必須です。"
+
+#: ../../toolchain/moon/module.md
+msgid "moon.mod"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:38
+msgid "name = \"user/example\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md
+msgid "moon.mod.json"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:44
+msgid ""
+"{\n"
+"  \"name\": \"user/example\"\n"
+"  // ...\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:53
+msgid "The module name can contain letters, numbers, `_`, `-`, and `/`."
+msgstr "モジュール名には、英字、数字、`_`、`-`、`/` を含めることができます。"
+
+#: ../../toolchain/moon/module.md:55
+msgid ""
+"For modules published to [mooncakes.io](https://mooncakes.io), the module"
+" name must begin with the username."
+msgstr "[mooncakes.io](https://mooncakes.io) に公開するモジュールでは、モジュール名をユーザー名で始める必要があります。"
+
+#: ../../toolchain/moon/module.md:57
+msgid ""
+"A major-version module path can end in `/vN`, as in `owner/library/v2`. "
+"The root package's default alias is still `@library`; use explicit "
+"aliases when importing multiple major versions. Publishing version "
+"`1.0.0` or later is not supported before MoonBit 1.0."
+msgstr "メジャーバージョンを示すモジュールパスは `owner/library/v2` のように `/vN` で終えることができます。ルートパッケージの既定の別名は引き続き `@library` です。複数のメジャーバージョンをインポートする場合は別名を明示してください。MoonBit 1.0 より前は、1.0.0 以降のバージョンの公開はサポートされません。"
+
+#: ../../toolchain/moon/module.md:57
+msgid "Version"
+msgstr "バージョン"
+
+#: ../../toolchain/moon/module.md:59
+msgid "The `version` field is used to specify the version of the module."
+msgstr "`version` フィールドはモジュールのバージョンを指定するために使います。"
+
+#: ../../toolchain/moon/module.md:61
+msgid ""
+"This field is optional. For modules published to "
+"[mooncakes.io](https://mooncakes.io), the version number must follow the "
+"[Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) "
+"specification."
+msgstr ""
+"このフィールドは任意です。[mooncakes.io](https://mooncakes.io) に公開するモジュールでは、バージョン番号は "
+"[Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) "
+"仕様に従う必要があります。"
+
+#: ../../toolchain/moon/module.md:65
+msgid "version = \"0.1.0\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:70
+msgid ""
+"{\n"
+"  \"version\": \"0.1.0\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:78
+msgid "Dependency Management"
+msgstr "依存関係管理"
+
+#: ../../toolchain/moon/module.md:85
+msgid "A dependency's declared version must exist in the registry."
+msgstr "宣言する依存バージョンはレジストリに存在する必要があります。"
+
+#: ../../toolchain/moon/module.md:80
+msgid ""
+"Module dependencies are declared with `import` in `moon.mod`. The legacy "
+"`moon.mod.json` format represents the same information in its `deps` "
+"field."
+msgstr ""
+"モジュール依存関係は `moon.mod` の `import` で宣言します。従来の `moon.mod.json` 形式では、同じ情報を "
+"`deps` フィールドで表します。"
+
+#: ../../toolchain/moon/module.md:83
+msgid "It is automatically managed by commands like `moon add` and `moon remove`."
+msgstr "`moon add` や `moon remove` などのコマンドによって自動的に管理されます。"
+
+#: ../../toolchain/moon/module.md:87
+msgid ""
+"name = \"username/hello\"\n"
+"import {\n"
+"  \"moonbitlang/x@0.4.6\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:95
+msgid ""
+"{\n"
+"  \"name\": \"username/hello\",\n"
+"  \"deps\": {\n"
+"    \"moonbitlang/x\": \"0.4.6\"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:106
+msgid "You may also use a local dependency for module."
+msgstr "モジュールにはローカル依存関係も使用できます。"
+
+#: ../../toolchain/moon/module.md:110
+msgid ""
+"For new `moon.mod` format, the local dependency configuration is "
+"deprecated.  The recommended way to use a local dependency is to "
+"configure it in `moon.work`."
+msgstr ""
+"新しい `moon.mod` 形式では、ローカル依存関係の設定は非推奨です。ローカル依存関係を使う推奨方法は、`moon.work` "
+"で設定することです。"
+
+#: ../../toolchain/moon/module.md:113
+msgid ""
+"For example, if you use `moon.work` to manage `user/module1` and "
+"`user/module2`:"
+msgstr "例えば、`moon.work` を使って `user/module1` と `user/module2` を管理する場合："
+
+#: ../../toolchain/moon/module.md:115
+msgid ""
+"// in moon.work\n"
+"members = [\n"
+"  \"source/to/module1\",\n"
+"  \"source/to/module2\",\n"
+"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:123
+msgid "And `user/module1` uses `user/module2` as a dependency:"
+msgstr "そして `user/module1` が `user/module2` を依存関係として使う場合："
+
+#: ../../toolchain/moon/module.md:125
+msgid ""
+"// in source/to/module1/moon.mod\n"
+"import {\n"
+"  \"user/module2@0.1.0\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:132
+msgid ""
+"The `@version` part is ignored, `user/module2` is resolved from the local"
+" source instead of mooncakes.io."
+msgstr "`@version` の部分は無視され、`user/module2` は mooncakes.io ではなくローカルソースから解決されます。"
+
+#: ../../toolchain/moon/module.md:136
+msgid ""
+"{\n"
+"  \"name\": \"username/hello\",\n"
+"  \"deps\": {\n"
+"    \"username/other\": {\n"
+"      \"path\": \"../other\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:149
+msgid "Meta Information"
+msgstr "メタ情報"
+
+#: ../../toolchain/moon/module.md:151
+msgid "README"
+msgstr "README"
+
+#: ../../toolchain/moon/module.md:153
+msgid ""
+"The `readme` field is used to specify the path to the module's README "
+"file."
+msgstr "`readme` フィールドは、モジュールの README ファイルへのパスを指定するために使います。"
+
+#: ../../toolchain/moon/module.md:157
+msgid "readme = \"README.md\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:162
+msgid ""
+"{\n"
+"  \"readme\": \"README.md\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:171
+msgid "Repository"
+msgstr "リポジトリ"
+
+#: ../../toolchain/moon/module.md:173
+msgid ""
+"The `repository` field is used to specify the URL of the module's "
+"repository."
+msgstr "`repository` フィールドは、モジュールのリポジトリ URL を指定するために使います。"
+
+#: ../../toolchain/moon/module.md:177
+msgid "repository = \"link/to/your/repo\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:182
+msgid ""
+"{\n"
+"  \"repository\": \"link/to/your/repo\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:191
+msgid "License"
+msgstr "ライセンス"
+
+#: ../../toolchain/moon/module.md:193
+msgid ""
+"The `license` field is used to specify the license of the module. The "
+"license type must comply with the [SPDX License "
+"List](https://spdx.org/licenses/)."
+msgstr ""
+"`license` フィールドはモジュールのライセンスを指定するために使います。ライセンス種別は [SPDX License "
+"List](https://spdx.org/licenses/) に準拠している必要があります。"
+
+#: ../../toolchain/moon/module.md:198
+msgid "license = \"MIT\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:203
+msgid ""
+"{\n"
+"  \"license\": \"MIT\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:211
+msgid "Keywords"
+msgstr "キーワード"
+
+#: ../../toolchain/moon/module.md:213
+msgid "The `keywords` field is used to specify the keywords for the module."
+msgstr "`keywords` フィールドはモジュールのキーワードを指定するために使います。"
+
+#: ../../toolchain/moon/module.md:217
+msgid "keywords = [\"example\", \"test\"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:222
+msgid ""
+"{\n"
+"  \"keywords\": [\"example\", \"test\"]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:230
+msgid "Description"
+msgstr "説明"
+
+#: ../../toolchain/moon/module.md:232
+msgid "The `description` field is used to specify the description of the module."
+msgstr "`description` フィールドはモジュールの説明を指定するために使います。"
+
+#: ../../toolchain/moon/module.md:237
+msgid "description = \"This is a description of the module.\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:242
+msgid ""
+"{\n"
+"  \"description\": \"This is a description of the module.\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:250
+msgid "Publishing Files with `.moonignore`"
+msgstr "`.moonignore` による公開ファイルの制御"
+
+#: ../../toolchain/moon/module.md:252
+msgid ""
+"Use `.moonignore` files to exclude files and directories from archives "
+"created by `moon package` and `moon publish`. Each file uses gitignore-"
+"style patterns:"
+msgstr ""
+"`.moonignore` ファイルを使うと、`moon package` と `moon publish` "
+"が作成するアーカイブからファイルやディレクトリを除外できます。各ファイルでは gitignore 形式のパターンを使います："
+
+#: ../../toolchain/moon/module.md:255
+msgid ""
+"# Generated output\n"
+"build/\n"
+"*.log\n"
+"\n"
+"# Keep this fixture even though other log files are excluded\n"
+"!fixtures/expected.log\n"
+"\n"
+"# Keep selected root dotfiles that are excluded by default\n"
+"!/.gitignore\n"
+"!/.moonignore\n"
+"\n"
+"# Keep a hidden directory and everything below it\n"
+"!/.well-known/\n"
+"!/.well-known/**\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:272
+msgid ""
+"Publishing honors `.gitignore` rules by default. If a directory contains "
+"a `.moonignore`, its rules are used instead of that directory's "
+"`.gitignore` when creating the archive; the two files in the same "
+"directory are not combined. This filtering is based on the patterns, "
+"regardless of whether a file is tracked by Git."
+msgstr ""
+"公開時はデフォルトで `.gitignore` の規則に従います。ディレクトリに `.moonignore` "
+"がある場合、アーカイブの作成時にはそのディレクトリの `.gitignore` の代わりに `.moonignore` "
+"の規則が使われ、同じディレクトリにある 2 つのファイルは結合されません。ファイルが Git "
+"に追跡されているかどうかにかかわらず、フィルタリングはパターンに基づきます。"
+
+#: ../../toolchain/moon/module.md:278
+msgid ""
+"Git's repository-local `.git/info/exclude` and global ignore "
+"configuration are not consulted. Only the ignore files that belong to the"
+" project affect the archive, so publishing the same contents does not "
+"depend on a user's Git configuration."
+msgstr ""
+"Git のリポジトリローカルな `.git/info/exclude` とグローバルな ignore 設定は参照されません。プロジェクトに属する "
+"ignore ファイルだけがアーカイブに影響するため、同じ内容を公開した結果がユーザーの Git 設定に依存することはありません。"
+
+#: ../../toolchain/moon/module.md:283
+msgid ""
+"By default, files and directories whose names begin with `.` are excluded"
+" at every depth. The root-anchored examples above keep the two ignore "
+"files and `.well-known/` in the archive. Re-including a directory does "
+"not automatically re-include its contents, so the second `.well-known` "
+"rule is also needed."
+msgstr ""
+"デフォルトでは、名前が `.` で始まるファイルとディレクトリは、どの階層でも除外されます。上のルートに固定した例では、2 つの ignore "
+"ファイルと `.well-known/` をアーカイブに残しています。ディレクトリを再度含めても、その内容は自動的には再度含まれないため、2 "
+"つ目の `.well-known` 規則も必要です。"
+
+#: ../../toolchain/moon/module.md:288
+msgid ""
+"The package-root `_build/` directory is always excluded and cannot be re-"
+"included by an ignore rule or the deprecated `include` field. This fixed "
+"exclusion does not apply to nested directories with the same name. For "
+"example, `!/_build/` and `!/_build/**` cannot restore the package-root "
+"directory, while `examples/_build/data.bin` is not excluded merely "
+"because a nested directory is named `_build`."
+msgstr ""
+"パッケージルートの `_build/` ディレクトリは常に除外され、ignore 規則や非推奨の `include` "
+"フィールドで再度含めることはできません。この固定の除外は、同名のネストしたディレクトリには適用されません。たとえば、`!/_build/` と "
+"`!/_build/**` ではパッケージルートのディレクトリを復元できませんが、`examples/_build/data.bin` "
+"はネストしたディレクトリ名が `_build` であるという理由だけでは除外されません。"
+
+#: ../../toolchain/moon/module.md:295
+msgid ""
+"Rules apply to the directory containing the ignore file and all of its "
+"descendants. Rules inherited from parent directories remain in effect, "
+"while later matching rules in nested directories take precedence. This "
+"includes `!` rules that restore a previously excluded path whose parent "
+"directory is still visible. A leading `/` anchors a pattern to the "
+"directory containing the ignore file, while a trailing `/` matches "
+"directories."
+msgstr ""
+"規則は、ignore "
+"ファイルを含むディレクトリとそのすべての子孫に適用されます。親ディレクトリから継承した規則は引き続き有効ですが、ネストしたディレクトリで後から一致する規則が優先されます。これには、親ディレクトリがまだ表示されている、以前に除外したパスを復元する"
+" `!` 規則も含まれます。先頭の `/` はパターンを ignore ファイルを含むディレクトリに固定し、末尾の `/` "
+"はディレクトリにマッチします。"
+
+#: ../../toolchain/moon/module.md:302
+msgid ""
+"Use [`moon package --list`](commands.md#moon-package) to inspect the "
+"files that will be packaged."
+msgstr ""
+"パッケージに含まれるファイルを確認するには、[`moon package --list`](commands.md#moon-package) "
+"を使ってください。"
+
+#: ../../toolchain/moon/module.md:305
+msgid "Deprecated `include` and `exclude` fields"
+msgstr "非推奨の `include` および `exclude` フィールド"
+
+#: ../../toolchain/moon/module.md:308
+msgid ""
+"The `include` and `exclude` fields in `moon.mod` and `moon.mod.json` are "
+"deprecated. Use `.moonignore` for new and migrated modules."
+msgstr ""
+"`moon.mod` と `moon.mod.json` の `include` および `exclude` "
+"フィールドは非推奨です。新しいモジュールと移行済みのモジュールでは `.moonignore` を使ってください。"
+
+#: ../../toolchain/moon/module.md:312
+msgid ""
+"Existing manifests may still use either field. When `include` is present,"
+" it is an exhaustive allowlist: `exclude`, `.gitignore`, `.moonignore`, "
+"and the default dot-prefixed-path exclusion are not applied. Use `!` "
+"patterns within `include` for exceptions to the allowlist. The fixed "
+"exclusion of the package-root `_build/` directory still applies."
+msgstr ""
+"既存のマニフェストでは、どちらのフィールドも引き続き使用できます。`include` "
+"がある場合、それは網羅的な許可リストとなり、`exclude`、`.gitignore`、`.moonignore`、およびデフォルトのドットで始まるパスの除外は適用されません。許可リストに例外を設けるには、`include`"
+" 内で `!` パターンを使います。パッケージルートの `_build/` ディレクトリに対する固定の除外は引き続き適用されます。"
+
+#: ../../toolchain/moon/module.md:318
+msgid ""
+"Avoid combining these legacy fields with ignore files; migrate the "
+"complete publishing policy to `.moonignore` instead."
+msgstr "これらのレガシーフィールドと ignore ファイルの併用は避け、公開ポリシー全体を `.moonignore` に移行してください。"
+
+#: ../../toolchain/moon/module.md:321
+msgid "Preferred Target"
+msgstr "優先ターゲット"
+
+#: ../../toolchain/moon/module.md:323
+msgid ""
+"The `preferred_target` field allows `moon` and the language server to "
+"know which target should be used as the default target, avoiding the "
+"necessity to write `--target` when developing a project targeting other "
+"backends than Wasm GC."
+msgstr ""
+"`preferred_target` フィールドは、`moon` "
+"と言語サーバーにデフォルトターゲットとして使うべきターゲットを知らせます。これにより、Wasm GC "
+"以外のバックエンドを対象とするプロジェクトを開発するときに `--target` を書く必要を避けられます。"
+
+#: ../../toolchain/moon/module.md:327
+msgid ""
+"Set `preferred_target` on each module. Workspace-level `preferred-target`"
+" is deprecated; `moon run` uses the selected module's own preferred "
+"target."
+msgstr ""
+"各モジュールに `preferred_target` を設定してください。ワークスペースレベルの `preferred-target` "
+"は非推奨です。`moon run` は選択したモジュール自身の優先ターゲットを使います。"
+
+#: ../../toolchain/moon/module.md:333
+msgid "preferred_target = \"js\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:338
+msgid ""
+"{\n"
+"  \"preferred-target\": \"js\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:348
+msgid "Supported Targets"
+msgstr "サポート対象ターゲット"
+
+#: ../../toolchain/moon/module.md:350
+msgid ""
+"The `supported_targets` field declares which backends this module is "
+"intended to support. Unlike `preferred_target`, it does not choose a "
+"default target for commands. Use it to record the module's compatibility "
+"surface in metadata."
+msgstr ""
+"`supported_targets` "
+"フィールドは、このモジュールがサポートする想定のバックエンドを宣言します。`preferred_target` "
+"とは異なり、コマンドのデフォルトターゲットは選択しません。モジュールの互換バックエンド範囲をメタデータに記録するために使います。"
+
+#: ../../toolchain/moon/module.md:354
+msgid "`supported_targets` uses a compact target-set syntax:"
+msgstr "`supported_targets` はコンパクトなターゲット集合構文を使います："
+
+#: ../../toolchain/moon/module.md:356
+msgid "`js` for a single backend"
+msgstr "`js` は単一のバックエンドを表します"
+
+#: ../../toolchain/moon/module.md:357
+msgid "`+js+wasm-gc` for an explicit set of backends"
+msgstr "`+js+wasm-gc` はバックエンドの明示的な集合を表します"
+
+#: ../../toolchain/moon/module.md:358
+msgid "`+all-js` for all backends except `js`"
+msgstr "`+all-js` は `js` 以外のすべてのバックエンドを表します"
+
+#: ../../toolchain/moon/module.md:360
+msgid "For example:"
+msgstr "例えば："
+
+#: ../../toolchain/moon/module.md:364
+msgid "supported_targets = \"+js+wasm-gc\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:369
+msgid ""
+"{\n"
+"  \"supported-targets\": \"+js+wasm-gc\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:377
+msgid "Legacy array syntax is still accepted for compatibility:"
+msgstr "互換性のために、従来の配列構文も引き続き受け付けられます："
+
+#: ../../toolchain/moon/module.md:381
+msgid "supported_targets = [\"js\", \"wasm-gc\"]\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:386
+msgid ""
+"{\n"
+"  \"supported-targets\": [\"js\", \"wasm-gc\"]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:394
+msgid "`preferred_target` and `supported_targets` are often used together:"
+msgstr "`preferred_target` と `supported_targets` はよく一緒に使われます："
+
+#: ../../toolchain/moon/module.md:396
+msgid "`preferred_target` says which backend `moon` should use by default"
+msgstr "`preferred_target` は、`moon` がデフォルトで使うべきバックエンドを示します"
+
+#: ../../toolchain/moon/module.md:397
+msgid "`supported_targets` says which backends the module claims to support"
+msgstr "`supported_targets` は、モジュールがサポートすると宣言するバックエンドを示します"
+
+#: ../../toolchain/moon/module.md:399
+msgid ""
+"When a package also defines `supported_targets`, the effective backend "
+"set is the intersection of the module-level and package-level "
+"declarations."
+msgstr ""
+"パッケージも `supported_targets` "
+"を定義している場合、実際に有効なバックエンド集合はモジュールレベルとパッケージレベルの宣言の共通部分になります。"
+
+#: ../../toolchain/moon/module.md:402
+msgid ""
+"For per-file conditional compilation inside a package, use "
+"[`targets`](package.md#conditional-compilation) in `moon.pkg` / "
+"`moon.pkg.json` instead."
+msgstr ""
+"パッケージ内でファイルごとの条件付きコンパイルを行う場合は、代わりに `moon.pkg` / `moon.pkg.json` の "
+"[`targets`](package.md#conditional-compilation) を使ってください。"
+
+#: ../../toolchain/moon/module.md:405
+msgid "Source directory"
+msgstr "ソースディレクトリ"
+
+#: ../../toolchain/moon/module.md:407
+msgid "The `source` field is used to specify the source directory of the module."
+msgstr "`source` フィールドはモジュールのソースディレクトリを指定するために使います。"
+
+#: ../../toolchain/moon/module.md:409
+msgid ""
+"It must be a relative path to a subdirectory of the directory containing "
+"the module file."
+msgstr ""
+
+#: ../../toolchain/moon/module.md:412
+msgid ""
+"When creating a module using the `moon new` command, a `src` directory "
+"will be automatically generated, and the default value of the `source` "
+"field will be `src`."
+msgstr ""
+"`moon new` コマンドでモジュールを作成すると、`src` ディレクトリが自動的に生成され、`source` フィールドのデフォルト値は "
+"`src` になります。"
+
+#: ../../toolchain/moon/module.md:416
+msgid "source = \"src\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:421
+msgid ""
+"{\n"
+"  \"source\": \"src\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:429
+msgid ""
+"When the `source` field does not exist, or its value is an empty string "
+"`\"\"`, it is equivalent to setting `source = \".\"`. This means that the"
+" source directory is the same as the directory containing the module "
+"file."
+msgstr ""
+"`source` フィールドが存在しない場合、または値が空文字列 `\"\"` の場合、`source = \".\"` "
+"を設定した場合と同等です。これは、ソースディレクトリがモジュールファイルのあるディレクトリと同じであることを意味します。"
+
+#: ../../toolchain/moon/module.md:435
+msgid "source = \"\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:438
+msgid "source = \".\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:443
+msgid ""
+"{\n"
+"  \"source\": \"\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:448
+msgid ""
+"{\n"
+"  \"source\": \".\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:454
+msgid "`null` is equivalent to the cases above:"
+msgstr "`null` は上記の場合と同等です："
+
+#: ../../toolchain/moon/module.md:456
+msgid ""
+"{\n"
+"  \"source\": null\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:463
+msgid "Warning List"
+msgstr "警告リスト"
+
+#: ../../toolchain/moon/module.md:465
+msgid "This is used to disable specific preset compiler warning numbers."
+msgstr "これは、特定のプリセットコンパイラ警告番号を無効化するために使います。"
+
+#: ../../toolchain/moon/module.md:467
+msgid ""
+"For example, in the following configuration, `-2` disables the warning "
+"number 2 (Unused variable)."
+msgstr "例えば、次の設定では `-2` によって警告番号 2（未使用の変数）を無効化します。"
+
+#: ../../toolchain/moon/module.md:471
+msgid "warnings = \"-2\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:476
+msgid ""
+"{\n"
+"  \"warn-list\": \"-2\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:484
+msgid ""
+"If multiple warnings need to be disabled, they can be directly connected "
+"and combined."
+msgstr "複数の警告を無効化する必要がある場合は、それらをそのまま連結して組み合わせることができます。"
+
+#: ../../toolchain/moon/module.md:489
+msgid "warnings = \"-2-4\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:494
+msgid ""
+"{\n"
+"  \"warn-list\": \"-2-4\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:502
+msgid ""
+"If it is necessary to activate certain warnings that were originally "
+"prohibited, use the plus sign."
+msgstr "もともと禁止されていた特定の警告を有効化する必要がある場合は、プラス記号を使います。"
+
+#: ../../toolchain/moon/module.md:506
+msgid "warnings = \"+31\"\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:511
+msgid ""
+"{\n"
+"  \"warn-list\": \"+31\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:519
+msgid ""
+"You can use `moonc check -warn-help` to see the list of preset compiler "
+"warning numbers. In the output below, `mnemonic` is the symbolic warning "
+"name used in warning lists, while `id` is the numeric form of the same "
+"warning."
+msgstr ""
+"`moonc check -warn-help` を使うと、プリセットコンパイラ警告番号の一覧を確認できます。以下の出力では、`mnemonic`"
+" は警告リストで使われる記号名で、`id` は同じ警告の数値形式です。"
+
+#: ../../toolchain/moon/module.md:530
+msgid ""
+"$ moonc check -warn-help\n"
+"Available warnings:\n"
+"mnemonic                   description"
+"                                                     id state\n"
+"unused_value               Unused variable or function."
+"                                     1 warn\n"
+"unused_value               Unused variable."
+"                                                 2 warn\n"
+"unused_type_declaration    Unused type declaration."
+"                                         3 warn\n"
+"missing_priv               Unused abstract type."
+"                                            4 warn\n"
+"unused_type_variable       Unused type variable."
+"                                            5 warn\n"
+"unused_constructor         Unused constructor."
+"                                              6 warn\n"
+"unused_field               Unused field or constructor argument."
+"                            7 warn\n"
+"redundant_modifier         Redundant modifier."
+"                                              8 warn\n"
+"struct_never_constructed   Struct never constructed."
+"                                        9 warn\n"
+"unused_pattern             Unused pattern."
+"                                                 10 warn\n"
+"partial_match              Partial pattern matching."
+"                                       11 error\n"
+"unreachable_code           Unreachable code."
+"                                               12 warn\n"
+"unresolved_type_variable   Unresolved type variable."
+"                                       13 warn\n"
+"alert or alert_<category>  All alerts or alerts with specific category."
+"                    14 warn\n"
+"unused_mut                 Unused mutability."
+"                                              15 error\n"
+"parser_inconsistency       Parser inconsistency check."
+"                                     16 warn\n"
+"ambiguous_loop_argument    Ambiguous usage of loop argument."
+"                               17 warn\n"
+"useless_loop               Useless loop expression."
+"                                        18 warn\n"
+"deprecated                 Deprecated API usage."
+"                                           20 warn\n"
+"missing_pattern_arguments  Some arguments of constructor are omitted in "
+"pattern.           21 warn\n"
+"ambiguous_block            Ambiguous block."
+"                                                22 warn\n"
+"unused_try                 Useless try expression."
+"                                         23 warn\n"
+"unused_error_type          Useless error type."
+"                                             24 warn\n"
+"test_unqualified_package   Using implicitly imported API in test."
+"                          25 warn\n"
+"unused_catch_all           Useless catch all."
+"                                              26 warn\n"
+"deprecated_syntax          Deprecated syntax."
+"                                              27 warn\n"
+"todo                       Todo"
+"                                                            28 warn\n"
+"unused_package             Unused package."
+"                                                 29 warn\n"
+"missing_package_alias      Empty package alias."
+"                                            30 warn\n"
+"unused_optional_argument   Optional argument never supplied."
+"                               31 off\n"
+"unused_default_value       Default value of optional argument never used."
+"                  32 off\n"
+"text_segment_excceed       Text segment exceed the line or column limits."
+"                  33 warn\n"
+"implicit_use_builtin       Implicit use of definitions from "
+"`moonbitlang/core/builtin`.    34 warn\n"
+"reserved_keyword           Reserved keyword."
+"                                               35 warn\n"
+"block_label_shadowing      Block label shadows another label."
+"                              36 warn\n"
+"unused_block_label         Unused block label."
+"                                             37 warn\n"
+"missing_invariant          For-loop is missing an invariant."
+"                               38 off\n"
+"missing_reasoning          For-loop is missing a proof_reasoning."
+"                          39 off\n"
+"multiline_string_escape    Deprecated escape sequence in multiline "
+"string.                 40 error\n"
+"missing_rest_mark          Missing `..` in map pattern."
+"                                    41 warn\n"
+"invalid_attribute          Invalid attribute."
+"                                              42 warn\n"
+"unused_attribute           Unused attribute."
+"                                               43 warn\n"
+"invalid_inline_wasm        Invalid inline-wasm."
+"                                            44 error\n"
+"unused_rest_mark           Useless `..` in pattern"
+"                                         46 warn\n"
+"missing_definition         Unused pub definition because it does not "
+"exist in mbti file.   49 warn\n"
+"method_shadowing           Local method shadows upstream method"
+"                            50 warn\n"
+"ambiguous_precedence       Ambiguous operator precedence"
+"                                   51 warn\n"
+"unused_loop_variable       Loop variable not updated in loop"
+"                               52 warn\n"
+"unused_trait_bound         Unused trait bound"
+"                                              53 warn\n"
+"ambiguous_range_direction  Ambiguous looping direction for range e1..=e2"
+"                   54 off\n"
+"unannotated_ffi            Unannotated FFI param type"
+"                                      55 error\n"
+"missing_pattern_field      Missing field in struct pattern"
+"                                 56 warn\n"
+"missing_pattern_payload    Constructor pattern expect payload"
+"                              57 warn\n"
+"unaligned_byte_access      Unaligned byte access in bits pattern"
+"                           59 warn\n"
+"unused_struct_update       Unused struct update"
+"                                            60 warn\n"
+"duplicate_test             Duplicate test name"
+"                                             61 warn\n"
+"invalid_cascade            Calling method with non-unit return type via "
+"`..`               62 warn\n"
+"syntax_lint                Syntax lint warning"
+"                                             63 warn\n"
+"unannotated_toplevel_array Unannotated toplevel array"
+"                                      64 warn\n"
+"prefer_readonly_array      Suggest ReadOnlyArray for read-only array "
+"literal               65 off\n"
+"prefer_fixed_array         Suggest FixedArray for mutated array literal"
+"                    66 off\n"
+"unused_async               Useless `async` annotation"
+"                                      67 warn\n"
+"declaration_unimplemented  Declaration is unimplemented"
+"                                    68 warn\n"
+"declaration_implemented    Declaration is already implemented"
+"                              69 off\n"
+"deprecated_for_in_method   using `iterator()` method for `for .. in` "
+"loop.                 70 off\n"
+"core_package_not_imported  Packages in `moonbitlang/core` need to be "
+"explicitly imported.  71 warn\n"
+"unqualified_local_using    unqualified local using"
+"                                         72 off\n"
+"unnecessary_annotation     unnecessary type annotation"
+"                                     73 off\n"
+"missing_doc                Missing documentation for public definition"
+"                     74 off\n"
+"unnecessary_view_op        Unnecessary `[:]` view operator"
+"                                 75 off\n"
+"result_error_return        Using `Result[T, E]` where `E` is an error "
+"type.                78 warn\n"
+"implicit_impl_as_method    `impl` implicitly promoted as method"
+"                            79 warn\n"
+"regex_match_missing_before Missing `before` binding in `regex match`."
+"                      80 warn\n"
+"regex_match_missing_after  Missing `after` binding in `regex match`."
+"                       81 warn\n"
+"ambiguous_braces           Ambiguous `{}` braces."
+"                                          82 warn\n"
+"type_param_method          Calling method of type parameter in a "
+"deprecated way.           83 warn\n"
+"unqualified_record         Struct literal in a `let` binding without a "
+"type prefix.        84 off\n"
+"unlabelled_break_in_labelled_loop Unlabelled `break` directly inside a "
+"labelled loop.             85 warn\n"
+"unlabelled_continue_in_labelled_loop Unlabelled `continue` directly "
+"inside a labelled loop.          86 warn\n"
+"guard_inexhaustive         `guard` condition is not exhaustive and may "
+"panic.              87 warn\n"
+"guard_redundant_bang       Redundant `!` on an exhaustive `guard`."
+"                         88 warn\n"
+"guard_redundant_else       Redundant `else` on an exhaustive `guard`."
+"                      89 warn\n"
+"unused_lexcase             `lexmatch`/`lexscan` branch that can never be "
+"selected because other branches takes precedence or its pattern matches "
+"nothing.  90 warn\n"
+"unused_errdefer            unused `errdefer` statement"
+"                                     91 warn\n"
+"fragile_catch_all          fragile `catch` handler that can be converted "
+"to `defer` or `errdefer`  92 warn\n"
+"unknown_constr_pat_on_exhaustive_type using `TypeName::..` pattern on a "
+"type not marked with `#non_exhaustive`  93 warn\n"
+"unknown_intrinsic          `#intrinsic` attribute names an unknown "
+"intrinsic.              94 warn\n"
+"nan_pattern                Pattern on a NaN constant, which never "
+"matches.                 95 warn\n"
+"unfenced_import            Deprecated import declarations outside "
+"frontmatter.             96 warn\n"
+"regex_runtime_fallback     Regex match over the compile limits, which "
+"runs on the runtime engine.  97 off\n"
+"cancellable_defer          Fragile cancellable async code inside "
+"`defer`/`errdefer`        98 warn\n"
+"all                        all warnings\n"
+"state: warn = enabled, error = promoted to error, off = disabled\n"
+"note: default alert exceptions: alert_unsafe=off\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:620
+msgid "Rule"
+msgstr "rule"
+
+#: ../../toolchain/moon/module.md:622
+msgid ""
+"The module-level `rule` entry declares a reusable pre-build command that "
+"is visible to every `moon.pkg` in the module. A module-level rule does "
+"not run by itself; to use it before building a package, add a package-"
+"level `dev_build` entry in `moon.pkg`. See the \"Rule and dev_build\" "
+"section in [Package Configuration](/toolchain/moon/package.md#rule-and-"
+"dev_build) for the package-level configuration."
+msgstr ""
+"モジュールレベルの `rule` エントリは、モジュール内のすべての `moon.pkg` "
+"から参照できる再利用可能な事前ビルドコマンドを宣言します。モジュールレベルの `rule` "
+"はそれ自体では実行されません。パッケージをビルドする前に使用するには、`moon.pkg` にパッケージレベルの `dev_build` "
+"エントリを追加します。パッケージレベルの設定については、[パッケージ設定](/toolchain/moon/package.md#rule-"
+"and-dev_build) の「`rule` と `dev_build`」セクションを参照してください。"
+
+#: ../../toolchain/moon/module.md:629
+msgid ""
+"Use `rule(name: \"...\", command: \"...\")`, where `name` identifies the "
+"rule and `command` is a shell command string. The command can refer to "
+"`$input` and `$output`, which are supplied by the package-level "
+"`dev_build` entry that uses the rule. A module can declare multiple "
+"module-level `rule` entries."
+msgstr ""
+"`rule(name: \"...\", command: \"...\")` を使用します。ここで `name` はその `rule` "
+"を識別し、`command` はシェルコマンド文字列です。このコマンドは `$input` と `$output` を参照できます。これらは、その"
+" `rule` を使用するパッケージレベルの `dev_build` エントリから提供されます。モジュールは複数のモジュールレベル `rule` "
+"エントリを宣言できます。"
+
+#: ../../toolchain/moon/module.md:636
+msgid "rule(name: \"tool\", command: \"tool $input -o $output\")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:641
+msgid "This feature is not supported in `moon.mod.json`."
+msgstr "この機能は `moon.mod.json` ではサポートされていません。"
+
+#: ../../toolchain/moon/module.md:645
+msgid "Scripts"
+msgstr "スクリプト"
+
+#: ../../toolchain/moon/module.md:647
+msgid ""
+"The `scripts` field is used to define custom scripts associated with the "
+"module."
+msgstr "`scripts` フィールドは、モジュールに関連付けるカスタムスクリプトを定義するために使います。"
+
+#: ../../toolchain/moon/module.md:649
+msgid "postadd script"
+msgstr "postadd スクリプト"
+
+#: ../../toolchain/moon/module.md:651
+msgid ""
+"The `postadd` script runs automatically after the module has been added. "
+"When executed, the script's current working directory (cwd) is set to the"
+" directory containing the module configuration file."
+msgstr ""
+"`postadd` スクリプトは、モジュールが追加された後に自動的に実行されます。実行時、スクリプトの現在の作業ディレクトリ（cwd）は "
+"モジュール設定ファイルがあるディレクトリに設定されます。"
+
+#: ../../toolchain/moon/module.md:657
+msgid ""
+"options(\n"
+"  scripts: {\n"
+"    \"postadd\": \"python3 build.py\",\n"
+"  },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:666
+msgid ""
+"{\n"
+"  \"scripts\": {\n"
+"    \"postadd\": \"python3 build.py\"\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:677
+msgid "\\[Experimental\\] Pre-build config script"
+msgstr "\\[実験的\\] 事前ビルド設定スクリプト"
+
+#: ../../toolchain/moon/module.md:690
+msgid ""
+"This feature is extremely experimental, and its API may change at any "
+"time."
+msgstr "この機能は非常に実験的であり、API は随時変更される可能性があります。"
+
+#: ../../toolchain/moon/module.md:685
+msgid ""
+"Using this feature may execute arbitrary code in your computer. Please "
+"use with caution and only with trusted dependencies."
+msgstr "この機能を使うと、コンピュータ上で任意のコードが実行される可能性があります。注意して使用し、信頼できる依存関係に対してのみ使ってください。"
+
+#: ../../toolchain/moon/module.md:689
+msgid ""
+"The pre-build config script is added in order to aid native target "
+"programming. To use such a script, add it to your module configuration:"
+msgstr ""
+"事前ビルド設定スクリプトは、native "
+"ターゲット向けプログラミングを支援するために追加されました。使用するには、モジュール設定にスクリプトを追加します："
+
+#: ../../toolchain/moon/module.md:695
+msgid ""
+"options(\n"
+"  \"--moonbit-unstable-prebuild\": \"<path/to/build-script>\",\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:702
+msgid ""
+"{\n"
+"  \"--moonbit-unstable-prebuild\": \"<path/to/build-script>\"\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:719
+msgid ""
+"The path is a relative path from the root of the project. The script may "
+"either be a JavaScript script (with extension `.js`, `.cjs`, `.mjs`) "
+"executed with `node`, a Python script (with extension `.py`) executed "
+"with `python3` or `python`, or a MoonBit script (`.mbtx`) compiled to "
+"Wasm and executed with `moonrun`. Its working directory is the module "
+"root."
+msgstr "パスはプロジェクトのルートからの相対パスです。`node` で実行する JavaScript（`.js`、`.cjs`、`.mjs`）、`python3` または `python` で実行する Python（`.py`）、Wasm にコンパイルして `moonrun` で実行する MoonBit（`.mbtx`）に対応しています。作業ディレクトリはモジュールのルートです。"
+
+#: ../../toolchain/moon/module.md:715
+msgid "Input"
+msgstr "入力"
+
+#: ../../toolchain/moon/module.md:727
+msgid ""
+"Read build information from environment variables, not standard input. "
+"The legacy JSON input on stdin is retained only for compatibility with "
+"older scripts."
+msgstr "ビルド情報は標準入力ではなく環境変数から読み取ってください。stdin の従来の JSON 入力は、古いスクリプトとの互換性のためだけに残されています。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "Variable"
+msgstr "変数"
+
+#: ../../toolchain/moon/module.md:710
+msgid "Meaning"
+msgstr "意味"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_MOD`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Path to the module's configuration file (`moon.mod` or `moon.mod.json`)."
+msgstr "モジュール設定ファイル（`moon.mod` または `moon.mod.json`）のパス。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_BUILD_DIR`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Writable output directory for this module's build script."
+msgstr "このモジュールのビルドスクリプトが書き込める出力ディレクトリ。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_HOST_OS`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Host operating system, such as `linux`, `macos`, or `windows`."
+msgstr "ホストの OS（`linux`、`macos`、`windows` など）。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_HOST_ARCH`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Host architecture, such as `x86_64` or `aarch64`."
+msgstr "ホストのアーキテクチャ（`x86_64`、`aarch64` など）。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_BACKEND`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Selected backend, such as `native`, `llvm`, `wasm`, `wasm-gc`, or `js`."
+msgstr "選択されたバックエンド（`native`、`llvm`、`wasm`、`wasm-gc`、`js` など）。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_PROFILE`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Build profile: `debug` or `release`."
+msgstr "ビルドプロファイル：`debug` または `release`。"
+
+#: ../../toolchain/moon/module.md:710
+msgid "`MOON_JOBS`"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:710
+msgid "Number of parallel jobs available to the build, as a decimal string."
+msgstr "ビルドで使用できる並列ジョブ数を表す十進数の文字列。"
+
+#: ../../toolchain/moon/module.md:740
+msgid ""
+"`MOON_HOST_OS` and `MOON_HOST_ARCH` describe the machine running the "
+"script, not a cross-compilation target. Write generated files under "
+"`MOON_BUILD_DIR` instead of modifying dependency source directories. Use "
+"the supplied path rather than relying on a particular build-directory "
+"layout."
+msgstr "`MOON_HOST_OS` と `MOON_HOST_ARCH` はクロスコンパイルのターゲットではなく、スクリプトを実行するマシンを表します。依存モジュールのソースディレクトリを変更せず、生成ファイルは `MOON_BUILD_DIR` に書き込んでください。特定のビルドディレクトリ構成に依存せず、提供されたパスを使用してください。"
+
+#: ../../toolchain/moon/module.md:745
+msgid ""
+"For example, a Python build script can expose its output directory as a "
+"build variable without reading stdin:"
+msgstr "たとえば、Python のビルドスクリプトでは、stdin を読み取らずに出力ディレクトリをビルド変数として提供できます："
+
+#: ../../toolchain/moon/module.md:748
+msgid ""
+"import json\n"
+"import os\n"
+"\n"
+"print(json.dumps({\"vars\": {\"OUT_DIR\": "
+"os.environ[\"MOON_BUILD_DIR\"]}}))\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:740
+msgid "Output"
+msgstr "出力"
+
+#: ../../toolchain/moon/module.md:757
+msgid ""
+"The script is expected to print a JSON string in its standard output "
+"stream (stdout) with the structure of `BuildScriptOutput`. Reserve stdout"
+" for this JSON object and write diagnostic messages to stderr. Exit with "
+"a nonzero status if the script fails."
+msgstr "スクリプトは `BuildScriptOutput` の構造を持つ JSON 文字列を標準出力（stdout）に出力します。stdout はこの JSON オブジェクト専用とし、診断メッセージは stderr に書き込んでください。失敗した場合はゼロ以外の終了ステータスで終了してください。"
+
+#: ../../toolchain/moon/module.md:763
+msgid ""
+"Unlike `dev_build`, pre-build configuration scripts can also run for "
+"dependencies. Only build dependencies whose scripts you trust."
+msgstr "`dev_build` と異なり、事前ビルド設定スクリプトは依存モジュールでも実行されることがあります。スクリプトを信頼できる依存モジュールだけをビルドしてください。"
+
+#: ../../toolchain/moon/module.md:767
+msgid "The output has the following fields:"
+msgstr "出力には以下のフィールドがあります："
+
+#: ../../toolchain/moon/module.md:745
+msgid ""
+"interface BuildScriptOutput {\n"
+"  /** Build variables */\n"
+"  vars?: Record<string, string>\n"
+"  /** Configurations to linking */\n"
+"  link_configs?: LinkConfig[]\n"
+"}\n"
+"\n"
+"interface LinkConfig {\n"
+"  /** The name of the package to configure */\n"
+"  package: string\n"
+"\n"
+"  /** Link flags that needs to be propagated to dependents\n"
+"   *\n"
+"   * Reference: `cargo::rustc-link-arg=FLAG` */\n"
+"  link_flags?: string\n"
+"\n"
+"  /** Libraries that need linking, propagated to dependents\n"
+"   *\n"
+"   * Reference: `cargo::rustc-link-lib=LIB` */\n"
+"  link_libs?: string[]\n"
+"\n"
+"  /** Paths that needs to be searched during linking, propagated to "
+"dependents\n"
+"   *\n"
+"   * Reference: `cargo::rustc-link-search=[KIND=]PATH` */\n"
+"  link_search_paths?: string[]\n"
+"}\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:774
+msgid "Build variables"
+msgstr "ビルド変数"
+
+#: ../../toolchain/moon/module.md:776
+msgid ""
+"You may use the variables emitted in the `vars` fields in the native "
+"linking arguments in `moon.pkg` as `${build.<var_name>}`."
+msgstr ""
+"`vars` フィールドに出力された変数は、`moon.pkg` の native リンク引数内で `${build.<var_name>}` "
+"として使用できます。"
+
+#: ../../toolchain/moon/module.md:779
+msgid "For example, if your build script outputs:"
+msgstr "例えば、ビルドスクリプトが次を出力する場合："
+
+#: ../../toolchain/moon/module.md:781
+msgid "{ \"vars\": { \"CC\": \"gcc\" } }\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:785
+msgid "and your `moon.pkg` is structured like:"
+msgstr "そして `moon.pkg` が次のような構成の場合："
+
+#: ../../toolchain/moon/module.md:787
+msgid "moon.pkg"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:787
+msgid ""
+"options(\n"
+"  link: { \"native\": { \"cc\": \"${build.CC}\" } },\n"
+")\n"
+msgstr ""
+
+#: ../../toolchain/moon/module.md:792
+msgid "It will be transformed into"
+msgstr "次のように変換されます"
+
+#: ../../toolchain/moon/module.md:794
+msgid ""
+"{\n"
+"  \"link\": {\n"
+"    \"native\": {\n"
+"      \"cc\": \"gcc\"\n"
+"    }\n"
+"  }\n"
+"}\n"
+msgstr ""

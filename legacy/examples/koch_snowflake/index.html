@@ -1,0 +1,77 @@
+<!--
+Copyright 2024 International Digital Economy Academy
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html lang="en">
+
+<head>
+  <title>Koch Snowflake</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <canvas id="canvas" height="280" width="280"></canvas>
+</body>
+<script>
+  const spectest = {
+    canvas: {
+      clear_rect: (ctx, x, y, w, h) => ctx.clearRect(x, y, w, h),
+      move_to: (ctx, x, y) => ctx.moveTo(x, y),
+      line_to: (ctx, x, y) => ctx.lineTo(x, y),
+      stroke: (ctx) => ctx.stroke(),
+      begin_path: (ctx) => ctx.beginPath(),
+      cos: (x) => Math.cos(x),
+      sqrt: (x) => Math.sqrt(x),
+      get_pi: () => Math.PI,
+    },
+    spectest: {
+      print_i32: (x) => console.log(String(x)),
+      print_f64: (x) => console.log(String(x)),
+      print_char: (x) => console.log(String.fromCharCode(x)),
+    },
+  };
+
+  var canvas = document.getElementById("canvas"); 
+
+  WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), spectest).then(
+    (obj) => {
+      const draw = obj.instance.exports["draw"];
+      var ctx = canvas.getContext("2d");
+      ctx.strikeStyle="#000";
+      draw(ctx, 1);
+      let c = 1;
+      const renderLoop = () => {
+        draw(ctx, c);
+        c = c + 1;
+        if (c > 6) {
+          c = 1;
+        }
+      }
+      setInterval(renderLoop, 500);
+    }
+  )
+</script>
+<style>
+  body {
+    text-align: center;
+  }
+    
+  #canvas {
+    background-color: #fff;
+  }
+</style>
+
+</html>

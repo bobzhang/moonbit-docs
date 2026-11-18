@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4124.md:1
+msgid "E4124"
+msgstr ""
+
+#: ../../language/error_codes/E4124.md:3
+msgid "The constructor is ambiguous: it may come from multiple types."
+msgstr ""
+
+#: ../../language/error_codes/E4124.md:5
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4124.md:7
+msgid ""
+"pub enum A {\n"
+"  A(Int32)\n"
+"  B(Bool)\n"
+"  C(Double)\n"
+"}\n"
+"\n"
+"pub enum B {\n"
+"  A(Double)\n"
+"  B(Int32)\n"
+"  C(Bool)\n"
+"}\n"
+"\n"
+"pub fn use_a() -> Unit {\n"
+"  ignore(A(1))\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4124.md:11
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4124.md:13
+msgid "Add `T::` before the constructor:"
+msgstr ""
+
+#: ../../language/error_codes/E4124.md:15
+msgid ""
+"pub enum A {\n"
+"  A(Int32)\n"
+"  B(Bool)\n"
+"  C(Double)\n"
+"}\n"
+"\n"
+"pub enum B {\n"
+"  A(Double)\n"
+"  B(Int32)\n"
+"  C(Bool)\n"
+"}\n"
+"\n"
+"pub fn use_all() -> (A, A, A, B, B, B) {\n"
+"  (\n"
+"    A::A(1),\n"
+"    A::B(true),\n"
+"    A::C(1.0),\n"
+"    B::A(1.0),\n"
+"    B::B(1),\n"
+"    B::C(true),\n"
+"  )\n"
+"}\n"
+msgstr ""

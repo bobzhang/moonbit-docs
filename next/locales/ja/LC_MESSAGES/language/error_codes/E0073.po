@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 11:21+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0073.md:1
+msgid "E0073"
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:3
+msgid "Warning name: `unnecessary_annotation`"
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:5
+msgid "Unnecessary type or package annotation."
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:7
+msgid ""
+"MoonBit reports this warning when a type or package qualifier repeats "
+"information that is already known from context. Removing the qualifier "
+"keeps the code shorter without changing the meaning."
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:11
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:13
+msgid ""
+"///|\n"
+"priv struct Point {\n"
+"  x : Int32\n"
+"}\n"
+"\n"
+"///|\n"
+"fn make_point() -> Point {\n"
+"  Point::{ x: 1 }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(make_point().x, content=\"1\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:17
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:19
+msgid "Remove the redundant annotation."
+msgstr ""
+
+#: ../../language/error_codes/E0073.md:21
+msgid ""
+"///|\n"
+"priv struct Point {\n"
+"  x : Int32\n"
+"}\n"
+"\n"
+"///|\n"
+"fn make_point() -> Point {\n"
+"  { x: 1 }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(make_point().x, content=\"1\")\n"
+"}\n"
+msgstr ""

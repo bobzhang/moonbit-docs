@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4064.md:1
+msgid "E4064"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:3
+msgid "Invalid escape sequence in char/string literal."
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:5
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:7
+msgid ""
+"Using an escape sequence with an invalid Unicode code point results in "
+"this error:"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:10
+msgid ""
+"///|\n"
+"test {\n"
+"  println('\\uD800')\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:14
+msgid "Another case is using an unsupported escape sequence in a `Byte` literal:"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:16
+msgid ""
+"///|\n"
+"test {\n"
+"  let _ : Byte = b'\\uD000'\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:20
+msgid "Only `\\x` and `\\o` escape sequences are supported in `Byte` literal."
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:22
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:24
+msgid ""
+"Use a valid Unicode code point for `Char` and `String` literals. For "
+"`Byte` literals, use byte escape sequences such as `\\x` or `\\o`:"
+msgstr ""
+
+#: ../../language/error_codes/E4064.md:27
+msgid ""
+"///|\n"
+"test {\n"
+"  let char : Char = '\\u{1F600}'\n"
+"  let byte : Byte = b'\\x41'\n"
+"  ignore(char)\n"
+"  inspect(byte.to_int(), content=\"65\")\n"
+"}\n"
+msgstr ""

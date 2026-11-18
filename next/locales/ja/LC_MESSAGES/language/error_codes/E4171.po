@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4171.md:1
+msgid "E4171"
+msgstr ""
+
+#: ../../language/error_codes/E4171.md:3
+msgid "Compiler diagnostic name: `last_regex_case_must_be_catchall`."
+msgstr ""
+
+#: ../../language/error_codes/E4171.md:5
+msgid ""
+"The catch-all case in a `lexmatch` or `lexscan` expression must be the "
+"last case."
+msgstr "`lexmatch` または `lexscan` 式のキャッチオールケースは、最後のケースでなければなりません。"
+
+#: ../../language/error_codes/E4171.md:8
+msgid ""
+"Once a catch-all branch is reached, later regex cases can never be "
+"selected."
+msgstr "キャッチオール分岐に到達すると、それ以降の正規表現ケースは選択されません。"
+
+#: ../../language/error_codes/E4171.md:10
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E4171.md:12
+msgid ""
+"///|\n"
+"pub fn match_text(text : String) -> Unit {\n"
+"  lexmatch text with longest {\n"
+"    _ => ()\n"
+"    re\"^abc$\" => ()\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4171.md:16
+msgid "The `_` branch appears before another regex case."
+msgstr "`_` 分岐が別の正規表現ケースより前にあります。"
+
+#: ../../language/error_codes/E4171.md:18
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4171.md:20
+msgid ""
+"Move the catch-all branch to the end. If the expression has no catch-all "
+"case at all, see [E4224](E4224.md)."
+msgstr "キャッチオール分岐を最後に移動してください。式にキャッチオールケース自体がない場合は、[E4224](E4224.md) を参照してください。"
+
+#: ../../language/error_codes/E4171.md:23
+msgid ""
+"///|\n"
+"pub fn match_text(text : String) -> Unit {\n"
+"  lexmatch text with longest {\n"
+"    re\"^abc$\" => ()\n"
+"    _ => ()\n"
+"  }\n"
+"}\n"
+msgstr ""

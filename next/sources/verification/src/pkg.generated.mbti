@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/verification-doc"
+
+// Values
+pub fn assumed_nonnegative(Int32) -> Int32
+
+pub fn binary_search(FixedArray[Int32], Int32) -> Int32?
+
+pub fn cached_height(Tree) -> Int32
+
+pub fn countdown(Int32) -> Int32
+
+pub fn deposit(Bridge, Int32) -> Bridge
+
+pub fn leaf(Int32) -> Tree
+
+pub fn search_window(FixedArray[Int32], Int32) -> Int32?
+
+// Errors
+
+// Types and methods
+pub struct Bridge {
+  reserve : Int32
+  used_nonces : Int32
+}
+
+pub type ProofSet[T]
+
+pub enum Tree {
+  Empty
+  Node(Tree, Int32, Tree, Int32)
+}
+
+// Type aliases
+
+// Traits

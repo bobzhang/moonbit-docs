@@ -1,0 +1,5 @@
+package moonbit:example;
+
+world server {
+  include wasi:http/proxy@0.2.1;
+}

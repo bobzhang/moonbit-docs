@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4084.md:1
+msgid "E4084"
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:3
+msgid ""
+"The label is supplied twice when calling a function with labelled "
+"parameters."
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:5
+msgid "Erroneous Example"
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:7
+msgid ""
+"///|\n"
+"pub fn f(a~ : Int32) -> Unit {\n"
+"  println(\"Hello, \\{a}\")\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  f(a=0, a=1)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:11
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:13
+msgid "If the call only needs one labelled argument, provide that label once."
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:15
+msgid ""
+"///|\n"
+"pub fn f(a~ : Int32) -> Unit {\n"
+"  println(\"Hello, \\{a}\")\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  f(a=0)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:19
+msgid ""
+"If the function has multiple labelled parameters and the duplicate label "
+"came from a typo, change the duplicated label to the correct one."
+msgstr ""
+
+#: ../../language/error_codes/E4084.md:22
+msgid ""
+"///|\n"
+"pub fn g(a~ : Int32, b~ : Int32) -> Unit {\n"
+"  println(\"Hello, \\{a} and \\{b}\")\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  g(a=0, b=1)\n"
+"}\n"
+msgstr ""

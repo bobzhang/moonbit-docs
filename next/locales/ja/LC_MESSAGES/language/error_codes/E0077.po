@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0077.md:1
+msgid "E0077"
+msgstr ""
+
+#: ../../language/error_codes/E0077.md:3
+msgid "Warning name: `lexmatch_longest_match`"
+msgstr ""
+
+#: ../../language/error_codes/E0077.md:5
+msgid ""
+"This warning described an earlier experimental form of longest-match "
+"`lexmatch` and is not emitted by the current compiler."
+msgstr "この警告は、longest-match `lexmatch` の以前の実験的な形式を説明するものであり、現在のコンパイラでは発生しません。"
+
+#: ../../language/error_codes/E0077.md:8
+msgid ""
+"Current `lexmatch ... with longest` is supported for in-memory `String` "
+"and `StringView` inputs when its cases use regex constant expressions."
+msgstr "現在の `lexmatch ... with longest` は、ケースが正規表現の定数式を使う場合、メモリ上の `String` と `StringView` の入力に対して利用できます。"
+
+#: ../../language/error_codes/E0077.md:11
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0077.md:13
+msgid ""
+"///|\n"
+"fn classify(input : String) -> String {\n"
+"  lexmatch input with longest {\n"
+"    (\"if|[a-z]*\" as token) => token.to_owned()\n"
+"    _ => \"other\"\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(classify(\"iff\"), content=\"iff\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0077.md:17
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0077.md:19
+msgid ""
+"Convert each legacy string pattern to a regex literal. Anchor it at `^`, "
+"and at `$` as well when the case must consume the whole input. Replace a "
+"trailing rest binder with `after=`."
+msgstr "各レガシー文字列パターンを正規表現リテラルに変換し、`^` で先頭に固定してください。ケースが入力全体を消費する必要がある場合は、`$` でも末尾に固定します。末尾の残余部分の束縛は `after=` に置き換えてください。"
+
+#: ../../language/error_codes/E0077.md:23
+msgid ""
+"///|\n"
+"fn classify(input : String) -> String {\n"
+"  lexmatch input with longest {\n"
+"    re\"^(if|[a-z]*)$\" as token => token.to_owned()\n"
+"    _ => \"other\"\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(classify(\"iff\"), content=\"iff\")\n"
+"}\n"
+msgstr ""

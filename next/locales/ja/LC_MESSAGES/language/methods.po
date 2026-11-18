@@ -1,0 +1,1150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-21 11:05+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/methods.md:1
+msgid "Method and Trait"
+msgstr "メソッドとトレイト"
+
+#: ../../language/methods.md:3
+msgid "Method system"
+msgstr "メソッドシステム"
+
+#: ../../language/methods.md:5
+msgid ""
+"MoonBit supports methods in a different way from traditional object-"
+"oriented languages. A method in MoonBit is just a toplevel function "
+"associated with a type constructor. To define a method, prepend "
+"`SelfTypeName::` in front of the function name, such as `fn "
+"SelfTypeName::method_name(...)`, and the method belongs to "
+"`SelfTypeName`. Within the signature of the method declaration, you can "
+"use `Self` to refer to `SelfTypeName`."
+msgstr ""
+"MoonBit のメソッドは、従来のオブジェクト指向言語とは異なる形でサポートされています。MoonBit "
+"のメソッドは、型コンストラクタに関連付けられたトップレベル関数にすぎません。メソッドを定義するには、関数名の前に `SelfTypeName::`"
+" を付けます。例えば `fn SelfTypeName::method_name(...)` のように書き、そのメソッドは "
+"`SelfTypeName` に属します。メソッド宣言のシグネチャ内では、`Self` を使って `SelfTypeName` を参照できます。"
+
+#: ../../language/methods.md:10
+msgid ""
+"Currently, there is a shorthand syntax for defining methods. When the "
+"name of the first parameter is `self`, a function declaration will be "
+"considered a method for the type of `self`. This syntax may be deprecated"
+" in the future, and we do not recommend using it in new code."
+msgstr ""
+"現在は、メソッドを定義するための省略構文もあります。最初の引数名が `self` の場合、その関数宣言は `self` "
+"の型に対するメソッドとして扱われます。この構文は将来的に非推奨になる可能性があるため、新しいコードでは使わないことを推奨します。"
+
+#: ../../language/methods.md:14
+msgid "fn method_name(self : SelfType) -> Unit { ... }"
+msgstr "fn method_name(self : SelfType) -> Unit { ... }"
+
+#: ../../language/methods.md:20
+msgid ""
+"enum List[X] {\n"
+"  Nil\n"
+"  Cons(X, List[X])\n"
+"}\n"
+"\n"
+"///|\n"
+"fn[X] List::length(xs : List[X]) -> Int32 {\n"
+"  ...\n"
+"}\n"
+msgstr ""
+"enum List[X] {\n"
+"  Nil\n"
+"  Cons(X, List[X])\n"
+"}\n"
+"\n"
+"///|\n"
+"fn[X] List::length(xs : List[X]) -> Int32 {\n"
+"  ...\n"
+"}\n"
+
+#: ../../language/methods.md:26
+msgid ""
+"To call a method, you can either invoke using qualified syntax "
+"`T::method_name(..)`, or using dot syntax where the first argument is the"
+" type of `T`:"
+msgstr ""
+"メソッドを呼び出すには、修飾名 `T::method_name(..)` を使う方法と、`T` "
+"の型を最初の引数として受け取るドット構文を使う方法があります："
+
+#: ../../language/methods.md:28
+msgid ""
+"let l : List[Int32] = Nil\n"
+"println(l.length())\n"
+"println(List::length(l))\n"
+msgstr ""
+"let l : List[Int32] = Nil\n"
+"println(l.length())\n"
+"println(List::length(l))\n"
+
+#: ../../language/methods.md:35
+msgid ""
+"When the first parameter of a method is also the type it belongs to, "
+"methods can be called using dot syntax `x.method(...)`. MoonBit "
+"automatically finds the correct method based on the type of `x`, there is"
+" no need to write the type name and even the package name of the method:"
+msgstr ""
+"メソッドの最初の引数が、そのメソッドが属する型でもある場合、`x.method(...)` というドット構文で呼び出せます。MoonBit は "
+"`x` の型に基づいて正しいメソッドを自動的に見つけるため、型名やメソッドのパッケージ名まで書く必要はありません："
+
+#: ../../language/methods.md:37
+msgid ""
+"pub(all) enum List[X] {\n"
+"  Nil\n"
+"  Cons(X, List[X])\n"
+"}\n"
+"\n"
+"pub fn[X] List::concat(list : List[List[X]]) -> List[X] {\n"
+"  ...\n"
+"}\n"
+msgstr ""
+"pub(all) enum List[X] {\n"
+"  Nil\n"
+"  Cons(X, List[X])\n"
+"}\n"
+"\n"
+"pub fn[X] List::concat(list : List[List[X]]) -> List[X] {\n"
+"  ...\n"
+"}\n"
+
+#: ../../language/methods.md:43
+msgid "using package with alias list"
+msgstr "エイリアス `list` を使ったパッケージ"
+
+#: ../../language/methods.md:43
+msgid ""
+"// assume `xs` is a list of lists, all the following two lines are "
+"equivalent\n"
+"let _ = xs.concat()\n"
+"let _ = @list.List::concat(xs)\n"
+msgstr ""
+"// assume `xs` is a list of lists, all the following two lines are "
+"equivalent\n"
+"let _ = xs.concat()\n"
+"let _ = @list.List::concat(xs)\n"
+
+#: ../../language/methods.md:51
+msgid ""
+"Unlike regular functions, methods defined using the "
+"`TypeName::method_name` syntax support overloading: different types can "
+"define methods of the same name, because each method lives in a different"
+" name space:"
+msgstr ""
+"通常の関数と異なり、`TypeName::method_name` "
+"構文で定義したメソッドはオーバーローディングをサポートします。各メソッドは別々の名前空間に存在するため、異なる型が同名のメソッドを定義できます："
+
+#: ../../language/methods.md:54
+msgid ""
+"struct T1 {\n"
+"  x1 : Int32\n"
+"}\n"
+"\n"
+"fn T1::default() -> T1 {\n"
+"  { x1: 0 }\n"
+"}\n"
+"\n"
+"struct T2 {\n"
+"  x2 : Int32\n"
+"}\n"
+"\n"
+"fn T2::default() -> T2 {\n"
+"  { x2: 0 }\n"
+"}\n"
+"\n"
+"test {\n"
+"  let t1 = T1::default()\n"
+"  let t2 = T2::default()\n"
+"\n"
+"}\n"
+msgstr ""
+"struct T1 {\n"
+"  x1 : Int32\n"
+"}\n"
+"\n"
+"fn T1::default() -> T1 {\n"
+"  { x1: 0 }\n"
+"}\n"
+"\n"
+"struct T2 {\n"
+"  x2 : Int32\n"
+"}\n"
+"\n"
+"fn T2::default() -> T2 {\n"
+"  { x2: 0 }\n"
+"}\n"
+"\n"
+"test {\n"
+"  let t1 = T1::default()\n"
+"  let t2 = T2::default()\n"
+"\n"
+"}\n"
+
+#: ../../language/methods.md:61
+msgid "Local method"
+msgstr "ローカルメソッド"
+
+#: ../../language/methods.md:62
+msgid ""
+"To ensure single source of truth in method resolution and avoid "
+"ambiguity, [methods can only be defined in the same package as its "
+"type](/language/packages.md#trait-implementations). However, there is one"
+" exception to this rule: MoonBit allows defining *private* methods for "
+"foreign types locally. These local methods can override methods from the "
+"type's own package (MoonBit will emit a warning in this case), and "
+"provide extension/complementary to upstream API:"
+msgstr ""
+"メソッド解決の単一ソースを保ち、曖昧さを避けるため、[メソッドはその型と同じパッケージでのみ定義できます](/language/packages.md"
+"#trait-implementations) 。ただし例外が 1 つあります。MoonBit では、外部型に対する *private* "
+"メソッドをローカルに定義できます。これらのローカルメソッドは、その型自身のパッケージにあるメソッドを上書きできます（この場合、MoonBit "
+"は警告を出します）。また、上流 API を拡張・補完する用途に使えます："
+
+#: ../../language/methods.md:68
+msgid ""
+"fn Int32::my_int_method(self : Int32) -> Int32 {\n"
+"  self * self + self\n"
+"}\n"
+"\n"
+"test {\n"
+"  assert_eq((6).my_int_method(), 42)\n"
+"}\n"
+msgstr ""
+"fn Int32::my_int_method(self : Int32) -> Int32 {\n"
+"  self * self + self\n"
+"}\n"
+"\n"
+"test {\n"
+"  assert_eq((6).my_int_method(), 42)\n"
+"}\n"
+
+#: ../../language/methods.md:75
+msgid "Alias methods as functions"
+msgstr "関数としてのエイリアスメソッド"
+
+#: ../../language/methods.md:77
+msgid "MoonBit allows calling methods with alternative names via alias."
+msgstr "MoonBit では、エイリアスを使ってメソッドを別名で呼び出せます。"
+
+#: ../../language/methods.md:79
+msgid ""
+"The method alias will create a method with the corresponding name. You "
+"can also choose to create a function with the corresponding name. The "
+"visibility can also be controlled."
+msgstr "メソッドエイリアスは、対応する名前のメソッドを作成します。対応する名前の関数を作ることもできます。可視性も制御できます。"
+
+#: ../../language/methods.md:83
+msgid ""
+"#alias(m)\n"
+"#alias(n, visibility=\"priv\")\n"
+"#as_free_fn(m)\n"
+"#as_free_fn(n, visibility=\"pub\")\n"
+"fn List::f() -> Bool {\n"
+"  true\n"
+"}\n"
+"test {\n"
+"  assert_eq(List::f(), List::m())\n"
+"  assert_eq(List::m(), m())\n"
+"}\n"
+msgstr ""
+"#alias(m)\n"
+"#alias(n, visibility=\"priv\")\n"
+"#as_free_fn(m)\n"
+"#as_free_fn(n, visibility=\"pub\")\n"
+"fn List::f() -> Bool {\n"
+"  true\n"
+"}\n"
+"test {\n"
+"  assert_eq(List::f(), List::m())\n"
+"  assert_eq(List::m(), m())\n"
+"}\n"
+
+#: ../../language/methods.md:89
+msgid "Operator Overloading"
+msgstr "演算子オーバーロード"
+
+#: ../../language/methods.md:91
+msgid ""
+"MoonBit supports overloading infix operators of builtin operators via "
+"several builtin traits. For example:"
+msgstr "MoonBit は、いくつかの組み込み trait を通じて、組み込み演算子の中置演算子をオーバーロードできます。例えば："
+
+#: ../../language/methods.md:93
+msgid ""
+"struct T {\n"
+"  x : Int32\n"
+"}\n"
+"\n"
+"impl Add for T with add(self : T, other : T) -> T {\n"
+"  { x: self.x + other.x }\n"
+"}\n"
+"\n"
+"test {\n"
+"  let a = T::{ x: 0 }\n"
+"  let b = T::{ x: 2 }\n"
+"  assert_eq((a + b).x, 2)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:99
+msgid ""
+"Other operators are overloaded via methods with annotations, for example "
+"`_[_]` and `_[_]=_`:"
+msgstr "その他の演算子は、注釈付きメソッドを通じてオーバーロードされます。例えば `_[_]` や `_[_]=_` です："
+
+#: ../../language/methods.md:101
+msgid ""
+"struct Coord {\n"
+"  mut x : Int32\n"
+"  mut y : Int32\n"
+"}\n"
+"\n"
+"#alias(\"_[_]\")\n"
+"fn Coord::get(coord : Self, key : String) -> Int32 {\n"
+"  match key {\n"
+"    \"x\" => coord.x\n"
+"    \"y\" => coord.y\n"
+"  }\n"
+"}\n"
+"\n"
+"#alias(\"_[_]=_\")\n"
+"fn Coord::set(coord : Self, key : String, val : Int32) -> Unit {\n"
+"  match key {\n"
+"    \"x\" => coord.x = val\n"
+"    \"y\" => coord.y = val\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:107
+msgid ""
+"fn main {\n"
+"  let c = Coord::{ x: 1, y: 2 }\n"
+"  println(\"{x: \\{c.x}, y: \\{c.y}}\")\n"
+"  println(c[\"y\"])\n"
+"  c[\"x\"] = 23\n"
+"  println(\"{x: \\{c.x}, y: \\{c.y}}\")\n"
+"  println(c[\"x\"])\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:115
+msgid "Output"
+msgstr "出力"
+
+#: ../../language/methods.md:115
+msgid ""
+"{x: 1, y: 2}\n"
+"2\n"
+"{x: 23, y: 2}\n"
+"23\n"
+msgstr ""
+"{x: 1, y: 2}\n"
+"2\n"
+"{x: 23, y: 2}\n"
+"23\n"
+
+#: ../../language/methods.md:119
+msgid "Currently, the following operators can be overloaded:"
+msgstr "現在、次の演算子をオーバーロードできます："
+
+#: ../../language/methods.md:115
+msgid "Operator Name"
+msgstr "演算子名"
+
+#: ../../language/methods.md:115
+msgid "overloading mechanism"
+msgstr "オーバーロード機構"
+
+#: ../../language/methods.md:115
+msgid "`+`"
+msgstr "`+`"
+
+#: ../../language/methods.md:115
+msgid "trait `Add`"
+msgstr "trait `Add`"
+
+#: ../../language/methods.md:115
+msgid "`-`"
+msgstr "`-`"
+
+#: ../../language/methods.md:115
+msgid "trait `Sub`"
+msgstr "trait `Sub`"
+
+#: ../../language/methods.md:115
+msgid "`*`"
+msgstr "`*`"
+
+#: ../../language/methods.md:115
+msgid "trait `Mul`"
+msgstr "trait `Mul`"
+
+#: ../../language/methods.md:115
+msgid "`/`"
+msgstr "`/`"
+
+#: ../../language/methods.md:115
+msgid "trait `Div`"
+msgstr "trait `Div`"
+
+#: ../../language/methods.md:115
+msgid "`%`"
+msgstr "`%`"
+
+#: ../../language/methods.md:115
+msgid "trait `Mod`"
+msgstr "trait `Mod`"
+
+#: ../../language/methods.md:115
+msgid "`==`"
+msgstr "`==`"
+
+#: ../../language/methods.md:115
+msgid "trait `Eq`"
+msgstr "trait `Eq`"
+
+#: ../../language/methods.md:115
+msgid "`<<`"
+msgstr "`<<`"
+
+#: ../../language/methods.md:115
+msgid "trait `Shl`"
+msgstr "trait `Shl`"
+
+#: ../../language/methods.md:115
+msgid "`>>`"
+msgstr "`>>`"
+
+#: ../../language/methods.md:115
+msgid "trait `Shr`"
+msgstr "trait `Shr`"
+
+#: ../../language/methods.md:115
+msgid "`-` (unary)"
+msgstr "`-` (単項)"
+
+#: ../../language/methods.md:115
+msgid "trait `Neg`"
+msgstr "trait `Neg`"
+
+#: ../../language/methods.md:115
+msgid "`_[_]` (get item)"
+msgstr "`_[_]` (要素取得)"
+
+#: ../../language/methods.md:115
+msgid "method + alias `_[_]`"
+msgstr "メソッド + エイリアス `_[_]`"
+
+#: ../../language/methods.md:115
+msgid "`_[_] = _` (set item)"
+msgstr "`_[_] = _` (要素設定)"
+
+#: ../../language/methods.md:115
+msgid "method + alias `_[_]=_`"
+msgstr "メソッド + エイリアス `_[_]=_`"
+
+#: ../../language/methods.md:115
+msgid "`_[_:_]` (view)"
+msgstr "`_[_:_]` (ビュー)"
+
+#: ../../language/methods.md:115
+msgid "method + alias `_[_:_]`"
+msgstr "メソッド + エイリアス `_[_:_]`"
+
+#: ../../language/methods.md:115
+msgid "`&`"
+msgstr "`&`"
+
+#: ../../language/methods.md:115
+msgid "trait `BitAnd`"
+msgstr "trait `BitAnd`"
+
+#: ../../language/methods.md:115
+msgid "`|`"
+msgstr "`|`"
+
+#: ../../language/methods.md:115
+msgid "trait `BitOr`"
+msgstr "trait `BitOr`"
+
+#: ../../language/methods.md:115
+msgid "`^`"
+msgstr "`^`"
+
+#: ../../language/methods.md:115
+msgid "trait `BitXOr`"
+msgstr "trait `BitXOr`"
+
+#: ../../language/methods.md:139
+msgid ""
+"When overloading `_[_]`/`_[_] = _`/`_[_:_]`, the method must have a "
+"correct signature:"
+msgstr "`_[_]` / `_[_] = _` / `_[_:_]` をオーバーロードする場合、メソッドは正しいシグネチャを持つ必要があります："
+
+#: ../../language/methods.md:141
+msgid ""
+"`_[_]` should have signature `(Self, Index) -> Result`, used as `let "
+"result = self[index]`"
+msgstr ""
+"`_[_]` は `(Self, Index) -> Result` というシグネチャである必要があり、`let result = "
+"self[index]` として使われます"
+
+#: ../../language/methods.md:142
+msgid ""
+"`_[_]=_` should have signature `(Self, Index, Value) -> Unit`, used as "
+"`self[index] = value`"
+msgstr ""
+"`_[_]=_` は `(Self, Index, Value) -> Unit` というシグネチャである必要があり、`self[index] ="
+" value` として使われます"
+
+#: ../../language/methods.md:143
+msgid ""
+"`_[_:_]` should have signature `(Self, start? : Index, end? : Index) -> "
+"Result`, used as `let result = self[start:end]`"
+msgstr ""
+"`_[_:_]` は `(Self, start? : Index, end? : Index) -> Result` "
+"というシグネチャである必要があり、`let result = self[start:end]` として使われます"
+
+#: ../../language/methods.md:145
+msgid ""
+"For `_[_:_]`, a bound can also have an explicit default, such as `start~ : "
+"Index = default_expr`, as in the example below."
+msgstr ""
+"`_[_:_]` の範囲の端点には、以下の例のように `start~ : Index = default_expr` "
+"として明示的なデフォルト値を指定することもできます。"
+
+#: ../../language/methods.md:148
+msgid ""
+"By implementing `_[_:_]` method, you can create a view for a user-defined"
+" type. Here is an example:"
+msgstr "`_[_:_]` メソッドを実装すると、ユーザー定義型にビューを作れます。例えば次のようになります："
+
+#: ../../language/methods.md:150
+msgid ""
+"struct DataView(String)\n"
+"\n"
+"struct Data {}\n"
+"\n"
+"#alias(\"_[_:_]\")\n"
+"fn Data::as_view(_self : Data, start~ : Int32 = 0, end? : Int32) -> DataView {\n"
+"  \"[\\{start}, \\{end.unwrap_or(100)})\"\n"
+"}\n"
+"\n"
+"test {\n"
+"  let data = Data::{  }\n"
+"  inspect(data[:].0, content=\"[0, 100)\")\n"
+"  inspect(data[2:].0, content=\"[2, 100)\")\n"
+"  inspect(data[:5].0, content=\"[0, 5)\")\n"
+"  inspect(data[2:5].0, content=\"[2, 5)\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:156
+msgid "Trait system"
+msgstr "trait システム"
+
+#: ../../language/methods.md:158
+msgid ""
+"MoonBit provides a trait system for overloading/ad-hoc polymorphism. "
+"Traits declare a list of operations, which must be supplied when a type "
+"wants to implement the trait. Traits can be declared as follows:"
+msgstr ""
+"MoonBit は、オーバーロード / ad-hoc polymorphism のための trait システムを提供します。trait "
+"は、ある型が実装しなければならない操作の一覧を宣言します。trait は次のように定義できます："
+
+#: ../../language/methods.md:160
+msgid ""
+"pub(open) trait I {\n"
+"  method_(Int32) -> Int32\n"
+"  method_with_label(Int32, label~ : Int32) -> Int32\n"
+"  //! method_with_label(Int32, label?: Int32) -> Int32\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:166
+msgid ""
+"In the body of a trait definition, a special type `Self` is used to refer"
+" to the type that implements the trait."
+msgstr "trait 定義の本体では、特別な型 `Self` を使って、その trait を実装する型を参照します。"
+
+#: ../../language/methods.md:168
+msgid "Extending traits"
+msgstr "trait の拡張"
+
+#: ../../language/methods.md:170
+msgid "A trait can depend on other traits, for example:"
+msgstr "trait は他の trait に依存できます。例えば："
+
+#: ../../language/methods.md:172
+msgid ""
+"pub(open) trait Position {\n"
+"  pos(Self) -> (Int32, Int32)\n"
+"}\n"
+"\n"
+"pub(open) trait Draw {\n"
+"  draw(Self, Int32, Int32) -> Unit\n"
+"}\n"
+"\n"
+"pub(open) trait Object: Position + Draw {}\n"
+msgstr ""
+
+#: ../../language/methods.md:178
+msgid "Implementing traits"
+msgstr "trait の実装"
+
+#: ../../language/methods.md:180
+msgid ""
+"To implement a trait, a type must explicitly provide all the methods "
+"required by the trait using the syntax `impl Trait for Type with "
+"method_name(...) { ... }`. For example:"
+msgstr ""
+"trait を実装するには、`impl Trait for Type with method_name(...) { ... }` "
+"という構文を使って、trait が要求するすべてのメソッドを型が明示的に提供する必要があります。例えば："
+
+#: ../../language/methods.md:183
+msgid ""
+"pub(open) trait MyShow {\n"
+"  to_string(Self) -> String\n"
+"}\n"
+"\n"
+"struct MyType {}\n"
+"\n"
+"pub impl MyShow for MyType with to_string(self) {\n"
+"  ...\n"
+"}\n"
+"\n"
+"pub extend MyType with MyShow::{to_string}\n"
+"\n"
+"struct MyContainer[_] {}\n"
+"\n"
+"/// trait implementation with type parameters.\n"
+"/// `[X : Show]` means the type parameter `X` must implement `Show`,\n"
+"/// this will be covered later.\n"
+"pub impl[X : MyShow] MyShow for MyContainer[X] with to_string(self) {\n"
+"  ...\n"
+"}\n"
+"\n"
+"pub extend MyContainer with MyShow::{to_string}\n"
+msgstr ""
+
+#: ../../language/methods.md:189
+msgid ""
+"Type annotation can be omitted for trait `impl`: MoonBit will "
+"automatically infer the type based on the signature of `Trait::method` "
+"and the self type."
+msgstr ""
+"trait の `impl` では型注釈を省略できます。MoonBit は `Trait::method` のシグネチャと self "
+"型に基づいて、型を自動的に推論します。"
+
+#: ../../language/methods.md:191
+msgid ""
+"The author of the trait can also define **default implementations** for "
+"some methods in the trait, for example:"
+msgstr "trait の作者は、一部のメソッドに対して **デフォルト実装** を定義することもできます。例えば："
+
+#: ../../language/methods.md:193
+msgid ""
+"pub(open) trait J {\n"
+"  f(Self) -> Unit\n"
+"  f_twice(Self) -> Unit = _\n"
+"}\n"
+"\n"
+"impl J with f_twice(self) {\n"
+"  self.f()\n"
+"  self.f()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:199
+msgid ""
+"Note that in addition to the actual default implementation `impl J with "
+"f_twice`, a mark `= _` is also required in the declaration of `f_twice` "
+"in `J`. The `= _` mark is an indicator that this method has default "
+"implementation, it enhances readability by allowing readers to know which"
+" methods have default implementation at first glance."
+msgstr ""
+"実際のデフォルト実装 `impl J with f_twice` に加えて、`J` 内の `f_twice` の宣言にも `= _` "
+"を付ける必要がある点に注意してください。`= _` "
+"はこのメソッドにデフォルト実装があることを示す印で、どのメソッドにデフォルト実装があるかを一目で分かるようにし、可読性を高めます。"
+
+#: ../../language/methods.md:204
+msgid ""
+"Implementers of trait `J` don't have to provide an implementation for "
+"`f_twice`: to implement `J`, only `f` is necessary. They can always "
+"override the default implementation with an explicit `impl J for Type "
+"with f_twice`, if desired, though."
+msgstr ""
+"trait `J` の実装者は `f_twice` の実装を提供する必要はありません。`J` を実装するには `f` "
+"だけで十分です。必要であれば、明示的に `impl J for Type with f_twice` "
+"を書いてデフォルト実装を上書きすることもできます。"
+
+#: ../../language/methods.md:207
+msgid ""
+"impl J for Int32 with f(self) {\n"
+"  println(self)\n"
+"}\n"
+"\n"
+"impl J for String with f(self) {\n"
+"  println(self)\n"
+"}\n"
+"\n"
+"impl J for String with f_twice(self) {\n"
+"  println(self)\n"
+"  println(self)\n"
+"}\n"
+"\n"
+msgstr ""
+
+#: ../../language/methods.md:213
+msgid ""
+"To implement the sub trait, one will have to implement the super traits, "
+"and the methods defined in the sub trait. For example:"
+msgstr "サブ trait を実装するには、super trait とサブ trait で定義されたメソッドを実装する必要があります。例えば："
+
+#: ../../language/methods.md:216
+msgid ""
+"impl Position for Point with pos(self) {\n"
+"  (self.x, self.y)\n"
+"}\n"
+"\n"
+"impl Draw for Point with draw(self, x, y) {\n"
+"  ()\n"
+"}\n"
+"\n"
+"impl Object for Point\n"
+"\n"
+"pub fn[O : Object] draw_object(obj : O) -> Unit {\n"
+"  let (x, y) = Position::pos(obj)\n"
+"  Draw::draw(obj, x, y)\n"
+"}\n"
+"\n"
+"test {\n"
+"  let p = Point::{ x: 1, y: 2 }\n"
+"  draw_object(p)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:222
+msgid ""
+"In a generic function constrained by a subtrait, call methods inherited "
+"from a supertrait with qualified syntax such as `Position::pos(obj)`. "
+"Calling those methods on the type parameter with dot syntax is deprecated"
+" because the method comes from the supertrait rather than the written "
+"constraint."
+msgstr ""
+
+#: ../../language/methods.md:227
+msgid ""
+"For traits where all methods have default implementation, it is still "
+"necessary to explicitly implement them, in order to support features such"
+" as [abstract trait](/language/packages.md#traits). For this purpose, "
+"MoonBit provides the syntax `impl Trait for Type` (i.e. without the "
+"method part). `impl Trait for Type` ensures that `Type` implements "
+"`Trait`, MoonBit will automatically check if every method in `Trait` has "
+"corresponding implementation (custom or default)."
+msgstr ""
+"すべてのメソッドにデフォルト実装がある trait でも、[abstract "
+"trait](/language/packages.md#traits) "
+"などの機能をサポートするために、明示的に実装する必要があります。この目的のために、MoonBit は `impl Trait for "
+"Type`（つまりメソッド部分なし）の構文を提供します。`impl Trait for Type` は `Type` が `Trait` "
+"を実装していることを保証し、MoonBit は `Trait` "
+"内のすべてのメソッドに対応する実装（独自実装またはデフォルト実装）があるかを自動で確認します。"
+
+#: ../../language/methods.md:234
+msgid ""
+"In addition to handling traits where every methods has a default "
+"implementation, the `impl Trait for Type` can also serve as "
+"documentation, or a TODO mark before filling actual implementation."
+msgstr ""
+"すべてのメソッドにデフォルト実装がある trait を扱うだけでなく、`impl Trait for Type` "
+"はドキュメントとして、または実装前の TODO マークとしても使えます。"
+
+#: ../../language/methods.md:238
+msgid "Currently, an empty trait without any method is implemented automatically."
+msgstr "現在、メソッドを持たない空の trait は自動的に実装されます。"
+
+#: ../../language/methods.md:241
+msgid "Attaching trait methods with `extend`"
+msgstr ""
+
+#: ../../language/methods.md:243
+msgid ""
+"An `impl Trait for Type` declaration records that `Type` implements "
+"`Trait`. Use an `extend` declaration to explicitly attach selected trait "
+"methods to the type so that they can be called with dot syntax:"
+msgstr ""
+
+#: ../../language/methods.md:247
+msgid ""
+"struct MyCustomType {}\n"
+"\n"
+"pub impl Show for MyCustomType with output(self, logger) {\n"
+"  ...\n"
+"}\n"
+"\n"
+"pub extend MyCustomType with Show::{to_string, output}\n"
+"\n"
+"fn f() -> Unit {\n"
+"  let x = MyCustomType::{  }\n"
+"  let _ = x.to_string()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:253
+msgid ""
+"The general form is `extend Type with Trait::{method1, method2}`. Add "
+"`pub` to make the attached methods public; without `pub`, they are "
+"available only in the current package. A private type may still have a "
+"private `extend` declaration."
+msgstr ""
+
+#: ../../language/methods.md:257
+msgid ""
+"When an attached trait method uses a default implementation, `Self` in "
+"that implementation is specialized to `Type`. Trait-object types can also"
+" be extended, for example `extend &Derived with Super::{method}`."
+msgstr ""
+
+#: ../../language/methods.md:261
+msgid ""
+"An `impl` does not automatically attach its methods to the implementing "
+"type. Library authors should add an explicit `extend` for methods "
+"intended to be callable with dot syntax, or use `Trait::method(value, "
+"...)` when no method-style API is intended. Calling a trait "
+"implementation with dot syntax without an attached method produces "
+"[E4015](error_codes/E4015.md)."
+msgstr "`impl` は実装対象の型にメソッドを自動的に追加しません。ドット構文で呼び出せるようにするメソッドには、ライブラリ作者が明示的な `extend` を追加します。メソッド形式の API を提供しない場合は `Trait::method(value, ...)` を使用します。メソッドを追加せずにトレイト実装をドット構文で呼び出すと、[E4015](error_codes/E4015.md) が発生します。"
+
+#: ../../language/methods.md:267
+msgid ""
+"Explicit attachment avoids ambiguity when an upstream trait adds a new "
+"default method. The old implicit attachment behavior is no longer "
+"supported."
+msgstr "メソッドを明示的に追加することで、上流のトレイトに新しいデフォルトメソッドが追加された際の曖昧さを防げます。以前の暗黙的な追加はサポートされなくなりました。"
+
+#: ../../language/methods.md:270
+msgid ""
+"If a previously implicitly attached method should remain callable "
+"temporarily but is not part of the intended method-style API, add a "
+"corresponding `extend` declaration marked with `#deprecated`. This "
+"preserves a migration path for downstream code while directing users to "
+"qualified calls such as `Trait::method(value)`."
+msgstr "以前に暗黙的に追加されていたメソッドを移行のため一時的に呼び出せるように残す場合は、対応する `extend` 宣言に `#deprecated` を付けます。これにより下流コードの移行経路を維持しつつ、`Trait::method(value)` のような修飾された呼び出しへ誘導できます。"
+
+#: ../../language/methods.md:279
+msgid "Using traits"
+msgstr "trait の使用"
+
+#: ../../language/methods.md:281
+msgid ""
+"When declaring a generic function, the type parameters can be annotated "
+"with the traits they should implement, allowing the definition of "
+"constrained generic functions. For example:"
+msgstr "ジェネリック関数を宣言するとき、型パラメータに実装すべき trait を注釈でき、制約付きジェネリック関数を定義できます。例えば："
+
+#: ../../language/methods.md:283
+msgid ""
+"fn[X : Eq] contains(xs : Array[X], elem : X) -> Bool {\n"
+"  for x in xs {\n"
+"    if x == elem {\n"
+"      return true\n"
+"    }\n"
+"  } nobreak {\n"
+"    false\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:289
+msgid ""
+"Without the `Eq` requirement, the expression `x == elem` in `contains` "
+"will result in a type error. Now, the function `contains` can be called "
+"with any type that implements `Eq`, for example:"
+msgstr ""
+"`Eq` 制約がないと、`contains` 内の式 `x == elem` は型エラーになります。これで、関数 `contains` は "
+"`Eq` を実装する任意の型に対して呼び出せます。例えば："
+
+#: ../../language/methods.md:291
+msgid ""
+"struct Point {\n"
+"  x : Int32\n"
+"  y : Int32\n"
+"}\n"
+"\n"
+"impl Eq for Point with equal(p1, p2) {\n"
+"  p1.x == p2.x && p1.y == p2.y\n"
+"}\n"
+"\n"
+"test {\n"
+"  assert_false(contains([1, 2, 3], 4))\n"
+"  assert_true(contains([1.5, 2.25, 3.375], 2.25))\n"
+"  assert_false(contains([{ x: 2, y: 3 }], { x: 4, y: 9 }))\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:297
+msgid "Invoke trait methods directly"
+msgstr "trait メソッドを直接呼び出す"
+
+#: ../../language/methods.md:299
+msgid ""
+"Methods of a trait can be called directly via `Trait::method`. MoonBit "
+"will infer the type of `Self` and check if `Self` indeed implements "
+"`Trait`, for example:"
+msgstr ""
+"trait のメソッドは `Trait::method` で直接呼び出せます。MoonBit は `Self` の型を推論し、`Self` "
+"が本当に `Trait` を実装しているかを確認します。例えば："
+
+#: ../../language/methods.md:301
+msgid ""
+"test {\n"
+"  assert_eq(Show::to_string(42), \"42\")\n"
+"  assert_eq(Compare::compare(1.0, 2.5), -1)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:303
+msgid ""
+"For a future-proof concrete-type API, explicitly attach trait methods "
+"that should support dot syntax with [`extend`](#attaching-trait-methods-"
+"with-extend). A regular method takes precedence over an attached trait "
+"method. Implicit dot calls must be migrated to explicit attachment or "
+"qualified calls such as `Trait::method(value)`."
+msgstr ""
+"将来の変更に強い具象型 API にするには、ドット構文をサポートする trait メソッドを [`extend`](#attaching-"
+"trait-methods-with-extend) で明示的に付加してください。通常のメソッドは、付加された trait "
+"メソッドより優先されます。暗黙的なドット呼び出しは、明示的なメソッドの付加か、`Trait::method(value)` のような修飾付き呼び出しに移行する必要があります。"
+
+#: ../../language/methods.md:313
+msgid ""
+"For type parameters, a method from the single written constraint may be "
+"called with dot syntax. Use qualified syntax for methods inherited from a"
+" supertrait, and for every trait method when the type parameter has "
+"multiple constraints. This makes the selected trait unambiguous. The same"
+" principle applies to trait objects: call supertrait methods with "
+"qualified syntax, or explicitly extend the trait-object type."
+msgstr ""
+
+#: ../../language/methods.md:320
+msgid "Trait objects"
+msgstr "trait オブジェクト"
+
+#: ../../language/methods.md:322
+msgid ""
+"MoonBit supports runtime polymorphism via trait objects. If `t` is of "
+"type `T`, which implements trait `I`, one can pack the methods of `T` "
+"that implements `I`, together with `t`, into a runtime object via `t as "
+"&I`. When the expected type of an expression is known to be a trait "
+"object type, `as &I` can be omitted. Trait object erases the concrete "
+"type of a value, so objects created from different concrete types can be "
+"put in the same data structure and handled uniformly:"
+msgstr ""
+"MoonBit は trait オブジェクトによる実行時多相をサポートしています。`t` が trait `I` を実装する型 `T` "
+"の値なら、`t as &I` を使って、`T` の `I` 実装メソッドを `t` と一緒に実行時オブジェクトへ詰め込めます。式の期待型が "
+"trait オブジェクト型だと分かっている場合は、`as &I` を省略できます。trait "
+"オブジェクトは値の具体的な型を消去するため、異なる具体型から作られたオブジェクトを同じデータ構造に入れて、統一的に扱えます："
+
+#: ../../language/methods.md:330
+msgid ""
+"pub(open) trait Animal {\n"
+"  speak(Self) -> String\n"
+"}\n"
+"\n"
+"struct Duck(String)\n"
+"\n"
+"fn Duck::make(name : String) -> Duck {\n"
+"  Duck(name)\n"
+"}\n"
+"\n"
+"impl Animal for Duck with speak(self) {\n"
+"  \"\\{self.0}: quack!\"\n"
+"}\n"
+"\n"
+"struct Fox(String)\n"
+"\n"
+"fn Fox::make(name : String) -> Fox {\n"
+"  Fox(name)\n"
+"}\n"
+"\n"
+"impl Animal for Fox with speak(_self) {\n"
+"  \"What does the fox say?\"\n"
+"}\n"
+"\n"
+"test {\n"
+"  let duck1 = Duck::make(\"duck1\")\n"
+"  let duck2 = Duck::make(\"duck2\")\n"
+"  let fox1 = Fox::make(\"fox1\")\n"
+"  let animals : Array[&Animal] = [duck1, duck2, fox1]\n"
+"  debug_inspect(\n"
+"    animals.map(fn(animal) { animal.speak() }),\n"
+"    content=(\n"
+"      #|[\"duck1: quack!\", \"duck2: quack!\", \"What does the fox "
+"say?\"]\n"
+"    ),\n"
+"  )\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:336
+msgid ""
+"Not all traits can be used to create objects. \"object-safe\" traits' "
+"methods must satisfy the following conditions:"
+msgstr ""
+"すべての trait がオブジェクト生成に使えるわけではありません。\"object-safe\" な trait "
+"のメソッドは、次の条件を満たす必要があります："
+
+#: ../../language/methods.md:339
+msgid "`Self` must be the first parameter of a method"
+msgstr "`Self` はメソッドの最初の引数でなければなりません"
+
+#: ../../language/methods.md:340
+msgid ""
+"There must be only one occurrence of `Self` in the type of the method "
+"(i.e. the first parameter)"
+msgstr "メソッドの型の中に `Self` は 1 回だけ現れなければなりません（つまり最初の引数のみ）"
+
+#: ../../language/methods.md:342
+msgid ""
+"Users can define new methods for trait objects, just like defining new "
+"methods for structs and enums:"
+msgstr "ユーザーは trait オブジェクトに対しても新しいメソッドを定義できます。struct や enum に新しいメソッドを定義するのと同じです："
+
+#: ../../language/methods.md:344
+msgid ""
+"pub(open) trait Logger {\n"
+"  write_string(Self, String) -> Unit\n"
+"}\n"
+"\n"
+"pub(open) trait CanLog {\n"
+"  log(Self, &Logger) -> Unit\n"
+"}\n"
+"\n"
+"fn[Obj : CanLog] &Logger::write_object(self : &Logger, obj : Obj) -> Unit"
+" {\n"
+"  obj.log(self)\n"
+"}\n"
+"\n"
+"/// use the new method to simplify code\n"
+"pub impl[A : CanLog, B : CanLog] CanLog for (A, B) with log(self, logger)"
+" {\n"
+"  let (a, b) = self\n"
+"  logger\n"
+"  ..write_string(\"(\")\n"
+"  ..write_object(a)\n"
+"  ..write_string(\", \")\n"
+"  ..write_object(b)\n"
+"  .write_string(\")\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:350
+msgid "Builtin traits"
+msgstr "組み込み trait"
+
+#: ../../language/methods.md:352
+msgid "MoonBit provides the following useful builtin traits:"
+msgstr "MoonBit は次のような便利な組み込み trait を提供します："
+
+#: ../../language/methods.md:356
+msgid ""
+"trait Eq {\n"
+"  op_equal(Self, Self) -> Bool\n"
+"}\n"
+"\n"
+"trait Compare : Eq {\n"
+"  // `0` for equal, `-1` for smaller, `1` for greater\n"
+"  compare(Self, Self) -> Int32\n"
+"}\n"
+"\n"
+"trait Hash {\n"
+"  hash_combine(Self, Hasher) -> Unit // to be implemented\n"
+"  hash(Self) -> Int32 // has default implementation\n"
+"}\n"
+"\n"
+"trait Show {\n"
+"  output(Self, Logger) -> Unit // to be implemented\n"
+"  to_string(Self) -> String // has default implementation\n"
+"}\n"
+"\n"
+"trait Default {\n"
+"  default() -> Self\n"
+"}\n"
+msgstr ""
+"trait Eq {\n"
+"  op_equal(Self, Self) -> Bool\n"
+"}\n"
+"\n"
+"trait Compare : Eq {\n"
+"  // `0` は等しい、`-1` は小さい、`1` は大きい\n"
+"  compare(Self, Self) -> Int32\n"
+"}\n"
+"\n"
+"trait Hash {\n"
+"  hash_combine(Self, Hasher) -> Unit // 実装が必要\n"
+"  hash(Self) -> Int32 // デフォルト実装あり\n"
+"}\n"
+"\n"
+"trait Show {\n"
+"  output(Self, Logger) -> Unit // 実装が必要\n"
+"  to_string(Self) -> String // デフォルト実装あり\n"
+"}\n"
+"\n"
+"trait Default {\n"
+"  default() -> Self\n"
+"}\n"
+
+#: ../../language/methods.md:381
+msgid "Deriving builtin traits"
+msgstr "組み込み trait の導出"
+
+#: ../../language/methods.md:383
+msgid "MoonBit can automatically derive implementations for some builtin traits:"
+msgstr "MoonBit は一部の組み込み trait について、実装を自動導出できます："
+
+#: ../../language/methods.md:385
+msgid ""
+"#derive(Eq, Compare, Debug, Default)\n"
+"struct T {\n"
+"  a : Int32\n"
+"  b : Int32\n"
+"}\n"
+"\n"
+"pub extend T with Eq::{not_equal, equal}\n"
+"\n"
+"pub extend T with Compare::{op_lt, op_le, op_ge, compare, op_gt}\n"
+"\n"
+"pub extend T with Debug::{to_repr}\n"
+"\n"
+"pub extend T with Default::{default}\n"
+"\n"
+"test {\n"
+"  let t1 : T = Default::default()\n"
+"  let t2 = T::{ a: 1, b: 1 }\n"
+"  debug_inspect(t1, content=\"{ a: 0, b: 0 }\")\n"
+"  debug_inspect(t2, content=\"{ a: 1, b: 1 }\")\n"
+"  assert_false(t1 == t2)\n"
+"  assert_true(t1 < t2)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/methods.md:391
+msgid "See [Deriving](./derive.md) for more information about deriving traits."
+msgstr "trait の導出について詳しくは [Deriving](./derive.md) を参照してください。"

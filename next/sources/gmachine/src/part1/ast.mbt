@@ -1,0 +1,53 @@
+using @list {type List}
+
+/// start expr_and_scdef definition
+#derive(Debug)
+enum RawExpr[T] {
+  Var(T)
+  Num(Int32)
+  Constructor(tag~ : Int32, arity~ : Int32) // tag, arity
+  App(RawExpr[T], RawExpr[T])
+  Let(Bool, List[(T, RawExpr[T])], RawExpr[T]) // isRec, Defs, Body
+  Case(RawExpr[T], List[(Int32, List[T], RawExpr[T])])
+}
+
+pub extend RawExpr with @moonbitlang/core/debug.Debug::{to_repr}
+
+#derive(Debug)
+struct ScDef[T] {
+  name : String
+  args : List[T]
+  body : RawExpr[T]
+}
+
+pub extend ScDef with @moonbitlang/core/debug.Debug::{to_repr}
+// end expr_and_scdef definition
+
+fn[T] ScDef::new(name : String, args : List[T], body : RawExpr[T]) -> ScDef[T] {
+  { name, args, body }
+}
+
+/// start prelude_defs definition
+let prelude_defs : List[ScDef[String]] = {
+  let args : (FixedArray[String]) -> List[String] = x => @list.List(x)
+  let id = ScDef::new("I", args(["x"]), Var("x")) // id x = x
+  let k = ScDef::new("K", args(["x", "y"]), Var("x")) // K x y = x
+  let k1 = ScDef::new("K1", args(["x", "y"]), Var("y")) // K1 x y = y
+  let s = ScDef::new(
+    "S",
+    args(["f", "g", "x"]),
+    App(App(Var("f"), Var("x")), App(Var("g"), Var("x"))),
+  ) // S f g x = f x (g x)
+  let compose = ScDef::new(
+    "compose",
+    args(["f", "g", "x"]),
+    App(Var("f"), App(Var("g"), Var("x"))),
+  ) // compose f g x = f (g x)
+  let twice = ScDef::new(
+    "twice",
+    args(["f"]),
+    App(App(Var("compose"), Var("f")), Var("f")),
+  ) // twice f = compose f f
+  @list.List([id, k, k1, s, compose, twice])
+}
+// end prelude_defs definition

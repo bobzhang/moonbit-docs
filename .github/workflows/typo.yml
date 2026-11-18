@@ -1,0 +1,32 @@
+name: check examples
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  typo-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check typos
+        uses: reviewdog/action-typos@v1.2.0
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check lint errors
+        uses: huacnlee/autocorrect-action@v2
+      - name: Report Review Dog
+        if: failure()
+        uses: huacnlee/autocorrect-action@v2
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          reviewdog: true

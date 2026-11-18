@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-21 18:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0030.md:1
+msgid "E0030"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:3
+msgid "Warning name: `missing_package_alias`"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:5
+msgid ""
+"The package alias is empty. The default package alias will be used instead. "
+"This warning applies to the legacy `moon.pkg.json` format. Current `moon` "
+"commands reject JSON manifests, and `moon.pkg` cannot express an explicitly "
+"empty alias. The examples below are retained as migration references."
+msgstr ""
+"パッケージの別名が空のため、デフォルトの別名が使用されます。この警告は旧形式の `moon.pkg.json` に適用されます。現在の `moon` "
+"コマンドは JSON 設定ファイルを受け付けず、`moon.pkg` では明示的に空の別名を記述できません。以下の例は移行時の参考として残しています。"
+
+#: ../../language/error_codes/E0030.md:10
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:12
+#: ../../language/error_codes/E0030.md:21
+msgid "moon.pkg.json"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:12
+msgid ""
+"{\n"
+"  \"import\": [\n"
+"    {\n"
+"      \"path\": \"moonbit-community/E0030/lib\",\n"
+"      \"alias\": \"\"\n"
+"    }\n"
+"  ]\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:17
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:19
+msgid "Use a non-empty alias for the package:"
+msgstr ""
+
+#: ../../language/error_codes/E0030.md:21
+msgid ""
+"{\n"
+"  \"import\": [\n"
+"    {\n"
+"      \"path\": \"moonbit-community/E0030-fixed/lib\",\n"
+"      \"alias\": \"hello\"\n"
+"    }\n"
+"  ]\n"
+"}\n"
+msgstr ""

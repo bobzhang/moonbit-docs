@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-02 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E3019.md:1
+msgid "E3019"
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:3
+msgid "Inclusive range pattern `a..=b` cannot have `_` as upper bound."
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:5
+msgid ""
+"Writing `a..=_` does not make sense, because `_` is a wildcard that "
+"matches any value. It is unclear what does \"equals to any value\" mean. "
+"If you want to express the meaning of \"greater than or equal to `a`\", "
+"you can use `a..<_` instead."
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:10
+msgid "Erroneous example"
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:12
+msgid ""
+"///|\n"
+"fn describe(value : Int32) -> String {\n"
+"  match value {\n"
+"    0..<=_ => \"non-negative\"\n"
+"    _ => \"negative\"\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(describe(0), content=\"non-negative\")\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:16
+msgid "Suggestion"
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:18
+msgid "Replace `..=_` with `..<_`:"
+msgstr ""
+
+#: ../../language/error_codes/E3019.md:20
+msgid ""
+"///|\n"
+"fn describe(value : Int32) -> String {\n"
+"  match value {\n"
+"    0..<_ => \"non-negative\"\n"
+"    _ => \"negative\"\n"
+"  }\n"
+"}\n"
+"\n"
+"///|\n"
+"test {\n"
+"  inspect(describe(0), content=\"non-negative\")\n"
+"}\n"
+msgstr ""

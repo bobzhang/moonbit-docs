@@ -1,0 +1,879 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-17 12:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/packages.md:1
+msgid "Managing Projects with Packages"
+msgstr "パッケージでプロジェクトを管理する"
+
+#: ../../language/packages.md:3
+msgid ""
+"When developing projects at large scale, the project usually needs to be "
+"divided into smaller modular unit that depends on each other.  More "
+"often, it involves using other people's work: most noticeably is the "
+"[core](https://github.com/moonbitlang/core), the standard library of "
+"MoonBit."
+msgstr ""
+"大規模なプロジェクトを開発するとき、プロジェクトは通常、相互に依存する小さなモジュール単位に分割する必要があります。さらに多くの場合、他人の成果物を利用します。代表的なものが、MoonBit"
+" の標準ライブラリである [core](https://github.com/moonbitlang/core) です。"
+
+#: ../../language/packages.md:6
+msgid "Packages and modules"
+msgstr "パッケージとモジュール"
+
+#: ../../language/packages.md:8
+msgid ""
+"In MoonBit, the most important unit for code organization is a package, "
+"which consists of a number of source code files and a single package "
+"configuration file (`moon.pkg`). A package is a library by default. A "
+"package containing a `main` function is declared executable with "
+"[`pkgtype(kind: \"executable\")`](/toolchain/moon/package.md#package-type)."
+msgstr ""
+"MoonBit のコードを整理する基本単位はパッケージで、複数のソースファイルと 1 "
+"つのパッケージ設定ファイル（`moon.pkg`）からなります。パッケージはデフォルトでライブラリです。`main` 関数を持つパッケージは "
+"[`pkgtype(kind: \"executable\")`](/toolchain/moon/package.md#package-type) "
+"で実行可能なパッケージとして宣言します。"
+
+#: ../../language/packages.md:12
+msgid ""
+"A project, corresponding to a module, consists of multiple packages and a "
+"single `moon.mod` configuration file. Run `moon fmt` to migrate older "
+"projects that still contain `moon.mod.json` or `moon.pkg.json` before using "
+"other commands."
+msgstr ""
+"プロジェクトはモジュールに対応し、複数のパッケージと 1 つの `moon.mod` 設定ファイルからなります。`moon.mod.json` や "
+"`moon.pkg.json` が残っている古いプロジェクトでは、他のコマンドを使う前に `moon fmt` で移行してください。"
+
+#: ../../language/packages.md:16
+msgid ""
+"A module is identified by the [`name`](/toolchain/moon/module.md#name) "
+"field, which usually consists of two parts, separated by `/`: `user-name"
+"/project-name`. A package is identified by the relative path to the "
+"source root defined by the [`source`](/toolchain/moon/module.md#source-"
+"directory) field. The full identifier would be `user-name/project-name"
+"/path-to-pkg`."
+msgstr ""
+"モジュールは [`name`](/toolchain/moon/module.md#name) フィールドで識別され、通常は `/` で区切られた"
+" 2 つの部分、つまり `user-name/project-name` "
+"から構成されます。パッケージは、[`source`](/toolchain/moon/module.md#source-directory) "
+"フィールドで定義されるソースルートからの相対パスで識別されます。完全な識別子は `user-name/project-name/path-to-"
+"pkg` になります。"
+
+#: ../../language/packages.md:19
+msgid ""
+"When using things from another package, the dependency between modules "
+"should first be declared in `moon.mod` with an "
+"[`import`](/toolchain/moon/module.md#dependency-management) declaration. "
+"The dependency between packages should then be declared in the package "
+"file (`moon.pkg`) by the [`import`](/toolchain/moon/package.md#import) "
+"field. Most core packages follow the same rule: if you use `@json`, "
+"`@test`, or other ordinary core aliases, add the corresponding "
+"`moonbitlang/core/...` package to `import`. Using an ordinary core "
+"package without an explicit import is an error."
+msgstr "他のパッケージを使用する場合、まず `moon.mod` の [`import`](/toolchain/moon/module.md#dependency-management) でモジュール依存を宣言し、次に `moon.pkg` の [`import`](/toolchain/moon/package.md#import) でパッケージ依存を宣言します。通常のコアパッケージも同様です。`@json` や `@test` などを使う場合、対応する `moonbitlang/core/...` を明示的にインポートしてください。明示的なインポートなしの使用はエラーになります。"
+
+#: ../../language/packages.md:28
+msgid ""
+"The **default alias** of a package is the last part of the identifier "
+"split by `/`. One can use `@pkg_alias` to access the imported entities, "
+"where `pkg_alias` is either the full identifier or the default alias. A "
+"custom alias may also be defined with the "
+"[`import`](/toolchain/moon/package.md#import) field."
+msgstr ""
+"パッケージの **デフォルトエイリアス** は、識別子を `/` で分割した最後の部分です。`@pkg_alias` を使うと import "
+"した要素にアクセスできます。ここで `pkg_alias` "
+"は完全な識別子でもデフォルトエイリアスでも構いません。カスタムエイリアスは、[`import`](/toolchain/moon/package.md#import)"
+" フィールドで定義できます。"
+
+#: ../../language/packages.md:32
+msgid "In `moon.pkg`, a custom alias is written as:"
+msgstr "`moon.pkg` では、カスタムエイリアスは次のように書きます："
+
+#: ../../language/packages.md:34
+msgid ""
+"import {\n"
+"  \"moonbit-community/language/packages/pkgA\",\n"
+"  \"moonbit-community/language/packages/pkgC\" @c,\n"
+"  \"moonbitlang/core/builtin\",\n"
+"}\n"
+msgstr ""
+"import {\n"
+"  \"moonbit-community/language/packages/pkgA\",\n"
+"  \"moonbit-community/language/packages/pkgC\" @c,\n"
+"  \"moonbitlang/core/builtin\",\n"
+"}\n"
+
+#: ../../language/packages.md:38
+msgid "pkgB/top.mbt"
+msgstr "pkgB/top.mbt"
+
+#: ../../language/packages.md:38
+msgid ""
+"///|\n"
+"pub fn add1(x : Int32) -> Int32 {\n"
+"  @moonbitlang/core/builtin.Add::add(0, @c.incr(@pkgA.incr(x)))\n"
+"}\n"
+msgstr ""
+"///|\n"
+"pub fn add1(x : Int32) -> Int32 {\n"
+"  @moonbitlang/core/builtin.Add::add(0, @c.incr(@pkgA.incr(x)))\n"
+"}\n"
+
+#: ../../language/packages.md:43
+msgid "Prelude and builtin names"
+msgstr "prelude と組み込み名"
+
+#: ../../language/packages.md:45
+msgid ""
+"If `@pkg.` is omitted, MoonBit resolves an unqualified name in the "
+"current package and the prelude. A local definition with the same name "
+"therefore shadows the prelude definition."
+msgstr ""
+"`@pkg.` を省略すると、MoonBit は現在のパッケージと prelude "
+"の中で修飾されていない名前を解決します。そのため、同じ名前のローカル定義があると prelude の定義は隠されます。"
+
+#: ../../language/packages.md:49
+msgid ""
+"fn println(msg : String) -> String {\n"
+"  \"log: \\{msg}\"\n"
+"}\n"
+"\n"
+"///|\n"
+"fn shadowed_println() -> String {\n"
+"  println(\"hello\")\n"
+"}\n"
+"\n"
+"///|\n"
+"fn builtin_answer() -> Int32 {\n"
+"  let answer : Int32 = 42\n"
+"  answer\n"
+"}\n"
+msgstr ""
+"fn println(msg : String) -> String {\n"
+"  \"log: \\{msg}\"\n"
+"}\n"
+"\n"
+"///|\n"
+"fn shadowed_println() -> String {\n"
+"  println(\"hello\")\n"
+"}\n"
+"\n"
+"///|\n"
+"fn builtin_answer() -> Int32 {\n"
+"  let answer : Int32 = 42\n"
+"  answer\n"
+"}\n"
+
+#: ../../language/packages.md:55
+msgid ""
+"`prelude` is a special package: it is available by default, and names "
+"exposed through it participate in normal unqualified name resolution "
+"without an explicit `import`."
+msgstr ""
+"`prelude` は特別なパッケージです。デフォルトで利用でき、そこで公開された名前は明示的な `import` "
+"なしで通常の未修飾名解決に参加します。"
+
+#: ../../language/packages.md:59
+msgid ""
+"Compiler builtins are a separate category. Types such as `Int32` are built "
+"into the language itself, not imported from any package, so there is no "
+"`@builtin.Int32`. The same distinction applies to other compiler-known "
+"names such as `String`, `Bool`, and `Unit`."
+msgstr ""
+"コンパイラ組み込み要素は別のカテゴリです。`Int32` などの型はどのパッケージからも import "
+"されるのではなく、言語そのものに組み込まれているため、`@builtin.Int32` は存在しません。同じ区別は "
+"`String`、`Bool`、`Unit` などのコンパイラ既知の名前にも当てはまります。"
+
+#: ../../language/packages.md:64
+msgid "Internal Packages"
+msgstr "内部パッケージ"
+
+#: ../../language/packages.md:66
+msgid ""
+"You can define internal packages that are only available for certain "
+"packages."
+msgstr "特定のパッケージからのみ利用できる内部パッケージを定義できます。"
+
+#: ../../language/packages.md:68
+msgid ""
+"Code in `a/b/c/internal/x/y/z` are only available to packages `a/b/c` and"
+" `a/b/c/**`."
+msgstr "`a/b/c/internal/x/y/z` 内のコードは、`a/b/c` と `a/b/c/**` のパッケージからのみ利用できます。"
+
+#: ../../language/packages.md:70
+msgid "Using"
+msgstr "using"
+
+#: ../../language/packages.md:72
+msgid "You can use `using` syntax to import symbols defined in another package."
+msgstr "`using` 構文を使うと、別のパッケージで定義されたシンボルを import できます。"
+
+#: ../../language/packages.md:74
+msgid "pkgC/top.mbt"
+msgstr "pkgC/top.mbt"
+
+#: ../../language/packages.md:74
+msgid ""
+"///|\n"
+"pub using @pkgA {incr, trait Trait, type Type}\n"
+msgstr ""
+"///|\n"
+"pub using @pkgA {incr, trait Trait, type Type}\n"
+
+#: ../../language/packages.md:79
+msgid "By having `pub` modifier, it is considered as reexportation."
+msgstr "`pub` 修飾子を付けると、再 export と見なされます。"
+
+#: ../../language/packages.md:82
+msgid "Access Control"
+msgstr "アクセス制御"
+
+#: ../../language/packages.md:84
+msgid ""
+"MoonBit features a comprehensive access control system that governs which"
+" parts of your code are accessible from other packages.  This system "
+"helps maintain encapsulation, information hiding, and clear API "
+"boundaries.  The visibility modifiers apply to functions, variables, "
+"types, and traits, allowing fine-grained control over how your code can "
+"be used by others."
+msgstr ""
+"MoonBit "
+"には、どのコード部分が他のパッケージからアクセス可能かを管理する包括的なアクセス制御システムがあります。この仕組みは、カプセル化、情報隠蔽、明確な"
+" API 境界の維持に役立ちます。可視性修飾子は関数、変数、型、trait に適用でき、他者がどのようにコードを利用できるかを細かく制御できます。"
+
+#: ../../language/packages.md:88
+msgid "Functions"
+msgstr "関数"
+
+#: ../../language/packages.md:90
+msgid ""
+"By default, all function definitions and variable bindings are "
+"_invisible_ to other packages. You can use the `pub` modifier before "
+"toplevel `let`/`fn` to make them public."
+msgstr ""
+"デフォルトでは、すべての関数定義と変数束縛は他のパッケージからは _見えません_。トップレベルの `let`/`fn` の前に `pub` "
+"修飾子を付けると公開できます。"
+
+#: ../../language/packages.md:93
+msgid "Aliases"
+msgstr "エイリアス"
+
+#: ../../language/packages.md:95
+msgid ""
+"By default, [function alias](/language/fundamentals.md#function-alias) "
+"and [method alias](/language/methods.md#alias-methods-as-functions) "
+"follow the visibility of the original definition, while  [type "
+"alias](/language/fundamentals.md#type-alias), [using](#using) are "
+"_invisible_ to other packages."
+msgstr ""
+"デフォルトでは、[function alias](/language/fundamentals.md#function-alias) と "
+"[method alias](/language/methods.md#alias-methods-as-functions) "
+"は元の定義の可視性に従います。一方で、[type alias](/language/fundamentals.md#type-alias) と "
+"[using](#using) は他のパッケージからは _見えません_。"
+
+#: ../../language/packages.md:101
+msgid ""
+"You can add the `pub` modifier before the definition or fill in the "
+"`visibility` field within the annotation."
+msgstr "定義の前に `pub` 修飾子を付けるか、annotation 内の `visibility` フィールドに値を入れることができます。"
+
+#: ../../language/packages.md:104
+msgid "Types"
+msgstr "型"
+
+#: ../../language/packages.md:106
+msgid "There are four different kinds of visibility for types in MoonBit:"
+msgstr "MoonBit の型には 4 種類の可視性があります："
+
+#: ../../language/packages.md:108
+msgid ""
+"Private type: declared with `priv`, completely invisible to the outside "
+"world"
+msgstr "Private 型：`priv` で宣言され、外部から完全に見えません"
+
+#: ../../language/packages.md:109
+msgid "Abstract type: which is the default visibility for types."
+msgstr "Abstract 型：型のデフォルト可視性です。"
+
+#: ../../language/packages.md:111
+msgid ""
+"Only the name of an abstract type is visible outside, the internal "
+"representation of the  type is hidden. Making abstract type by default is"
+" a design choice to encourage  encapsulation and information hiding."
+msgstr ""
+"Abstract 型では名前だけが外部に見え、型の内部表現は隠されます。Abstract 型を "
+"デフォルトにしているのは、カプセル化と情報隠蔽を促すための設計上の選択です。"
+
+#: ../../language/packages.md:115
+msgid "Readonly types, declared with `pub`."
+msgstr "`pub` で宣言される readonly 型です。"
+
+#: ../../language/packages.md:117
+msgid ""
+"The internal representation of readonly types are visible outside, but "
+"users can only read the values of these types from outside, construction "
+"and mutation are not allowed."
+msgstr "readonly 型の内部表現は外部から見えますが、外部からできるのは値の読み取りだけです。構築と変更はできません。"
+
+#: ../../language/packages.md:120
+msgid "Fully public types, declared with `pub(all)`."
+msgstr "`pub(all)` で宣言される完全公開型です。"
+
+#: ../../language/packages.md:122
+msgid ""
+"The outside world can freely construct, read values of these types and "
+"modify them if possible."
+msgstr "外部からこれらの型を自由に構築し、値を読み取り、可能であれば変更できます。"
+
+#: ../../language/packages.md:124
+msgid ""
+"In addition to the visibility of the type itself, the fields of a public "
+"`struct` can be annotated with `priv`, which will hide the field from the"
+" outside world completely. Note that `struct`s with private fields cannot"
+" be constructed directly outside, but you can update the public fields "
+"using the functional struct update syntax."
+msgstr ""
+"型自体の可視性に加えて、public な `struct` のフィールドに `priv` "
+"を付けると、そのフィールドを外部から完全に隠せます。private フィールドを持つ `struct` は外部から直接構築できませんが、関数的な "
+"struct 更新構文を使って public フィールドは更新できます。"
+
+#: ../../language/packages.md:129
+msgid ""
+"Readonly types is a very useful feature, inspired by [private "
+"types](https://ocaml.org/manual/5.3/privatetypes.html) in OCaml.  In "
+"short, values of `pub` types can be destructed by pattern matching and "
+"the dot syntax, but  cannot be constructed or mutated in other packages."
+msgstr ""
+"readonly 型は、OCaml の [private "
+"types](https://ocaml.org/manual/5.3/privatetypes.html) "
+"に触発された非常に便利な機能です。要するに、`pub` 型の値は パターンマッチやドット構文で分解できますが、他のパッケージでは構築や変更は "
+"できません。"
+
+#: ../../language/packages.md:134
+msgid ""
+"There is no restriction within the same package where `pub` types are "
+"defined."
+msgstr "`pub` 型が定義された同じパッケージ内では制限はありません。"
+
+#: ../../language/packages.md:138
+msgid ""
+"// Package A\n"
+"pub struct RO {\n"
+"  field: Int32\n"
+"}\n"
+"test {\n"
+"  let r = { field: 4 }       // OK\n"
+"  let r = { ..r, field: 8 }  // OK\n"
+"}\n"
+"\n"
+"// Package B\n"
+"fn println(r : RO) -> Unit {\n"
+"  println(\"{ field: \")\n"
+"  println(r.field)  // OK\n"
+"  println(\" }\")\n"
+"}\n"
+"test {\n"
+"  let r : RO = { field: 4 }  // ERROR: Cannot create values of the public"
+" read-only type RO!\n"
+"  let r = { ..r, field: 8 }  // ERROR: Cannot mutate a public read-only "
+"field!\n"
+"}\n"
+msgstr ""
+"// Package A\n"
+"pub struct RO {\n"
+"  field: Int32\n"
+"}\n"
+"test {\n"
+"  let r = { field: 4 }       // OK\n"
+"  let r = { ..r, field: 8 }  // OK\n"
+"}\n"
+"\n"
+"// Package B\n"
+"fn println(r : RO) -> Unit {\n"
+"  println(\"{ field: \")\n"
+"  println(r.field)  // OK\n"
+"  println(\" }\")\n"
+"}\n"
+"test {\n"
+"  let r : RO = { field: 4 }  // ERROR: Cannot create values of the public"
+" read-only type RO!\n"
+"  let r = { ..r, field: 8 }  // ERROR: Cannot mutate a public read-only "
+"field!\n"
+"}\n"
+
+#: ../../language/packages.md:160
+msgid ""
+"Access control in MoonBit adheres to the principle that a `pub` type, "
+"function, or variable cannot be defined in terms of a private type. This "
+"is because the private type may not be accessible everywhere that the "
+"`pub` entity is used. MoonBit incorporates sanity checks to prevent the "
+"occurrence of use cases that violate this principle."
+msgstr ""
+"MoonBit のアクセス制御は、`pub` 型・関数・変数を private 型を使って定義してはならない、という原則に従います。private"
+" 型は `pub` な要素が使われるすべての場所で利用できるとは限らないためです。MoonBit "
+"には、この原則に反する使い方を防ぐための整合性チェックが組み込まれています。"
+
+#: ../../language/packages.md:163
+msgid ""
+"pub(all) type T1\n"
+"pub(all) type T2\n"
+"priv type T3\n"
+"\n"
+"pub(all) struct S {\n"
+"  x: T1  // OK\n"
+"  y: T2  // OK\n"
+"  z: T3  // ERROR: public field has private type `T3`!\n"
+"}\n"
+"\n"
+"// ERROR: public function has private parameter type `T3`!\n"
+"pub fn f1(_x: T3) -> T1 { ... }\n"
+"// ERROR: public function has private return type `T3`!\n"
+"pub fn f2(_x: T1) -> T3 { ... }\n"
+"// OK\n"
+"pub fn f3(_x: T1) -> T1 { ... }\n"
+"\n"
+"pub let a: T3 = { ... } // ERROR: public variable has private type `T3`!\n"
+msgstr ""
+"pub(all) type T1\n"
+"pub(all) type T2\n"
+"priv type T3\n"
+"\n"
+"pub(all) struct S {\n"
+"  x: T1  // OK\n"
+"  y: T2  // OK\n"
+"  z: T3  // ERROR: public field has private type `T3`!\n"
+"}\n"
+"\n"
+"// ERROR: public function has private parameter type `T3`!\n"
+"pub fn f1(_x: T3) -> T1 { ... }\n"
+"// ERROR: public function has private return type `T3`!\n"
+"pub fn f2(_x: T1) -> T3 { ... }\n"
+"// OK\n"
+"pub fn f3(_x: T1) -> T1 { ... }\n"
+"\n"
+"pub let a: T3 = { ... } // ERROR: public variable has private type `T3`!\n"
+
+#: ../../language/packages.md:184
+msgid "Traits"
+msgstr "trait"
+
+#: ../../language/packages.md:186
+msgid ""
+"There are four visibility for traits, just like `struct` and `enum`: "
+"private, abstract, readonly and fully public."
+msgstr ""
+"trait にも `struct` や `enum` と同様に 4 "
+"種類の可視性があります。private、abstract、readonly、fully public です。"
+
+#: ../../language/packages.md:187
+msgid ""
+"Private traits are declared with `priv trait`, and they are completely "
+"invisible from outside."
+msgstr "Private trait は `priv trait` で宣言され、外部からは完全に見えません。"
+
+#: ../../language/packages.md:188
+msgid ""
+"Abstract trait is the default visibility. Only the name of the trait is "
+"visible from outside, and the methods in the trait are not exposed."
+msgstr "Abstract trait はデフォルトの可視性です。trait 名だけが外部に見え、trait 内のメソッドは公開されません。"
+
+#: ../../language/packages.md:189
+msgid ""
+"Readonly traits are declared with `pub trait`, their methods can be "
+"invoked from outside, but only the current package can add new "
+"implementation for readonly traits."
+msgstr ""
+"Readonly trait は `pub trait` で宣言され、メソッドは外部から呼び出せますが、readonly trait "
+"に新しい実装を追加できるのは現在のパッケージだけです。"
+
+#: ../../language/packages.md:190
+msgid ""
+"Fully public traits are declared with `pub(open) trait`, they are open to"
+" new implementations outside current package, and their methods can be "
+"freely used."
+msgstr ""
+"Fully public trait は `pub(open) trait` "
+"で宣言され、現在のパッケージ外からも新しい実装を追加でき、メソッドを自由に使えます。"
+
+#: ../../language/packages.md:192
+msgid ""
+"Abstract and readonly traits are sealed, because only the package "
+"defining the trait can implement them. Implementing a sealed (abstract or"
+" readonly) trait outside its package result in compiler error."
+msgstr ""
+"Abstract trait と readonly trait は sealed です。trait "
+"を定義したパッケージだけがそれらを実装できるからです。sealed な（abstract または readonly の）trait "
+"をそのパッケージ外で実装するとコンパイラエラーになります。"
+
+#: ../../language/packages.md:195
+msgid "Trait Implementations"
+msgstr "trait 実装"
+
+#: ../../language/packages.md:197
+msgid ""
+"Implementations have independent visibility, just like functions. The "
+"type will not be considered having fulfillled the trait outside current "
+"package unless the implementation is `pub`."
+msgstr ""
+"実装は関数と同様に独立した可視性を持ちます。実装が `pub` でない限り、その型は現在のパッケージ外では trait "
+"を満たしているとは見なされません。"
+
+#: ../../language/packages.md:199
+msgid ""
+"To make the trait system coherent (i.e. there is a globally unique "
+"implementation for every `Type: Trait` pair), and prevent third-party "
+"packages from modifying behavior of existing programs by accident, "
+"MoonBit employs the following restrictions on who can define "
+"methods/implement traits for types:"
+msgstr ""
+"trait システムの整合性（つまり、すべての `Type: Trait` "
+"の組に対して世界で一意の実装があること）を保ち、サードパーティ製パッケージが既存プログラムの挙動を誤って変更するのを防ぐため、MoonBit "
+"では型に対するメソッド定義や trait 実装に次の制限を設けています："
+
+#: ../../language/packages.md:203
+msgid ""
+"_only the package that defines a type can define methods for it_. So one "
+"cannot define new methods or override old methods for builtin and foreign"
+" types."
+msgstr "_型を定義したパッケージだけが、その型のメソッドを定義できます_。したがって、組み込み型や外部型に対して新しいメソッドを定義したり、既存メソッドを上書きしたりはできません。"
+
+#: ../../language/packages.md:204
+msgid ""
+"there is an exception to this rule: [local methods](/language/methods.md"
+"#local-method). Local methods are always private though, so they do not "
+"break coherence properties of MoonBit's type system"
+msgstr ""
+"この規則には例外があります。[local methods](/language/methods.md#local-method) "
+"です。ただしローカルメソッドは常に private なので、MoonBit の型システムの整合性を壊しません。"
+
+#: ../../language/packages.md:205
+msgid ""
+"_only the package of the type or the package of the trait can define an "
+"implementation_. For example, only `@pkg1` and `@pkg2` are allowed to "
+"write `impl @pkg1.Trait for @pkg2.Type`."
+msgstr ""
+"_実装を定義できるのは、その型のパッケージか trait のパッケージだけです_。例えば、`impl @pkg1.Trait for "
+"@pkg2.Type` を書けるのは `@pkg1` と `@pkg2` だけです。"
+
+#: ../../language/packages.md:208
+msgid ""
+"The second rule above allows one to add new functionality to a foreign "
+"type by defining a new trait and implementing it. This makes MoonBit's "
+"trait & method system flexible while enjoying good coherence property."
+msgstr ""
+"上記 2 つ目の規則により、新しい trait を定義して実装することで外部型に新しい機能を追加できます。これにより、MoonBit の "
+"trait とメソッドの仕組みは整合性を保ちながら柔軟になります。"
+
+#: ../../language/packages.md:212
+msgid "Currently, an empty trait is implemented automatically."
+msgstr "現在、空の trait は自動的に実装されます。"
+
+#: ../../language/packages.md:215
+msgid "Here's an example of abstract trait:"
+msgstr "abstract trait の例を示します："
+
+#: ../../language/packages.md:218
+msgid ""
+"trait Number {\n"
+" op_add(Self, Self) -> Self\n"
+" op_sub(Self, Self) -> Self\n"
+"}\n"
+"\n"
+"fn[N : Number] add(x : N, y: N) -> N {\n"
+"  Number::op_add(x, y)\n"
+"}\n"
+"\n"
+"fn[N : Number] sub(x : N, y: N) -> N {\n"
+"  Number::op_sub(x, y)\n"
+"}\n"
+"\n"
+"impl Number for Int32 with op_add(x, y) { x + y }\n"
+"impl Number for Int32 with op_sub(x, y) { x - y }\n"
+"\n"
+"impl Number for Double with op_add(x, y) { x + y }\n"
+"impl Number for Double with op_sub(x, y) { x - y }"
+msgstr ""
+"trait Number {\n"
+" op_add(Self, Self) -> Self\n"
+" op_sub(Self, Self) -> Self\n"
+"}\n"
+"\n"
+"fn[N : Number] add(x : N, y: N) -> N {\n"
+"  Number::op_add(x, y)\n"
+"}\n"
+"\n"
+"fn[N : Number] sub(x : N, y: N) -> N {\n"
+"  Number::op_sub(x, y)\n"
+"}\n"
+"\n"
+"impl Number for Int32 with op_add(x, y) { x + y }\n"
+"impl Number for Int32 with op_sub(x, y) { x - y }\n"
+"\n"
+"impl Number for Double with op_add(x, y) { x + y }\n"
+"impl Number for Double with op_sub(x, y) { x - y }"
+
+#: ../../language/packages.md:240
+msgid "From outside this package, users can only see the following:"
+msgstr "このパッケージの外からは、ユーザーは次のものだけを見られます："
+
+#: ../../language/packages.md:242
+msgid ""
+"trait Number\n"
+"\n"
+"fn[N : Number] op_add(x : N, y : N) -> N\n"
+"fn[N : Number] op_sub(x : N, y : N) -> N\n"
+"\n"
+"impl Number for Int32\n"
+"impl Number for Double"
+msgstr ""
+"trait Number\n"
+"\n"
+"fn[N : Number] op_add(x : N, y : N) -> N\n"
+"fn[N : Number] op_sub(x : N, y : N) -> N\n"
+"\n"
+"impl Number for Int32\n"
+"impl Number for Double"
+
+#: ../../language/packages.md:252
+msgid ""
+"The author of `Number` can make use of the fact that only `Int32` and "
+"`Double` can ever implement `Number`, because new implementations are not"
+" allowed outside."
+msgstr ""
+"`Number` の作者は、`Number` を実装できるのが `Int32` と `Double` "
+"だけであるという事実を利用できます。外部では新しい実装を追加できないからです。"
+
+#: ../../language/packages.md:255
+msgid "Virtual Packages"
+msgstr "仮想パッケージ"
+
+#: ../../language/packages.md:258
+msgid ""
+"Virtual package is an experimental feature. There may be bugs and "
+"undefined behaviors."
+msgstr "仮想パッケージは実験的機能です。バグや未定義の動作が含まれている可能性があります。"
+
+#: ../../language/packages.md:261
+msgid ""
+"You can define virtual packages, which serves as an interface. They can "
+"be replaced by specific implementations at build time. Currently virtual "
+"packages can only contain plain functions."
+msgstr "インターフェースとして機能する仮想パッケージを定義できます。仮想パッケージはビルド時に特定の実装へ置き換えられます。現在、仮想パッケージには通常の関数しか含められません。"
+
+#: ../../language/packages.md:263
+msgid ""
+"Virtual packages can be useful when swapping different implementations "
+"while keeping the code untouched."
+msgstr "仮想パッケージは、コードを変更せずに異なる実装を切り替えたいときに便利です。"
+
+#: ../../language/packages.md:265
+msgid "Defining a virtual package"
+msgstr "仮想パッケージの定義"
+
+#: ../../language/packages.md:267
+msgid ""
+"You need to declare it to be a virtual package and define its interface "
+"in a MoonBit interface file."
+msgstr "仮想パッケージであることを宣言し、そのインターフェースを MoonBit の interface ファイルに定義する必要があります。"
+
+#: ../../language/packages.md:269
+msgid ""
+"Within `moon.pkg`, you will need to add field "
+"[`virtual`](/toolchain/moon/package.md#declarations) :"
+msgstr ""
+"`moon.pkg` には、[`virtual`](/toolchain/moon/package.md#declarations) "
+"フィールドを追加する必要があります："
+
+#: ../../language/packages.md:271
+msgid "virtual(has_default: true)\n"
+msgstr ""
+
+#: ../../language/packages.md:275
+msgid ""
+"The `has-default` indicates whether the virtual package has a default "
+"implementation."
+msgstr "`has-default` は、その仮想パッケージにデフォルト実装があるかどうかを示します。"
+
+#: ../../language/packages.md:277
+msgid "Within the package, you will need to add an interface file `pkg.mbti`:"
+msgstr "パッケージ内には、interface ファイル `pkg.mbti` を追加する必要があります："
+
+#: ../../language/packages.md:279
+msgid "/src/packages/virtual/pkg.mbti"
+msgstr "/src/packages/virtual/pkg.mbti"
+
+#: ../../language/packages.md:279
+msgid ""
+"package \"moonbit-community/language/packages/virtual\"\n"
+"\n"
+"fn log(String) -> Unit"
+msgstr ""
+"package \"moonbit-community/language/packages/virtual\"\n"
+"\n"
+"fn log(String) -> Unit"
+
+#: ../../language/packages.md:284
+msgid ""
+"The first line of the interface file need to be `package \"full-package-"
+"name\"`. Then comes the declarations. The `pub` keyword for [access "
+"control](#access-control) and the function parameter names should be "
+"omitted."
+msgstr ""
+"interface ファイルの 1 行目は `package \"full-package-name\"` "
+"である必要があります。続いて宣言を書きます。[アクセス制御](#access-control) の `pub` "
+"キーワードと、関数のパラメータ名は省略してください。"
+
+#: ../../language/packages.md:288
+msgid ""
+"If you are uncertain about how to define the interface, you can create a "
+"normal package, define the functions you need using [TODO "
+"syntax](/language/fundamentals.md#todo-syntax), and use `moon info` to "
+"help you generate the interface."
+msgstr ""
+"interface の定義に迷う場合は、通常のパッケージを作成し、[TODO syntax](/language/fundamentals.md"
+"#todo-syntax) を使って必要な関数を定義し、`moon info` で interface 生成を補助できます。"
+
+#: ../../language/packages.md:291
+msgid "Implementing a virtual package"
+msgstr "仮想パッケージの実装"
+
+#: ../../language/packages.md:293
+msgid ""
+"A virtual package can have a default implementation. By defining "
+"[`virtual.has-default`](/toolchain/moon/package.md#declarations) as "
+"`true`, you can implement the code as usual within the same package."
+msgstr ""
+"仮想パッケージにはデフォルト実装を持たせることができます。[`virtual.has-"
+"default`](/toolchain/moon/package.md#declarations) を `true` "
+"にすると、同じパッケージ内で通常どおりコードを実装できます。"
+
+#: ../../language/packages.md:295
+msgid "/src/packages/virtual/top.mbt"
+msgstr "/src/packages/virtual/top.mbt"
+
+#: ../../language/packages.md:295
+msgid ""
+"///|\n"
+"pub fn log(s : String) -> Unit {\n"
+"  println(s)\n"
+"}\n"
+msgstr ""
+"///|\n"
+"pub fn log(s : String) -> Unit {\n"
+"  println(s)\n"
+"}\n"
+
+#: ../../language/packages.md:300
+msgid ""
+"A virtual package can also be implemented by a third party. By defining "
+"[`implements`](/toolchain/moon/package.md#implementations) as the target "
+"package's full name, the compiler can warn you about the missing "
+"implementations or the mismatched implementations."
+msgstr ""
+"仮想パッケージはサードパーティによって実装することもできます。[`implements`](/toolchain/moon/package.md#implementations)"
+" に対象パッケージの完全名を指定すると、未実装や不一致の実装についてコンパイラが警告してくれます。"
+
+#: ../../language/packages.md:302
+msgid "virtual(implement: \"moonbit-community/language/packages/virtual\")\n"
+msgstr ""
+
+#: ../../language/packages.md:306
+msgid "/src/packages/implement/top.mbt"
+msgstr "/src/packages/implement/top.mbt"
+
+#: ../../language/packages.md:306
+msgid ""
+"///|\n"
+"pub fn log(string : String) -> Unit {\n"
+"  ignore(string)\n"
+"}\n"
+msgstr ""
+"///|\n"
+"pub fn log(string : String) -> Unit {\n"
+"  ignore(string)\n"
+"}\n"
+
+#: ../../language/packages.md:311
+msgid "Using a virtual package"
+msgstr "仮想パッケージの利用"
+
+#: ../../language/packages.md:313
+msgid ""
+"To use a virtual package, it's the same as other packages: define "
+"[`import`](/toolchain/moon/package.md#import) field in the package where "
+"you want to use it."
+msgstr ""
+"仮想パッケージを使う方法は他のパッケージと同じです。使いたいパッケージに "
+"[`import`](/toolchain/moon/package.md#import) フィールドを定義してください。"
+
+#: ../../language/packages.md:315
+msgid "Overriding a virtual package"
+msgstr "仮想パッケージの上書き"
+
+#: ../../language/packages.md:317
+msgid ""
+"If a virtual package has a default implementation and that is your "
+"choice, there's no extra configurations."
+msgstr "仮想パッケージにデフォルト実装があり、それを使うのであれば、追加設定は不要です。"
+
+#: ../../language/packages.md:319
+msgid ""
+"Otherwise, you may define the [`overrides`](/toolchain/moon/package.md"
+"#overriding-implementations) field by providing an array of "
+"implementations that you would like to use."
+msgstr ""
+"それ以外の場合は、使いたい実装の配列を指定して、[`overrides`](/toolchain/moon/package.md"
+"#overriding-implementations) フィールドを定義できます。"
+
+#: ../../language/packages.md:321
+msgid "/src/packages/use_implement/moon.pkg"
+msgstr "/src/packages/use_implement/moon.pkg"
+
+#: ../../language/packages.md:321
+msgid ""
+"import {\n"
+"  \"moonbit-community/language/packages/virtual\",\n"
+"}\n"
+"\n"
+"pkgtype(kind: \"executable\")\n"
+"\n"
+"options(\n"
+"  overrides: [ \"moonbit-community/language/packages/implement\" ],\n"
+")\n"
+msgstr ""
+
+#: ../../language/packages.md:326
+msgid "You should reference the virtual package when using the entities."
+msgstr "要素を使うときは、仮想パッケージを参照してください。"
+
+#: ../../language/packages.md:328
+msgid "/src/packages/use_implement/top.mbt"
+msgstr "/src/packages/use_implement/top.mbt"
+
+#: ../../language/packages.md:328
+msgid ""
+"///|\n"
+"fn main {\n"
+"  @virtual.log(\"Hello\")\n"
+"}\n"
+msgstr ""
+"///|\n"
+"fn main {\n"
+"  @virtual.log(\"Hello\")\n"
+"}\n"

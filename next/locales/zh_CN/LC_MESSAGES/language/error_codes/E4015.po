@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-06 14:57+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4015.md:1
+msgid "E4015"
+msgstr ""
+
+#: ../../language/error_codes/E4015.md:3
+msgid "Type has no method with the specified name."
+msgstr "类型没有指定名称的方法。"
+
+#: ../../language/error_codes/E4015.md:5
+msgid "Erroneous Example"
+msgstr "错误示例："
+
+#: ../../language/error_codes/E4015.md:7
+msgid ""
+"///|\n"
+"pub fn shout() -> String {\n"
+"  \"hey\".upper()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4015.md:11
+msgid ""
+"The above example tries to call an inexistent method `upper()` on a "
+"string literal, giving the following error on line 1:"
+msgstr "上述例子中，试图对字符串常量调用一个不存在的方法 `upper()`，在第 1 行报错："
+
+#: ../../language/error_codes/E4015.md:14
+msgid "Type String has no method upper.\n"
+msgstr ""
+
+#: ../../language/error_codes/E4015.md:18
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4015.md:20
+msgid ""
+"This is usually a typo or a misunderstanding of the methods available. "
+"Please make sure to use the correct method name:"
+msgstr "这通常是因为一个拼写错误或对可用方法的误解。请确保使用正确的方法名称："
+
+#: ../../language/error_codes/E4015.md:23
+msgid ""
+"///|\n"
+"pub fn shout() -> String {\n"
+"  \"hey\".to_upper()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4015.md:27
+msgid ""
+"If the missing method belongs to a trait, an `impl Trait for Type` "
+"declaration does not by itself guarantee that the method can be called "
+"with dot syntax. Call it explicitly as `Trait::method(value, ...)`, or "
+"attach the method with `extend Type with Trait::{method}`. Use `pub "
+"extend` if callers in other packages should also be able to use dot "
+"syntax. See [attaching trait methods with `extend`](../methods.md"
+"#attaching-trait-methods-with-extend)."
+msgstr ""
+"如果缺少的方法属于某个特征，仅有 `impl Trait for Type` 声明并不保证可以用点语法调用该方法。"
+"可以显式调用 `Trait::method(value, ...)`，或通过 `extend Type with Trait::{method}` "
+"将方法附加到类型。如果其他包中的调用者也需要使用点语法，请使用 `pub extend`。"
+"参见[使用 `extend` 附加特征方法](../methods.md#attaching-trait-methods-with-extend)。"
+
+#: ../../language/error_codes/E4015.md:34
+msgid ""
+"For example, implementing `Render` alone does not make `badge.render()` "
+"available:"
+msgstr "例如，仅实现 `Render` 并不能使用 `badge.render()`："
+
+#: ../../language/error_codes/E4015.md:36
+msgid ""
+"///|\n"
+"pub(open) trait Render {\n"
+"  fn render(Self) -> String\n"
+"}\n"
+"\n"
+"///|\n"
+"pub(all) struct Badge(String)\n"
+"\n"
+"///|\n"
+"pub impl Render for Badge with render(self) {\n"
+"  self.0\n"
+"}\n"
+"\n"
+"///|\n"
+"pub fn show_badge(badge : Badge) -> String {\n"
+"  badge.render()\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4015.md:40
+msgid "Attach `render` explicitly to allow the dot call:"
+msgstr "显式附加 `render`，使其支持点调用："
+
+#: ../../language/error_codes/E4015.md:42
+msgid ""
+"///|\n"
+"pub(open) trait Render {\n"
+"  fn render(Self) -> String\n"
+"}\n"
+"\n"
+"///|\n"
+"pub(all) struct Badge(String)\n"
+"\n"
+"///|\n"
+"pub impl Render for Badge with render(self) {\n"
+"  self.0\n"
+"}\n"
+"\n"
+"///|\n"
+"pub extend Badge with Render::{render}\n"
+"\n"
+"///|\n"
+"pub fn show_badge(badge : Badge) -> String {\n"
+"  badge.render()\n"
+"}\n"
+msgstr ""

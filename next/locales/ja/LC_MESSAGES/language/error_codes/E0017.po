@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 16:09+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E0017.md:1
+msgid "E0017"
+msgstr ""
+
+#: ../../language/error_codes/E0017.md:3
+msgid "Warning name: `ambiguous_loop_argument`"
+msgstr "警告名: `ambiguous_loop_argument`"
+
+#: ../../language/error_codes/E0017.md:5
+msgid ""
+"This warning applies to an ambiguous reference to the initial state of "
+"the deprecated functional-loop syntax. Use a `for` loop with explicit "
+"state bindings instead. This makes the current state distinct from the "
+"original value, without relying on a pattern alias."
+msgstr ""
+"この警告は、非推奨の関数型ループ構文における初期状態への曖昧な参照に対して出力されます。代わりに、状態を明示的に束縛する `for` "
+"ループを使ってください。パターンの別名に頼らず、現在の状態と元の値を区別できます。"
+
+#: ../../language/error_codes/E0017.md:10
+msgid "Suggestion"
+msgstr "対処"
+
+#: ../../language/error_codes/E0017.md:12
+msgid ""
+"To refer to the state that changes on each iteration, use the variable "
+"bound in the `for` header:"
+msgstr "反復ごとに変化する状態を参照するには、`for` のヘッダーで束縛した変数を使います。"
+
+#: ../../language/error_codes/E0017.md:15
+msgid ""
+"///|\n"
+"fn main {\n"
+"  for a = \"asdf\"[:]; a is [_, .. d]; a = d {\n"
+"    println(a)\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0017.md:23
+#: ../../language/error_codes/E0017.md:38
+msgid "Output:"
+msgstr "出力:"
+
+#: ../../language/error_codes/E0017.md:25
+msgid ""
+"asdf\n"
+"sdf\n"
+"df\n"
+"f\n"
+msgstr ""
+
+#: ../../language/error_codes/E0017.md:28
+msgid "To refer to the original value, bind it outside the loop:"
+msgstr "元の値を参照するには、ループの外で束縛します。"
+
+#: ../../language/error_codes/E0017.md:30
+msgid ""
+"///|\n"
+"fn main {\n"
+"  let b : StringView = \"asdf\"\n"
+"  for a = b; a is [_, .. d]; a = d {\n"
+"    println(b)\n"
+"  }\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E0017.md:40
+msgid ""
+"asdf\n"
+"asdf\n"
+"asdf\n"
+"asdf\n"
+msgstr ""
+
+#~ msgid "Erroneous example"
+#~ msgstr "問題のある例"
+
+#~ msgid ""
+#~ "let text : StringView = \"asdf\"\n"
+#~ "for i = 0; i < text.length(); i = i + 1 {\n"
+#~ "  println(text[i:])\n"
+#~ "}\n"
+#~ msgstr ""

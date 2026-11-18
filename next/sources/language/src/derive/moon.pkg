@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/core/hashset",
+  "moonbitlang/core/json",
+  "moonbitlang/core/quickcheck",
+  "moonbitlang/core/quickcheck/shrink",
+  "moonbitlang/core/test",
+}
+
+warnings = "-missing_priv-unused_constructor"

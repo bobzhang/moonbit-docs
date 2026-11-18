@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, International Digital Economy Academy
+# This file is distributed under the same license as the MoonBit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoonBit \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-08 17:17+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../language/error_codes/E4189.md:1
+msgid "E4189"
+msgstr ""
+
+#: ../../language/error_codes/E4189.md:3
+msgid "Compiler diagnostic name: `invalid_js_module_import`."
+msgstr ""
+
+#: ../../language/error_codes/E4189.md:5
+msgid "Invalid JavaScript module import."
+msgstr "无效的 JavaScript 模块导入。"
+
+#: ../../language/error_codes/E4189.md:7
+msgid ""
+"The `#module` attribute declares a JavaScript module dependency for an "
+"external JavaScript function. Module names must be module specifiers, not"
+" relative file paths."
+msgstr "`#module` 属性为外部 JavaScript 函数声明 JavaScript 模块依赖。模块名必须是模块说明符，而不是相对文件路径。"
+
+#: ../../language/error_codes/E4189.md:11
+msgid "Erroneous example"
+msgstr "错误示例"
+
+#: ../../language/error_codes/E4189.md:13
+msgid "The following example uses a relative module path:"
+msgstr "下面的示例使用了相对模块路径："
+
+#: ../../language/error_codes/E4189.md:15
+msgid ""
+"///|\n"
+"#module(\"./local.js\")\n"
+"extern \"js\" fn value() -> Int32 = \"value\"\n"
+"\n"
+"///|\n"
+"test {\n"
+"  ignore(value)\n"
+"}\n"
+msgstr ""
+
+#: ../../language/error_codes/E4189.md:19
+msgid "MoonBit will report an error."
+msgstr "MoonBit 会报告一个错误。"
+
+#: ../../language/error_codes/E4189.md:21
+msgid "Suggestion"
+msgstr "建议"
+
+#: ../../language/error_codes/E4189.md:23
+msgid "Use a non-relative module specifier:"
+msgstr "使用非相对的模块说明符："
+
+#: ../../language/error_codes/E4189.md:25
+msgid ""
+"///|\n"
+"#module(\"local\")\n"
+"extern \"js\" fn value() -> Int32 = \"value\"\n"
+"\n"
+"///|\n"
+"test {\n"
+"  ignore(value)\n"
+"}\n"
+msgstr ""

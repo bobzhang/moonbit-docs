@@ -1,0 +1,36 @@
+Workspace command transcript
+  $ cd "$TMPDIR"
+
+  $ moon new --user username module_a >/dev/null 2>&1
+  $ moon new --user username module_b >/dev/null 2>&1
+
+  $ moon work init module_a module_b
+  Created moon.work
+
+  $ grep '"./module_a"' moon.work
+    "./module_a",
+  $ grep '"./module_b"' moon.work
+    "./module_b",
+
+  $ moon new --user username module_c >/dev/null 2>&1
+  $ moon work use module_c
+  Updated moon.work
+  $ grep '"./module_c"' moon.work
+    "./module_c",
+
+  $ sed -i.bak 's|^version = .*|version = "0.2.0"|' module_a/moon.mod
+  $ cd module_b
+  $ moon add --no-update username/module_a@0.1.0
+  $ cd ..
+  $ rm module_a/moon.mod.bak
+
+  $ grep 'username/module_a' module_b/moon.mod
+    "username/module_a@0.1.0",
+
+  $ moon work sync >/dev/null
+
+  $ grep 'username/module_a' module_b/moon.mod
+    "username/module_a@0.2.0",
+
+  $ moon check --target native --no-render >/dev/null 2>&1
+  $ moon test --target native --no-render >/dev/null 2>&1

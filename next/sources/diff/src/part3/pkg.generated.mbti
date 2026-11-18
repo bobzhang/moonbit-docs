@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbit-community/diff/part3"
+
+import {
+  "moonbitlang/core/json",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+type BPArray[T]
+
+type Box
+
+type Edit
+
+#derive(@json.ToJson)
+type Line
+pub fn Line::to_json(Self) -> @json.Json
+
+type Snake
+
+// Type aliases
+
+// Traits

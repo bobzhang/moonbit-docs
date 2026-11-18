@@ -1,0 +1,5 @@
+import {
+  "moonbitlang/core/test",
+}
+
+warnings = "+unqualified_local_using"
