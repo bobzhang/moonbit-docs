@@ -1,13 +1,16 @@
+///|
 struct Buffer {
   mut data : Bytes
-  mut len : Int
+  mut len : Int32
 }
 
-pub fn Buffer::new(size : Int) -> Buffer {
-  { data: Bytes::make(size, 0), len: 0 }
+///|
+pub fn Buffer::new(size : Int32) -> Buffer {
+  { data: Bytes::make(size, 0), len: 0, }
 }
 
-pub fn op_get(self : Buffer, i : Int) -> Option[Int] {
+///|
+pub fn Buffer::op_get(self : Buffer, i : Int32) -> Int32? {
   if i < self.data.length() {
     Some(self.data[i])
   } else {
@@ -15,15 +18,18 @@ pub fn op_get(self : Buffer, i : Int) -> Option[Int] {
   }
 }
 
-pub fn capacity(self : Buffer) -> Int {
+///|
+pub fn Buffer::capacity(self : Buffer) -> Int32 {
   self.data.length()
 }
 
-pub fn length(self : Buffer) -> Int {
+///|
+pub fn Buffer::length(self : Buffer) -> Int32 {
   self.len
 }
 
-fn expand_size(self : Buffer) {
+///|
+fn Buffer::expand_size(self : Buffer) {
   let new_capacity = if self.data.length() != 0 {
     self.data.length() * 2
   } else {
@@ -38,7 +44,8 @@ fn expand_size(self : Buffer) {
   self.data = new_data
 }
 
-pub fn append_int(self : Buffer, value : Int) {
+///|
+pub fn Buffer::append_int(self : Buffer, value : Int32) {
   if self.len >= self.data.length() {
     self.expand_size()
   }
@@ -54,7 +61,8 @@ pub fn append_int(self : Buffer, value : Int) {
   }
 }
 
-pub fn truncate(self : Buffer, another: Buffer) {
+///|
+pub fn Buffer::truncate(self : Buffer, another : Buffer) {
   let mut index = 0
   while index < another.len {
     if self.len >= self.data.length() {
@@ -66,7 +74,8 @@ pub fn truncate(self : Buffer, another: Buffer) {
   }
 }
 
-pub fn clear(self : Buffer) {
+///|
+pub fn Buffer::clear(self : Buffer) {
   let mut index = 0
   while index < self.len {
     self.data[index] = 0
@@ -75,24 +84,31 @@ pub fn clear(self : Buffer) {
   self.len = 0
 }
 
-pub fn reset(self : Buffer, capacity : Int) {
+///|
+pub fn Buffer::reset(self : Buffer, capacity : Int32) {
   self.len = 0
   self.data = Bytes::make(capacity, 0)
 }
 
-pub fn to_bytes(self : Buffer) -> Bytes {
+///|
+pub fn Buffer::to_bytes(self : Buffer) -> Bytes {
   self.data
 }
 
-pub fn bytes_to_int(bytes : Bytes, start : Int) -> Int {
-  bytes[start].land(0xff).lsl(24).lor(
-    bytes[start + 1].land(0xff).lsl(16).lor(
-      bytes[start + 2].land(0xff).lsl(8).lor(bytes[start + 3].land(0xff)),
-    ),
+///|
+pub fn bytes_to_int(bytes : Bytes, start : Int32) -> Int32 {
+  bytes[start]
+  .land(0xff)
+  .lsl(24)
+  .lor(
+    bytes[start + 1]
+    .land(0xff)
+    .lsl(16)
+    .lor(bytes[start + 2].land(0xff).lsl(8).lor(bytes[start + 3].land(0xff))),
   )
 }
 
+///|
 fn init {
   ()
 }
-

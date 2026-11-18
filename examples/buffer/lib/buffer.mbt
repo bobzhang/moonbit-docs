@@ -91,4 +91,3 @@ pub fn println[T : Show](self : Buffer[T]) {
 fn init {
   ()
 }
-

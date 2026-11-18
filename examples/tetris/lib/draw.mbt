@@ -1,41 +1,65 @@
+///|
 type Canvas_ctx
 
-fn set_stroke_color(self : Canvas_ctx, color : Int) = "canvas" "set_stroke_color"
+///|
+fn Canvas_ctx::set_stroke_color(self : Canvas_ctx, color : Int32) = "canvas" "set_stroke_color"
 
-fn set_line_width(self : Canvas_ctx, width : Double) = "canvas" "set_line_width"
+///|
+fn Canvas_ctx::set_line_width(self : Canvas_ctx, width : Double) = "canvas" "set_line_width"
 
-fn stroke_rect(self : Canvas_ctx, x : Int, y : Int, width : Int, height : Int) = "canvas" "stroke_rect"
+///|
+fn Canvas_ctx::stroke_rect(
+  self : Canvas_ctx,
+  x : Int32,
+  y : Int32,
+  width : Int32,
+  height : Int32,
+) = "canvas" "stroke_rect"
 
-fn fill_rect(self : Canvas_ctx, x : Int, y : Int, width : Int, height : Int) = "canvas" "fill_rect"
+///|
+fn Canvas_ctx::fill_rect(
+  self : Canvas_ctx,
+  x : Int32,
+  y : Int32,
+  width : Int32,
+  height : Int32,
+) = "canvas" "fill_rect"
 
-fn set_fill_style(self : Canvas_ctx, color : Int) = "canvas" "set_fill_style"
+///|
+fn Canvas_ctx::set_fill_style(self : Canvas_ctx, color : Int32) = "canvas" "set_fill_style"
 
-fn draw_game_over(self : Canvas_ctx) = "canvas" "draw_game_over"
+///|
+fn Canvas_ctx::draw_game_over(self : Canvas_ctx) = "canvas" "draw_game_over"
 
+///|
 pub fn draw(canvas : Canvas_ctx, tetris : Tetris) -> Unit {
   let mut c = 0
 
   // draw backgroud
   while c < grid_col_count {
-    let color = if c % 2 == 0 {
-      0
-    } else {
-      1
-    }
+    let color = if c % 2 == 0 { 0 } else { 1 }
     canvas.set_fill_style(color)
     canvas.fill_rect(c, 0, 1, grid_row_count)
     c = c + 1
   }
   draw_piece(canvas, tetris.grid, (0, 0))
-  draw_piece(canvas, List::from_array(tetris.pice_shap), (tetris.pice_x, tetris.pice_y))
+  draw_piece(
+    canvas,
+    List::from_array(tetris.pice_shap),
+    (tetris.pice_x, tetris.pice_y),
+  )
   if tetris.dead {
     canvas.draw_game_over()
   }
 }
 
-pub fn draw_piece(canvas : Canvas_ctx, matrix : List[Array[Int]],
-        offset : (Int, Int)) -> Unit {
-  fn go(l : List[Array[Int]], r : Int, canvas : Canvas_ctx) {
+///|
+pub fn draw_piece(
+  canvas : Canvas_ctx,
+  matrix : List[Array[Int32]],
+  offset : (Int32, Int32),
+) -> Unit {
+  fn go(l : List[Array[Int32]], r : Int32, canvas : Canvas_ctx) {
     match l {
       Cons(v, n) => {
         let mut c = 0
@@ -59,4 +83,3 @@ pub fn draw_piece(canvas : Canvas_ctx, matrix : List[Array[Int]],
 
   go(matrix, 0, canvas)
 }
-

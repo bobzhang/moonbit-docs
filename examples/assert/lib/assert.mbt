@@ -19,4 +19,3 @@ pub fn assert_ne[T : Compare + Show](left : T, right : T) {
 fn init {
   ()
 }
-

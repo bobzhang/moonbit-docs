@@ -1,39 +1,52 @@
+///|
 fn log(x : Double) -> Double = "math" "log"
 
-fn floor(x : Double) -> Int = "math" "floor"
+///|
+fn floor(x : Double) -> Int32 = "math" "floor"
 
-fn float_of_int(x : Int) -> Double = "math" "float_of_int"
+///|
+fn float_of_int(x : Int32) -> Double = "math" "float_of_int"
 
+///|
 type ImageData
 
-fn set_image_data(self : ImageData, x : Int, rgb : Int) = "imagedata" "set"
+///|
+fn ImageData::set_image_data(self : ImageData, x : Int32, rgb : Int32) = "imagedata" "set"
 
+///|
 let escape_radius = 4.0
 
+///|
 let max_iter_number = 1000
 
 // -0.743030 + 0.126433i @ 0.016110 /0.75
 // -0.74364085 + 0.13182733i @ 0.00012068 /.75
 // -0.7 + 0.0i @ 3.0769 / 0.75
 
+///|
 let ratio = 0.75
 
+///|
 let image_width = 800.0
 
+///|
 let image_height : Double = image_width * ratio // 600
 
+///|
 let coffset : Double = if floor(image_width) % 2 == 0 {
   image_width / 2.0 - 0.5
 } else {
   image_width / 2.0
 }
 
+///|
 let roffset : Double = if floor(image_height) % 2 == 0 {
   image_height / 2.0 - 0.5
 } else {
   image_height / 2.0
 }
 
+///|
 pub fn iter(cx : Double, cy : Double) -> Double {
   let mut x = 0.0
   let mut y = 0.0
@@ -55,7 +68,8 @@ pub fn iter(cx : Double, cy : Double) -> Double {
   return -1.0
 }
 
-fn interpolation(f : Double, c0 : Int, c1 : Int) -> Int {
+///|
+fn interpolation(f : Double, c0 : Int32, c1 : Int32) -> Int32 {
   let r0 = c0.asr(16).land(0xFF)
   let g0 = c0.asr(8).land(0xFF)
   let b0 = c0.land(0xFF)
@@ -68,7 +82,8 @@ fn interpolation(f : Double, c0 : Int, c1 : Int) -> Int {
   return r.lsl(16).lor(g.lsl(8).lor(b))
 }
 
-pub fn get_color(d : Double) -> Int {
+///|
+pub fn get_color(d : Double) -> Int32 {
   if d >= 0.0 {
     let mut k = 0.021 * (d - 1.0 + log(log(128.0)) / log(2.0))
     k = log(1.0 + k) - 29.0 / 400.0
@@ -90,8 +105,14 @@ pub fn get_color(d : Double) -> Int {
   }
 }
 
-pub fn calc_color(col : Int, row : Int, ox : Double, oy : Double,
-        width : Double) -> Int {
+///|
+pub fn calc_color(
+  col : Int32,
+  row : Int32,
+  ox : Double,
+  oy : Double,
+  width : Double,
+) -> Int32 {
   let pixel_size = width / image_width
   let cx = (float_of_int(col) - coffset) * pixel_size + ox
   let cy = (float_of_int(row) - roffset) * pixel_size + oy
@@ -120,14 +141,20 @@ pub fn calc_color(col : Int, row : Int, ox : Double, oy : Double,
   return r.lsl(16).lor(g.lsl(8)).lor(b)
 }
 
-pub fn draw_color(image_data : ImageData, col : Int, row : Int, rgb : Int) -> Unit {
-  let pindex = ((image_height - float_of_int(row) - 1.0) * image_width + float_of_int(
-      col,
-    )) * 4.0
+///|
+pub fn draw_color(
+  image_data : ImageData,
+  col : Int32,
+  row : Int32,
+  rgb : Int32,
+) -> Unit {
+  let pindex = (
+      (image_height - float_of_int(row) - 1.0) * image_width + float_of_int(col)
+    ) *
+    4.0
   let pindex = floor(pindex)
   set_image_data(image_data, pindex, rgb.lsr(16).land(0xFF))
   set_image_data(image_data, pindex + 1, rgb.lsr(8).land(0xFF))
   set_image_data(image_data, pindex + 2, rgb.land(0xFF))
   set_image_data(image_data, pindex + 3, 0xFF)
 }
-

@@ -1,3 +1,4 @@
+///|
 fn init {
   // Posix
   let posix_path = @lib.Path::new(
@@ -10,8 +11,7 @@ fn init {
   }
   println(posix_path.parent()) // /tmp/abc/f/
   match posix_path.file_name() {
-    Some(v) =>
-      println(v) // d
+    Some(v) => println(v) // d
     None => ()
   }
   posix_path.append("def")
@@ -26,8 +26,7 @@ fn init {
   }
   println(rel_posix_path.parent()) // ./abc/de/
   match rel_posix_path.file_name() {
-    Some(v) =>
-      println(v) // f
+    Some(v) => println(v) // f
     None => ()
   }
   rel_posix_path.append("hello")
@@ -42,9 +41,7 @@ fn init {
     println("is absolute")
   }
   match win_path.file_name() {
-    Some(v) =>
-      println(v) // de
+    Some(v) => println(v) // de
     None => ()
   }
 }
-
