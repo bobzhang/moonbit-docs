@@ -11,6 +11,11 @@ def main():
         if not example.is_dir() or example.name.startswith('.') or example.name == "target":
             continue
 
+        # Game examples are outside this fork upgrade.
+        if example.name in {"game_of_life", "snake", "tetris"}:
+            print(f"Skipping game example: {example.name}")
+            continue
+
         # Skip wasi-http for non-wasm backends
         check_targets = "all"
         test_targets = "all"

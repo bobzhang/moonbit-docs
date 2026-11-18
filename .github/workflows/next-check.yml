@@ -14,7 +14,6 @@ on:
 jobs:
   validation:
     name: validation (${{ matrix.os }}, ${{ matrix.version }})
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -23,7 +22,7 @@ jobs:
           - macos-latest
           - windows-latest
         version:
-          - nightly
+          - latest
           - pre-release
     runs-on: ${{ matrix.os }}
     env:

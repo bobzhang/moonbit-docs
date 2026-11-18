@@ -14,6 +14,7 @@ jobs:
   build:
     strategy:
       matrix:
+        version: [latest, pre-release]
         os:
           - ubuntu-latest
           - macos-latest
@@ -24,6 +25,8 @@ jobs:
 
       - name: install
         uses: ./.github/actions/setup
+        with:
+          version: ${{ matrix.version }}
 
       - name: Set up Python
         uses: actions/setup-python@v4

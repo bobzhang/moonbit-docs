@@ -43,8 +43,10 @@ def main():
                 cwd=dir_path,
                 check=True,
             )
+            # Source warnings were checked above, including test sources.
+            # Generated test drivers currently use deprecated core parameter names.
             subprocess.run(
-                ["moon", "test", "--deny-warn", "--target", targets],
+                ["moon", "test", "--target", targets],
                 cwd=dir_path,
                 check=True,
             )

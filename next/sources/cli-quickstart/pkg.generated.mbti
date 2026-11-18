@@ -8,21 +8,21 @@ import {
 // Values
 pub fn command() -> @argparse.Command
 
-pub fn parse_config(Array[String]) -> Config raise
+pub fn parse_config(ArrayView[String]) -> Config raise
 
 pub async fn run(Config) -> Unit
 
 // Errors
 
 // Types and methods
+#derive(Eq)
 pub struct Config {
   url : String
   output : String?
 }
-pub impl Eq for Config
-pub impl Show for Config
+pub fn Config::equal(Self, Self) -> Bool
+pub fn Config::not_equal(Self, Self) -> Bool
 
 // Type aliases
 
 // Traits
-
